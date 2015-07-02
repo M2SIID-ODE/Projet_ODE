@@ -2,16 +2,16 @@
   
   Fichier:     Script_Creation_DWH.sql
 
-  RÃ©sumÃ©:  CrÃ©e le DWH (OLTP) du projet ODE
+  Résumé:  Crée le DWH (OLTP) du projet ODE
   Date:     02/07/2015
-  Updated:  -
+  Updated:  02/07/2015
 
   SQL Server Version: 2014
   
 ------------------------------------------------------------------------------
   
-  Du dÃ©but Ã  la crÃ©ation des tables ODE, le script est issu de la base 
-  d'exemple "AdventureWorks2014" mise Ã  disposition par Microsoft sur son site
+  Du début à la création des tables ODE, le script est issu de la base 
+  d'exemple "AdventureWorks2014" mise à disposition par Microsoft sur son site
   
 ============================================================================*/
 
@@ -20,8 +20,8 @@
 -- Menu "QUERY" > "SQLCMD MODE"
 :on error exit
 
--- PATH vers le rÃ©pertoire /DATA de votre SQL SERVER 2014
-:setvar OdeDwhPath "F:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA\"
+-- PATH vers le répertoire /DATA de votre SQL SERVER 2014
+:setvar OdeDwhPath "D:\SIID_ODE\DataWarehouseODE\"
 
 IF '$(OdeDwhPath)' IS NULL OR '$(OdeDwhPath)' = ''
 BEGIN
@@ -62,7 +62,7 @@ GO
 -- Create Database
 -- ****************************************
 PRINT '';
-PRINT '*** CrÃ©ation de la base BaseOperationelleODE';
+PRINT '*** Création de la base BaseOperationelleODE';
 GO
 
 CREATE DATABASE [DataWarehouseODE] 
@@ -173,7 +173,7 @@ GO
 -- Create database schemas
 -- ******************************************************
 PRINT '';
-PRINT '*** CrÃ©ation du schÃ©ma ODE_DATAWAREHOUSE de la base';
+PRINT '*** Création du schéma ODE_DATAWAREHOUSE de la base';
 GO
 
 CREATE SCHEMA [ODE_DATAWAREHOUSE] AUTHORIZATION [dbo];
@@ -185,10 +185,10 @@ GO
 -- Create tables
 -- ******************************************************
 PRINT '';
-PRINT '*** CrÃ©ation des tables du schÃ©ma ODE_DATAWAREHOUSE';
+PRINT '*** Création des tables du schéma ODE_DATAWAREHOUSE';
 GO
 
--- REMARQUE : Contrairement Ã  la base operationelle, il n'y a pas de CONSTRAINT (RÃ¨gles mÃ©tiers verifiÃ©es par SSIS)
+-- REMARQUE : Contrairement à la base operationelle, il n'y a pas de CONSTRAINT (Règles métiers verifiées par SSIS)
 
 -- Table de faits "Ventes"
 CREATE TABLE [ODE_DATAWAREHOUSE].[FACT_VENTES] (
@@ -214,7 +214,7 @@ GO
 /*****    TO DO   ******/
 
 
--- Table de Dimension "CatÃ©gories"
+-- Table de Dimension "Catégories"
 
 /*****    TO DO   ******/
 
@@ -246,7 +246,21 @@ GO
 -- Table de Dimension "Lieux"
 
 /*****    TO DO   ******/
+CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_LIEU](
+	[LIEU_PK] [int] NOT NULL,
+	[VILLE_FK] [int] NOT NULL,
+	[TYPE_LIEU] [varchar](max) NOT NULL,
+	[LIBEL_LIEU] [varchar](max) NOT NULL,
+	[DATE_OUVERTURE] [date] NOT NULL,
+	[DATE_FERMETURE] [date] NOT NULL,
+	[SURFACE_M2] [numeric](18, 0) NOT NULL,
+ CONSTRAINT [PK_DIM_LIEU] PRIMARY KEY CLUSTERED 
+(
+	[LIEU_PK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
+GO
 
 -- Table de Dimension "Villes"
 
@@ -272,7 +286,7 @@ GO
 -- Add Primary Keys
 -- ******************************************************
 PRINT '';
-PRINT '*** Ajout des clÃ©s Primaires';
+PRINT '*** Ajout des clés Primaires';
 GO
 
 SET QUOTED_IDENTIFIER ON;
@@ -283,7 +297,7 @@ SET QUOTED_IDENTIFIER ON;
 /*****    TO DO   ******/
 
 
--- PK de la dimension "CatÃ©gories"
+-- PK de la dimension "Catégories"
 
 /*****    TO DO   ******/
 
@@ -349,7 +363,7 @@ GO
 -- Create Foreign key constraints
 -- ****************************************
 PRINT '';
-PRINT '*** Ajout des clÃ©s EtrangÃ¨res';
+PRINT '*** Ajout des clés Etrangères';
 GO
 /*
 -- FK de la table de faits "Ventes" vers la dimension "Produits"
@@ -415,7 +429,7 @@ GO
 /*****    TO DO   ******/
 
 
--- FK de la dimension "Produits" vers la dimension "CatÃ©gories"
+-- FK de la dimension "Produits" vers la dimension "Catégories"
 
 /*****    TO DO   ******/
 
