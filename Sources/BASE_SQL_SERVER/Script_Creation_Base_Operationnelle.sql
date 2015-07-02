@@ -680,10 +680,7 @@ ALTER TABLE [ODE_VENTES].[STOCKS] ADD
         [ID_LIEU]
     ) REFERENCES [ODE_VENTES].[LIEUX](
         [ID_LIEU]
-    );
-GO
-
-ALTER TABLE [ODE_VENTES].[STOCKS] ADD 
+    ),
     CONSTRAINT [FK_Stocks_Produits_ProduitID] FOREIGN KEY 
     (
         [ID_PRODUIT]
@@ -698,10 +695,7 @@ ALTER TABLE [ODE_VENTES].[VENTES] ADD
         [ID_CLIENT]
     ) REFERENCES [ODE_VENTES].[CLIENTS](
         [ID_CLIENT]
-    );
-GO
-
-ALTER TABLE [ODE_VENTES].[VENTES] ADD 
+    ),
     CONSTRAINT [FK_Ventes_Lieux_LieuID] FOREIGN KEY 
     (
         [ID_LIEU]
@@ -725,10 +719,7 @@ ALTER TABLE [ODE_VENTES].[PRIXPRODUITS] ADD
         [ID_LIEU]
     ) REFERENCES [ODE_VENTES].[LIEUX](
         [ID_LIEU]
-    );
-GO
-
-ALTER TABLE [ODE_VENTES].[PRIXPRODUITS] ADD 
+    ),
     CONSTRAINT [FK_PrixProduits_Produits_ProduitID] FOREIGN KEY 
     (
         [ID_PRODUIT]
