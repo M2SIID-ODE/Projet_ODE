@@ -1,0 +1,78 @@
+Microsoft SQL Server 2014 - 12.0.2000.8 (X64) 
+	Feb 20 2014 20:04:26 
+	Copyright (c) Microsoft Corporation
+	Enterprise Evaluation Edition (64-bit) on Windows NT 6.3 <X64> (Build 9600: )
+
+ 
+Started - 2015-07-02 17:24:22.147
+ 
+*** Suppression de la base BaseOperationelleODE
+ 
+*** Création de la base BaseOperationelleODE
+ 
+*** Verification de la base BaseOperationelleODE
+ 
+*** Creating DDL Trigger for Database
+ 
+*** Creating Error Log objects
+  CREATE_TABLE - dbo.ErrorLog
+  ALTER_TABLE - dbo.ErrorLog
+  CREATE_PROCEDURE - dbo.uspPrintError
+  CREATE_PROCEDURE - dbo.uspLogError
+ 
+*** Création du schéma ODE_VENTES de la base
+  CREATE_SCHEMA - ODE_VENTES.ODE_VENTES
+ 
+*** Création des tables du schéma ODE_VENTES
+  CREATE_TABLE - ODE_VENTES.UNIVERS_PRODUITS
+  CREATE_TABLE - ODE_VENTES.RAYONS_PRODUITS
+  CREATE_TABLE - ODE_VENTES.FAMILLES_PRODUITS
+  CREATE_TABLE - ODE_VENTES.SOUS_FAMILLES_PRODUITS
+  CREATE_TABLE - ODE_VENTES.PRODUITS
+  CREATE_TABLE - ODE_VENTES.CLIENTS
+  CREATE_TABLE - ODE_VENTES.LIEUX
+  CREATE_TABLE - ODE_VENTES.VILLES
+  CREATE_TABLE - ODE_VENTES.STOCKS
+  CREATE_TABLE - ODE_VENTES.VENTES
+  CREATE_TABLE - ODE_VENTES.TICKETS
+  CREATE_TABLE - ODE_VENTES.PRIXPRODUITS
+ 
+*** Ajout des clés Primaires
+  ALTER_TABLE - ODE_VENTES.UNIVERS_PRODUITS
+  ALTER_TABLE - ODE_VENTES.RAYONS_PRODUITS
+  ALTER_TABLE - ODE_VENTES.FAMILLES_PRODUITS
+  ALTER_TABLE - ODE_VENTES.SOUS_FAMILLES_PRODUITS
+  ALTER_TABLE - ODE_VENTES.PRODUITS
+  ALTER_TABLE - ODE_VENTES.CLIENTS
+  ALTER_TABLE - ODE_VENTES.LIEUX
+  ALTER_TABLE - ODE_VENTES.VILLES
+  ALTER_TABLE - ODE_VENTES.STOCKS
+  ALTER_TABLE - ODE_VENTES.VENTES
+  ALTER_TABLE - ODE_VENTES.PRIXPRODUITS
+ 
+*** Ajout des indexes
+ 
+*** Ajout des clés Etrangères
+  ALTER_TABLE - ODE_VENTES.RAYONS_PRODUITS
+  ALTER_TABLE - ODE_VENTES.FAMILLES_PRODUITS
+  ALTER_TABLE - ODE_VENTES.SOUS_FAMILLES_PRODUITS
+  ALTER_TABLE - ODE_VENTES.PRODUITS
+  ALTER_TABLE - ODE_VENTES.CLIENTS
+  ALTER_TABLE - ODE_VENTES.LIEUX
+  ALTER_TABLE - ODE_VENTES.STOCKS
+  ALTER_TABLE - ODE_VENTES.STOCKS
+  ALTER_TABLE - ODE_VENTES.VENTES
+  ALTER_TABLE - ODE_VENTES.VENTES
+  ALTER_TABLE - ODE_VENTES.TICKETS
+  ALTER_TABLE - ODE_VENTES.PRIXPRODUITS
+  ALTER_TABLE - ODE_VENTES.PRIXPRODUITS
+ 
+*** Disabling DDL Trigger for Database
+ 
+*** Changing File Growth Values for Database
+ 
+*** Shrinking Database
+DBCC SHRINKDATABASE: File ID 1 of database ID 7 was skipped because the file does not have enough free space to reclaim.
+DBCC SHRINKDATABASE: File ID 2 of database ID 7 was skipped because the file does not have enough free space to reclaim.
+DBCC execution completed. If DBCC printed error messages, contact your system administrator.
+Finished - 2015-07-02 17:24:24.887
