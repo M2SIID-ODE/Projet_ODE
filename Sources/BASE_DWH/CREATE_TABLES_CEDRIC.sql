@@ -1,0 +1,16 @@
+CREATE TABLE [dbo].[DIM_CLIENTS](
+	[CLIENT_PK]         [INT] 				NOT NULL,
+	[VILLE_FK]          [INT]              	NOT NULL, -- FK
+	[TAUX_REMISE] 	    [DECIMAL](4, 1)     NOT NULL, -- à voir si on ne met pas en (6,2)
+	[TYPE_CLIENT]       [CHAR](1)           NOT NULL,
+	[NOM_CLIENT]        [NVARCHAR](256)		NOT NULL, -- à voir si on ne reduit pas la taille, en génral j'utilise du 32
+	[DATE_NAISSANCE]	[DATE]				NOT NULL,
+	[DATE_SOUSCRIPTION]	[DATE]				NOT NULL,
+	[CODE_FIDELITE]  	[NVARCHAR](32),
+ CONSTRAINT [PK_DIM_CLIENTS] PRIMARY KEY CLUSTERED 
+(
+	[CLIENT_PK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
