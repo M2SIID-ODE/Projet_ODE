@@ -4,7 +4,7 @@
 
   Résumé:  Crée le DWH (OLTP) du projet ODE
   Date:     02/07/2015
-  Updated:  02/07/2015
+  Updated:  05/07/2015
 
   SQL Server Version: 2014
   
@@ -21,7 +21,7 @@
 :on error exit
 
 -- PATH vers le répertoire /DATA de votre SQL SERVER 2014
-:setvar OdeDwhPath "D:\SIID_ODE\DataWarehouseODE\"
+:setvar OdeDwhPath "F:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA\"
 
 IF '$(OdeDwhPath)' IS NULL OR '$(OdeDwhPath)' = ''
 BEGIN
@@ -204,19 +204,58 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[FACT_VENTES] (
 ) ON [PRIMARY];
 GO
 
--- Table de faits "Stocks"
 
-/*****    TO DO   ******/
+-- Table de Fait "STOCK"
+
+CREATE TABLE [ODE_DATAWAREHOUSE].[FACT_STOCKS](
+	[DATE_INVENTAIRE_FK]	[INT] 	NOT NULL, --FK
+	[PRODUIT_FK]			[INT] 	NOT NULL, --FK
+	[LIEU_FK]				[INT] 	NOT NULL, --FK
+	[NBR_DISPO]				[INT] 	NOT NULL,
+	[NBR_DEFECTUEUX]		[INT] 	NOT NULL,
+	[ID_INVENTAIRE]			[INT] 	NOT NULL
+) ON [PRIMARY]
+
+GO
 
 
 -- Table de Dimension "Produits"
 
-/*****    TO DO   ******/
+create table [ODE_DATAWAREHOUSE].[DIM_PRODUITS](
+	[PRODUIT_PK]		[INT] identity(1,1)	NOT NULL, -- PK
+	[CATEGORIE_FK]		[INT]				NOT NULL,
+	[LIBEL_PRODUIT]		[NVARCHAR](256)		NOT NULL,
+	[PRIX_ACHAT]		[MONEY]				NOT NULL,
+	[TAUX_TVA]			[DECIMAL](4,1)		NOT NULL,
+	[MARQUE_PRODUIT]	[NVARCHAR](256)		NOT NULL,
+	[GROSSISTE_PRODUIT] [NVARCHAR](256)		NULL,
+	constraint [PRODUIT_PK] primary key clustered (
+		[PRODUIT_PK]  ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+) ON [PRIMARY]
+
+GO
 
 
--- Table de Dimension "Catégories"
+-- Table de Dimension "CATEGORIE"
 
-/*****    TO DO   ******/
+CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CATEGORIES](
+	[CATEGORIE_PK]		[INT] 				NOT NULL, -- PK
+	[LIBEL_UNIVERS]		[NVARCHAR](256) 	NOT NULL,
+	[ID_UNIVERS]		[INT] 				NOT NULL,
+	[LIBEL_RAYON]		[NVARCHAR](256) 	NOT NULL,
+	[ID_RAYON]			[INT] 				NOT NULL,
+	[LIBEL_FAMILLE]		[NVARCHAR](256) 	NOT NULL,
+	[ID_FAMILLE]		[INT] 				NOT NULL,
+	[LIBEL_SSFAMILLE]	[NVARCHAR](256) 	NOT NULL,
+	[ID_SSFAMILLE]		[INT] 				NOT NULL,
+ CONSTRAINT [PK_DIM_CATEGORIE] PRIMARY KEY CLUSTERED 
+(
+	[CATEGORIE_PK] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+) ON [PRIMARY]
+
+GO
 
 
 -- Table de Dimension "Temps"
@@ -245,31 +284,56 @@ GO
 
 -- Table de Dimension "Lieux"
 
-/*****    TO DO   ******/
-CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_LIEU](
-	[LIEU_PK] [int] NOT NULL,
-	[VILLE_FK] [int] NOT NULL,
-	[TYPE_LIEU] [varchar](max) NOT NULL,
-	[LIBEL_LIEU] [varchar](max) NOT NULL,
-	[DATE_OUVERTURE] [date] NOT NULL,
-	[DATE_FERMETURE] [date] NOT NULL,
-	[SURFACE_M2] [numeric](18, 0) NOT NULL,
- CONSTRAINT [PK_DIM_LIEU] PRIMARY KEY CLUSTERED 
-(
-	[LIEU_PK] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_LIEUX](
+	[LIEU_PK]			[INT] IDENTITY (1, 1)	NOT NULL,  -- PK
+	[VILLE_FK]			[INT]					NOT NULL,
+	[TYPE_LIEU]			[CHAR](1)				NOT NULL,
+	[LIBEL_LIEU]		[NVARCHAR](256)			NOT NULL,
+	[DATE_OUVERTURE]	[DATE]					NOT NULL,
+	[DATE_FERMETURE]	[DATE]					NOT NULL,
+	[SURFACE_M2]		[NUMERIC](6,1)			NULL,	-- N'existe pas dans la base operationelle : A remplir SSIS source fichier Excel !
+	CONSTRAINT [PK_DIM_LIEU] PRIMARY KEY CLUSTERED 
+	(
+		[LIEU_PK] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+) ON [PRIMARY];
 
 GO
 
 -- Table de Dimension "Villes"
-
-/*****    TO DO   ******/
+CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] (
+	[VILLE_PK] 				[INT] IDENTITY (1, 1) 	NOT NULL,	-- PK
+	[CODE_POSTAL]			[NVARCHAR](6)			NOT NULL,
+	[CODE_COMMUNE]			[INT]					NOT NULL,
+	[CODE_REGION]			[INT]					NOT NULL,
+	[CODE_DEPARTEMENT]		[INT]					NOT NULL,
+	[CODE_ARRONDISEMENT]	[INT]					NOT NULL,
+	[CODE_CANTON]			[INT]					NOT NULL,
+	[NOM_VILLE_MAJ]			[NVARCHAR](256)			NOT NULL,
+	[NOM_VILLE_MIN]			[NVARCHAR](256)			NOT NULL,
+	[POPULATION]			[INT]					NULL,	-- N'existe pas dans la base operationelle : A remplir SSIS source fichier Excel !
+) ON [PRIMARY];
+GO
 
 
 -- Table de Dimension "Clients"
 
-/*****    TO DO   ******/
+CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](        ---  TO CHECK WITH OPERATIONAL DB
+	[CLIENT_PK]         [INT] 				NOT NULL,
+	[VILLE_FK]          [INT]              	NOT NULL, -- FK
+	[TAUX_REMISE] 	    [DECIMAL](6, 2)     NOT NULL,
+	[TYPE_CLIENT]       [CHAR](1)           NOT NULL,
+	[NOM_CLIENT]        [NVARCHAR](256)		NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
+	[DATE_NAISSANCE]	[DATE]				NOT NULL,
+	[DATE_SOUSCRIPTION]	[DATE]				NOT NULL,
+	[CODE_FIDELITE]  	[NVARCHAR](32),
+ CONSTRAINT [PK_DIM_CLIENTS] PRIMARY KEY CLUSTERED 
+(
+	[CLIENT_PK] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+) ON [PRIMARY]
+
+GO
 
 
 /*
@@ -292,16 +356,6 @@ GO
 SET QUOTED_IDENTIFIER ON;
 
 
--- PK de la dimension "Produits"
-
-/*****    TO DO   ******/
-
-
--- PK de la dimension "Catégories"
-
-/*****    TO DO   ******/
-
-
 -- PK de la dimension "Temps"
 ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_TEMPS] WITH CHECK ADD 
     CONSTRAINT [PK_DimTemps_TempsPK] PRIMARY KEY CLUSTERED 
@@ -311,19 +365,13 @@ ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_TEMPS] WITH CHECK ADD
 GO
 
 
--- PK de la dimension "Lieux"
-
-/*****    TO DO   ******/
-
-
 -- PK de la dimension "Villes"
-
-/*****    TO DO   ******/
-
-
--- PK de la dimension "Clients"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] WITH CHECK ADD 
+    CONSTRAINT [PK_DimVilles_VillePK] PRIMARY KEY CLUSTERED 
+    (
+        [VILLE_PK]
+    )  ON [PRIMARY];
+GO
 
 
 /*
@@ -365,7 +413,7 @@ GO
 PRINT '';
 PRINT '*** Ajout des clés Etrangères';
 GO
-/*
+
 -- FK de la table de faits "Ventes" vers la dimension "Produits"
 ALTER TABLE [ODE_DATAWAREHOUSE].[FACT_VENTES] ADD 
     CONSTRAINT [FK_FactVentes_DimProduits_ProduitFK] FOREIGN KEY 
@@ -412,36 +460,78 @@ ALTER TABLE [ODE_DATAWAREHOUSE].[FACT_VENTES] ADD
 		[LIEU_PK]
 	);
 GO
-*/
+
 
 -- FK de la table de faits "Stocks" vers la dimension "Produits"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[FACT_STOCKS] ADD 
+    CONSTRAINT [FK_FactStocks_DimProduits_ProduitFK] FOREIGN KEY 
+    (
+        [PRODUIT_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_PRODUITS] 
+	(
+		[PRODUIT_PK]
+	);
+GO
 
 
 -- FK de la table de faits "Stocks" vers la dimension "Temps"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[FACT_STOCKS] ADD 
+    CONSTRAINT [FK_FactStocks_DimTemps_TempsFK] FOREIGN KEY 
+    (
+        [DATE_INVENTAIRE_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_TEMPS] 
+	(
+		[TEMPS_PK]
+	);
+GO
 
 
 -- FK de la table de faits "Stocks" vers la dimension "Lieux"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[FACT_STOCKS] ADD 
+    CONSTRAINT [FK_FactStocks_DimLieux_LieuFK] FOREIGN KEY 
+    (
+        [LIEU_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_LIEUX] 
+	(
+		[LIEU_PK]
+	);
+GO
 
 
 -- FK de la dimension "Produits" vers la dimension "Catégories"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_PRODUITS] ADD 
+    CONSTRAINT [FK_DimProduits_DimCategories_FK] FOREIGN KEY 
+    (
+        [CATEGORIE_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_CATEGORIES] 
+	(
+		[CATEGORIE_PK]
+	);
+GO
 
 
 -- FK de la dimension "Lieux" vers la dimension "Villes"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_LIEUX] ADD 
+    CONSTRAINT [FK_DimLieux_DimVilles_FK] FOREIGN KEY 
+    (
+        [VILLE_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_VILLES] 
+	(
+		[VILLE_PK]
+	);
+GO
 
 
 -- FK de la dimension "Clients" vers la dimension "Villes"
-
-/*****    TO DO   ******/
+ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS] ADD 
+    CONSTRAINT [FK_DimClients_DimVilles_FK] FOREIGN KEY 
+    (
+        [VILLE_FK]
+    ) REFERENCES [ODE_DATAWAREHOUSE].[DIM_VILLES] 
+	(
+		[VILLE_PK]
+	);
+GO
 
 
 /*
