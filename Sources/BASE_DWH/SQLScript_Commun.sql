@@ -318,13 +318,13 @@ GO
 -- Table de Dimension "Clients"
 
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](        ---  TO CHECK WITH OPERATIONAL DB
-	[CLIENT_PK]         [INT] 				NOT NULL,
-	[VILLE_FK]          [INT]              	NOT NULL, -- FK
-	[TAUX_REMISE] 	    [DECIMAL](6, 2)     NOT NULL,
-	[TYPE_CLIENT]       [CHAR](1)           NOT NULL,
-	[NOM_CLIENT]        [NVARCHAR](256)		NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
-	[DATE_NAISSANCE]	[DATE]				NOT NULL,
-	[DATE_SOUSCRIPTION]	[DATE]				NOT NULL,
+	[CLIENT_PK]         [INT] IDENTITY (1, 1) NOT NULL,
+	[VILLE_FK]          [INT]              	  NOT NULL, -- FK
+	[TAUX_REMISE] 	    [DECIMAL](6, 2)       NOT NULL,
+	[TYPE_CLIENT]       [CHAR](1)             NOT NULL,
+	[NOM_CLIENT]        [NVARCHAR](256)		  NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
+	[DATE_NAISSANCE]	[DATE]				  NOT NULL,
+	[DATE_SOUSCRIPTION]	[DATE]				  NOT NULL,
 	[CODE_FIDELITE]  	[NVARCHAR](32),
  CONSTRAINT [PK_DIM_CLIENTS] PRIMARY KEY CLUSTERED 
 (
