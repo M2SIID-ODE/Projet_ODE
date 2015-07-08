@@ -66,9 +66,11 @@ PRINT '*** Création de la base BaseOperationelleODE';
 GO
 
 CREATE DATABASE [DataWarehouseODE] 
-    ON (NAME = 'DataWarehouseODE_Data', FILENAME = N'$(OdeDwhPath)DataWarehouseODE_Data.mdf', SIZE = 170, FILEGROWTH = 8)
-    LOG ON (NAME = 'DataWarehouseODE_Log', FILENAME = N'$(OdeDwhPath)DataWarehouseODE_Log.ldf' , SIZE = 2, FILEGROWTH = 96);
+    -- ON (NAME = 'DataWarehouseODE_Data', FILENAME = N'$(OdeDwhPath)DWH_ODE_Data.mdf', SIZE = 170, FILEGROWTH = 8) -- OLIVIER # 08/07/2015 : Desactive car pb d erreur "Msg 5105"
+    -- LOG ON (NAME = 'DataWarehouseODE_Log', FILENAME = N'$(OdeDwhPath)DWH_ODE_Log.ldf' , SIZE = 2, FILEGROWTH = 96); -- OLIVIER # 08/07/2015 : Desactive car pb d erreur "Msg 5105"
+-- NOTE : Si message d erreur "A file activation error occurred. The physical file name..." : 
 GO
+
 
 PRINT '';
 PRINT '*** Checking for DataWarehouseODE Database';
@@ -240,7 +242,7 @@ GO
 -- Table de Dimension "CATEGORIE"
 
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CATEGORIES](
-	[CATEGORIE_PK]		[INT] 				NOT NULL, -- PK
+	[CATEGORIE_PK]		[INT] identity(1,1)	NOT NULL, -- PK
 	[LIBEL_UNIVERS]		[NVARCHAR](256) 	NOT NULL,
 	[ID_UNIVERS]		[INT] 				NOT NULL,
 	[LIBEL_RAYON]		[NVARCHAR](256) 	NOT NULL,
@@ -260,24 +262,21 @@ GO
 
 -- Table de Dimension "Temps"
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_TEMPS] (
-	[TEMPS_PK] 			[INT] IDENTITY (1, 1) 	NOT NULL, -- PK
-	[DATE]				[DATE]					NOT NULL,
-	[JOUR]				[NVARCHAR](16)			NOT NULL,
-	[ANNEE_CODE]		[INT]					NOT NULL,
-	[ANNEE_DATE]		[DATE]					NOT NULL,
-	[ANNEE_NOM]			[NVARCHAR](16)			NOT NULL,
-	[TRIMESTRE_CODE]	[INT]					NOT NULL,
-	[TRIMESTRE_DATE]	[DATE]					NOT NULL,
-	[TRIMESTRE_NOM]		[NVARCHAR](16)			NOT NULL,
-	[MOIS_CODE]			[INT]					NOT NULL,
-	[MOIS_DATE]			[DATE]					NOT NULL,
-	[MOIS_NOM]			[NVARCHAR](16)			NOT NULL,
-	[SEMAINE_CODE]		[INT]					NOT NULL,
-	[SEMAINE_DATE]		[DATE]					NOT NULL,
-	[SEMAINE_NOM]		[NVARCHAR](16)			NOT NULL,
-	[JOUR_CODE]			[INT]					NOT NULL,
-	[JOUR_DATE]			[DATE]					NOT NULL,
-	[JOUR_NOM]			[NVARCHAR](16)			NOT NULL
+	[TEMPS_PK] 			[INT]				 	NOT NULL, -- PK
+	[DATE]				[SMALLDATETIME]			NOT NULL,
+	[JOUR]				[NVARCHAR](50)			NULL,
+	[ANNEE_CODE]		[INT]					NULL,
+	[ANNEE_DATE]		[SMALLDATETIME]			NOT NULL,
+	[ANNEE_NOM]			[NVARCHAR](50)			NULL,
+	[TRIMESTRE_CODE]	[INT]					NULL,
+	[TRIMESTRE_DATE]	[SMALLDATETIME]			NOT NULL,
+	[TRIMESTRE_NOM]		[NVARCHAR](50)			NULL,
+	[MOIS_CODE]			[INT]					NULL,
+	[MOIS_DATE]			[SMALLDATETIME]			NOT NULL,
+	[MOIS_NOM]			[NVARCHAR](50)			NULL,
+	[SEMAINE_CODE]		[INT]					NULL,
+	[SEMAINE_DATE]		[SMALLDATETIME]			NOT NULL,
+	[SEMAINE_NOM]		[NVARCHAR](50)			NULL
 ) ON [PRIMARY];
 GO
 
@@ -290,8 +289,8 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_LIEUX](
 	[TYPE_LIEU]			[CHAR](1)				NOT NULL,
 	[LIBEL_LIEU]		[NVARCHAR](256)			NOT NULL,
 	[DATE_OUVERTURE]	[DATE]					NOT NULL,
-	[DATE_FERMETURE]	[DATE]					NOT NULL,
-	[SURFACE_M2]		[NUMERIC](6,1)			NULL,	-- N'existe pas dans la base operationelle : A remplir SSIS source fichier Excel !
+	[DATE_FERMETURE]	[DATE]					NULL,
+	[SURFACE_M2]		[NUMERIC](6,1)			NOT NULL,	-- N'existe pas dans la base operationelle : A remplir SSIS source fichier Excel !
 	CONSTRAINT [PK_DIM_LIEU] PRIMARY KEY CLUSTERED 
 	(
 		[LIEU_PK] ASC
@@ -319,13 +318,13 @@ GO
 -- Table de Dimension "Clients"
 
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](        ---  TO CHECK WITH OPERATIONAL DB
-	[CLIENT_PK]         [INT] 				NOT NULL,
+	[CLIENT_PK]         [INT] identity(1,1)	NOT NULL,
 	[VILLE_FK]          [INT]              	NOT NULL, -- FK
-	[TAUX_REMISE] 	    [DECIMAL](6, 2)     NOT NULL,
+	[TAUX_REMISE] 	    [DECIMAL](6, 2)     NULL,
 	[TYPE_CLIENT]       [CHAR](1)           NOT NULL,
 	[NOM_CLIENT]        [NVARCHAR](256)		NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
-	[DATE_NAISSANCE]	[DATE]				NOT NULL,
-	[DATE_SOUSCRIPTION]	[DATE]				NOT NULL,
+	[DATE_NAISSANCE]	[DATE]				NULL,
+	[DATE_SOUSCRIPTION]	[DATE]				NULL,
 	[CODE_FIDELITE]  	[NVARCHAR](32),
  CONSTRAINT [PK_DIM_CLIENTS] PRIMARY KEY CLUSTERED 
 (
@@ -563,6 +562,7 @@ GO
 -- ****************************************
 -- Change File Growth Values for Database
 -- ****************************************
+/* -- OLIVIER # 08/07/2015 : Desactive car pb d erreur "Msg 5041"
 PRINT '';
 PRINT '*** Changing File Growth Values for Database';
 GO
@@ -575,7 +575,7 @@ GO
 ALTER DATABASE [DataWarehouseODE] 
 MODIFY FILE (NAME = N'DataWarehouseODE_Log', FILEGROWTH = 16);
 GO
-
+*/
 
 -- ****************************************
 -- Shrink Database
