@@ -1,0 +1,317 @@
+1;Chauffage Électrique;1
+1;Chauffage Central;2
+1;Chauffage Bois Et Bois De Chauffage;3
+1;Sèche-Serviettes;4
+1;Chauffage D'Appoint;5
+1;Climatiseur;6
+1;Ventilateur;7
+1;Régulation De Température;8
+1;Ventilation : Vmc Et Aérateur;9
+1;Déshumidificateur, Humidificateur Et Saturateur;10
+1;Thermomètre Et Station Météo;11
+2;Meuble De Cuisine;12
+2;Kitchenette Et Bloc Cuisine;13
+2;Plan De Travail Et Crédence;14
+2;Électroménager;15
+2;Évier;16
+2;Robinetterie;17
+2;Vidage D'Évier;18
+2;Poubelle, Tabouret Et Accessoire De Cuisine;19
+2;Carrelage Mural;20
+2;Carrelage Sol;21
+2;Poignée Et Bouton De Cuisine;22
+3;Rideau Et Voilage;23
+3;Store;24
+3;Barre À Rideaux;25
+3;Tapis;26
+3;Pouf, Coussin Et Plaid;27
+3;Toile Et Affiche;28
+3;Cadre;29
+3;Horloge;30
+3;Miroir;31
+3;Lettre Décorative;32
+3;Sticker Et Pochoir;33
+3;Revêtement Adhésif Déco;34
+3;Poignée De Porte Et De Fenêtre;35
+4;Carrelage Mural;36
+4;Lambris Bois, Pvc Et Lame Adhésive;37
+4;Plaquette De Parement;38
+4;Poutre, Décoration Et Revetement Plafond;39
+5;Luminaire Intérieur;40
+5;Luminaire Extérieur;41
+5;Ampoule;42
+5;Interrupteur Et Prise;43
+6;Table De Jardin;44
+6;Chaise De Jardin;45
+6;Salon De Jardin;46
+6;Salon De Détente;47
+6;Banc De Jardin;48
+6;Bain De Soleil;49
+6;Fauteuil De Relaxation, Hamac Et Chilienne;50
+6;Coussin;51
+7;Carrelage Sol;52
+7;Parquet, Stratifié Et Plancher;53
+7;Sol Vinyle Pvc;54
+7;Moquette, Sisal Et Jonc De Mer;55
+7;Peinture Et Résine Sol;56
+7;Paillasson;57
+8;Peinture Intérieure Couleur;58
+8;Papier Peint Et Revêtement Mural;59
+8;Peinture Blanche Mur Et Plafond;60
+8;Préparation Des Murs Et Plafonds;61
+8;Peinture À Effets Décoratifs;62
+8;Résine Décorative;63
+8;Peinture De Rénovation Pour Mur, Mobilier Et Sol;64
+8;Peinture Et Restauration Du Meuble Bois;65
+8;Peinture Lambris, Porte, Poutre;66
+8;Peinture Et Produit Pour Parquet;67
+8;Aérosol;68
+8;Outil Du Peintre;69
+9;Porte Intérieure;70
+9;Cloison Amovible;71
+9;Escalier;72
+9;Balustrade;73
+9;Habillage Porte;74
+9;Barrière De Sécurité Pour Escalier;75
+10;Produits Essentiels;76
+10;Entretien Du Sol;77
+10;Gros Lessivage;78
+10;Entretien Spécifique;79
+10;Diluant, Nettoyant Et Détachant;80
+10;Insecticide;81
+10;Accessoire De Ménage;82
+10;Désodorisant Et Parfum D'Ambiance;83
+11;Dressing Et Aménagement De Placard;84
+11;Portes De Placard;85
+11;Penderie Et Portant;86
+11;Etabli Et Rangement Garage, Cave, Atelier;87
+11;Rangement Mural;88
+11;Plateau Et Tréteau;89
+11;Boîte De Rangement;90
+12;Meuble De Salle De Bains;91
+12;Douche;92
+12;Lavabo, Vasque Et Lave-Mains;93
+12;Baignoire;94
+12;Robinetterie;95
+12;Wc;96
+12;Accessoire De Salle De Bains;97
+12;Armoire Et Miroir;98
+12;Sèche-Serviettes;99
+13;Moulure : Baguette, 1/4 Rond, Frise;100
+13;Plancher;101
+13;Panneau De Bois;102
+13;Tablette;103
+13;Poutre;104
+13;Plinthe;105
+13;Tasseau;106
+13;Bois De Charpente;107
+14;Matériel Et Outillage De Bâtiment;108
+14;Revêtement De La Façade;109
+14;Charpente Et Couverture;110
+14;Étanchéité Et Anti Humidité;111
+14;Evacuation Des Eaux;112
+14;Gouttière Et Récupération D'Eau De Pluie;113
+14;Grille D'Aération;114
+14;Matériau, Poudre Et Agrégat;115
+14;Plancher;116
+15;Tableau Électrique Et Composant;117
+15;Domotique : Commande À Distance;118
+15;Rallonge Électrique, Enrouleur Et Multiprise;119
+15;Carillon, Sonnette Et Interphone;120
+15;Câble, Fil Et Gaine Électrique;121
+15;Douille Et Fiche Électrique;122
+15;Outils D'Électricien;123
+15;Energie Solaire Et Éolienne;124
+15;Ampoule;125
+15;Pile Et Lampe Torche;126
+16;Etabli Pliant;127
+16;Etabli Fixe Et Aménageable;128
+16;Boite À Outils;129
+16;Porte-Outils;130
+16;Servante Et Coffre De Chantier;131
+16;Crémaillère, Console Murale Et Tablette;132
+16;Cantine;133
+16;Casier À Vis;134
+16;Rangement Atelier Et Garage;135
+16;Déménagement;136
+16;Casier À Bouteille Et Accessoire;137
+16;Étau;138
+17;Motorisation;139
+18;Isolation Thermique Par L'Intérieur;140
+18;Isolation Thermique Par L'Extérieur;141
+18;Cloison : Mur, Combles, Plafond Et Sol;142
+19;Perceuse, Perforateur, Foret Et Accessoires;143
+19;Aspirateur Et Nettoyeur;144
+19;Outil Multifonctions Et Mini-Outil;145
+19;Scie Et Meuleuse Électrique;146
+19;Ponceuse Et Abrasif;147
+19;Etabli, Diable Et Rangement Des Outils;148
+19;Outillage À Main;149
+19;Mesure Et Traçage;150
+19;Escabeau, Échelle Et Échafaudage;151
+19;Rabot, Défonceuse Et Machine À Bois;152
+19;Compresseur Et Accessoire;153
+19;Soudure;154
+19;Groupe Électrogène;155
+19;Matériel Et Outillage De Bâtiment;156
+19;Pistolet À Peinture, Décolleuse Et Décapeur;157
+19;Vêtement, Chaussure Et Protection;158
+20;Chauffe-Eau;159
+20;Traitement De L'Eau;160
+20;Alimentation En Eau;161
+20;Évacuation Des Eaux;162
+20;Étanchéité;163
+20;Joint Et Clapet;164
+20;Soudure De Plomberie;165
+20;Outils De Plombier;166
+20;Bouteille De Gaz;167
+21;Porte D'Entrée;168
+21;Porte De Garage;169
+21;Porte De Service;170
+21;Fenêtre;171
+21;Auvent Et Marquise;172
+21;Fenêtre De Toit Et Accessoire;173
+21;Volet Et Accessoire;174
+21;Porte-Fenêtre Et Baie;175
+21;Moustiquaire;176
+21;Paillasson;177
+22;Accessoire Pour Volet, Fenêtre Et Portail;178
+22;Adhésif;179
+22;Boite Aux Lettres;180
+22;Boulon Écrou Et Rondelle;181
+22;Cheville;182
+22;Clou;183
+22;Colle;184
+22;Corde, Sangle, Sandow, Chaîne Et Cable;185
+22;Fixation Et Assemblage;186
+22;Marquage Et Signalisation;187
+22;Pied Et Embout;188
+22;Quincaillerie De Meuble;189
+22;Roulette;190
+22;Tôle Et Profilé;191
+22;Vis;192
+23;Récepteur Tnt, Télécommande Et Transmetteur;193
+23;Support Tv;194
+23;Antenne, Parabole, Et Fixation;195
+23;Câble Et Connectique Tv;196
+23;Connectique Téléphone Et Informatique;197
+24;Alarme Et Vidéosurveillance;198
+24;Détecteur De Fumée, Gaz Et Protection Incendie;199
+24;Coffre-Fort Et Armoire À Fusils;200
+24;Cadenas Et Antivol;201
+24;Serrure;202
+24;Verrou;203
+24;Sécurité Des Portes Et Fenetres;204
+24;Automobile;205
+24;Sécurité De Salle De Bain;206
+24;Barrière De Sécurité Pour Escalier;207
+24;Détecteur Et Projecteur À Détection;208
+25;Pavé De Verre;209
+25;Verre;210
+25;Mastic Et Outillage De Vitrier;211
+25;Film Pour Vitrage;212
+26;Abri De Jardin Et Accessoire;213
+26;Garage Et Carport;214
+26;Serre;215
+26;Coffre De Jardin;216
+26;Auvent Et Marquise;217
+26;Bûcher;218
+26;Niche Et Abri Pour Animaux;219
+27;Barbecue Mobile;220
+27;Cuisine D'Extérieur;221
+27;Plancha;222
+27;Barbecue Fixe;223
+27;Accessoire De Barbecue Et Plancha;224
+27;Allume-Feu Et Combustible;225
+28;Maisonnette;226
+28;Portique;227
+28;Mobilier Enfant;228
+28;Toboggan;229
+28;Trampoline;230
+28;Bac À Sable;231
+28;Trébuchet;232
+29;Parasol;233
+29;Store De Terrasse;234
+29;Tonnelle;235
+29;Pergola;236
+29;Voile D'Ombrage Et Accessoire;237
+30;Piscine;238
+30;Spa/Sauna;239
+30;Entretien Et Accessoire Piscine;240
+31;Clôture Et Panneau;241
+31;Portail Et Portillon;242
+31;Grillage;243
+31;Pilier, Muret Et Chapern;244
+31;Brise Vue, Brise Vent, Canisse Et Occultation;245
+31;Balustre Et Claustra Maçonnée;246
+32;Tondeuse Et Autoportée;247
+32;Scarificateur;248
+32;Coupe-Bordure;249
+32;Débroussailleuse Et Motofaucheuse;250
+32;Taille-Haie;251
+32;Tronçonneuse;252
+32;Motobineuse Et Motoculteur;253
+32;Nettoyeur Haute Pression;254
+32;Broyeur De Végétaux;255
+32;Aspirateur/Souffleur;256
+32;Scie Circulaire Et Fendeur De Bûches;257
+32;Déneigeuse;258
+32;Huile, Pièce De Rechange Et Accessoire Pour Outil À Moteur;259
+33;Outil De Coupe Du Bois;260
+33;Outil De Taille;261
+33;Outil Pour Le Gazon;262
+33;Outil Pour Le Potager Et Les Massifs;263
+33;Pelle Et Pioche;264
+33;Outil Combinable;265
+33;Incinérateur Et Composteur;266
+33;Brouette Et Accessoire;267
+33;Remorque;268
+33;Poubelle Et Balai;269
+33;Botte Et Sabot;270
+33;Etendoir À Linge;271
+34;Récupération D'Eau;272
+34;Tuyau Et Dévidoir;273
+34;Pompe;274
+34;Pulvérisateur;275
+34;Programmation D'Arrosage;276
+34;Arrosage Enterré;277
+34;Arrosage Goutte À Goutte;278
+34;Arrosage De Surface;279
+34;Arrosoir Et Seau;280
+34;Raccord Arrosage;281
+35;Pot De Fleurs;282
+35;Bac À Fleurs;283
+35;Jardinière Et Balconnière;284
+35;Carré Potager;285
+35;Support Et Accessoire;286
+35;Soucoupe;287
+35;Fontaine De Jardin;288
+35;Treillage;289
+35;Bordure;290
+35;Bougie Extérieure;291
+36;Applique Extérieure;292
+36;Luminaire D'Ambiance Extérieur;293
+36;Lampadaire Extérieur;294
+36;Spot Extérieur;295
+36;Projecteur Extérieur Et Détecteur De Mouvement;296
+36;Luminaire Solaire;297
+36;Luminaire Extérieur Led;298
+36;Eclairage De Façade;299
+37;Lame De Terrasse;300
+37;Dalle De Terrasse;301
+37;Carrelage Extérieur;302
+37;Pavé, Dalle Et Pas Japonais;303
+37;Gravier Et Galet;304
+37;Produit De Traitement Et Étanchéité;305
+38;Bardage Et Clin;306
+38;Plaquette De Parement Exterieure;307
+38;Traitement Extérieur;308
+38;Enduit De Façade;309
+38;Traitement Graffiti;310
+39;Anti-Nuisible Du Jardin;311
+39;Désherbant;312
+39;Engrais;313
+39;Produit Pour Plantes D'Appartement;314
+39;Semence Et Semis;315
+39;Terreau Et Amendement;316
+39;Traitement Des Végétaux;317
