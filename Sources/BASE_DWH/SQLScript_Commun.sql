@@ -318,13 +318,13 @@ GO
 -- Table de Dimension "Clients"
 
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](        ---  TO CHECK WITH OPERATIONAL DB
-	[CLIENT_PK]         [INT] IDENTITY (1, 1) NOT NULL,
-	[VILLE_FK]          [INT]              	  NOT NULL, -- FK
-	[TAUX_REMISE] 	    [DECIMAL](6, 2)       NOT NULL,
-	[TYPE_CLIENT]       [CHAR](1)             NOT NULL,
-	[NOM_CLIENT]        [NVARCHAR](256)		  NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
-	[DATE_NAISSANCE]	[DATE]				  NOT NULL,
-	[DATE_SOUSCRIPTION]	[DATE]				  NOT NULL,
+	[CLIENT_PK]         [INT] 				NOT NULL,
+	[VILLE_FK]          [INT]              	NOT NULL, -- FK
+	[TAUX_REMISE] 	    [DECIMAL](6, 2)     NOT NULL,
+	[TYPE_CLIENT]       [CHAR](1)           NOT NULL,
+	[NOM_CLIENT]        [NVARCHAR](256)		NOT NULL, -- Long car inclu le prénom(s) et nom du client, voir le nom de la societé et son SIREN si c est une entreprise
+	[DATE_NAISSANCE]	[DATE]				NOT NULL,
+	[DATE_SOUSCRIPTION]	[DATE]				NOT NULL,
 	[CODE_FIDELITE]  	[NVARCHAR](32),
  CONSTRAINT [PK_DIM_CLIENTS] PRIMARY KEY CLUSTERED 
 (
@@ -574,21 +574,28 @@ WITH (
 
 
 -- REMPLISSAGE TABLES
-declare @nb_lignes int = 10
 declare @compteur int = 0
 
 declare @type int
 declare @type_lieu [CHAR](1)
+declare @type_lieu_bis [CHAR](1)
 declare @lib_ville varchar(50)
 declare @ville_fk int
 declare @libel_lieu [NVARCHAR](256)
+declare @libel_lieu_bis [NVARCHAR](256)
 declare @dept varchar(20)
 declare @date_ouv date, @date_ferm date
 declare @est_ferme int
 declare @surface [NUMERIC](6,1)
+declare @surface_bis [NUMERIC](6,1)
+declare @nb_logistique int = 2
+declare @nb_entrepot int = 10
+declare @nb_magasins int = 121
+declare @nb_sit_internet int = 1
 
 
-WHILE @compteur < @nb_lignes
+
+WHILE @compteur < @nb_logistique
 BEGIN
 	SET @ville_fk =  (SELECT TOP 1 VILLE_PK FROM VILLE ORDER BY NEWID()) --on choisit une ville au hasard dans la table des villes
 	SET @lib_ville = (SELECT NOM_VILLE FROM VILLE WHERE VILLE_PK = @ville_fk) -- on récupère le nom de la ville associée
@@ -606,38 +613,8 @@ BEGIN
 
 	SET @surface = (select cast((1000-100)* rand() + 1 as numeric(6,1))) -- on tire au sort une surface entre 100 et 1000 m²
 
-	SET @type = (select cast(round((6-1)* rand() + 1,0) as integer)) -- on tire un type de lieu au hasard
-
-	IF @type = 1
-	BEGIN
-		SET @type_lieu = 'R'
-		SET @libel_lieu = 'Magasin de '+@lib_ville+' ('+@dept+')'
-	END
-	IF @type = 2
-	BEGIN	
-		SET @type_lieu = 'M'
-		SET @libel_lieu = 'Stock du magasin de '+@lib_ville+' ('+@dept+')'	
-	END
-	IF @type = 3
-	BEGIN
-		SET @type_lieu = 'I'
-		SET @libel_lieu = 'Site Internet administré depuis '+@lib_ville+' ('+@dept+')'
-	END
-	IF @type = 4
-	BEGIN
-		SET @type_lieu = 'S'
-		SET @libel_lieu = 'Stock pour site Internet à '+@lib_ville+' ('+@dept+')'
-	END
-	IF @type = 5
-	BEGIN
-		SET @type_lieu = 'E'
-		SET @libel_lieu = 'Entrepôt de '+@lib_ville+' ('+@dept+')'
-	END
-	IF @type = 6
-	BEGIN	
-		SET @type_lieu = 'P'
-		SET @libel_lieu = 'Plateforme logistique de '+@lib_ville+' ('+@dept+')'
-	END
+	SET @type_lieu = 'P'
+	SET @libel_lieu = 'Plateforme logistique de '+@lib_ville+' ('+@dept+')'
 
 	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
 	VALUES (@ville_fk,
@@ -657,6 +634,173 @@ BEGIN
 	
 	SET @compteur = @compteur + 1
 END
+
+	SET @compteur = 0
+
+WHILE @compteur < @nb_entrepot
+BEGIN
+	SET @ville_fk =  (SELECT TOP 1 VILLE_PK FROM VILLE ORDER BY NEWID()) --on choisit une ville au hasard dans la table des villes
+	SET @lib_ville = (SELECT NOM_VILLE FROM VILLE WHERE VILLE_PK = @ville_fk) -- on récupère le nom de la ville associée
+	SET @dept = (SELECT DEPARTEMENT FROM VILLE WHERE VILLE_PK = @ville_fk) -- et le département
+
+	SET @date_ouv = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate())) -- on génère une date d'ouverture aléatoire sur les 10 dernières années
+	SET @date_ferm = '01/01/1900' -- on initialise la date de fermeture
+
+	SET @est_ferme = (select cast(round((4-1)* rand() + 1,0) as integer)) --on effectue un tirage pour décider si le magasin est fermé où non
+	IF @est_ferme = 1 -- la magasin a 1 chance sur 4 d'être fermé
+	BEGIN
+		WHILE @date_ferm <= @date_ouv -- dans ce cas on lui attribue une date de fermeture postérieur à la date d'ouverture
+			SET @date_ferm = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate()))
+	END
+
+	SET @surface = (select cast((1000-100)* rand() + 1 as numeric(6,1))) -- on tire au sort une surface entre 100 et 1000 m²
+
+	SET @type_lieu = 'E'
+	SET @libel_lieu = 'Entrepôt de '+@lib_ville+' ('+@dept+')'
+
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
+	VALUES (@ville_fk,
+	@type_lieu,
+	@libel_lieu,
+	@date_ouv,
+	@date_ferm,
+	@surface)
+	
+	PRINT @ville_fk; -- on affiche pour tester
+	PRINT @lib_ville;
+	PRINT @type_lieu;
+	PRINT @libel_lieu;
+	PRINT @date_ouv;
+	PRINT @date_ferm;
+	PRINT @surface;
+	
+	SET @compteur = @compteur + 1
+END
+
+SET @compteur = 0
+
+WHILE @compteur < @nb_magasins
+BEGIN
+	SET @ville_fk =  (SELECT TOP 1 VILLE_PK FROM VILLE ORDER BY NEWID()) --on choisit une ville au hasard dans la table des villes
+	SET @lib_ville = (SELECT NOM_VILLE FROM VILLE WHERE VILLE_PK = @ville_fk) -- on récupère le nom de la ville associée
+	SET @dept = (SELECT DEPARTEMENT FROM VILLE WHERE VILLE_PK = @ville_fk) -- et le département
+
+	SET @date_ouv = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate())) -- on génère une date d'ouverture aléatoire sur les 10 dernières années
+	SET @date_ferm = '01/01/1900' -- on initialise la date de fermeture
+
+	SET @est_ferme = (select cast(round((4-1)* rand() + 1,0) as integer)) --on effectue un tirage pour décider si le magasin est fermé où non
+	IF @est_ferme = 1 -- la magasin a 1 chance sur 4 d'être fermé
+	BEGIN
+		WHILE @date_ferm <= @date_ouv -- dans ce cas on lui attribue une date de fermeture postérieur à la date d'ouverture
+			SET @date_ferm = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate()))
+	END
+
+	SET @surface = (select cast((1000-100)* rand() + 1 as numeric(6,1))) -- on tire au sort une surface entre 100 et 1000 m²
+	SET @surface_bis = (select cast((1000-100)* rand() + 1 as numeric(6,1))) -- on tire au sort une surface entre 100 et 1000 m²
+
+	SET @type_lieu = 'R'
+	SET @libel_lieu = 'Magasin de '+@lib_ville+' ('+@dept+')'
+
+	SET @type_lieu_bis = 'M'
+	SET @libel_lieu_bis = 'Stock du magasin de '+@lib_ville+' ('+@dept+')'
+
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
+	VALUES (@ville_fk,
+	@type_lieu,
+	@libel_lieu,
+	@date_ouv,
+	@date_ferm,
+	@surface)
+	
+	PRINT @ville_fk; -- on affiche pour tester
+	PRINT @lib_ville;
+	PRINT @type_lieu;
+	PRINT @libel_lieu;
+	PRINT @date_ouv;
+	PRINT @date_ferm;
+	PRINT @surface;
+	
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
+	VALUES (@ville_fk,
+	@type_lieu_bis,
+	@libel_lieu_bis,
+	@date_ouv,
+	@date_ferm,
+	@surface_bis)
+	
+	PRINT @ville_fk; -- on affiche pour tester
+	PRINT @lib_ville;
+	PRINT @type_lieu_bis;
+	PRINT @libel_lieu_bis;
+	PRINT @date_ouv;
+	PRINT @date_ferm;
+	PRINT @surface_bis;
+
+	SET @compteur = @compteur + 1
+END
+
+SET @compteur = 0
+
+WHILE @compteur < @nb_sit_internet
+BEGIN
+	SET @ville_fk =  (SELECT TOP 1 VILLE_PK FROM VILLE ORDER BY NEWID()) --on choisit une ville au hasard dans la table des villes
+	SET @lib_ville = (SELECT NOM_VILLE FROM VILLE WHERE VILLE_PK = @ville_fk) -- on récupère le nom de la ville associée
+	SET @dept = (SELECT DEPARTEMENT FROM VILLE WHERE VILLE_PK = @ville_fk) -- et le département
+
+	SET @date_ouv = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate())) -- on génère une date d'ouverture aléatoire sur les 10 dernières années
+	SET @date_ferm = '01/01/1900' -- on initialise la date de fermeture
+
+	SET @est_ferme = (select cast(round((4-1)* rand() + 1,0) as integer)) --on effectue un tirage pour décider si le magasin est fermé où non
+	IF @est_ferme = 1 -- la magasin a 1 chance sur 4 d'être fermé
+	BEGIN
+		WHILE @date_ferm <= @date_ouv -- dans ce cas on lui attribue une date de fermeture postérieur à la date d'ouverture
+			SET @date_ferm = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 3650) * -1, getdate()))
+	END
+
+	SET @surface = 0 -- on tire au sort une surface entre 100 et 1000 m²
+	SET @surface_bis = (select cast((1000-100)* rand() + 1 as numeric(6,1))) -- on tire au sort une surface entre 100 et 1000 m²
+
+	SET @type_lieu = 'I'
+	SET @libel_lieu = 'Site Internet administré depuis '+@lib_ville+' ('+@dept+')'
+
+	SET @type_lieu_bis = 'S'
+	SET @libel_lieu_bis = 'Stock pour site Internet à '+@lib_ville+' ('+@dept+')'
+
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
+	VALUES (@ville_fk,
+	@type_lieu,
+	@libel_lieu,
+	@date_ouv,
+	@date_ferm,
+	@surface)
+	
+	PRINT @ville_fk; -- on affiche pour tester
+	PRINT @lib_ville;
+	PRINT @type_lieu;
+	PRINT @libel_lieu;
+	PRINT @date_ouv;
+	PRINT @date_ferm;
+	PRINT @surface;
+	
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_LIEUX] ([VILLE_FK],[TYPE_LIEU],[LIBEL_LIEU],[DATE_OUVERTURE],[DATE_FERMETURE],[SURFACE_M2]) -- on insert nos données dans la table LIEUX
+	VALUES (@ville_fk,
+	@type_lieu_bis,
+	@libel_lieu_bis,
+	@date_ouv,
+	@date_ferm,
+	@surface_bis)
+	
+	PRINT @ville_fk; -- on affiche pour tester
+	PRINT @lib_ville;
+	PRINT @type_lieu_bis;
+	PRINT @libel_lieu_bis;
+	PRINT @date_ouv;
+	PRINT @date_ferm;
+	PRINT @surface_bis;
+
+	SET @compteur = @compteur + 1
+END
+
 
 
 
