@@ -4,7 +4,7 @@
 
   Résumé:  Crée la base OLTP du projet ODE
   Date:     02/07/2015
-  Updated:  -
+  Updated:  13/07/2015
 
   SQL Server Version: 2014
   
@@ -347,7 +347,7 @@ GO
 CREATE TABLE [ODE_VENTES].[SOUS_FAMILLES_PRODUITS] (
 	[ID_SSFAMILLE] 			[INT] IDENTITY (1, 1) 	NOT NULL,
 	[LIBEL_FAMILLE] 		[NVARCHAR](256)			NOT NULL,
-	[ID_RAYON_SSFAMILLE] 	[INT] 					NOT NULL, -- FK : Famille de la sous-famille
+	[ID_FAMILLE_SSFAMILLE] 	[INT] 					NOT NULL, -- FK : Famille de la sous-famille -- OLIVIER # 13/07/2015 : Renomage du champ
 	[DATE_CREAT] 			[DATETIME] 				NOT NULL	CONSTRAINT [DF_SSfamillesProduits_DateCreate] DEFAULT (GETDATE()),
 	[OPER_CREAT] 			[NVARCHAR](64)  		NOT NULL,
 	[DATE_MODIF] 			[DATETIME]							CONSTRAINT [DF_SSfamillesProduits_DateModif] DEFAULT (GETDATE()),
@@ -637,11 +637,12 @@ ALTER TABLE [ODE_VENTES].[FAMILLES_PRODUITS] ADD
         [ID_RAYON]
     );
 GO
-	
-ALTER TABLE [ODE_VENTES].[SOUS_FAMILLES_PRODUITS] ADD 
-    CONSTRAINT [FK_SSFamillesProduits_Rayon_RayonID] FOREIGN KEY 
+
+-- OLIVIER # 13/07/2015 : Renomage du champ
+ALTER TABLE [ODE_VENTES].[SOUS_FAMILLES_PRODUITS] ADD
+    CONSTRAINT [FK_SSFamillesProduits_Familles_FamilleID] FOREIGN KEY 
     (
-        [ID_RAYON_SSFAMILLE]
+        [ID_FAMILLE_SSFAMILLE]
     ) REFERENCES [ODE_VENTES].[FAMILLES_PRODUITS](
         [ID_FAMILLE]
     );
