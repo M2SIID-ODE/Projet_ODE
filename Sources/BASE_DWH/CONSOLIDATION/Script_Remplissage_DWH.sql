@@ -3,7 +3,7 @@
   Fichier:     Script_Remplissage_DWH.sql
 
   Résumé:  Rempli le DWH (OLTP) du projet ODE
-  Date:     15/07/2015
+  Date:     16/07/2015
   Updated:  
 
   SQL Server Version: 2014
@@ -17,12 +17,11 @@
 
 
 -- Connexion à la base
-USE [DataWarehouseODE];
-GO
+USE [DataWarehouseODE]
 
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
-:setvar OdeCsvPath "E:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\ScriptsConsolidés\Données\"
+:setvar OdeCsvPath "Z:\GitHub\Projet_ODE\Sources\BASE_DWH\CONSOLIDATION\Donnees\"
 
 
 
@@ -31,13 +30,13 @@ GO
 -- ETAPE 0 : RAZ DE TOUTES LES TABLES
 -- ----------------------------------
 
-DELETE FROM [ODE_DATAWAREHOUSE].[FACT_VENTES];
-DELETE FROM [ODE_DATAWAREHOUSE].[FACT_STOCKS];
-DELETE FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX];
-DELETE FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS];
-DELETE FROM [ODE_DATAWAREHOUSE].[DIM_VILLES];
-DELETE FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS];
-DELETE FROM [ODE_DATAWAREHOUSE].[DIM_TEMPS];
+DELETE FROM [ODE_DATAWAREHOUSE].[FACT_VENTES]
+DELETE FROM [ODE_DATAWAREHOUSE].[FACT_STOCKS]
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX]
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS]
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_VILLES]
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS]
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_TEMPS]
 
 DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_LIEUX]',		RESEED, 0)	WITH NO_INFOMSGS
 DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CLIENTS]',	RESEED, 0)	WITH NO_INFOMSGS
@@ -51,7 +50,119 @@ GO
 -- ETAPE 1 : REMPLISSAGE TABLE CATEGORIES
 -- --------------------------------------
 
--- BRICE # ??/??
+-- BRICE # 16/07/2015
+
+-- CREATION VUES TEMPORAIRES POUR éviter l'erreur "Bulk load data conversion error (type mismatch or invalid character for the specified codepage) for row 1, column 1 (ID)."
+GO
+
+CREATE VIEW [ODE_DATAWAREHOUSE].Univers_V
+AS SELECT LIBEL_UNIVERS,ID_UNIVERS
+FROM DIM_CATEGORIES;
+GO
+
+CREATE VIEW [ODE_DATAWAREHOUSE].Rayons_V
+AS SELECT LIBEL_RAYON,ID_RAYON
+FROM DIM_CATEGORIES;
+GO
+
+CREATE VIEW [ODE_DATAWAREHOUSE].Familles_V
+AS SELECT LIBEL_FAMILLE,ID_FAMILLE
+FROM DIM_CATEGORIES;
+GO
+
+CREATE VIEW [ODE_DATAWAREHOUSE].sous_Familles_V
+AS SELECT LIBEL_SSFAMILLE,ID_SSFAMILLE
+FROM DIM_CATEGORIES;
+GO
+
+GO
+
+BULK INSERT [ODE_DATAWAREHOUSE].[Univers_V] FROM N'$(OdeCsvPath)Univers.csv' 
+WITH (
+    --CHECK_CONSTRAINTS,
+    --CODEPAGE='ACP',
+    --DATAFILETYPE='char',
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='\n'
+    --KEEPIDENTITY,
+    --TABLOCK
+);
+
+GO
+
+BULK INSERT [ODE_DATAWAREHOUSE].[Rayons_V] FROM N'$(OdeCsvPath)Rayons.csv'
+WITH (
+    --CHECK_CONSTRAINTS,
+    --CODEPAGE='ACP',
+    --DATAFILETYPE='char',
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='\n'
+    --KEEPIDENTITY,
+    --TABLOCK
+);
+
+GO
+
+BULK INSERT [ODE_DATAWAREHOUSE].[Familles_V] FROM N'$(OdeCsvPath)Familles.csv'
+WITH (
+    --CHECK_CONSTRAINTS,
+    --CODEPAGE='ACP',
+    --DATAFILETYPE='char',
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='\n'
+    --KEEPIDENTITY,
+    --TABLOCK
+);
+
+GO
+
+BULK INSERT [ODE_DATAWAREHOUSE].[sous_Familles_V] FROM N'$(OdeCsvPath)Sous_familles.csv'
+WITH (
+    --CHECK_CONSTRAINTS,
+    --CODEPAGE='ACP',
+    --DATAFILETYPE='char',
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='\n'
+    --KEEPIDENTITY,
+    --TABLOCK
+);
+
+GO
+
+DROP VIEW [ODE_DATAWAREHOUSE].[Univers_V];
+DROP VIEW [ODE_DATAWAREHOUSE].[Rayons_V];
+DROP VIEW [ODE_DATAWAREHOUSE].[Familles_V];
+DROP VIEW [ODE_DATAWAREHOUSE].[sous_Familles_V];
+
+
+
+
+	-- OLIVIER # 16/07/2015 : Remplissage de la table des CATEGORIES
+	-- NOTE : Les accents sont KO, lors qu ils sont OK dans les tables sources !!!
+	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_CATEGORIES](
+		[LIBEL_UNIVERS],
+		[ID_UNIVERS],
+		[LIBEL_RAYON],
+		[ID_RAYON],
+		[LIBEL_FAMILLE],
+		[ID_FAMILLE],
+		[LIBEL_SSFAMILLE],
+		[ID_SSFAMILLE])
+	SELECT
+		LIB_UNIVERS,		-- [LIBEL_UNIVERS]
+		UNIVERS_PK,			-- [ID_UNIVERS]
+		LIB_RAYONS,			-- [LIBEL_RAYON]
+		RAYONS_PK,			-- [ID_RAYON]
+		LIB_FAMILLES,		-- [LIBEL_FAMILLE]
+		FAMILLES_PK,		-- [ID_FAMILLE]
+		LIB_SOUS_FAMILLES,	-- [LIBEL_SSFAMILLE]
+		SOUS_FAMILLES_PK	-- [ID_SSFAMILLE]
+	FROM		
+					[ODE_DATAWAREHOUSE].[UNIVERS] U
+		LEFT JOIN	[ODE_DATAWAREHOUSE].[RAYONS] R			ON U.[UNIVERS_PK] = R.[UNIVERS_RAY]
+		LEFT JOIN	[ODE_DATAWAREHOUSE].[FAMILLES] F		ON R.[RAYONS_PK] = F.[RAYONS_FAM]
+		LEFT JOIN	[ODE_DATAWAREHOUSE].[SOUS_FAMILLES] S	ON F.[FAMILLES_PK] = S.[FAMILLES_SFAM];
+
 
 
 
@@ -63,10 +174,14 @@ GO
 
 
 -- REMPLISSAGE TABLE PRODUITS
+-- THOMAS # 09/07/2015
+
+
+-- REMPLISSAGE TABLE PRODUITS
 
 -- CREATION BIBLIOTHEQUE
 create table [ODE_DATAWAREHOUSE].[UNIVERS](  -- on crée une table pour charger ensuite les fichiers CSV
-	LIB_UNIVERS varchar(50),
+	LIB_UNIVERS nvarchar(50),
 	UNIVERS_PK int,
 )
 
@@ -74,16 +189,16 @@ BULK INSERT [ODE_DATAWAREHOUSE].[UNIVERS] FROM N'$(OdeCsvPath)Univers.csv' -- ch
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
 create table [ODE_DATAWAREHOUSE].[RAYONS](
 	UNIVERS_RAY int,
-	LIB_RAYONS varchar(70),
+	LIB_RAYONS nvarchar(70),
 	RAYONS_PK int,
 )
 
@@ -91,16 +206,16 @@ BULK INSERT [ODE_DATAWAREHOUSE].[RAYONS] FROM N'$(OdeCsvPath)Rayons.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
 create table [ODE_DATAWAREHOUSE].[FAMILLES](
 	RAYONS_FAM int,
-	LIB_FAMILLES varchar(70),
+	LIB_FAMILLES nvarchar(70),
 	FAMILLES_PK int,
 )
 
@@ -108,16 +223,16 @@ BULK INSERT [ODE_DATAWAREHOUSE].[FAMILLES] FROM N'$(OdeCsvPath)Familles.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
 create table [ODE_DATAWAREHOUSE].[SOUS_FAMILLES](
 	FAMILLES_SFAM int,
-	LIB_SOUS_FAMILLES varchar(70),
+	LIB_SOUS_FAMILLES nvarchar(70),
 	SOUS_FAMILLES_PK int,
 )
 
@@ -125,57 +240,59 @@ BULK INSERT [ODE_DATAWAREHOUSE].[SOUS_FAMILLES] FROM N'$(OdeCsvPath)Sous_famille
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
+-- CREATION BIBLIOTHEQUE
+
 create table [ODE_DATAWAREHOUSE].[PRODUITS](
 	RAYONS_PDT int,
-	LIB_PRODUIT varchar(70),
+	LIB_PRODUIT nvarchar(70),
 )
 
 BULK INSERT [ODE_DATAWAREHOUSE].[PRODUITS] FROM N'$(OdeCsvPath)Produits.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
 create table [ODE_DATAWAREHOUSE].[FOURNISSEURS](
 	UNIVERS_FOUR int,
-	LIB_FOURNISSEUR varchar(70),
+	LIB_FOURNISSEUR nvarchar(70),
 )
 
 BULK INSERT [ODE_DATAWAREHOUSE].[FOURNISSEURS] FROM N'$(OdeCsvPath)Fournisseurs.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
 
 create table [ODE_DATAWAREHOUSE].[MARQUES](
 	RAYONS_MAR int,
-	LIB_MARQUE varchar(70),
+	LIB_MARQUE nvarchar(70),
 )
 
 BULK INSERT [ODE_DATAWAREHOUSE].[MARQUES] FROM N'$(OdeCsvPath)Marques.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
@@ -233,32 +350,6 @@ BEGIN
 	SET @grossiste = (SELECT TOP 1 fournisseur FROM [ODE_DATAWAREHOUSE].[TABLE_TEMP])
 
 
-	-- OLIVIER # 15/07/2015 : Patch temporaire pour remplir la table des CATEGORIES (cf. erreur ci-dessous, en l absence de ce patch)
-	-- Sera réalisé par le dev de BRICE
-	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_CATEGORIES](
-		[LIBEL_UNIVERS],
-		[ID_UNIVERS],
-		[LIBEL_RAYON],
-		[ID_RAYON],
-		[LIBEL_FAMILLE],
-		[ID_FAMILLE],
-		[LIBEL_SSFAMILLE],
-		[ID_SSFAMILLE])
-	SELECT
-		LIB_UNIVERS,		-- [LIBEL_UNIVERS]
-		UNIVERS_PK,			-- [ID_UNIVERS]
-		LIB_RAYONS,			-- [LIBEL_RAYON]
-		RAYONS_PK,			-- [ID_RAYON]
-		LIB_FAMILLES,		-- [LIBEL_FAMILLE]
-		FAMILLES_PK,		-- [ID_FAMILLE]
-		LIB_SOUS_FAMILLES,	-- [LIBEL_SSFAMILLE]
-		SOUS_FAMILLES_PK	-- [ID_SSFAMILLE]
-	FROM		
-					[ODE_DATAWAREHOUSE].[UNIVERS] U
-		LEFT JOIN	[ODE_DATAWAREHOUSE].[RAYONS] R			ON U.[UNIVERS_PK] = R.[UNIVERS_RAY]
-		LEFT JOIN	[ODE_DATAWAREHOUSE].[FAMILLES] F		ON R.[RAYONS_PK] = F.[RAYONS_FAM]
-		LEFT JOIN	[ODE_DATAWAREHOUSE].[SOUS_FAMILLES] S	ON F.[FAMILLES_PK] = S.[FAMILLES_SFAM];
-
 
 	-- OLIVIER # 15/07/2015 : ERREUR due à l absence de lien avec la table des CATEGORIES
 	--		Msg 547, Niveau 16, État 0, Ligne 213
@@ -275,7 +366,7 @@ BEGIN
 
 	SET @compteur_2 = @compteur_2 + 1
 END
-
+/*
 DROP TABLE [ODE_DATAWAREHOUSE].[TABLE_TEMP] --on supprime la table temporaire
 
 -- OLIVIER # 13/07/2015 : Drop des autres tables intermediares
@@ -287,7 +378,7 @@ DROP TABLE [ODE_DATAWAREHOUSE].[MARQUES]
 DROP TABLE [ODE_DATAWAREHOUSE].[PRODUITS]
 DROP TABLE [ODE_DATAWAREHOUSE].[SOUS_FAMILLES];
 GO
-
+*/
 
 -- ----------------------------------
 -- ETAPE 3 : REMPLISSAGE TABLE VILLES
@@ -295,17 +386,15 @@ GO
 
 -- BERNARD # 09/07/2015
 
--- OLIVIER # 15/07/2015 : Attention aux accents sur NOM_VILLE_MIN !
-
 BULK 
 INSERT [ODE_DATAWAREHOUSE].[DIM_VILLES]
 FROM N'$(OdeCsvPath)Script_villes_france.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 )
@@ -326,11 +415,11 @@ declare @compteur int = 0
 declare @type int
 declare @type_lieu [CHAR](1)
 declare @type_lieu_bis [CHAR](1)
-declare @lib_ville varchar(50)
+declare @lib_ville nvarchar(50)
 declare @ville_fk int
 declare @libel_lieu [NVARCHAR](256)
 declare @libel_lieu_bis [NVARCHAR](256)
-declare @dept varchar(20)
+declare @dept nvarchar(20)
 declare @date_ouv date, @date_ferm date
 declare @est_ferme int
 declare @surface [NUMERIC](6,1)
@@ -530,8 +619,8 @@ DECLARE @nom AS [NVARCHAR](256)
 DECLARE @date_naissance AS date
 DECLARE @date_souscription AS date
 DECLARE @code_fidelite AS [NVARCHAR](32)
-DECLARE @consonne AS varchar(20) = 'BCDFGHJKLMNPQRSTVWXZ'
-DECLARE @voyelle AS varchar(6) = 'AEIOUY'
+DECLARE @consonne AS nvarchar(20) = 'BCDFGHJKLMNPQRSTVWXZ'
+DECLARE @voyelle AS nvarchar(6) = 'AEIOUY'
 DECLARE @length AS int
 
 --La table ville devra etre chargée en amont
@@ -708,9 +797,9 @@ BULK INSERT [ODE_DATAWAREHOUSE].[DIM_TEMPS] FROM N'$(OdeCsvPath)DimTemps.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
-    --DATAFILETYPE='char',
+    CODEPAGE='1252', -- OLIVIER # 16/07/2015 : CodePage du LATIN-1 pour gestion des accents
     FIELDTERMINATOR=';',
-    ROWTERMINATOR='\n'
+    ROWTERMINATOR='0x0a' -- OLIVIER # 16/07/2015 : Fin de lignes des CSV en LF seul (/n <=> CR + LF)
     --KEEPIDENTITY,
     --TABLOCK
 );
@@ -772,7 +861,7 @@ SET @nbrMoyenArticleMagasin = 18;		-- En magasin : 18 articles par ticket en moy
 SET @tauxMargeMoyenInternet = 44.3;		-- Sur Internet - Moyenne 44.3 pourcents de marge
 SET @tauxMargeMoyenMagasin = 34.8;		-- En Magasin - Moyenne 34.8 pourcents de marge
 SET @ecartMoyenMarge = 20.0;			-- Ecart maximale de variation autour de la marge moyenne
-SET @traceOn = 1;						-- Activation de la trace : 1
+SET @traceOn = 0;						-- Activation de la trace : 1
 
 
 ---------------------------------------------------------------------------------
@@ -829,8 +918,10 @@ BEGIN
 			SELECT @typeLieuSelection = [TYPE_LIEU] FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX] WHERE [LIEU_PK] = @lieuFk;
 
 			IF(@traceOn = 1)
-				PRINT '@lieuFk = '+ cast(@lieuFk as varchar);
-				PRINT '@typeLieuSelection = '+ cast(@typeLieuSelection as varchar);
+			BEGIN
+				PRINT '@lieuFk = '+ cast(@lieuFk as nvarchar);
+				PRINT '@typeLieuSelection = '+ cast(@typeLieuSelection as nvarchar);
+			END;
 
 		END;
 		
@@ -857,7 +948,7 @@ BEGIN
 		SET @nbrArticlesVente = cast( floor(1 + (2 * @nbrMoyenArticle - 1) * rand()) as INT); 
 		
 		IF(@traceOn = 1)
-			PRINT '@nbrArticlesVente = '+ cast(@nbrArticlesVente as varchar);
+			PRINT '@nbrArticlesVente = '+ cast(@nbrArticlesVente as nvarchar);
 
 			
 		----------------------------------------------------	
@@ -883,7 +974,7 @@ BEGIN
 			SET @tauxMargeArticle = cast(@tauxMargeMoyen + @ecartMoyenMarge * (2* rand() - 1) as NUMERIC(4,1));
 
 			IF(@traceOn = 1)
-				PRINT '@tauxMargeArticle = '+ cast(@tauxMargeArticle as varchar);
+				PRINT '@tauxMargeArticle = '+ cast(@tauxMargeArticle as nvarchar);
 			
 			------------------------------
 			-- Tirage au sort de l article
@@ -898,7 +989,7 @@ BEGIN
 			SET @unitesVendues = cast( floor(1 + (@nbrArticlesVente - @nbrArticlesIndex) * rand()) as INT); 
 			
 			IF(@traceOn = 1)
-				PRINT '@unitesVendues = '+ cast(@unitesVendues as varchar);
+				PRINT '@unitesVendues = '+ cast(@unitesVendues as nvarchar);
 
 			-------------------------------------
 			-- Nbr d articles cumules de la vente
@@ -953,7 +1044,7 @@ BEGIN
 		-----------------------------------------------------------------
 		IF(@numTickets % 1000 = 0)
 		BEGIN
-			PRINT 'Ticket de caisse no. ' + cast(@numTickets as varchar);
+			PRINT 'Ticket de caisse no. ' + cast(@numTickets as nvarchar);
 		END;
 
 	END;
@@ -963,9 +1054,7 @@ BEGIN
 	----------------------------------
 	SET @anneeIndex = @anneeIndex + 1;
 	IF(@traceOn = 1)
-		PRINT '@anneeIndex = '+ cast(@anneeIndex as varchar);
+		PRINT '@anneeIndex = '+ cast(@anneeIndex as nvarchar);
 
 END;
-
-
 
