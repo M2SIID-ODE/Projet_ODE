@@ -537,7 +537,7 @@ DECLARE @length AS int
 
 --La table ville devra etre chargée en amont
 --!!!!!! modifier ici le nombre poste total souhaité à la fin du traitement
-SET @nb_poste_total = 100
+SET @nb_poste_total = 10000
 --!!!!!!!!!!!!!!!!!!!!!!!
 
 PRINT 'Remplissage automatique de la table Clients'
@@ -552,10 +552,10 @@ PRINT 'Nombre de postes avant ajout : ' + CAST(@nb_poste_deb as nvarchar)
 SET @nb_insert = @nb_poste_total - @nb_poste_deb
 PRINT 'Nombre de postes à ajouter   : ' + CAST(@nb_insert as nvarchar)
 
-SET @nb_anonyme = @nb_insert* 25 / 100 
-SET @nb_internet = @nb_insert * 25 / 100 
+SET @nb_anonyme = @nb_insert* 40 / 100 
+SET @nb_internet = @nb_insert * 20 / 100 
 SET @nb_nominatif = @nb_insert * 20 / 100 
-SET @nb_pro = @nb_insert *15 / 100 
+SET @nb_pro = @nb_insert *10 / 100 
 SET @nb_societe = @nb_insert - @nb_anonyme - @nb_internet - @nb_nominatif - @nb_pro
 
 PRINT '--------------------------------------------------'
@@ -572,13 +572,6 @@ WHILE(@i <= @nb_insert)
 
 -- Selection ville aléatoire dans la table Ville
 		SET @ville_fk =  (SELECT TOP 1 VILLE_PK FROM [ODE_DATAWAREHOUSE].[DIM_VILLES] ORDER BY NEWID())
-
--- Taux de remise aléatoire entre 0,00 et 100,00, si le taux est supérieur à 50, on le force à 0
-		SET @taux_remise = rand() * 100
-		IF @taux_remise > 50 
-			BEGIN
-				SET @taux_remise = 0
-			END
 
 -- Type de client aléatoire (champs de valeur)
 -- A : Anonyme
@@ -599,12 +592,13 @@ WHILE(@i <= @nb_insert)
 		IF @type = 'A' 
 		BEGIN
 			SET @nom = 'Client anonyme'
+			SET @taux_remise = 0
 		END
 
 		IF @type = 'I' OR @type = 'N' OR @type = 'S' OR @type = 'P'
 		BEGIN
-		    -- recup nom aléatoire avec longueur aléatoire entre 0 et 100
-			SET @length = (select cast(round((50 -1)* rand() + 1,0) as integer))
+		    -- recup nom aléatoire avec longueur aléatoire entre 2 et 102
+			SET @length = (select cast(round((50 -1)* rand() + 1,0) as integer)) + 2
 			SET @j = 1
 			SET @nom =''
 			
@@ -616,19 +610,36 @@ WHILE(@i <= @nb_insert)
 			END
 		END
 
-		IF @type = 'N' OR @type = 'I'
+		IF @type = 'I'
+		BEGIN
+			SET @nom = @nom + ' INT ' + CAST(@i as nvarchar)
+			SET @taux_remise = 0
+		END
+
+		IF @type = 'N'
 		BEGIN
 			SET @nom = @nom + ' BOB ' + CAST(@i as nvarchar)
+			SET @taux_remise = (select cast(round((49)* rand() + 1,0) as integer))
 		END
 
 		IF @type = 'S'
 		BEGIN
 			SET @nom = @nom + 'SARL'
+			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
+			IF @taux_remise > 50 
+			BEGIN
+				SET @taux_remise = 0
+			END
 		END
 		
 		IF @type = 'P'
 		BEGIN
 			SET @nom = @nom + ' PRO ' + CAST(@i as nvarchar)
+			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
+			IF @taux_remise > 50 
+			BEGIN
+				SET @taux_remise = 0
+			END
 		END
 
 -- Date de naissance aléatoire sur les 80 dernières années
@@ -648,7 +659,7 @@ WHILE(@i <= @nb_insert)
         SET @code_fidelite = ''
 	    IF @taux_remise > 0
 		BEGIN
-		   	SET @length = (select cast(round((16 -1)* rand() + 1,0) as integer))
+		   	SET @length = (select cast(round((16 -1)* rand() + 1,0) as integer)) + 1
 			SET @j = 1
 			WHILE @j < @length
 			BEGIN
@@ -679,6 +690,7 @@ WHILE(@i <= @nb_insert)
     SET @i += 1
 
 END
+
 
 
 -- ---------------------------------
