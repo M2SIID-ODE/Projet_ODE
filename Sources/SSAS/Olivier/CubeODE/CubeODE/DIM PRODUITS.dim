@@ -1,0 +1,361 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="7510eb14-0c46-42b1-b61f-6959d7357958" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DIM PRODUITS</ID>
+  <Name>DIM PRODUITS</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-2838" scrolltop="-1089" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="10980" y="16140" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CATEGORIES" left="337" top="0" logicalid="4" controlid="1" masterid="0" hint1="0" hint2="0" width="3678" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000a00005e0e0000ea120000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="ODE_DATAWAREHOUSE_DIM_CATEGORIES" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_PRODUITS" left="20" top="7242" logicalid="5" controlid="2" masterid="0" hint1="0" hint2="0" width="4313" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000a0000d91000009b0f0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="ODE_DATAWAREHOUSE_DIM_PRODUITS" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1777" top="4343" logicalid="6" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK_DimProduits_DimCategories_FK]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="1" destid="2" sourceattachpoint="7" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="2176" y="4842" />
+              <point x="2176" y="7242" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-2838</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-1089</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="94">
+            <Shape Id="PRODUIT PK" Expanded="false">
+              <Attributes>
+                <Attribute Id="PRODUIT PK" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="CATEGORIE PK" Expanded="false">
+              <Attributes>
+                <Attribute Id="CATEGORIE PK" />
+              </Attributes>
+              <Position x="142" y="20" />
+            </Shape>
+            <Shape Id="ID FAMILLE" Expanded="false">
+              <Attributes>
+                <Attribute Id="ID FAMILLE" />
+              </Attributes>
+              <Position x="265" y="20" />
+            </Shape>
+            <Shape Id="ID RAYON" Expanded="false">
+              <Attributes>
+                <Attribute Id="ID RAYON" />
+              </Attributes>
+              <Position x="387" y="20" />
+            </Shape>
+            <Shape Id="ID UNIVERS" Expanded="false">
+              <Attributes>
+                <Attribute Id="ID UNIVERS" />
+              </Attributes>
+              <Position x="510" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="2d737446-4f1d-46e6-a995-a57262045970">
+    <DataSourceViewID>Data Warehouse ODE</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="7306a36a-9e25-460f-8b6a-260349807be3">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="145a567f-df42-4724-aecb-d01168f6b1f4">
+      <ID>PRODUIT PK</ID>
+      <Name>PRODUIT</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="06bb4c38-6c13-4911-9a57-35e01cf1044b">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a5b7dda4-7d4b-4700-a14a-42150d9a70f7">
+            <TableID>ODE_DATAWAREHOUSE_DIM_PRODUITS</TableID>
+            <ColumnID>PRODUIT_PK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="4e3a6226-01c0-4c03-8b2f-55aff6b49ab5">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="f16ced2a-3de5-4b58-a51c-c0266767c86c">
+          <TableID>ODE_DATAWAREHOUSE_DIM_PRODUITS</TableID>
+          <ColumnID>LIBEL_PRODUIT</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="19e60230-b9aa-43de-aca4-83bd1acf0fa4">
+          <AttributeID>CATEGORIE PK</AttributeID>
+          <Name>CATEGORIE</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5f2f63f2-b6bc-48e7-a8c6-8c006579f7ef">
+      <ID>CATEGORIE PK</ID>
+      <Name>CATEGORIE</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="74973240-8111-4795-b691-89862cd37a60">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="44e1052a-46bf-4b22-ae88-7f4c2ed7bd78">
+            <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+            <ColumnID>CATEGORIE_PK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="e442cab0-3299-4a72-ad6b-fc6324b6edc1">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="f4c4cc36-7efb-4fad-bf9e-fc212ec458cd">
+          <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+          <ColumnID>LIBEL_SSFAMILLE</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="d0ee65f8-4a04-4317-b9d3-cbc0675581a2">
+          <AttributeID>ID FAMILLE</AttributeID>
+          <Name>FAMILLE</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="feb748cd-a087-43d0-aec9-06e7245b4748">
+      <ID>ID UNIVERS</ID>
+      <Name>UNIVERS</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="07dbc54f-0035-47cf-98ca-dac6e7c437dc">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1aec3876-3dec-4f3f-a3c3-b03f0494cf1a">
+            <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+            <ColumnID>ID_UNIVERS</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="cc6588b9-d461-4460-b1b8-46613d2656f2">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="16c08021-7c65-4d6e-96db-c490307705b2">
+          <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+          <ColumnID>LIBEL_UNIVERS</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="02673343-77ff-457b-adb2-166921447afe">
+      <ID>ID RAYON</ID>
+      <Name>RAYON</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="091f65bd-945e-477d-89f9-268cb43a99c1">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="fae4f306-b6f6-48c8-86ff-d81bb60e6562">
+            <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+            <ColumnID>ID_RAYON</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="f1501cae-0c01-41c8-a973-b27d00899795">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="023388dd-0f46-4aed-aad6-f0c25b5c1c4f">
+          <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+          <ColumnID>LIBEL_RAYON</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="91d00d44-6be5-4699-9c50-bcf0df3e534d">
+          <AttributeID>ID UNIVERS</AttributeID>
+          <Name>UNIVERS</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="cee17bff-c8dc-4d63-a32b-f74792b3b826">
+      <ID>ID FAMILLE</ID>
+      <Name>FAMILLE</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="616fcea7-5ffd-4d21-91a8-1cac1370ff82">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b5325f90-1f52-4a19-9292-1197b4e7a4a8">
+            <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+            <ColumnID>ID_FAMILLE</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="6e7d498d-1cae-42f1-b14f-8edd92cb1e3e">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="8dc5eb08-8115-4a66-a7c9-8f7daada5ed2">
+          <TableID>ODE_DATAWAREHOUSE_DIM_CATEGORIES</TableID>
+          <ColumnID>LIBEL_FAMILLE</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="c7623bd1-2e09-49bd-a307-19e5324dcbe8">
+          <AttributeID>ID RAYON</AttributeID>
+          <Name>RAYON</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="ae110cff-0cd5-4aa8-b342-1e05f39e3b92">
+      <ID>Hierarchy</ID>
+      <Name>Univers - Rayon - Famille</Name>
+      <Levels>
+        <Level dwd:design-time-name="707470c5-28e9-4000-b1c0-329101e0f9c1">
+          <ID>UNIVERS</ID>
+          <Name>UNIVERS</Name>
+          <SourceAttributeID>ID UNIVERS</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="5697c773-8277-403b-a443-a359ad2f8554">
+          <ID>RAYON</ID>
+          <Name>RAYON</Name>
+          <SourceAttributeID>ID RAYON</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="33ddbfcc-c1d3-43a4-8f34-5d523133c50c">
+          <ID>FAMILLE</ID>
+          <Name>FAMILLE</Name>
+          <SourceAttributeID>ID FAMILLE</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="e1c99a7a-9e8f-4e63-8964-8d9be7759c88">
+      <ID>Hierarchy 1</ID>
+      <Name>Univers - Rayon</Name>
+      <Levels>
+        <Level dwd:design-time-name="35dde52f-ef26-41f0-bf6b-176d19835678">
+          <ID>UNIVERS</ID>
+          <Name>UNIVERS</Name>
+          <SourceAttributeID>ID UNIVERS</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="bb4cacd0-cf78-4d02-b305-9f7d2e7a6c33">
+          <ID>RAYON</ID>
+          <Name>RAYON</Name>
+          <SourceAttributeID>ID RAYON</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="e7622ee0-efd5-47a9-996e-dd5a0477fac0">
+      <ID>Hierarchy 2</ID>
+      <Name>Univers - Rayon - Famille - Catégorie</Name>
+      <Levels>
+        <Level dwd:design-time-name="e90559d3-bc3b-4a3e-8a95-ba830b7690bb">
+          <ID>UNIVERS</ID>
+          <Name>UNIVERS</Name>
+          <SourceAttributeID>ID UNIVERS</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="02ca2a79-6400-4c7a-8d0a-c02ddc2cab49">
+          <ID>RAYON</ID>
+          <Name>RAYON</Name>
+          <SourceAttributeID>ID RAYON</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="66486c1d-2e32-4ea4-bc50-24b9a462a88e">
+          <ID>FAMILLE</ID>
+          <Name>FAMILLE</Name>
+          <SourceAttributeID>ID FAMILLE</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="88f73688-b326-402f-84ab-f5e4fb780b10">
+          <ID>CATEGORIE</ID>
+          <Name>CATEGORIE</Name>
+          <SourceAttributeID>CATEGORIE PK</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

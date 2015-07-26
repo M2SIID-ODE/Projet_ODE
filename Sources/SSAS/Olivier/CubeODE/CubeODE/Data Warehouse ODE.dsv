@@ -1,0 +1,363 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="1406ce6b-5d52-4264-88ee-f7fdf4c6ad9a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Data Warehouse ODE</ID>
+  <Name>Data Warehouse ODE</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout />
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>0</DiagramViewPortLeft>
+            <DiagramViewPortTop>0</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>Data Warehouse ODE</DataSourceID>
+  <Schema>
+    <xs:schema id="Data_x0020_Warehouse_x0020_ODE" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="Data_x0020_Warehouse_x0020_ODE" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="79a9f332-85e5-4750-8a82-070ca7be43f1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_CATEGORIES" msprop:design-time-name="e27e0ba5-0ddb-4185-82ce-8b6c6df7e2b9" msprop:DbTableName="DIM_CATEGORIES" msprop:FriendlyName="DIM_CATEGORIES" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CATEGORIE_PK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="801f0452-0100-444a-bf62-acd7bd5bbede" msprop:DbColumnName="CATEGORIE_PK" msprop:FriendlyName="CATEGORIE_PK" type="xs:int" />
+                  <xs:element name="LIBEL_UNIVERS" msprop:design-time-name="6d95e13c-fa89-4b8a-892b-bfc6970541c9" msprop:DbColumnName="LIBEL_UNIVERS" msprop:FriendlyName="LIBEL_UNIVERS" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ID_UNIVERS" msprop:design-time-name="47aa0628-911e-480c-b814-e289b32fd489" msprop:DbColumnName="ID_UNIVERS" msprop:FriendlyName="ID_UNIVERS" type="xs:int" minOccurs="0" />
+                  <xs:element name="LIBEL_RAYON" msprop:design-time-name="e40a331a-e6f0-4804-a4b9-4284879dc62e" msprop:DbColumnName="LIBEL_RAYON" msprop:FriendlyName="LIBEL_RAYON" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ID_RAYON" msprop:design-time-name="256c1af9-7fac-49e5-be26-9b4c38fa7a70" msprop:DbColumnName="ID_RAYON" msprop:FriendlyName="ID_RAYON" type="xs:int" minOccurs="0" />
+                  <xs:element name="LIBEL_FAMILLE" msprop:design-time-name="222b3391-c5ca-4759-8ae2-2ab4c81fd15c" msprop:DbColumnName="LIBEL_FAMILLE" msprop:FriendlyName="LIBEL_FAMILLE" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ID_FAMILLE" msprop:design-time-name="b521c4a9-521b-4976-b17d-d43d83934504" msprop:DbColumnName="ID_FAMILLE" msprop:FriendlyName="ID_FAMILLE" type="xs:int" minOccurs="0" />
+                  <xs:element name="LIBEL_SSFAMILLE" msprop:design-time-name="53f1fa28-5888-4eff-8795-f6af89489169" msprop:DbColumnName="LIBEL_SSFAMILLE" msprop:FriendlyName="LIBEL_SSFAMILLE" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ID_SSFAMILLE" msprop:design-time-name="c7cda50a-d98a-43d1-95f1-d63b08555000" msprop:DbColumnName="ID_SSFAMILLE" msprop:FriendlyName="ID_SSFAMILLE" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_CLIENTS" msprop:design-time-name="6b49a40d-b733-4a1c-a704-6c53aee4df5e" msprop:DbTableName="DIM_CLIENTS" msprop:FriendlyName="DIM_CLIENTS" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CLIENT_PK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="93efd5ba-fc8d-4ebf-8932-cd95e89aebb3" msprop:DbColumnName="CLIENT_PK" msprop:FriendlyName="CLIENT_PK" type="xs:int" />
+                  <xs:element name="VILLE_FK" msprop:design-time-name="d0e7425a-7fd1-4cba-9eb7-1c2e7105dffc" msprop:DbColumnName="VILLE_FK" msprop:FriendlyName="VILLE_FK" type="xs:int" />
+                  <xs:element name="TAUX_REMISE" msprop:design-time-name="49510cfe-80a2-44ee-945b-84e22dbaaa60" msprop:DbColumnName="TAUX_REMISE" msprop:FriendlyName="TAUX_REMISE" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TYPE_CLIENT" msprop:design-time-name="e2511110-8947-4f16-8ec7-23805a3d17d7" msprop:DbColumnName="TYPE_CLIENT" msprop:FriendlyName="TYPE_CLIENT">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="1" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="NOM_CLIENT" msprop:design-time-name="dcc79989-dcdb-42ee-ba2b-3f41dfb6b470" msprop:DbColumnName="NOM_CLIENT" msprop:FriendlyName="NOM_CLIENT">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DATE_NAISSANCE" msprop:design-time-name="6dd04d8d-584a-4afb-9e50-d47a7eb88f69" msprop:DbColumnName="DATE_NAISSANCE" msprop:FriendlyName="DATE_NAISSANCE" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="DATE_SOUSCRIPTION" msprop:design-time-name="b8e90c3c-3276-41d5-b4fa-15983eaee963" msprop:DbColumnName="DATE_SOUSCRIPTION" msprop:FriendlyName="DATE_SOUSCRIPTION" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="CODE_FIDELITE" msprop:design-time-name="b94d69c3-f97c-4160-93f7-fd3ff6d9ca9d" msprop:DbColumnName="CODE_FIDELITE" msprop:FriendlyName="CODE_FIDELITE" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="32" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_LIEUX" msprop:design-time-name="81515270-606a-4715-ab19-d0906d11935f" msprop:DbTableName="DIM_LIEUX" msprop:FriendlyName="DIM_LIEUX" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="LIEU_PK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="cb075057-da15-44c3-91c7-c124effba98b" msprop:DbColumnName="LIEU_PK" msprop:FriendlyName="LIEU_PK" type="xs:int" />
+                  <xs:element name="VILLE_FK" msprop:design-time-name="51911820-b815-48b9-b987-557fa4fbf2d0" msprop:DbColumnName="VILLE_FK" msprop:FriendlyName="VILLE_FK" type="xs:int" />
+                  <xs:element name="TYPE_LIEU" msprop:design-time-name="163a2bda-e847-44cd-8465-fe4c6ed85636" msprop:DbColumnName="TYPE_LIEU" msprop:FriendlyName="TYPE_LIEU">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="1" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="LIBEL_LIEU" msprop:design-time-name="99760a44-8587-4ef4-bada-a76f19b4b29a" msprop:DbColumnName="LIBEL_LIEU" msprop:FriendlyName="LIBEL_LIEU">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DATE_OUVERTURE" msprop:design-time-name="1100ffe7-df3a-4ec9-8831-5cc345c94d70" msprop:DbColumnName="DATE_OUVERTURE" msprop:FriendlyName="DATE_OUVERTURE" type="xs:dateTime" />
+                  <xs:element name="DATE_FERMETURE" msprop:design-time-name="b34db526-8e01-4c3c-8150-d124966a477a" msprop:DbColumnName="DATE_FERMETURE" msprop:FriendlyName="DATE_FERMETURE" type="xs:dateTime" />
+                  <xs:element name="SURFACE_M2" msprop:design-time-name="29f005df-38d5-4c18-a7fa-99a289fb1a4b" msprop:DbColumnName="SURFACE_M2" msprop:FriendlyName="SURFACE_M2" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_PRODUITS" msprop:design-time-name="1baebf2c-3937-42a7-88fa-9b2cff1015e1" msprop:DbTableName="DIM_PRODUITS" msprop:FriendlyName="DIM_PRODUITS" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PRODUIT_PK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="e617379e-f0b9-490e-b13c-ef2acfcde856" msprop:DbColumnName="PRODUIT_PK" msprop:FriendlyName="PRODUIT_PK" type="xs:int" />
+                  <xs:element name="CATEGORIE_FK" msprop:design-time-name="7b0dcd0e-1614-491f-8622-cad5d26e3000" msprop:DbColumnName="CATEGORIE_FK" msprop:FriendlyName="CATEGORIE_FK" type="xs:int" />
+                  <xs:element name="LIBEL_PRODUIT" msprop:design-time-name="a411b97d-4838-445c-b990-2effbdc98192" msprop:DbColumnName="LIBEL_PRODUIT" msprop:FriendlyName="LIBEL_PRODUIT">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PRIX_ACHAT" msprop:design-time-name="2256481e-8073-4a02-b065-2621a85c3af3" msprop:DbColumnName="PRIX_ACHAT" msprop:FriendlyName="PRIX_ACHAT" type="xs:decimal" />
+                  <xs:element name="TAUX_TVA" msprop:design-time-name="306d2778-f290-4992-8b49-28f56e325ff3" msprop:DbColumnName="TAUX_TVA" msprop:FriendlyName="TAUX_TVA" type="xs:decimal" />
+                  <xs:element name="MARQUE_PRODUIT" msprop:design-time-name="62219efb-64b1-4ee2-b61c-1c6c1a872832" msprop:DbColumnName="MARQUE_PRODUIT" msprop:FriendlyName="MARQUE_PRODUIT">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="GROSSISTE_PRODUIT" msprop:design-time-name="99563d23-4d77-4cc7-b52f-c3cedca76f3e" msprop:DbColumnName="GROSSISTE_PRODUIT" msprop:FriendlyName="GROSSISTE_PRODUIT" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_TEMPS" msprop:design-time-name="5c267a35-3944-4c0b-85f5-5752f2e74743" msprop:DbTableName="DIM_TEMPS" msprop:FriendlyName="DIM_TEMPS" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="TEMPS_PK" msprop:design-time-name="7778627e-05f8-490b-be71-09322fd64b72" msprop:DbColumnName="TEMPS_PK" msprop:FriendlyName="TEMPS_PK" type="xs:int" />
+                  <xs:element name="DATE" msprop:design-time-name="6e2715bf-dd10-461d-a549-1194e8ccb09f" msprop:DbColumnName="DATE" msprop:FriendlyName="DATE" type="xs:dateTime" />
+                  <xs:element name="JOUR" msprop:design-time-name="4d7d2d36-b77d-471c-8bce-27737daa14b3" msprop:DbColumnName="JOUR" msprop:FriendlyName="JOUR" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="64" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ANNEE_CODE" msprop:design-time-name="8f2ee348-8058-45a6-a393-804ffd860761" msprop:DbColumnName="ANNEE_CODE" msprop:FriendlyName="ANNEE_CODE" type="xs:int" minOccurs="0" />
+                  <xs:element name="ANNEE_DATE" msprop:design-time-name="9a0c06d3-c4cd-49d1-856b-6bce1443369e" msprop:DbColumnName="ANNEE_DATE" msprop:FriendlyName="ANNEE_DATE" type="xs:dateTime" />
+                  <xs:element name="ANNEE_NOM" msprop:design-time-name="a35ae0be-eaf5-4430-a031-1a3017d5c6bf" msprop:DbColumnName="ANNEE_NOM" msprop:FriendlyName="ANNEE_NOM" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="64" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TRIMESTRE_CODE" msprop:design-time-name="7dba9fe0-ec2a-49df-957f-d610b89bdefa" msprop:DbColumnName="TRIMESTRE_CODE" msprop:FriendlyName="TRIMESTRE_CODE" type="xs:int" minOccurs="0" />
+                  <xs:element name="TRIMESTRE_DATE" msprop:design-time-name="fa33dedb-468b-4c98-81ed-a49ffe74b8bc" msprop:DbColumnName="TRIMESTRE_DATE" msprop:FriendlyName="TRIMESTRE_DATE" type="xs:dateTime" />
+                  <xs:element name="TRIMESTRE_NOM" msprop:design-time-name="3fe3d4af-c61d-4bac-8eac-973f00ac5358" msprop:DbColumnName="TRIMESTRE_NOM" msprop:FriendlyName="TRIMESTRE_NOM" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="64" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MOIS_CODE" msprop:design-time-name="dbeab192-8615-42ca-8f8e-1173e8a7835b" msprop:DbColumnName="MOIS_CODE" msprop:FriendlyName="MOIS_CODE" type="xs:int" minOccurs="0" />
+                  <xs:element name="MOIS_DATE" msprop:design-time-name="b1416ead-c15d-4c61-b3e2-7e73959e2107" msprop:DbColumnName="MOIS_DATE" msprop:FriendlyName="MOIS_DATE" type="xs:dateTime" />
+                  <xs:element name="MOIS_NOM" msprop:design-time-name="19bc8c6e-50e2-47c2-89ac-701cf7792860" msprop:DbColumnName="MOIS_NOM" msprop:FriendlyName="MOIS_NOM" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="64" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SEMAINE_CODE" msprop:design-time-name="28cfdb77-28ea-4793-aa53-032b9391ec6d" msprop:DbColumnName="SEMAINE_CODE" msprop:FriendlyName="SEMAINE_CODE" type="xs:int" minOccurs="0" />
+                  <xs:element name="SEMAINE_DATE" msprop:design-time-name="34c06c82-b160-4e60-8e16-82fe8a753e19" msprop:DbColumnName="SEMAINE_DATE" msprop:FriendlyName="SEMAINE_DATE" type="xs:dateTime" />
+                  <xs:element name="SEMAINE_NOM" msprop:design-time-name="eff3cdd6-201d-4b47-9087-69f5aff12253" msprop:DbColumnName="SEMAINE_NOM" msprop:FriendlyName="SEMAINE_NOM" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="64" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_DIM_VILLES" msprop:design-time-name="022e0f51-e854-4b0b-aedb-eff30e789647" msprop:DbTableName="DIM_VILLES" msprop:FriendlyName="DIM_VILLES" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="VILLE_PK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="bcf6eaf3-48ec-4063-b8b0-c1450bb42251" msprop:DbColumnName="VILLE_PK" msprop:FriendlyName="VILLE_PK" type="xs:int" />
+                  <xs:element name="CODE_POSTAL" msprop:design-time-name="4fa27873-d073-4304-baca-486d81f03697" msprop:DbColumnName="CODE_POSTAL" msprop:FriendlyName="CODE_POSTAL">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="6" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="CODE_COMMUNE" msprop:design-time-name="e6a78ac7-1bc8-448b-9194-17458da499c7" msprop:DbColumnName="CODE_COMMUNE" msprop:FriendlyName="CODE_COMMUNE" type="xs:int" />
+                  <xs:element name="CODE_REGION" msprop:design-time-name="b1cb7dc8-e60e-4223-8b64-e59bc0357759" msprop:DbColumnName="CODE_REGION" msprop:FriendlyName="CODE_REGION" type="xs:int" />
+                  <xs:element name="CODE_DEPARTEMENT" msprop:design-time-name="35451764-0cd2-4394-989f-1475e6b6b284" msprop:DbColumnName="CODE_DEPARTEMENT" msprop:FriendlyName="CODE_DEPARTEMENT" type="xs:int" />
+                  <xs:element name="CODE_ARRONDISEMENT" msprop:design-time-name="592323ba-f37c-45aa-893f-d3671da8fb3c" msprop:DbColumnName="CODE_ARRONDISEMENT" msprop:FriendlyName="CODE_ARRONDISEMENT" type="xs:int" />
+                  <xs:element name="CODE_CANTON" msprop:design-time-name="cf5722d3-9409-4df9-9ff2-3acb09271f04" msprop:DbColumnName="CODE_CANTON" msprop:FriendlyName="CODE_CANTON" type="xs:int" />
+                  <xs:element name="NOM_VILLE_MAJ" msprop:design-time-name="c8f42cff-f2df-4d38-8f0d-0e274ffa9b35" msprop:DbColumnName="NOM_VILLE_MAJ" msprop:FriendlyName="NOM_VILLE_MAJ">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="NOM_VILLE_MIN" msprop:design-time-name="a5441eae-ade8-40ab-8fbc-e41d12fd91a7" msprop:DbColumnName="NOM_VILLE_MIN" msprop:FriendlyName="NOM_VILLE_MIN">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="POPULATION" msprop:design-time-name="a17759f6-cd7d-4d3a-9f06-b9f5b6b8ed64" msprop:DbColumnName="POPULATION" msprop:FriendlyName="POPULATION" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_FACT_STOCKS" msprop:design-time-name="a9328109-ba83-4064-811e-da5ed39b2eb5" msprop:DbTableName="FACT_STOCKS" msprop:FriendlyName="FACT_STOCKS" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DATE_INVENTAIRE_FK" msprop:design-time-name="d786646d-a544-47c8-b2e0-8cf3655a7f51" msprop:DbColumnName="DATE_INVENTAIRE_FK" msprop:FriendlyName="DATE_INVENTAIRE_FK" type="xs:int" />
+                  <xs:element name="PRODUIT_FK" msprop:design-time-name="badae1ef-5f50-4d7a-8c67-dd7911734993" msprop:DbColumnName="PRODUIT_FK" msprop:FriendlyName="PRODUIT_FK" type="xs:int" />
+                  <xs:element name="LIEU_FK" msprop:design-time-name="331045a1-72fb-462b-b5c2-9868bfede4d3" msprop:DbColumnName="LIEU_FK" msprop:FriendlyName="LIEU_FK" type="xs:int" />
+                  <xs:element name="NBR_DISPO" msprop:design-time-name="d5f1c023-495f-4c00-832d-e1d768cd97ed" msprop:DbColumnName="NBR_DISPO" msprop:FriendlyName="NBR_DISPO" type="xs:int" />
+                  <xs:element name="NBR_DEFECTUEUX" msprop:design-time-name="57fdd40a-7336-4aed-9519-8f22f6e2fd8c" msprop:DbColumnName="NBR_DEFECTUEUX" msprop:FriendlyName="NBR_DEFECTUEUX" type="xs:int" />
+                  <xs:element name="ID_INVENTAIRE" msprop:design-time-name="610b1f0e-dccd-48fb-9539-f62692e374cd" msprop:DbColumnName="ID_INVENTAIRE" msprop:FriendlyName="ID_INVENTAIRE" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ODE_DATAWAREHOUSE_FACT_VENTES" msprop:design-time-name="042de81e-64df-4cb9-8e8c-3fe631de5510" msprop:DbTableName="FACT_VENTES" msprop:FriendlyName="FACT_VENTES" msprop:DbSchemaName="ODE_DATAWAREHOUSE" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DATE_VENTE_FK" msprop:design-time-name="3800ac5b-ef3e-4d52-88bb-d3b4bd197dae" msprop:DbColumnName="DATE_VENTE_FK" msprop:FriendlyName="DATE_VENTE_FK" type="xs:int" />
+                  <xs:element name="PRODUIT_FK" msprop:design-time-name="50d0b8c2-9197-4972-95a1-5556429d6004" msprop:DbColumnName="PRODUIT_FK" msprop:FriendlyName="PRODUIT_FK" type="xs:int" />
+                  <xs:element name="CLIENT_FK" msprop:design-time-name="db01ec0d-70d2-4a75-9221-a53ea275f84a" msprop:DbColumnName="CLIENT_FK" msprop:FriendlyName="CLIENT_FK" type="xs:int" />
+                  <xs:element name="LIEU_FK" msprop:design-time-name="a3ff1c54-7397-4cf9-a59e-6691cf88d971" msprop:DbColumnName="LIEU_FK" msprop:FriendlyName="LIEU_FK" type="xs:int" />
+                  <xs:element name="MONTANT_HT_VENTE" msprop:design-time-name="dbcefa93-babc-4d5d-a062-d607eaa2d932" msprop:DbColumnName="MONTANT_HT_VENTE" msprop:FriendlyName="MONTANT_HT_VENTE" type="xs:decimal" />
+                  <xs:element name="MONTANT_TVA_VENTE" msprop:design-time-name="165575e0-b4b7-42a5-b4e6-24edbdbc207f" msprop:DbColumnName="MONTANT_TVA_VENTE" msprop:FriendlyName="MONTANT_TVA_VENTE" type="xs:decimal" />
+                  <xs:element name="MARGE_BRUTE" msprop:design-time-name="41704c0d-11eb-41e8-acac-52d85e1568de" msprop:DbColumnName="MARGE_BRUTE" msprop:FriendlyName="MARGE_BRUTE" type="xs:decimal" />
+                  <xs:element name="UNITES_VENDUES" msprop:design-time-name="6893f243-b54e-4d47-ab76-dae306c2c915" msprop:DbColumnName="UNITES_VENDUES" msprop:FriendlyName="UNITES_VENDUES" type="xs:int" />
+                  <xs:element name="NUM_TICKET" msprop:design-time-name="bdd8c41a-3785-4272-8658-7c63f2f46711" msprop:DbColumnName="NUM_TICKET" msprop:FriendlyName="NUM_TICKET">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_CATEGORIES" />
+          <xs:field xpath="CATEGORIE_PK" />
+        </xs:unique>
+        <xs:unique name="ODE_DATAWAREHOUSE_DIM_CLIENTS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_CLIENTS" />
+          <xs:field xpath="CLIENT_PK" />
+        </xs:unique>
+        <xs:unique name="ODE_DATAWAREHOUSE_DIM_LIEUX_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_LIEUX" />
+          <xs:field xpath="LIEU_PK" />
+        </xs:unique>
+        <xs:unique name="ODE_DATAWAREHOUSE_DIM_PRODUITS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_PRODUITS" />
+          <xs:field xpath="PRODUIT_PK" />
+        </xs:unique>
+        <xs:unique name="ODE_DATAWAREHOUSE_DIM_TEMPS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_TEMPS" />
+          <xs:field xpath="TEMPS_PK" />
+        </xs:unique>
+        <xs:unique name="ODE_DATAWAREHOUSE_DIM_VILLES_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_VILLES" />
+          <xs:field xpath="VILLE_PK" />
+        </xs:unique>
+        <xs:keyref name="FK_FactVentes_DimClients_ClientFK" refer="ODE_DATAWAREHOUSE_DIM_CLIENTS_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_VENTES" />
+          <xs:field xpath="CLIENT_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactVentes_DimLieux_LieuFK" refer="ODE_DATAWAREHOUSE_DIM_LIEUX_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_VENTES" />
+          <xs:field xpath="LIEU_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactVentes_DimProduits_ProduitFK" refer="ODE_DATAWAREHOUSE_DIM_PRODUITS_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_VENTES" />
+          <xs:field xpath="PRODUIT_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactVentes_DimTemps_DateVenteFK" refer="ODE_DATAWAREHOUSE_DIM_TEMPS_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_VENTES" />
+          <xs:field xpath="DATE_VENTE_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactStocks_DimTemps_TempsFK" refer="ODE_DATAWAREHOUSE_DIM_TEMPS_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_STOCKS" />
+          <xs:field xpath="DATE_INVENTAIRE_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactStocks_DimProduits_ProduitFK" refer="ODE_DATAWAREHOUSE_DIM_PRODUITS_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_STOCKS" />
+          <xs:field xpath="PRODUIT_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_FactStocks_DimLieux_LieuFK" refer="ODE_DATAWAREHOUSE_DIM_LIEUX_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_FACT_STOCKS" />
+          <xs:field xpath="LIEU_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_DimProduits_DimCategories_FK" refer="Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_PRODUITS" />
+          <xs:field xpath="CATEGORIE_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_DimLieux_DimVilles_FK" refer="ODE_DATAWAREHOUSE_DIM_VILLES_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_LIEUX" />
+          <xs:field xpath="VILLE_FK" />
+        </xs:keyref>
+        <xs:keyref name="FK_DimClients_DimVilles_FK" refer="ODE_DATAWAREHOUSE_DIM_VILLES_Constraint1">
+          <xs:selector xpath=".//ODE_DATAWAREHOUSE_DIM_CLIENTS" />
+          <xs:field xpath="VILLE_FK" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <Data_x0020_Warehouse_x0020_ODE xmlns="" />
+  </Schema>
+</DataSourceView>
