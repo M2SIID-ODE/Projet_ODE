@@ -3,7 +3,7 @@
   Fichier:     Script_Remplissage_DWH.sql
 
   Résumé:  Rempli le DWH (OLTP) du projet ODE
-  Date:     20/07/2015
+  Date:     26/07/2015
   Updated:  
 
   SQL Server Version: 2014
@@ -22,7 +22,8 @@ GO
 
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
-:setvar OdeCsvPath "C:\TEMP2\Donnees\"
+:setvar OdeCsvPath "Z:\GitHub\Projet_ODE\Sources\BASE_DWH\CONSOLIDATION\Donnees\"
+
 
 
 
@@ -30,7 +31,6 @@ GO
 -- ----------------------------------
 -- ETAPE 0 : RAZ DE TOUTES LES TABLES
 -- ----------------------------------
-
 DELETE FROM [ODE_DATAWAREHOUSE].[FACT_VENTES];
 DELETE FROM [ODE_DATAWAREHOUSE].[FACT_STOCKS];
 DELETE FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX];
@@ -38,11 +38,22 @@ DELETE FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS];
 DELETE FROM [ODE_DATAWAREHOUSE].[DIM_VILLES];
 DELETE FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS];
 DELETE FROM [ODE_DATAWAREHOUSE].[DIM_TEMPS];
+DELETE FROM [ODE_DATAWAREHOUSE].[DIM_CATEGORIES];  -- Olivier # 25/07/2015 : Ajout pour DIM_CATEGORIES
 
-DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_LIEUX]',		RESEED, 0)	WITH NO_INFOMSGS
-DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CLIENTS]',	RESEED, 0)	WITH NO_INFOMSGS
-DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_VILLES]',		RESEED, 0)	WITH NO_INFOMSGS
-DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_PRODUITS]',	RESEED, 0)	WITH NO_INFOMSGS
+GO
+
+
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_LIEUX]',		RESEED, 1)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CLIENTS]',	RESEED, 1)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_VILLES]',		RESEED, 1)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_PRODUITS]',	RESEED, 1)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CATEGORIES]',	RESEED, 1)	WITH NO_INFOMSGS  -- Olivier # 25/07/2015 : Ajout pour DIM_CATEGORIES
+
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_LIEUX]',		RESEED)	WITH NO_INFOMSGS -- Olivier # 26/07/2015 : http://blog.sqlauthority.com/2007/03/15/sql-server-dbcc-reseed-table-identity-value-reset-table-identity/#comment-2406
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CLIENTS]',	RESEED)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_VILLES]',		RESEED)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_PRODUITS]',	RESEED)	WITH NO_INFOMSGS
+DBCC CHECKIDENT('[ODE_DATAWAREHOUSE].[DIM_CATEGORIES]',	RESEED)	WITH NO_INFOMSGS  
 
 GO
 
@@ -513,14 +524,11 @@ END
 
 -- 08/07/2015 # CEDRIC
 
-USE [DataWarehouseODE]
-GO
 DECLARE @nb_poste_total AS int 
 DECLARE @nb_poste_deb AS int
 DECLARE @nb_insert AS int
-DECLARE @ville_fk AS int
 DECLARE @taux_remise AS [DECIMAL](6, 2)
-DECLARE @type AS [CHAR](1)
+DECLARE @typeChar AS [CHAR](1)
 DECLARE @i AS int , @j AS int
 DECLARE @nb_anonyme AS int
 DECLARE @nb_internet AS int
@@ -535,22 +543,36 @@ DECLARE @consonne AS nvarchar(20) = 'BCDFGHJKLMNPQRSTVWXZ'
 DECLARE @voyelle AS nvarchar(6) = 'AEIOUY'
 DECLARE @length AS int
 
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+DECLARE @traceOn BIT;
+SET @traceOn = 0;						-- Activation de la trace : 1
+
 --La table ville devra etre chargée en amont
 --!!!!!! modifier ici le nombre poste total souhaité à la fin du traitement
 SET @nb_poste_total = 10000
 --!!!!!!!!!!!!!!!!!!!!!!!
 
-PRINT 'Remplissage automatique de la table Clients'
-PRINT '--------------------------------------------------'
-PRINT 'Nombre de postes souhaités   : ' + CAST(@nb_poste_total as nvarchar)
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+IF @traceOn = 1
+BEGIN
+	PRINT 'Remplissage automatique de la table Clients'
+	PRINT '--------------------------------------------------'
+	PRINT 'Nombre de postes souhaités   : ' + CAST(@nb_poste_total as nvarchar)
+END;
 	
 -- Recupération nombre de postes en table
 (SELECT @nb_poste_deb = count(*) FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS])
+
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+IF @traceOn = 1
 PRINT 'Nombre de postes avant ajout : ' + CAST(@nb_poste_deb as nvarchar)
 
 -- Calcul nombre de postes à ajouter
 SET @nb_insert = @nb_poste_total - @nb_poste_deb
-PRINT 'Nombre de postes à ajouter   : ' + CAST(@nb_insert as nvarchar)
+
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+IF @traceOn = 1
+	PRINT 'Nombre de postes à ajouter   : ' + CAST(@nb_insert as nvarchar)
 
 SET @nb_anonyme = @nb_insert* 40 / 100 
 SET @nb_internet = @nb_insert * 20 / 100 
@@ -558,13 +580,17 @@ SET @nb_nominatif = @nb_insert * 20 / 100
 SET @nb_pro = @nb_insert *10 / 100 
 SET @nb_societe = @nb_insert - @nb_anonyme - @nb_internet - @nb_nominatif - @nb_pro
 
-PRINT '--------------------------------------------------'
-PRINT 'Nombre d''anonyme             : ' + CAST(@nb_anonyme as nvarchar)
-PRINT 'Nombre internet              : ' + CAST(@nb_internet as nvarchar)
-PRINT 'Nombre nominatif             : ' + CAST(@nb_nominatif as nvarchar)
-PRINT 'Nombre professionnel         : ' + CAST(@nb_pro as nvarchar)
-PRINT 'Nombre société               : ' + CAST(@nb_societe as nvarchar)
-	
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+IF @traceOn = 1
+BEGIN
+	PRINT '--------------------------------------------------'
+	PRINT 'Nombre d''anonyme             : ' + CAST(@nb_anonyme as nvarchar)
+	PRINT 'Nombre internet              : ' + CAST(@nb_internet as nvarchar)
+	PRINT 'Nombre nominatif             : ' + CAST(@nb_nominatif as nvarchar)
+	PRINT 'Nombre professionnel         : ' + CAST(@nb_pro as nvarchar)
+	PRINT 'Nombre société               : ' + CAST(@nb_societe as nvarchar)
+END;
+
 -- Boucle de traitement
 SET @i = 1
 WHILE(@i <= @nb_insert)
@@ -579,23 +605,23 @@ WHILE(@i <= @nb_insert)
 -- N : Nominatif
 -- P : Professionnel artisan
 -- S : Société
-		SET @type =
+		SET @typeChar =
 			CASE 
 			WHEN @i> @nb_anonyme + @nb_internet + @nb_nominatif + @nb_pro THEN 'S'
 			WHEN @i> @nb_anonyme + @nb_internet + @nb_nominatif           THEN 'P'
 			WHEN @i> @nb_anonyme + @nb_internet                           THEN 'N'
 			WHEN @i> @nb_anonyme                                          THEN 'I'
 			WHEN @i> 0                                                    THEN 'A'
-			END
+	END
 
 -- Nom du client aléatoire selon le type de client
-		IF @type = 'A' 
+		IF @typeChar = 'A' 
 		BEGIN
 			SET @nom = 'Client anonyme'
 			SET @taux_remise = 0
 		END
 
-		IF @type = 'I' OR @type = 'N' OR @type = 'S' OR @type = 'P'
+		IF @typeChar = 'I' OR @typeChar = 'N' OR @typeChar = 'S' OR @typeChar = 'P'
 		BEGIN
 		    -- recup nom aléatoire avec longueur aléatoire entre 2 et 102
 			SET @length = (select cast(round((50 -1)* rand() + 1,0) as integer)) + 2
@@ -610,19 +636,19 @@ WHILE(@i <= @nb_insert)
 			END
 		END
 
-		IF @type = 'I'
+		IF @typeChar = 'I'
 		BEGIN
 			SET @nom = @nom + ' INT ' + CAST(@i as nvarchar)
 			SET @taux_remise = 0
 		END
 
-		IF @type = 'N'
+		IF @typeChar = 'N'
 		BEGIN
 			SET @nom = @nom + ' BOB ' + CAST(@i as nvarchar)
 			SET @taux_remise = (select cast(round((49)* rand() + 1,0) as integer))
 		END
 
-		IF @type = 'S'
+		IF @typeChar = 'S'
 		BEGIN
 			SET @nom = @nom + 'SARL'
 			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
@@ -632,7 +658,7 @@ WHILE(@i <= @nb_insert)
 			END
 		END
 		
-		IF @type = 'P'
+		IF @typeChar = 'P'
 		BEGIN
 			SET @nom = @nom + ' PRO ' + CAST(@i as nvarchar)
 			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
@@ -643,7 +669,7 @@ WHILE(@i <= @nb_insert)
 		END
 
 -- Date de naissance aléatoire sur les 80 dernières années
-		IF @type = 'I' OR @type = 'N' OR @type = 'P' 
+		IF @typeChar = 'I' OR @typeChar = 'N' OR @typeChar = 'P' 
 		BEGIN
 			SET @date_naissance = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 31025) * -1, getdate()))
 		END
@@ -681,7 +707,7 @@ WHILE(@i <= @nb_insert)
 	VALUES
 		(@ville_fk,
 		 @taux_remise,
-		 @type,
+		 @typeChar,
 		 @nom,
 		 @date_naissance,
 		 @date_souscription,
@@ -746,8 +772,6 @@ DECLARE @tauxMargeProduit NUMERIC(4,1);
 DECLARE @nbrJourMois INT;
 DECLARE @moisIndex INT;
 DECLARE @jourIndex INT;
-DECLARE @nbrClient INT;
-DECLARE @nbrLieux INT;
 DECLARE @typeLieuSelection CHAR;
 DECLARE @dateVenteFk INT;
 DECLARE @produitFk INT;
@@ -769,9 +793,6 @@ DECLARE @tauxMargeArticle NUMERIC(4,1);
 DECLARE @tauxMargeMoyenInternet NUMERIC(4,1);
 DECLARE @tauxMargeMoyenMagasin NUMERIC(4,1);
 DECLARE @ecartMoyenMarge NUMERIC(4,1);
-DECLARE @nbrProduits INT;
-DECLARE @nbrLieu INT;
-DECLARE @traceOn BIT;
 
 
 -- Constantes du code
@@ -785,8 +806,11 @@ SET @nbrMoyenArticleMagasin = 18;		-- En magasin : 18 articles par ticket en moy
 SET @tauxMargeMoyenInternet = 44.3;		-- Sur Internet - Moyenne 44.3 pourcents de marge
 SET @tauxMargeMoyenMagasin = 34.8;		-- En Magasin - Moyenne 34.8 pourcents de marge
 SET @ecartMoyenMarge = 20.0;			-- Ecart maximale de variation autour de la marge moyenne
-SET @traceOn = 0;						-- Activation de la trace : 1
 
+
+-- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
+DECLARE @traceOn BIT;
+SET @traceOn = 0;						-- Activation de la trace : 1
 
 ---------------------------------------------------------------------------------
 -- Le SI Decisionnel est alimente depuis environ 5 ans (01/01/2010 -> 01/01/2015)
@@ -831,15 +855,12 @@ BEGIN
 		---------------------------------------------------------------------------
 		-- Selection aleatoire du lieu de type R : Rayon de magasin ou I : Internet
 		---------------------------------------------------------------------------
-		SELECT @nbrLieu = COUNT(*) FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX]; -- La PK de DimLieux etant en auto-increment à 1, les PK sont des INT consecutifs
-
 		SET @typeLieuSelection = 'X';
-	
-	
+
 		WHILE(@typeLieuSelection != @typeLieuVente)
 		BEGIN
-			SET @lieuFk = cast( floor(1 + @NbrLieu * rand()) as INT); 
-			SELECT @typeLieuSelection = [TYPE_LIEU] FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX] WHERE [LIEU_PK] = @lieuFk;
+			SET @lieuFk = (SELECT TOP 1 LIEU_PK FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX] ORDER BY NEWID()); -- Olivier # 26/07/2015 : Tirage aleatoire du lieu
+			SET @typeLieuSelection = (SELECT [TYPE_LIEU] FROM [ODE_DATAWAREHOUSE].[DIM_LIEUX] WHERE [LIEU_PK] = @lieuFk);
 
 			IF(@traceOn = 1)
 			BEGIN
@@ -853,8 +874,7 @@ BEGIN
 		--------------------------------	
 		-- Selection aleatoire du client
 		--------------------------------	
-		SELECT @nbrClient = COUNT(*) FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS];
-		SET @clientFk = cast( floor(1 + @nbrClient * rand()) as INT); 
+		SET @clientFk = (SELECT TOP 1 CLIENT_PK FROM [ODE_DATAWAREHOUSE].[DIM_CLIENTS] ORDER BY NEWID()) -- Olivier # 26/07/2015 : Tirage aleatoire du client
 
 
 		--------------------------------------	
@@ -903,8 +923,7 @@ BEGIN
 			------------------------------
 			-- Tirage au sort de l article
 			------------------------------
-			SELECT @nbrProduits = COUNT(*) FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS];
-			SET @produitFk = cast( floor(1 + @nbrProduits * rand()) as INT); 
+			SET @produitFk = (SELECT TOP 1 PRODUIT_PK FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS] ORDER BY NEWID()) -- Olivier # 26/07/2015 : Tirage aleatoire du produit
 
 			------------------------------------------------------------------------------
 			-- Nbr d articles identiques de la vente
@@ -934,6 +953,19 @@ BEGIN
 			-- Egale au taux de marge de l article * son montant HT
 			-------------------------------------------------------
 			SET @margeBrute = @montantHtVente * (1 + @tauxMargeArticle / 100);
+
+			IF(@traceOn = 1)
+			BEGIN
+				PRINT '@dateVenteFk = ' + cast(@dateVenteFk as nvarchar);
+				PRINT '@produitFk = ' + cast(@produitFk as nvarchar);
+				PRINT '@clientFk = ' + cast(@clientFk as nvarchar);
+				PRINT '@lieuFk = ' + cast(@lieuFk as nvarchar);
+				PRINT '@montantHtVente = ' + cast(@montantHtVente as nvarchar);
+				PRINT '@montantTvaVente = ' + cast(@montantTvaVente as nvarchar);
+				PRINT '@margeBrute = ' + cast(@margeBrute as nvarchar);
+				PRINT '@unitesVendues = ' + cast(@unitesVendues as nvarchar);
+				PRINT '@numTickets = ' + cast(@numTickets as nvarchar);
+			END
 
 			---------------------------
 			-- INSERT en table de faits
@@ -981,4 +1013,3 @@ BEGIN
 		PRINT '@anneeIndex = '+ cast(@anneeIndex as nvarchar);
 
 END;
-
