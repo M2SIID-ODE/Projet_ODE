@@ -8,7 +8,7 @@
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -33,7 +33,7 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>lc05uJa90nhcAFcf52+PRlt93uQ=26/07/2015 17:16:0926/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>lc05uJa90nhcAFcf52+PRlt93uQ=26/07/2015 17:27:0726/07/2015 10:03:12</TimeStamp>
         <ID>
           <String>DIM TEMPS</String>
         </ID>
@@ -78,5 +78,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2015-07-26T15:26:57.323333Z</LastDeployed>
+  <LastDeployed>2015-07-26T15:30:39.426667Z</LastDeployed>
 </DeploymentSnapshot>

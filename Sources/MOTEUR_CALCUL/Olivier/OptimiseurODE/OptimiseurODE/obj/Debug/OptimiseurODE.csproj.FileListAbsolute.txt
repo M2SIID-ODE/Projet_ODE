@@ -1,0 +1,6 @@
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\bin\Debug\OptimiseurODE.exe.config
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\bin\Debug\OptimiseurODE.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\bin\Debug\OptimiseurODE.pdb
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\obj\Debug\OptimiseurODE.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurODE\OptimiseurODE\obj\Debug\OptimiseurODE.pdb
