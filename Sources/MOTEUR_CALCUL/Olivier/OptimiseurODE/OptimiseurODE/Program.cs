@@ -32,6 +32,13 @@ using Microsoft.AnalysisServices.AdomdClient; // Lib de client XMLA pour SSAS
 
 namespace OptimiseurODE
 {
+
+
+
+
+
+
+
     class Program
     {
         static void Main(string[] args)
@@ -96,7 +103,7 @@ namespace OptimiseurODE
 
 
             Console.WriteLine(Environment.NewLine + "Press any key to continue.");
-            Console.ReadKey();
+            Console.ReadKey()
         }
     }
 }
