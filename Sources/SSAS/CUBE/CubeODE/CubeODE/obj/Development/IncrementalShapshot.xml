@@ -8,7 +8,7 @@
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -19,49 +19,49 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>1EqcFjMc8RApRp0VTQcB8FMlu0o=26/07/2015 10:01:3426/07/2015 10:01:34</TimeStamp>
+        <TimeStamp>KPA7ZA/oZseV/+RPcDXnHjeImNM=04/08/2015 22:35:2704/08/2015 22:35:27</TimeStamp>
         <ID>
           <String>Data Warehouse ODE</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>E6I38LWYNNKHthMqc1JNjF/alBQ=26/07/2015 10:02:1126/07/2015 10:02:11</TimeStamp>
+        <TimeStamp>rkrqC1c9iAwa+rkoQryqRN5f/OM=04/08/2015 22:37:3104/08/2015 22:37:30</TimeStamp>
         <ID>
           <String>Data Warehouse ODE</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>o1NeUCzQlOIPM/fnXIaMBOs0msA=04/08/2015 22:30:0526/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>LOoPCDF4eod745neg8Z3PfpxukQ=04/08/2015 22:53:3204/08/2015 22:38:13</TimeStamp>
         <ID>
           <String>DIM TEMPS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>6uxeHOXcGy5+DSQVSDv4CiJavoY=26/07/2015 16:56:5226/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>lVKkBaISrPchnjleToU99sjQpG8=04/08/2015 22:38:1304/08/2015 22:38:13</TimeStamp>
         <ID>
           <String>DIM PRODUITS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>mqkhfaCtcUAl2a7B8079IFK1pPg=26/07/2015 10:03:1326/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>Fea46hyLpIHM6BEtb/nV5T20u7E=04/08/2015 22:38:1304/08/2015 22:38:13</TimeStamp>
         <ID>
           <String>DIM LIEUX</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>cLPN8lrTpJCQZO4PyQXewGKrlqo=26/07/2015 10:03:1326/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>TTaTyp4DpdgYLVfRecdKcXvh7EM=04/08/2015 22:38:1304/08/2015 22:38:13</TimeStamp>
         <ID>
           <String>DIM CLIENTS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>0Qh23t3wWDcVe3H7+32X/h/OxL8=26/07/2015 17:06:5426/07/2015 10:03:12PpVxtminXoDm/dPNOxou1DCxW9w=26/07/2015 16:25:4926/07/2015 10:03:12</TimeStamp>
+        <TimeStamp>ylscrpAT/FSrmnbVycUN8e+aVhs=04/08/2015 22:52:1004/08/2015 22:38:13e3/e0HLPbl90WVQ2nQAjsrwP2Rc=04/08/2015 22:38:1304/08/2015 22:38:13</TimeStamp>
         <ID>
           <String>Data Warehouse ODE</String>
         </ID>
@@ -69,7 +69,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>0ZCCDZfCfqVdeHlol8Gobvftf90=26/07/2015 09:56:1926/07/2015 09:56:18</TimeStamp>
+      <TimeStamp>n2EWjVeCoe8vkgCJhPpqKOyxexI=04/08/2015 22:35:1704/08/2015 22:35:17</TimeStamp>
       <ID>
         <String>CubeODE</String>
       </ID>
@@ -78,5 +78,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2015-08-04T20:30:12.93Z</LastDeployed>
+  <LastDeployed>2015-08-04T20:53:37.023333Z</LastDeployed>
 </DeploymentSnapshot>

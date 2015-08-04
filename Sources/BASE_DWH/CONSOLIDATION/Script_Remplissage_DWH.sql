@@ -4,7 +4,7 @@
 
   Résumé:  Rempli le DWH (OLTP) du projet ODE
   Date:     26/07/2015
-  Updated:  
+  Updated:  04/08/2015
 
   SQL Server Version: 2014
   
@@ -23,7 +23,6 @@ GO
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
 :setvar OdeCsvPath "Z:\GitHub\Projet_ODE\Sources\BASE_DWH\CONSOLIDATION\Donnees\"
-
 
 
 
@@ -322,6 +321,56 @@ WITH (
     --TABLOCK
 )
 GO
+
+
+-- ------------------
+-- Olivier 04/08/2015
+-- MAJ TABLE VILLES
+-- ------------------
+
+-- Création de tables temporaires pour charger les fichiers csv
+CREATE TABLE [ODE_DATAWAREHOUSE].[VILLES_POPULATION](
+ 	[CODE_COMMUNE]			[INT]					NOT NULL, 
+ 	[CODE_REGION]			[INT]					NOT NULL, 
+ 	[CODE_DEPARTEMENT]		[NVARCHAR](3)			NOT NULL, -- Olivier # 30/07/2015 : Merci la Corse !
+ 	[CODE_ARRONDISEMENT]	[INT]					NOT NULL, 
+ 	[CODE_CANTON]			[INT]					NOT NULL, 
+ 	[POPULATION]			[INT]					NOT NULL
+) ON [PRIMARY]; 
+
+
+BULK INSERT [ODE_DATAWAREHOUSE].[VILLES_POPULATION] FROM N'$(OdeCsvPath)PopulationINSEE.csv' -- chargement du fichier csv dans la table
+WITH (
+    CODEPAGE='1252', -- CodePage du LATIN-1 pour gestion des accents
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='0x0a' -- Fin de lignes des CSV en LF seul (/n <=> CR + LF)
+);
+
+--Remplissage de la table catégories à partir des tables temporaires créées précedemment
+
+UPDATE [ODE_DATAWAREHOUSE].[DIM_VILLES]
+SET [POPULATION] = (
+	SELECT MAX(V.[POPULATION]) -- Olivier # 30/07/2015 : Sécurité en cas de correspondance multiple
+	FROM		
+		[ODE_DATAWAREHOUSE].[VILLES_POPULATION] AS V
+	WHERE	
+		V.[CODE_COMMUNE] 		= [ODE_DATAWAREHOUSE].[DIM_VILLES].[CODE_COMMUNE] AND
+		V.[CODE_REGION] 		= [ODE_DATAWAREHOUSE].[DIM_VILLES].[CODE_REGION] AND
+		V.[CODE_DEPARTEMENT] 	= [ODE_DATAWAREHOUSE].[DIM_VILLES].[CODE_DEPARTEMENT] AND
+		V.[CODE_ARRONDISEMENT] 	= [ODE_DATAWAREHOUSE].[DIM_VILLES].[CODE_ARRONDISEMENT]
+);
+
+
+-- Villes trop petites : Aléatoirement entre 1 et 50 pelerins...
+UPDATE [ODE_DATAWAREHOUSE].[DIM_VILLES]
+SET [POPULATION] = cast( floor(50 * rand() + 1) as INT)
+WHERE [POPULATION] IS NULL;
+
+-- Drop de la table temporaire
+DROP TABLE [ODE_DATAWAREHOUSE].[VILLES_POPULATION]
+GO
+
+
 
 
 -- ----------------------------------
@@ -773,7 +822,7 @@ DECLARE @nbrJourMois INT;
 DECLARE @moisIndex INT;
 DECLARE @jourIndex INT;
 DECLARE @typeLieuSelection CHAR;
-DECLARE @dateVenteFk INT;
+DECLARE @dateVenteFk DATETIME;
 DECLARE @produitFk INT;
 DECLARE @clientFk INT;
 DECLARE @lieuFk INT;
@@ -846,11 +895,8 @@ BEGIN
 		--------------------------------------------------------------
 		-- Selection aleatoire de la date de vente au cours de l annee
 		--------------------------------------------------------------
-		SET @moisIndex = cast( floor(12 * rand() + 1) as INT); -- Tirage du mois, entre 1 et 12
-		SELECT @nbrJourMois = COUNT(*) FROM [ODE_DATAWAREHOUSE].[DIM_TEMPS] WHERE [MOIS_CODE] = (10000 * @anneeIndex + 100 * @moisIndex + 1); -- Combien de jour dans le MOIS/ANNEE  
-		SET @jourIndex = cast( floor(@nbrJourMois * rand() + 1) as INT); -- Tirage du jour, entre 1 et @nbrJourMois
-		SET @dateVenteFk = 10000 * @anneeIndex + 100 * @moisIndex + @jourIndex; -- Generation du FK de la forme YYYYMMDD, exemple : "20150825"
-	
+		SET @dateVenteFk = (SELECT TOP 1 TEMPS_PK FROM [ODE_DATAWAREHOUSE].[DIM_TEMPS] WHERE [ANNEE_NOM] = 'Calendrier ' + cast(@anneeIndex as nvarchar) ORDER BY NEWID()) -- Olivier # 04/08/2015 : Tirage aleatoire de la date appartenant a cette annee
+		print @dateVenteFk;
 		
 		---------------------------------------------------------------------------
 		-- Selection aleatoire du lieu de type R : Rayon de magasin ou I : Internet

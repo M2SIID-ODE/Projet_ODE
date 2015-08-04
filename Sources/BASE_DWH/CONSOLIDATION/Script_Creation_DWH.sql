@@ -4,7 +4,7 @@
 
   Résumé:  Crée le DWH (OLTP) du projet ODE
   Date:     02/07/2015
-  Updated:  15/07/2015
+  Updated:  04/08/2015
 
   SQL Server Version: 2014
   
@@ -194,7 +194,7 @@ GO
 
 -- Table de faits "Ventes"
 CREATE TABLE [ODE_DATAWAREHOUSE].[FACT_VENTES] (
-	[DATE_VENTE_FK] 	[INT]			NOT NULL, -- FK
+	[DATE_VENTE_FK] 	[DATETIME]		NOT NULL, -- FK -- Olivier # 04/08/2015 : Suite aux changements de DIM_TEMPS
 	[PRODUIT_FK] 		[INT]			NOT NULL, -- FK
 	[CLIENT_FK] 		[INT]			NOT NULL, -- FK
 	[LIEU_FK] 			[INT]			NOT NULL, -- FK
@@ -210,7 +210,7 @@ GO
 -- Table de Fait "STOCK"
 
 CREATE TABLE [ODE_DATAWAREHOUSE].[FACT_STOCKS](
-	[DATE_INVENTAIRE_FK]	[INT] 	NOT NULL, --FK
+	[DATE_INVENTAIRE_FK]	[DATETIME] 	NOT NULL, --FK -- Olivier # 04/08/2015 : Suite aux changements de DIM_TEMPS
 	[PRODUIT_FK]			[INT] 	NOT NULL, --FK
 	[LIEU_FK]				[INT] 	NOT NULL, --FK
 	[NBR_DISPO]				[INT] 	NOT NULL,
@@ -260,27 +260,44 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CATEGORIES](
 GO
 
 
+
+
 -- Table de Dimension "Temps"
+-- Olivier # 04/08/2015 : Creation de DIM_TEMPS via assistants SSDT
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_TEMPS] (
-	[TEMPS_PK] 			[INT]				 	NOT NULL, -- PK -- pas d auto-increment pour le temps !
-	[DATE]				[SMALLDATETIME]			NOT NULL,
-	[JOUR]				[NVARCHAR](64)			NULL,
-	[ANNEE_CODE]		[INT]					NULL,
-	[ANNEE_DATE]		[SMALLDATETIME]			NOT NULL,
-	[ANNEE_NOM]			[NVARCHAR](64)			NULL,
-	[TRIMESTRE_CODE]	[INT]					NULL,
-	[TRIMESTRE_DATE]	[SMALLDATETIME]			NOT NULL,
-	[TRIMESTRE_NOM]		[NVARCHAR](64)			NULL,
-	[MOIS_CODE]			[INT]					NULL,
-	[MOIS_DATE]			[SMALLDATETIME]			NOT NULL,
-	[MOIS_NOM]			[NVARCHAR](64)			NULL,
-	[SEMAINE_CODE]		[INT]					NULL,
-	[SEMAINE_DATE]		[SMALLDATETIME]			NOT NULL,
-	[SEMAINE_NOM]		[NVARCHAR](64)			NULL
-) ON [PRIMARY];
+	[TEMPS_PK]					[DATETIME]	NOT NULL, -- PK -- pas d auto-increment pour le temps !
+	[DATE_NOM]					[NVARCHAR](50) NULL,
+	[ANNEE]						[DATETIME] NULL,
+	[ANNEE_NOM]					[NVARCHAR](50) NULL,
+	[TRIMESTRE]					[DATETIME] NULL,
+	[TRIMESTRE_NOM]				[NVARCHAR](50) NULL,
+	[MOIS]						[DATETIME] NULL,
+	[MOIS_NOM]					[NVARCHAR](50) NULL,
+	[SEMAINE]					[DATETIME] NULL,
+	[SEMAINE_NOM]				[NVARCHAR](50) NULL,
+	[JOUR_DE_ANNEE]				[INT] NULL,
+	[JOUR_DE_ANNEE_NOM]			[NVARCHAR](50) NULL,
+	[JOUR_DU_TRIMESTRE]			[INT] NULL,
+	[JOUR_DU_TRIMESTRE_NOM]		[NVARCHAR](50) NULL,
+	[JOUR_DU_MOIS]				[INT] NULL,
+	[JOUR_DU_MOIS_NOM]			[NVARCHAR](50) NULL,
+	[JOUR_DE_SEMAINE]			[INT] NULL,
+	[JOUR_DE_SEMAINE_NOM]		[NVARCHAR](50) NULL,
+	[SEMAINE_DE_ANNEE]				[INT] NULL,
+	[SEMAINE_DE_ANNEE_NOM]			[NVARCHAR](50) NULL,
+	[MOIS_DE_ANNEE]				[INT] NULL,
+	[MOIS_DE_ANNEE_NOM]			[NVARCHAR](50) NULL,
+	[MOIS_DU_TRIMESTRE]			[INT] NULL,
+	[MOIS_DU_TRIMESTRE_NOM]		[NVARCHAR](50) NULL,
+	[TRIMESTRE_DE_ANNEE]		[INT] NULL,
+	[TRIMESTRE_DE_ANNEE_NOM]	[NVARCHAR](50) NULL,
+ CONSTRAINT [TEMPS_PK] PRIMARY KEY CLUSTERED 
+(
+	[TEMPS_PK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 GO
-
-
 
 
 -- Table de Dimension "Lieux"
@@ -316,9 +333,17 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] (
 ) ON [PRIMARY];
 GO
 
+-- PK de la dimension "Villes"
+ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] WITH CHECK ADD 
+    CONSTRAINT [PK_DimVilles_VillePK] PRIMARY KEY CLUSTERED 
+    (
+        [VILLE_PK]
+    )  ON [PRIMARY];
+GO
+
 
 -- Table de Dimension "Clients"
-
+-- Olivier # 04/08/2015 : Generation de DIM_TEMPS via SSDT
 CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](
 	[CLIENT_PK]         [INT] IDENTITY(1,1)	NOT NULL,
 	[VILLE_FK]          [INT]              	NOT NULL, -- FK
@@ -335,74 +360,6 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_CLIENTS](
 ) ON [PRIMARY]
 
 GO
-
-
-/*
--- Template : 
-CREATE TABLE [ODE_DATAWAREHOUSE].[NOM_TABLE](
-	[COLONE_NOM] [COLONNE_TYPE] NOT NULL,
-	[COLONE_NOM] [COLONNE_TYPE] NULL,
-) ON [PRIMARY];
-GO
-*/
-
-
--- ******************************************************
--- Add Primary Keys
--- ******************************************************
-PRINT '';
-PRINT '*** Ajout des clés Primaires';
-GO
-
-SET QUOTED_IDENTIFIER ON;
-
-
--- PK de la dimension "Temps"
-ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_TEMPS] WITH CHECK ADD 
-    CONSTRAINT [PK_DimTemps_TempsPK] PRIMARY KEY CLUSTERED 
-    (
-        [TEMPS_PK]
-    )  ON [PRIMARY];
-GO
-
-
--- PK de la dimension "Villes"
-ALTER TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] WITH CHECK ADD 
-    CONSTRAINT [PK_DimVilles_VillePK] PRIMARY KEY CLUSTERED 
-    (
-        [VILLE_PK]
-    )  ON [PRIMARY];
-GO
-
-
-/*
--- Template : 
-ALTER TABLE [ODE_DATAWAREHOUSE].[NOM_TABLE] WITH CHECK ADD 
-    CONSTRAINT [PK_NomTable_NomColonnePK] PRIMARY KEY CLUSTERED 
-    (
-        [COLONNE_NOM]
-    )  ON [PRIMARY];
-GO
-*/
-
-
-
--- ******************************************************
--- Add Indexes
--- ******************************************************
-PRINT '';
-PRINT '*** Ajout des indexes';
-GO
-
-
-/*
--- Template : 
-ALTER TABLE [ODE_DATAWAREHOUSE].[NOM_TABLE] ADD  CONSTRAINT [AK_NomTable_NomColonne_Key] UNIQUE NONCLUSTERED 
-(
-	[NOM_COLONNE] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
-GO
-*/
 
 
 
