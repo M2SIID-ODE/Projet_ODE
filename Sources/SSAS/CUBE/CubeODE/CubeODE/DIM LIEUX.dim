@@ -6,6 +6,61 @@
   <Annotations>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="4" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-2705" scrolltop="-1486" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="10583" y="14817" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_LIEUX" left="390" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3942" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000a0000660f00009b0f0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="ODE_DATAWAREHOUSE_DIM_LIEUX" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_VILLES" left="20" top="6395" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="4683" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000a00004b12000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="ODE_DATAWAREHOUSE_DIM_VILLES" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="3695" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK_DimLieux_DimVilles_FK]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="8" destattachpoint="7" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="2361" y="6395" />
+              <point x="2361" y="3995" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
@@ -21,15 +76,15 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
-      <Value>0</Value>
+      <Value>-2705</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
-      <Value>0</Value>
+      <Value>-1486</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
-      <Value>0</Value>
+      <Value>20</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
@@ -38,6 +93,48 @@
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
       <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="158">
+            <Shape Id="LIEU PK" Expanded="false">
+              <Attributes>
+                <Attribute Id="LIEU PK" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="VILLE PK" Expanded="true">
+              <Attributes>
+                <Attribute Id="VILLE PK" />
+                <Attribute Id="CODE ARRONDISEMENT" />
+                <Attribute Id="CODE CANTON" />
+                <Attribute Id="CODE COMMUNE" />
+              </Attributes>
+              <Position x="222" y="20" />
+            </Shape>
+            <Shape Id="CODE DEPARTEMENT" Expanded="false">
+              <Attributes>
+                <Attribute Id="CODE DEPARTEMENT" />
+              </Attributes>
+              <Position x="425" y="20" />
+            </Shape>
+            <Shape Id="CODE REGION" Expanded="false">
+              <Attributes>
+                <Attribute Id="CODE REGION" />
+              </Attributes>
+              <Position x="627" y="20" />
+            </Shape>
+            <Shape Id="CODE POSTAL" Expanded="false">
+              <Attributes>
+                <Attribute Id="CODE POSTAL" />
+              </Attributes>
+              <Position x="425" y="68" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
     </Annotation>
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
@@ -66,7 +163,7 @@
         </KeyColumn>
       </KeyColumns>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="8c382342-7743-48a8-931d-f98a92ac9b8b">
+        <AttributeRelationship dwd:design-time-name="c10b3aba-352a-4664-aa51-bbd0e5d0c10a">
           <AttributeID>VILLE PK</AttributeID>
           <Name>VILLE PK</Name>
         </AttributeRelationship>
@@ -87,10 +184,178 @@
           </Source>
         </KeyColumn>
       </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="66498146-835d-48d7-a81a-c56c7bcb2ce2">
+          <AttributeID>CODE COMMUNE</AttributeID>
+          <Name>CODE COMMUNE</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="306a58e9-c47a-4cd0-adb6-06ebe6cd21f3">
+          <AttributeID>CODE ARRONDISEMENT</AttributeID>
+          <Name>CODE ARRONDISEMENT</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0d8d0219-855c-44d5-8aff-c15f7ba25f87">
+          <AttributeID>CODE CANTON</AttributeID>
+          <Name>CODE CANTON</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a7741923-0526-433c-b016-00c51ab368a3">
+          <AttributeID>CODE POSTAL</AttributeID>
+          <Name>CODE POSTAL</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0d1a3c5c-c836-4d62-b552-6e697dbf254a">
+          <AttributeID>CODE DEPARTEMENT</AttributeID>
+          <Name>CODE DEPARTEMENT</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
+    <Attribute dwd:design-time-name="1bcfdde5-e3a1-48c1-ba1b-8780008bf81f">
+      <ID>CODE COMMUNE</ID>
+      <Name>CODE COMMUNE</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0f161584-ef33-4c4c-8321-5dc4e3c34f3e">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d85d6508-8cd4-4153-a92b-56930199618f">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_COMMUNE</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="018c3c79-c8d2-4f1d-b3f1-3eca54a17bf9">
+      <ID>CODE DEPARTEMENT</ID>
+      <Name>CODE DEPARTEMENT</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4df63160-e143-48aa-8286-2b517dc6b391">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ba88e703-b1b9-48b0-9d24-fda8fb4dca97">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_DEPARTEMENT</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="eb9086bb-8f20-4bda-b7f0-91fca8bef790">
+          <AttributeID>CODE REGION</AttributeID>
+          <Name>CODE REGION</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="cbadff75-2752-41f7-a736-3c31c0ad16ed">
+      <ID>CODE REGION</ID>
+      <Name>CODE REGION</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="eec74031-cf5b-4f20-986d-df2c224c4296">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1d735781-acb7-4314-ae9b-e67cbe848055">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_REGION</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="fe4b207a-9e0c-4f33-94c5-12a82aeda4a5">
+      <ID>CODE ARRONDISEMENT</ID>
+      <Name>CODE ARRONDISEMENT</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="06e90abe-32eb-4b7d-a3a3-991ab74bf32c">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="03b22cfc-9b3e-44a6-9f40-d99bdd20cf77">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_ARRONDISEMENT</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="88f1345f-981d-4c42-be38-4b0b25edd4da">
+      <ID>CODE CANTON</ID>
+      <Name>CODE CANTON</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="db665b08-6ff6-4e6f-9284-cc2b1923b052">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1c32afe4-0508-4311-8b27-8b53d29ee1b1">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_CANTON</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="10f5f40a-dd4c-4f4d-b4f6-2ce1031d672d">
+      <ID>CODE POSTAL</ID>
+      <Name>CODE POSTAL</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ecc25d1f-ca26-4f74-aad7-f73d73670a05">
+          <DataType>WChar</DataType>
+          <DataSize>6</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="04f8faea-0f45-4deb-b106-f9ad11d2e871">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>CODE_POSTAL</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
   </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="0dd71b12-271a-4431-b4c1-fec1d5f7992a">
+      <ID>Hierarchy</ID>
+      <Name>Region - Dept - Ville - Lieu</Name>
+      <Levels>
+        <Level dwd:design-time-name="a022fd5a-ab3f-45a1-82d2-8fb4e504116b">
+          <ID>CODE REGION</ID>
+          <Name>CODE REGION</Name>
+          <SourceAttributeID>CODE REGION</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="66c85082-9a03-4ae5-9dac-0ede45b454ba">
+          <ID>CODE DEPARTEMENT</ID>
+          <Name>CODE DEPARTEMENT</Name>
+          <SourceAttributeID>CODE DEPARTEMENT</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="1c08bceb-1d9e-4846-8942-d8751dff4ce2">
+          <ID>VILLE PK</ID>
+          <Name>VILLE PK</Name>
+          <SourceAttributeID>VILLE PK</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="9e49f484-aa5c-46dd-8e6a-292b033f6c0e">
+          <ID>LIEU PK</ID>
+          <Name>LIEU PK</Name>
+          <SourceAttributeID>LIEU PK</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="7514e844-ce24-4154-8952-a2e447505cf2">
+      <ID>Hierarchy 1</ID>
+      <Name>Code postal - Ville - Lieu</Name>
+      <Levels>
+        <Level dwd:design-time-name="3b98cae5-76a1-42e6-835c-4b3b1368a5d0">
+          <ID>CODE POSTAL</ID>
+          <Name>CODE POSTAL</Name>
+          <SourceAttributeID>CODE POSTAL</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="3429b6d3-1292-4a9e-a1af-935c061d913f">
+          <ID>VILLE PK</ID>
+          <Name>VILLE PK</Name>
+          <SourceAttributeID>VILLE PK</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="96d17b15-703a-481b-969d-1203ac6bf000">
+          <ID>LIEU PK</ID>
+          <Name>LIEU PK</Name>
+          <SourceAttributeID>LIEU PK</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
   <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
 </Dimension>

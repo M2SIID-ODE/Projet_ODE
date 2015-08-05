@@ -33,12 +33,6 @@ using Microsoft.AnalysisServices.AdomdClient; // Lib de client XMLA pour SSAS
 namespace OptimiseurODE
 {
 
-
-
-
-
-
-
     class Program
     {
         static void Main(string[] args)
@@ -46,9 +40,13 @@ namespace OptimiseurODE
             // Chaine de connexion SSAS
             AdomdConnection conn = new AdomdConnection("Data Source=localhost;Catalog= cubeODE ");  // CATALOG : Nom du cube
 
+            // Membres
+            DataSet ds;
+            DataTable dt;
+
+
             // Ouverture de la connexion SSAS
             conn.Open();
-
 
             /*
                 // -----------
@@ -70,7 +68,7 @@ namespace OptimiseurODE
                 // Si requete MDX fausse : Crashe ici. Cliquer sur "VIEW DETAILS" de la pop-up de debuggage pour voir le retour de SSAS... A ameliorer avec un TRY..CATCH !
                 CellSet cs = cmd.ExecuteCellSet();
 
-      
+
                 // Iterations sur toutes les lignes et les colonnes
                 foreach (Position pRow in cs.Axes[1].Positions)
                 {
@@ -83,13 +81,21 @@ namespace OptimiseurODE
                 }
             */
 
-            // ------------------------------------
-            // Recuperation de la structure du cube
-            // ------------------------------------
+            // ---------------------------------------------------
+            // Recuperation de la structure des dimensions du cube
+            // ---------------------------------------------------
+            /*  Exemple de retour : 
+                    DIMENSION_UNIQUE_NAME = [DIM CLIENTS]
+                    DIMENSION_ORDINAL = 5 -- N-ime dimension
+                    DIMENSION_TYPE = 3 -- Nomenclature ?
+                    DIMENSION_CARDINALITY = 10001 -- Count *
+                    DIMENSION_UNIQUE_SETTINGS = 1 --?
+            */
 
-            DataSet ds = conn.GetSchemaDataSet(AdomdSchemaGuid.Dimensions, null);
+            ds = conn.GetSchemaDataSet(AdomdSchemaGuid.Dimensions, null);
+            dt = ds.Tables[0];
 
-            DataTable dt = ds.Tables[0];
+
             foreach (DataRow row in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
@@ -98,12 +104,45 @@ namespace OptimiseurODE
                 Console.WriteLine();
             }
 
+
+            // ---------------------------------------------------
+            // Recuperation des mesures
+            // ---------------------------------------------------
+            ds = conn.GetSchemaDataSet(AdomdSchemaGuid.Measures, null);
+            dt = ds.Tables[0];
+
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataColumn col in dt.Columns)
+                    Console.WriteLine(col.ColumnName + " = " + row[col].ToString());
+
+                Console.WriteLine();
+            }
+
+
+/*
+            // ---------------------------------------------------
+            // Recuperation des infos de tables (?)
+            // ---------------------------------------------------
+            ds = conn.GetSchemaDataSet(AdomdSchemaGuid.TablesInfo, null);
+            dt = ds.Tables[0];
+
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataColumn col in dt.Columns)
+                    Console.WriteLine(col.ColumnName + " = " + row[col].ToString());
+
+                Console.WriteLine();
+            }
+*/
+
+
             // Cloture de la connexion SSAS
             conn.Close();
 
 
             Console.WriteLine(Environment.NewLine + "Press any key to continue.");
-            Console.ReadKey()
+            Console.ReadKey();
         }
     }
 }
