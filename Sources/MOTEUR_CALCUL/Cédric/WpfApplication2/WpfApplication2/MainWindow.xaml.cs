@@ -23,14 +23,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Microsoft.AnalysisServices.AdomdClient;
-//using Microsoft.AnalysisServices;
 //using Microsoft.SqlServer.Management.Common;
 //using Microsoft.SqlServer.Management.Sdk;
 //using Microsoft.SqlServer.Management.Smo;
 //using System.Data.SqlClient;
 //using System.Data;
 //using System.Data.OleDb;
-
 
 namespace WpfApplication2
 {
@@ -41,12 +39,7 @@ namespace WpfApplication2
     
     public partial class MainWindow : Window
     {
-
-        // Définition des variables globales
-        //public class VarGlob
-        //{
-            //public string NomMetadata = "Data Warehouse ODE";
-        //}
+        public static string Status_Traitement = "OK";
 
         public MainWindow()
         {
@@ -57,27 +50,38 @@ namespace WpfApplication2
         // Initialisation de l'interface
         public void InitializeBis()
         {
-        //    VarGlob Par_Glob = new VarGlob();
-
             Bouton_Connexion.IsEnabled = false;
             Barre_Espace.IsEnabled = false;
             Barre_Selection.IsEnabled = false;
             Bouton_Algo_1.IsEnabled = false;
             Bouton_Algo_2.IsEnabled = false;
+            Liste_Cube.Items.Clear();
         }
 
         // Demande de connexion
         private void Bouton_Connexion_Click(object sender, RoutedEventArgs e)
         {
             string StrConnexion = "Datasource=" + Nom_Server.Text + ";Catalog=" + Nom_Database.Text + ";";
-            String Status_Connexion = ConnectToCube(StrConnexion);
+            AdomdConnection conn = Connexion_Base(StrConnexion);
 
-            if (Status_Connexion == "OK")
+            Liste_Cube.Items.Clear();
+
+            if (Status_Traitement == "OK")
             {
                 Barre_Espace.IsEnabled = true;
                 Barre_Selection.IsEnabled = true;
                 Bouton_Algo_1.IsEnabled = true;
                 Bouton_Algo_2.IsEnabled = true;
+
+                int nbOfCubes = conn.Cubes.Count;
+                for (int i = 0; i < nbOfCubes; i++)
+                {
+                    CubeDef cube = conn.Cubes[i];
+                    if (cube.Type == CubeType.Cube)
+                    {
+                        Liste_Cube.Items.Add(conn.Cubes[i].Name);
+                    }
+                }
             }
             else
             {
@@ -104,6 +108,7 @@ namespace WpfApplication2
             Barre_Selection.IsEnabled = false;
             Bouton_Algo_1.IsEnabled = false;
             Bouton_Algo_2.IsEnabled = false;
+            Liste_Cube.Items.Clear();
         }
 
         // Modification nom du cube
@@ -122,18 +127,17 @@ namespace WpfApplication2
             Barre_Selection.IsEnabled = false;
             Bouton_Algo_1.IsEnabled = false;
             Bouton_Algo_2.IsEnabled = false;
+            Liste_Cube.Items.Clear();
         }
-        
-
 
         private void Bouton_Algo_1_Click(object sender, RoutedEventArgs e)
         {
 
             // AFAIRE -------------------------------
             string StrConnexion = "Datasource=" + Nom_Server.Text + ";Catalog=" + Nom_Database.Text + ";";
-            String Status_Connexion = ConnectToCube(StrConnexion);
+            AdomdConnection conn = Connexion_Base(StrConnexion);
 
-            if (Status_Connexion == "OK")
+            if (Status_Traitement == "OK")
             {
                 // Partie 1 - Commune
                 
@@ -156,9 +160,9 @@ namespace WpfApplication2
         {
             // AFAIRE
             string StrConnexion = "Datasource=" + Nom_Server.Text + ";Catalog=" + Nom_Database.Text + ";";
-            String Status_Connexion = ConnectToCube(StrConnexion);
+            AdomdConnection conn = Connexion_Base(StrConnexion);
 
-            if (Status_Connexion == "OK")
+            if (Status_Traitement == "OK")
             {
                 // Partie 1 - Commune
 
@@ -177,29 +181,25 @@ namespace WpfApplication2
             }
 
         }
-        
-        
-        
-        
-        
-        // Fonction de connexion à la base
-        public static string ConnectToCube(string StrConnect)
 
+        private AdomdConnection Connexion_Base(string StrConnect)
         {
-            String StatusConnect = "KO";
+            Status_Traitement = "KO";
             AdomdConnection conn = new AdomdConnection(StrConnect);
             try
             {
                 conn.Open();
-                StatusConnect = "OK";
+                 //Utilisation de la donnée pour déclencher l'exception
+                int nbOfCubes = conn.Cubes.Count;
+                Status_Traitement = "OK";
             }
-            // A voir problème récupération erreur quand cube inexistant malgré levé de l'erreur
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Failed to connect to data source");
             }
-            return StatusConnect;
+            return conn;
         }
+
         // Fonction de déconnexion à la base
         public static string DeconnectToCube(string StrConnect)
 
