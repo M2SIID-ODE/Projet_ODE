@@ -4,6 +4,22 @@ pour les variables, voir on ne peut pas utiliser un fichier de configuration htt
 http://www.developpez.net/forums/d989898/logiciels/solutions-d-entreprise/business-intelligence/microsoft-bi/ssas/2k8-extraire-storagemode-cube/
 
 
+
+aggreagtion :
+https://msdn.microsoft.com/en-us/library/ms345091.aspx
+
+http://www.ssas-info.com/analysis-services-scripts/1622-script-to-automate-ssas-partition-management-sql-ssis
+
+https://technet.microsoft.com/en-us/library/ms345091%28v=sql.105%29.aspx
+http://www.techheadbrothers.com/Articles.aspx/optimisation-cubes-design-agregations-page-4
+https://msdn.microsoft.com/en-us/library/bb934053.aspx
+
+http://www.techheadbrothers.com/Articles.aspx/optimisation-cubes-design-agregations-page-4
+
+
+
+
+
 */
 
 
@@ -23,11 +39,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Microsoft.AnalysisServices.AdomdClient;
+using Microsoft.AnalysisServices;
 //using Microsoft.SqlServer.Management.Common;
 //using Microsoft.SqlServer.Management.Sdk;
 //using Microsoft.SqlServer.Management.Smo;
 //using System.Data.SqlClient;
-//using System.Data;
+using System.Data;
 //using System.Data.OleDb;
 
 namespace WpfApplication2
@@ -79,9 +96,159 @@ namespace WpfApplication2
                     CubeDef cube = conn.Cubes[i];
                     if (cube.Type == CubeType.Cube)
                     {
-                        Liste_Cube.Items.Add(conn.Cubes[i].Name);
+                        int dd = 0;
+                        //Liste_Cube.Items.Add(conn.Cubes[i].Name);
                     }
                 }
+
+                // Détermination nombre d'agrégation        -----------------------------------------------------
+                Server srv = new Server();
+                srv.Connect(Nom_Server.Text);
+                Database db = srv.Databases.FindByName(Nom_Database.Text);
+
+                int j = 1;
+                foreach (Cube Cube3 in db.Cubes)
+                {
+                    Liste_Cube.Items.Add(Cube3.Name);
+                    string gg = Cube3.StorageLocation;
+                    foreach (MeasureGroup Meg in Cube3.MeasureGroups)
+                    {
+                   
+                    foreach (AggregationDesign agr in Meg.AggregationDesigns)
+                       {
+                            string dd = "dd";
+                        }
+                        string rr = "kk";
+
+
+                        // Creation aggregation
+                        if (rr == "hi")
+                        {
+                            // Creation aggregat
+                            //Cube cube = server.Databases["Adventure Works DW Standard Edition"].Cubes["InternetSales"];
+                            //AggregationDesign ad = cube.MeasureGroups["Fact Internet Sales"].AggregationDesigns["AggregationDesign linked"];
+                            //Aggregation aggr = ad.Aggregations.Add("ECM A1", "ECM A1");
+                            //AggregationDesign ad = Meg.AggregationDesigns["AggregationDesign linked"];
+                            //Ajout des dimensions
+                            //foreach (CubeDimension dim in Cube3.Dimensions)
+                            //{   aggr.Dimensions.Add(dim.ID);  }
+                            //AggregationDimension orderDateAggregationDimension = aggr.Dimensions["Order Date"];
+                            //AggregationDimension promotionAggregationDimension = aggr.Dimensions["Promotion"];
+                            //AggregationAttribute year =  new AggregationAttribute (cube.Dimensions["Order Date"].Attributes["CalendarYear"].AttributeID);
+                            //AggregationAttribute month = new AggregationAttribute(cube.Dimensions["Order Date"].Attributes["EnglishMonthName"].AttributeID);
+                            //AggregationAttribute promotion = new AggregationAttribute(cube.Dimensions["Promotion"].Attributes["Promotion Category"].AttributeID);
+
+                            //orderDateAggregationDimension.Attributes.Add(year);
+                            //orderDateAggregationDimension.Attributes.Add(month);
+                            //promotionAggregationDimension.Attributes.Add(promotion);
+                            //ad.Update();
+
+
+
+
+                             double optimization = 0;
+                             double storage = 0;
+                             long aggCount = 0;
+                             bool finished = false;
+
+                             AggregationDesign ad = null;
+
+                             String aggDesignName;
+                             String AggregationsDesigned = "";
+
+                             //aggDesignName = Meg.AggregationPrefix + "_" + Meg.Name;
+                             aggDesignName = "test" + "_" + Meg.Name;
+                             ad = Meg.AggregationDesigns.Add();
+                            
+                             ad.InitializeDesign();
+                             //optimization = 0;
+                             //storage = 0;
+                             //aggCount = 0;
+
+                            foreach (CubeDimension dim in Cube3.Dimensions)
+                            {   ad.Dimensions.Add(dim.ID);  }
+
+                            //finished = False;
+                            //  while (!finished)
+                            //While Not finished And optimization < optimizationWanted
+                            //And storage < maxStorageBytes
+                            //{ ad.DesignAggregations(out optimization, out storage, out aggCount, out finished);
+                            //}
+                            ad.FinalizeDesign();
+
+
+                            foreach (Partition part in Meg.Partitions)
+                            {
+                                part.AggregationDesignID = ad.ID;
+                            //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
+                            }
+
+                            // ad.Update();
+
+                            //foreach (Partition part in Meg.Partitions)
+                            //{
+                            //    part.AggregationDesignID = ad.ID;
+                            //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
+                            //}
+
+                            Cube3.Update(UpdateOptions.ExpandFull);
+                            //Meg.Update();
+                            Cube3.Process(ProcessType.ProcessFull);
+
+
+
+
+                            //ad.Name = aggDesignName;
+                            //ad.InitializeDesign();
+                            //while ((!finished) && (optimization < optimizationWanted) && (storage < maxStorageBytes))
+                            //while (!finished)
+                            //{
+                            //    ad.DesignAggregations(out optimization, out storage, out aggCount, out finished);
+                            //}
+                            //ad.FinalizeDesign();
+                            //ad.Update()
+                            //foreach (Partition part in mg.Partitions)
+                            //{
+                            //    part.AggregationDesignID = ad.ID;
+                            //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
+                            //}
+                            
+                            //fin dreation aggregtation
+
+
+                        }
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+                        //  foreach (Partition part in Meg.Partitions)
+                        //  {
+                        //      int dd = Meg.AggregationDesigns.Count;
+                        //  }
+                    }
+                    j++;
+                }
+                srv.Disconnect();
+
+
+
+
+
+
+
+
+
+
             }
             else
             {
@@ -197,7 +364,41 @@ namespace WpfApplication2
             {
                 MessageBox.Show("Failed to connect to data source");
             }
-            return conn;
+
+            //ASUPP
+            //string strStringConnection = "Provider=MSOLAP.4;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=MyDataBase;Impersonation Level=Impersonate";
+            //Server svr = new Server();
+            //svr.Connect(strStringConnection);
+            //
+            //String databaseName = "MyDataBase";
+            //Database db = svr.Databases.FindByName(databaseName);
+            //Cube cube = db.Cubes.FindByName("MyCube");
+
+            // Liste des databases disponibles
+            Server svr = new Server();
+            svr.Connect("Localhost");
+            foreach (Database db in svr.Databases)
+            {
+                string dd = db.Name;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                return conn;
         }
 
         // Fonction de déconnexion à la base

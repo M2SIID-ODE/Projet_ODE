@@ -21,3 +21,5 @@ C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplic
 C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
 C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.exe
 C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.pdb
+C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
+C:\Users\Cédric\Documents\Visual Studio 2015\Projects\WpfApplication2\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.DLL
