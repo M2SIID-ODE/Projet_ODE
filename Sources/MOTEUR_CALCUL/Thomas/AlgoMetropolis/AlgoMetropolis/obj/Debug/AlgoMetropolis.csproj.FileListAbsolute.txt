@@ -1,0 +1,6 @@
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\bin\Debug\AlgoMetropolis.exe.config
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\obj\Debug\AlgoMetropolis.csprojResolveAssemblyReference.cache
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\bin\Debug\AlgoMetropolis.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\bin\Debug\AlgoMetropolis.pdb
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\obj\Debug\AlgoMetropolis.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoMetropolis\AlgoMetropolis\obj\Debug\AlgoMetropolis.pdb

@@ -1,0 +1,6 @@
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\bin\Debug\AlgoCombinaison.exe.config
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\bin\Debug\AlgoCombinaison.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\bin\Debug\AlgoCombinaison.pdb
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\obj\Debug\AlgoCombinaison.csprojResolveAssemblyReference.cache
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\obj\Debug\AlgoCombinaison.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\AlgoCombinaison\AlgoCombinaison\obj\Debug\AlgoCombinaison.pdb

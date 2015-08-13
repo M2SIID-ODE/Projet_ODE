@@ -1,0 +1,7 @@
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\bin\Debug\Cuboïdes.exe.config
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\bin\Debug\Cuboïdes.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\bin\Debug\Cuboïdes.pdb
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\obj\Debug\Cuboïdes.csprojResolveAssemblyReference.cache
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\obj\Debug\Cuboïdes.exe
+c:\users\beatrice\documents\visual studio 2015\Projects\Cuboïdes\Cuboïdes\obj\Debug\Cuboïdes.pdb
