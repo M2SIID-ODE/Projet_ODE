@@ -49,11 +49,60 @@ using System.Data;
 
 namespace WpfApplication2
 {
+
+    // -- Debut OLIVIER
+
+    /// <summary>
+    /// Classe des dimensions 1D : DIM_TEMPS, DIM_CLIENTS, DIM_LIEUX et DIM_PRODUITS
+    /// </summary>
+    /// 
+    class Dimension
+    {
+        // Membres
+        private string dimensionName; // Nom "officiel" de la dimension - potentiellement plusieurs si "dimensionOrder" >= 2
+        private int dimensionCount; // Nombre de lignes de la dimension
+        private int dimensionMemory; // Taille d'une ligne, en octets
+        private int dimensionOrder; // Indique la dimension du cuboide. Ex : 1 - 1D / 2 : 2D...
+
+
+        // Constructeur avec dimensionOrder comme argument
+        public Dimension(int inDimensionOrder)
+        {
+            SetDimensionName("");
+            SetDimensionCount(1);
+            SetDimensionMemory(0);
+            dimensionOrder = inDimensionOrder;
+        }
+
+        // Constructeur avec (name, count, dimensionOrder) comme arguments
+        public Dimension(string inDimensionName, int inDimensionCount, int inDimensionOrder)
+        {
+            SetDimensionName(inDimensionName);
+            SetDimensionCount(inDimensionCount);
+            SetDimensionMemory(0);
+            dimensionOrder = inDimensionOrder;
+        }
+
+        // Methodes
+        public void SetDimensionName(string inDimensionName) { dimensionName = String.Copy(inDimensionName); }
+        public void SetDimensionCount(int inDimensionCount) { dimensionCount = inDimensionCount; }
+        public void SetDimensionMemory(int inDimensionMemory) { dimensionMemory = inDimensionMemory; }
+        // REM : Pas d'accesseur Set pour "dimensionOrder" car parametré à l'instanciation de classe
+
+        public string GetDimensionName() { return (dimensionName); }
+        public int GetDimensionCount() { return (dimensionCount); }
+        public int GetDimensionMemory() { return (dimensionMemory); }
+        public int GetDimensionOrder() { return (dimensionOrder); }
+    }
+    // -- Fin OLIVIER
+
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    
+
     public partial class MainWindow : Window
     {
         public static string Status_Traitement = "OK";
@@ -80,6 +129,17 @@ namespace WpfApplication2
         {
             string StrConnexion = "Datasource=" + Nom_Server.Text + ";Catalog=" + Nom_Database.Text + ";";
             AdomdConnection conn = Connexion_Base(StrConnexion);
+
+            // -- Debut OLIVIER
+            string cubeId = "[Data Warehouse ODE]"; // Nom du cube 
+
+            // Instance de classe de dimensions 1D
+            List<Dimension> listDim1D = new List<Dimension>();
+
+            // Liste de toutes les dimensions 1D: 
+            GetDimension1DProperties(conn, cubeId, listDim1D);
+
+            // -- Fin OLIVIER
 
             Liste_Cube.Items.Clear();
 
@@ -113,9 +173,9 @@ namespace WpfApplication2
                     string gg = Cube3.StorageLocation;
                     foreach (MeasureGroup Meg in Cube3.MeasureGroups)
                     {
-                   
-                    foreach (AggregationDesign agr in Meg.AggregationDesigns)
-                       {
+
+                        foreach (AggregationDesign agr in Meg.AggregationDesigns)
+                        {
                             string dd = "dd";
                         }
                         string rr = "kk";
@@ -146,27 +206,27 @@ namespace WpfApplication2
 
 
 
-                             double optimization = 0;
-                             double storage = 0;
-                             long aggCount = 0;
-                             bool finished = false;
+                            double optimization = 0;
+                            double storage = 0;
+                            long aggCount = 0;
+                            bool finished = false;
 
-                             AggregationDesign ad = null;
+                            AggregationDesign ad = null;
 
-                             String aggDesignName;
-                             String AggregationsDesigned = "";
+                            String aggDesignName;
+                            String AggregationsDesigned = "";
 
-                             //aggDesignName = Meg.AggregationPrefix + "_" + Meg.Name;
-                             aggDesignName = "test" + "_" + Meg.Name;
-                             ad = Meg.AggregationDesigns.Add();
-                            
-                             ad.InitializeDesign();
-                             //optimization = 0;
-                             //storage = 0;
-                             //aggCount = 0;
+                            //aggDesignName = Meg.AggregationPrefix + "_" + Meg.Name;
+                            aggDesignName = "test" + "_" + Meg.Name;
+                            ad = Meg.AggregationDesigns.Add();
+
+                            ad.InitializeDesign();
+                            //optimization = 0;
+                            //storage = 0;
+                            //aggCount = 0;
 
                             foreach (CubeDimension dim in Cube3.Dimensions)
-                            {   ad.Dimensions.Add(dim.ID);  }
+                            { ad.Dimensions.Add(dim.ID); }
 
                             //finished = False;
                             //  while (!finished)
@@ -180,7 +240,7 @@ namespace WpfApplication2
                             foreach (Partition part in Meg.Partitions)
                             {
                                 part.AggregationDesignID = ad.ID;
-                            //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
+                                //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
                             }
 
                             // ad.Update();
@@ -212,23 +272,11 @@ namespace WpfApplication2
                             //    part.AggregationDesignID = ad.ID;
                             //    AggregationsDesigned += aggDesignName + " = " + aggCount.ToString() + " aggregations designed\r\n\tOptimization: " + optimization.ToString() + "/" + optimizationWanted.ToString() + "\n\r\tStorage: " + storage.ToString() + "/" + maxStorageBytes.ToString() + " ]\n\r";
                             //}
-                            
+
                             //fin dreation aggregtation
 
 
                         }
-
-                        
-
-
-
-
-
-
-
-
-
-
 
 
                         //  foreach (Partition part in Meg.Partitions)
@@ -239,16 +287,6 @@ namespace WpfApplication2
                     j++;
                 }
                 srv.Disconnect();
-
-
-
-
-
-
-
-
-
-
             }
             else
             {
@@ -307,13 +345,13 @@ namespace WpfApplication2
             if (Status_Traitement == "OK")
             {
                 // Partie 1 - Commune
-                
+
 
                 // Partie 2 - Algo Spécifique Thomas
-                
+
 
                 // Partie 3 - Commune
-                
+
                 String Status_Deconnexion = DeconnectToCube(StrConnexion);
                 // Actualisation infos interface si tout est ok
                 //Barre_Espace.IsEnabled = true;
@@ -356,7 +394,7 @@ namespace WpfApplication2
             try
             {
                 conn.Open();
-                 //Utilisation de la donnée pour déclencher l'exception
+                //Utilisation de la donnée pour déclencher l'exception
                 int nbOfCubes = conn.Cubes.Count;
                 Status_Traitement = "OK";
             }
@@ -398,7 +436,7 @@ namespace WpfApplication2
 
 
 
-                return conn;
+            return conn;
         }
 
         // Fonction de déconnexion à la base
@@ -409,6 +447,87 @@ namespace WpfApplication2
             AdomdConnection conn = new AdomdConnection(StrConnect);
             conn.Close();
             return StatusDeconnect;
+        }
+
+
+        // -- Debut OLIVIER
+
+        /// <summary>
+        /// Exploration DMV de SSAS (Vues prédefinies sur tables systeme)
+        /// </summary>
+        /// 
+        static void GetDimension1DProperties(AdomdConnection adoConnect, string cubeId, List<Dimension> listDim1D)
+        {
+            AdomdCommand cmdPart1 = adoConnect.CreateCommand();
+            AdomdCommand cmdPart2 = adoConnect.CreateCommand();
+
+            // Dimension tempDim1D = new Dimension(1);
+
+
+            // Toutes les dimensions d'un cube, leur type et leur cardinalité
+            // https://msdn.microsoft.com/en-us/library/ms126309.aspx
+            // https://msdn.microsoft.com/en-us/library/ms126180.aspx
+
+            // Etape 1 : Récuperation des noms et des count
+            cmdPart1.CommandText = "SELECT " +
+                               "     DIMENSION_NAME, " +
+                               "     DIMENSION_CARDINALITY " +
+                               "FROM " +
+                               "     $SYSTEM.MDSCHEMA_DIMENSIONS " +
+                               "WHERE " +
+                               "     CUBE_NAME = 'Data Warehouse ODE' AND " +
+                               "    DIMENSION_CAPTION <> 'Measures' " +
+                               "ORDER BY DIMENSION_NAME";
+
+            // Ouverture du reader XML
+            AdomdDataReader readerPart1 = cmdPart1.ExecuteReader();
+
+            // Enregistrement des données dans des instances de Dimension
+            while (readerPart1.Read())
+            {
+                // Enregistrement dans la listDim1D
+                listDim1D.Add(new Dimension(readerPart1.GetString(0), readerPart1.GetInt32(1), 1));
+            }
+
+            // Fermeture du reader XML
+            readerPart1.Close();
+
+
+
+            // Etape 2 : Récuperation des tailles (Octets)
+            // Utilisation mémoire : https://msdn.microsoft.com/en-us/library/bb934098(v=sql.120).aspx
+            cmdPart2.CommandText = "SELECT " +
+                                    "   (OBJECT_MEMORY_SHRINKABLE + OBJECT_MEMORY_NONSHRINKABLE + OBJECT_MEMORY_CHILD_SHRINKABLE + OBJECT_MEMORY_CHILD_NONSHRINKABLE) " +
+                                    "FROM " +
+                                    "    $SYSTEM.DISCOVER_OBJECT_MEMORY_USAGE " +
+                                    "WHERE " +
+                                    "    OBJECT_TYPE_ID = 100006 AND " +
+                                    "    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')" +
+                                    "ORDER BY OBJECT_ID";
+
+            // Ouverture du reader XML
+            AdomdDataReader readerPart2 = cmdPart2.ExecuteReader();
+
+            // Enregistrement des données dans des instances de Dimension
+
+            // while (readerPart2.Read())
+            for (int i = 0; i < listDim1D.Count(); i++)
+            {
+                readerPart2.Read();
+
+                // 3eme retour : [TOTAL_MEM_SIZE]
+                if (listDim1D[i].GetDimensionCount() != 0)
+                {
+                    listDim1D[i].SetDimensionMemory(readerPart2.GetInt32(0) / listDim1D[i].GetDimensionCount());
+                }
+                else
+                {
+                    listDim1D[i].SetDimensionMemory(0);
+                }
+            }
+
+            // Fermeture du reader XML
+            readerPart2.Close();
         }
     }
 }

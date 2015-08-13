@@ -153,6 +153,7 @@
       <ID>LIEU PK</ID>
       <Name>LIEU PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>256</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="75e96d69-c87e-4f4f-8836-1a502bce32d9">
           <DataType>Integer</DataType>
@@ -175,6 +176,7 @@
     <Attribute dwd:design-time-name="12e62374-4984-453c-807d-2652fdd28f66">
       <ID>VILLE PK</ID>
       <Name>VILLE PK</Name>
+      <EstimatedCount>256</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="43e2aa09-d44d-472a-bdba-c4bff0f3f336">
           <DataType>Integer</DataType>
@@ -228,6 +230,7 @@
     <Attribute dwd:design-time-name="018c3c79-c8d2-4f1d-b3f1-3eca54a17bf9">
       <ID>CODE DEPARTEMENT</ID>
       <Name>CODE DEPARTEMENT</Name>
+      <EstimatedCount>95</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="4df63160-e143-48aa-8286-2b517dc6b391">
           <DataType>Integer</DataType>
@@ -249,6 +252,7 @@
     <Attribute dwd:design-time-name="cbadff75-2752-41f7-a736-3c31c0ad16ed">
       <ID>CODE REGION</ID>
       <Name>CODE REGION</Name>
+      <EstimatedCount>20</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="eec74031-cf5b-4f20-986d-df2c224c4296">
           <DataType>Integer</DataType>
@@ -294,6 +298,7 @@
     <Attribute dwd:design-time-name="10f5f40a-dd4c-4f4d-b4f6-2ce1031d672d">
       <ID>CODE POSTAL</ID>
       <Name>CODE POSTAL</Name>
+      <EstimatedCount>256</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="ecc25d1f-ca26-4f74-aad7-f73d73670a05">
           <DataType>WChar</DataType>

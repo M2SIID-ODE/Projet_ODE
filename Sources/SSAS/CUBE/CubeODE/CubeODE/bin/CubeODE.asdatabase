@@ -134,6 +134,7 @@
           <ID>TEMPS PK</ID>
           <Name>JOUR</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>3652</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -160,6 +161,7 @@
         <Attribute>
           <ID>ANNEE</ID>
           <Name>ANNEE</Name>
+          <EstimatedCount>6</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -175,6 +177,7 @@
         <Attribute>
           <ID>TRIMESTRE</ID>
           <Name>TRIMESTRE</Name>
+          <EstimatedCount>20</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -196,6 +199,7 @@
         <Attribute>
           <ID>MOIS</ID>
           <Name>MOIS</Name>
+          <EstimatedCount>80</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -217,6 +221,7 @@
         <Attribute>
           <ID>SEMAINE</ID>
           <Name>SEMAINE</Name>
+          <EstimatedCount>300</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -461,6 +466,7 @@
           <ID>PRODUIT PK</ID>
           <Name>PRODUIT PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>10</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -503,6 +509,7 @@
         <Attribute>
           <ID>ID UNIVERS</ID>
           <Name>ID UNIVERS</Name>
+          <EstimatedCount>4</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -518,6 +525,7 @@
         <Attribute>
           <ID>ID RAYON</ID>
           <Name>ID RAYON</Name>
+          <EstimatedCount>100</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -539,6 +547,7 @@
         <Attribute>
           <ID>ID FAMILLE</ID>
           <Name>ID FAMILLE</Name>
+          <EstimatedCount>1000</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -560,6 +569,7 @@
         <Attribute>
           <ID>ID SSFAMILLE</ID>
           <Name>ID SSFAMILLE</Name>
+          <EstimatedCount>5000</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -769,6 +779,7 @@
           <ID>LIEU PK</ID>
           <Name>LIEU PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>256</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -791,6 +802,7 @@
         <Attribute>
           <ID>VILLE PK</ID>
           <Name>VILLE PK</Name>
+          <EstimatedCount>256</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -844,6 +856,7 @@
         <Attribute>
           <ID>CODE DEPARTEMENT</ID>
           <Name>CODE DEPARTEMENT</Name>
+          <EstimatedCount>95</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -865,6 +878,7 @@
         <Attribute>
           <ID>CODE REGION</ID>
           <Name>CODE REGION</Name>
+          <EstimatedCount>20</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -910,6 +924,7 @@
         <Attribute>
           <ID>CODE POSTAL</ID>
           <Name>CODE POSTAL</Name>
+          <EstimatedCount>256</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -985,7 +1000,7 @@
           <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
           <Value>
             <dds xmlns="">
-              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-2705" scrolltop="-1274" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="10583" y="14817" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="4" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-2705" scrolltop="-1274" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="10583" y="14817" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
                 <font>
                   <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
                 </font>
@@ -996,7 +1011,7 @@
               <layoutmanager>
                 <ddsxmlobj />
               </layoutmanager>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CLIENTS" left="218" top="7400" logicalid="4" controlid="1" masterid="0" hint1="0" hint2="0" width="4286" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CLIENTS" left="218" top="7400" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4286" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a0000be10000043110000" />
                 </control>
@@ -1007,7 +1022,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_VILLES" left="20" top="0" logicalid="5" controlid="2" masterid="0" hint1="0" hint2="0" width="4683" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_VILLES" left="20" top="0" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="4683" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a00004b12000088130000" />
                 </control>
@@ -1018,7 +1033,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="4501" logicalid="6" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="4501" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1127,6 +1142,7 @@
           <ID>CLIENT PK</ID>
           <Name>CLIENT PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>10000</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -1149,6 +1165,7 @@
         <Attribute>
           <ID>VILLE PK</ID>
           <Name>VILLE PK</Name>
+          <EstimatedCount>3652</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -1175,6 +1192,7 @@
         <Attribute>
           <ID>CODE REGION</ID>
           <Name>CODE REGION</Name>
+          <EstimatedCount>20</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -1190,6 +1208,7 @@
         <Attribute>
           <ID>CODE DEPARTEMENT</ID>
           <Name>CODE DEPARTEMENT</Name>
+          <EstimatedCount>95</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -1211,6 +1230,7 @@
         <Attribute>
           <ID>CODE POSTAL</ID>
           <Name>CODE POSTAL</Name>
+          <EstimatedCount>3652</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1288,7 +1308,7 @@
           <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
           <Value>
             <dds xmlns="">
-              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="15" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-12576" scrolltop="4158" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="30189" y="14817" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="30" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-12576" scrolltop="4158" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="30189" y="14817" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
                 <font>
                   <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
                 </font>
@@ -1299,7 +1319,7 @@
               <layoutmanager>
                 <ddsxmlobj />
               </layoutmanager>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_LIEUX" left="7103" top="502" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3942" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_LIEUX" left="7103" top="502" logicalid="15" controlid="1" masterid="0" hint1="0" hint2="0" width="3942" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a0000660f00009b0f0000" />
                 </control>
@@ -1310,7 +1330,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="FACT_VENTES" left="3297" top="17416" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="4471" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="FACT_VENTES" left="3297" top="17416" logicalid="16" controlid="2" masterid="0" hint1="0" hint2="0" width="4471" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a000077110000ea120000" />
                 </control>
@@ -1321,7 +1341,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_VILLES" left="20" top="0" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="4683" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_VILLES" left="20" top="0" logicalid="17" controlid="3" masterid="0" hint1="0" hint2="0" width="4683" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a00004b12000088130000" />
                 </control>
@@ -1332,7 +1352,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_TEMPS" left="2370" top="24658" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="5398" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_TEMPS" left="2370" top="24658" logicalid="18" controlid="4" masterid="0" hint1="0" hint2="0" width="5398" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a00001615000088130000" />
                 </control>
@@ -1343,7 +1363,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CLIENTS" left="218" top="7400" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="4286" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CLIENTS" left="218" top="7400" logicalid="19" controlid="5" masterid="0" hint1="0" hint2="0" width="4286" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a0000be10000043110000" />
                 </control>
@@ -1354,7 +1374,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_PRODUITS" left="10168" top="21461" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="4313" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_PRODUITS" left="10168" top="21461" logicalid="20" controlid="6" masterid="0" hint1="0" hint2="0" width="4313" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a0000d91000009b0f0000" />
                 </control>
@@ -1365,7 +1385,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CATEGORIES" left="10485" top="14219" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="3678" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="DIM_CATEGORIES" left="10485" top="14219" logicalid="21" controlid="7" masterid="0" hint1="0" hint2="0" width="3678" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobjectstreaminitwrapper binary="000a00005e0e0000ea120000" />
                 </control>
@@ -1376,7 +1396,7 @@
                 </layoutobject>
                 <shape groupshapeid="0" groupnode="0" />
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="4403" top="2101" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="3000" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="4403" top="2101" logicalid="22" controlid="8" masterid="0" hint1="0" hint2="0" width="3000" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1396,7 +1416,7 @@
                   <point x="7103" y="2499" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="5782" top="3998" logicalid="9" controlid="9" masterid="0" hint1="0" hint2="0" width="3692" height="13718" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="5782" top="3998" logicalid="23" controlid="9" masterid="0" hint1="0" hint2="0" width="3692" height="13718" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1416,7 +1436,7 @@
                   <point x="6082" y="17416" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="4670" top="21958" logicalid="10" controlid="10" masterid="0" hint1="0" hint2="0" width="1162" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="4670" top="21958" logicalid="24" controlid="10" masterid="0" hint1="0" hint2="0" width="1162" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1436,7 +1456,7 @@
                   <point x="5532" y="22258" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="7468" top="19537" logicalid="11" controlid="11" masterid="0" hint1="0" hint2="0" width="3000" height="4321" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="7468" top="19537" logicalid="25" controlid="11" masterid="0" hint1="0" hint2="0" width="3000" height="4321" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1456,7 +1476,7 @@
                   <point x="7768" y="19837" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="11320" logicalid="12" controlid="12" masterid="0" hint1="0" hint2="0" width="2770" height="6396" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="11320" logicalid="26" controlid="12" masterid="0" hint1="0" hint2="0" width="2770" height="6396" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1476,7 +1496,7 @@
                   <point x="4432" y="17416" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="4501" logicalid="13" controlid="13" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="1962" top="4501" logicalid="27" controlid="13" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1494,7 +1514,7 @@
                   <point x="2361" y="7400" />
                 </connector>
               </ddscontrol>
-              <ddscontrol controlprogid="MSDDS.Polyline" left="11925" top="18562" logicalid="14" controlid="14" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+              <ddscontrol controlprogid="MSDDS.Polyline" left="11925" top="18562" logicalid="28" controlid="14" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
                 <control>
                   <ddsxmlobj>
                     <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
@@ -1751,6 +1771,7 @@
             </Measure>
           </Measures>
           <StorageMode>Molap</StorageMode>
+          <EstimatedRows>249</EstimatedRows>
           <ProcessingMode>Regular</ProcessingMode>
           <Dimensions>
             <Dimension xsi:type="RegularMeasureGroupDimension">
@@ -1841,8 +1862,794 @@
               <StorageMode>Molap</StorageMode>
               <CurrentStorageMode>Molap</CurrentStorageMode>
               <ProcessingMode>Regular</ProcessingMode>
+              <EstimatedRows>249</EstimatedRows>
+              <AggregationDesignID>AggregationDesign 1</AggregationDesignID>
             </Partition>
           </Partitions>
+          <AggregationDesigns>
+            <AggregationDesign>
+              <ID>AggregationDesign</ID>
+              <Name>AggregationDesign</Name>
+              <CreatedTimestamp>2015-08-10T18:57:59.38Z</CreatedTimestamp>
+              <LastSchemaUpdate>2015-08-10T18:57:59.38Z</LastSchemaUpdate>
+              <EstimatedRows>249</EstimatedRows>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TEMPS PK</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                      <EstimatedCount>6</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>MOIS</AttributeID>
+                      <EstimatedCount>80</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>SEMAINE</AttributeID>
+                      <EstimatedCount>300</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>PRODUIT PK</AttributeID>
+                      <EstimatedCount>10</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CATEGORIE PK</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                      <EstimatedCount>4</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID RAYON</AttributeID>
+                      <EstimatedCount>100</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID FAMILLE</AttributeID>
+                      <EstimatedCount>1000</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID SSFAMILLE</AttributeID>
+                      <EstimatedCount>5000</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>LIEU PK</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE COMMUNE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE DEPARTEMENT</AttributeID>
+                      <EstimatedCount>95</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE ARRONDISEMENT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE CANTON</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE POSTAL</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CLIENT PK</AttributeID>
+                      <EstimatedCount>10000</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE DEPARTEMENT</AttributeID>
+                      <EstimatedCount>95</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE POSTAL</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+              <Aggregations>
+                <Aggregation>
+                  <ID>Aggregation 0</ID>
+                  <Name>Aggregation 0</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 1</ID>
+                  <Name>Aggregation 1</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 2</ID>
+                  <Name>Aggregation 2</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 3</ID>
+                  <Name>Aggregation 3</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>TRIMESTRE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 4</ID>
+                  <Name>Aggregation 4</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 5</ID>
+                  <Name>Aggregation 5</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ANNEE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 6</ID>
+                  <Name>Aggregation 6</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 7</ID>
+                  <Name>Aggregation 7</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>TRIMESTRE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 8</ID>
+                  <Name>Aggregation 8</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>MOIS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 9</ID>
+                  <Name>Aggregation 9</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation a</ID>
+                  <Name>Aggregation a</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ANNEE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+              </Aggregations>
+            </AggregationDesign>
+            <AggregationDesign>
+              <ID>AggregationDesign 1</ID>
+              <Name>AggregationDesign 1</Name>
+              <CreatedTimestamp>2015-08-10T19:31:05.48Z</CreatedTimestamp>
+              <LastSchemaUpdate>2015-08-10T19:31:05.48Z</LastSchemaUpdate>
+              <EstimatedRows>249</EstimatedRows>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TEMPS PK</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                      <EstimatedCount>6</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>MOIS</AttributeID>
+                      <EstimatedCount>80</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>SEMAINE</AttributeID>
+                      <EstimatedCount>300</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>PRODUIT PK</AttributeID>
+                      <EstimatedCount>10</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CATEGORIE PK</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                      <EstimatedCount>4</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID RAYON</AttributeID>
+                      <EstimatedCount>100</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID FAMILLE</AttributeID>
+                      <EstimatedCount>1000</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>ID SSFAMILLE</AttributeID>
+                      <EstimatedCount>5000</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>LIEU PK</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE COMMUNE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE DEPARTEMENT</AttributeID>
+                      <EstimatedCount>95</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE ARRONDISEMENT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE CANTON</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE POSTAL</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CLIENT PK</AttributeID>
+                      <EstimatedCount>10000</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE DEPARTEMENT</AttributeID>
+                      <EstimatedCount>95</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE POSTAL</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+              <Aggregations>
+                <Aggregation>
+                  <ID>Aggregation 0</ID>
+                  <Name>Aggregation 0</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 1</ID>
+                  <Name>Aggregation 1</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 2</ID>
+                  <Name>Aggregation 2</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 3</ID>
+                  <Name>Aggregation 3</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>TRIMESTRE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 4</ID>
+                  <Name>Aggregation 4</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 5</ID>
+                  <Name>Aggregation 5</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ANNEE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 6</ID>
+                  <Name>Aggregation 6</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 7</ID>
+                  <Name>Aggregation 7</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>MOIS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 8</ID>
+                  <Name>Aggregation 8</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>TRIMESTRE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 9</ID>
+                  <Name>Aggregation 9</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>CODE REGION</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation a</ID>
+                  <Name>Aggregation a</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ANNEE</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>ID UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+              </Aggregations>
+            </AggregationDesign>
+          </AggregationDesigns>
         </MeasureGroup>
       </MeasureGroups>
       <Source>

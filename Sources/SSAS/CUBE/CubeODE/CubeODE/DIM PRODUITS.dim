@@ -151,6 +151,7 @@
       <ID>PRODUIT PK</ID>
       <Name>PRODUIT PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>10</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="8c2d0867-ecdf-467d-a504-fa498837a34f">
           <DataType>Integer</DataType>
@@ -193,6 +194,7 @@
     <Attribute dwd:design-time-name="d595cd67-9c1f-45aa-b7a0-a25c356c2609">
       <ID>ID UNIVERS</ID>
       <Name>ID UNIVERS</Name>
+      <EstimatedCount>4</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="aed245bd-718e-4977-a733-b7cb819bd5c8">
           <DataType>Integer</DataType>
@@ -208,6 +210,7 @@
     <Attribute dwd:design-time-name="5a7252c5-c86e-4a1a-b868-f5df1377c0a9">
       <ID>ID RAYON</ID>
       <Name>ID RAYON</Name>
+      <EstimatedCount>100</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="e29557ac-d7b6-483a-8a92-e02a81d1c48b">
           <DataType>Integer</DataType>
@@ -229,6 +232,7 @@
     <Attribute dwd:design-time-name="96883aae-1119-44cd-bca4-acb6b802481d">
       <ID>ID FAMILLE</ID>
       <Name>ID FAMILLE</Name>
+      <EstimatedCount>1000</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="7a7aad65-a129-4dd4-ad31-2306f643cd51">
           <DataType>Integer</DataType>
@@ -250,6 +254,7 @@
     <Attribute dwd:design-time-name="f542d360-3d0a-4e64-bd59-1e1242bd496f">
       <ID>ID SSFAMILLE</ID>
       <Name>ID SSFAMILLE</Name>
+      <EstimatedCount>5000</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="0170d63e-b300-4df1-a835-20ad8259819a">
           <DataType>Integer</DataType>

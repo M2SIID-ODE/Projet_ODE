@@ -18,8 +18,794 @@
           <StorageMode>Molap</StorageMode>
           <CurrentStorageMode>Molap</CurrentStorageMode>
           <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>249</EstimatedRows>
+          <AggregationDesignID>AggregationDesign 1</AggregationDesignID>
         </Partition>
       </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2015-08-10T18:57:59.38Z</CreatedTimestamp>
+          <LastSchemaUpdate>2015-08-10T18:57:59.38Z</LastSchemaUpdate>
+          <EstimatedRows>249</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>TEMPS PK</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ANNEE</AttributeID>
+                  <EstimatedCount>6</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>TRIMESTRE</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>MOIS</AttributeID>
+                  <EstimatedCount>80</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>SEMAINE</AttributeID>
+                  <EstimatedCount>300</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>PRODUIT PK</AttributeID>
+                  <EstimatedCount>10</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CATEGORIE PK</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID UNIVERS</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID RAYON</AttributeID>
+                  <EstimatedCount>100</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID FAMILLE</AttributeID>
+                  <EstimatedCount>1000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID SSFAMILLE</AttributeID>
+                  <EstimatedCount>5000</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>LIEU PK</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>VILLE PK</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE COMMUNE</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE DEPARTEMENT</AttributeID>
+                  <EstimatedCount>95</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE REGION</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE ARRONDISEMENT</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE CANTON</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE POSTAL</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>CLIENT PK</AttributeID>
+                  <EstimatedCount>10000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>VILLE PK</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE REGION</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE DEPARTEMENT</AttributeID>
+                  <EstimatedCount>95</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE POSTAL</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 5</ID>
+              <Name>Aggregation 5</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 6</ID>
+              <Name>Aggregation 6</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 7</ID>
+              <Name>Aggregation 7</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 8</ID>
+              <Name>Aggregation 8</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>MOIS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 9</ID>
+              <Name>Aggregation 9</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation a</ID>
+              <Name>Aggregation a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+        <AggregationDesign>
+          <ID>AggregationDesign 1</ID>
+          <Name>AggregationDesign 1</Name>
+          <CreatedTimestamp>2015-08-10T19:31:05.48Z</CreatedTimestamp>
+          <LastSchemaUpdate>2015-08-10T19:31:05.48Z</LastSchemaUpdate>
+          <EstimatedRows>249</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>TEMPS PK</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ANNEE</AttributeID>
+                  <EstimatedCount>6</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>TRIMESTRE</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>MOIS</AttributeID>
+                  <EstimatedCount>80</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>SEMAINE</AttributeID>
+                  <EstimatedCount>300</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>PRODUIT PK</AttributeID>
+                  <EstimatedCount>10</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CATEGORIE PK</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID UNIVERS</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID RAYON</AttributeID>
+                  <EstimatedCount>100</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID FAMILLE</AttributeID>
+                  <EstimatedCount>1000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ID SSFAMILLE</AttributeID>
+                  <EstimatedCount>5000</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>LIEU PK</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>VILLE PK</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE COMMUNE</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE DEPARTEMENT</AttributeID>
+                  <EstimatedCount>95</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE REGION</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE ARRONDISEMENT</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE CANTON</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE POSTAL</AttributeID>
+                  <EstimatedCount>256</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>CLIENT PK</AttributeID>
+                  <EstimatedCount>10000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>VILLE PK</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE REGION</AttributeID>
+                  <EstimatedCount>20</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE DEPARTEMENT</AttributeID>
+                  <EstimatedCount>95</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>CODE POSTAL</AttributeID>
+                  <EstimatedCount>3652</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 5</ID>
+              <Name>Aggregation 5</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 6</ID>
+              <Name>Aggregation 6</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 7</ID>
+              <Name>Aggregation 7</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>MOIS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 8</ID>
+              <Name>Aggregation 8</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TRIMESTRE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 9</ID>
+              <Name>Aggregation 9</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CODE REGION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation a</ID>
+              <Name>Aggregation a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ANNEE</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID UNIVERS</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
     </MeasureGroup>
   </MeasureGroups>
 </Cube>

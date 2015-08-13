@@ -8,3 +8,6 @@ E:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\OptimiseurOde2\OptimiseurOde2
 E:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\OptimiseurOde2\OptimiseurOde2\bin\Debug\Microsoft.AnalysisServices.XMLA.dll
 E:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\OptimiseurOde2\OptimiseurOde2\obj\Debug\OptimiseurOde2.exe
 E:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\OptimiseurOde2\OptimiseurOde2\obj\Debug\OptimiseurOde2.pdb
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurOde2\OptimiseurOde2\bin\Debug\OptimiseurOde2.exe.config
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurOde2\OptimiseurOde2\obj\Debug\OptimiseurOde2.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Olivier\OptimiseurOde2\OptimiseurOde2\obj\Debug\OptimiseurOde2.pdb
