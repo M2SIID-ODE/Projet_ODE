@@ -76,9 +76,3 @@ C:\Users\Beatrice\Documents\Visual Studio 2015\Projects\AppliMerge\WpfApplicatio
 C:\Users\Beatrice\Documents\Visual Studio 2015\Projects\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.g.resources
 C:\Users\Beatrice\Documents\Visual Studio 2015\Projects\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
 C:\Users\Beatrice\Documents\Visual Studio 2015\Projects\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.exe.config
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\Interop.ADODB.dll
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\Interop.ADOMD.dll
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.ResolveComReference.cache
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.exe
-C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.pdb

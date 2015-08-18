@@ -366,12 +366,12 @@ namespace WpfApplication2
                 // -- Fin THOMAS
 
                 // -- Début THOMAS : "récupération" du nombre de lignes des cuboïdes
-                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
+                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
                 Console.WriteLine();
                 // -- Fin Thomas
 
                 // Partie 2 - Algo Spécifique Thomas
-                int seuil_poids = 500; // le seuil de poids à ne pas dépasser : à récupérer via l'interface plus tard
+                int seuil_poids = 1000000; // le seuil de poids à ne pas dépasser : à récupérer via l'interface plus tard
                 int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
                 int nb_boucle = 100; // le nombre de boucle que l'on veut faire à l'algo de Metropolis : éventuellement à faire saisir par l'utilisateur
                 Metropolis(listCuboides, seuil_poids, nb_boucle, solution); // appel de l'algo de Metropolis
@@ -594,7 +594,7 @@ namespace WpfApplication2
         // -- Fin THOMAS
 
         // -- Début THOMAS : Algorithme qui récupère le nombre de lignes des cuboides
-        static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, int nb_dim_1d,String datasource, String catalog)
+        static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d,String datasource, String catalog)
         {
             // Chaine de connexion SSAS
             AdomdConnection conn = new AdomdConnection("Data Source="+datasource+";Catalog="+catalog);  // CATALOG : Nom du cube
@@ -611,6 +611,7 @@ namespace WpfApplication2
 
             String[] test_dimensions = new String[nb_dim_1d*2];
             int cpt = 0;
+            int poids_une_ligne = 0;
 
             Console.WriteLine("RÉCUPÉRATION DES CLÉS PRIMAIRES :");
             foreach (DataRow row in dt.Rows)
@@ -641,18 +642,22 @@ namespace WpfApplication2
                 if (cuboides[i].Length == 1)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    poids_une_ligne = listDim1D[int.Parse(cuboides[i])].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 2)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory()+ listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 3)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 4)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionMemory();
                 }
 
 
@@ -673,6 +678,7 @@ namespace WpfApplication2
 
                     Console.WriteLine(" | Nb ligne  = " + poids);
                     listCuboides[i].SetDimensionCount(poids); // on affece le nombre de lignes au cuboide
+                    listCuboides[i].SetDimensionMemory(poids_une_ligne);
 
                 }
                 catch (Exception ex)
@@ -707,9 +713,9 @@ namespace WpfApplication2
                 choix_cube = rand.Next(0, listCuboides.Count); // on choisit un cube à permuter
                 Console.Write("Cube choisi pour permutation : n°" + choix_cube);
                 if (sol_act[choix_cube] == 0) // s'il est à 0, on ajoute son poids
-                    poids_next = poids_act + listCuboides[choix_cube].GetDimensionCount();
+                    poids_next = poids_act + (listCuboides[choix_cube].GetDimensionCount() * listCuboides[choix_cube].GetDimensionMemory());
                 else // sinon on on l'enlève
-                    poids_next = poids_act - listCuboides[choix_cube].GetDimensionCount();
+                    poids_next = poids_act - (listCuboides[choix_cube].GetDimensionCount() * listCuboides[choix_cube].GetDimensionMemory());
 
                 if (poids_next <= seuil_poids) // on continue uniquement si le poids de la future solution ne dépasse pas le seuil fixé
                 {
