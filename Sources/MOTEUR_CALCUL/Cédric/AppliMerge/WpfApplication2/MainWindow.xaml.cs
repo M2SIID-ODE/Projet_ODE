@@ -231,7 +231,7 @@ namespace WpfApplication2
 
                 // -- Début THOMAS : "récupération" du nombre de lignes des cuboïdes
                 //CVA : GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
-                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Glb_Nom_Server, Glb_Nom_Database); // appel de la fonction qui récupère le nombre de lignes des cuboides
+                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
 
                 Console.WriteLine();
                 // -- Fin Thomas
@@ -344,7 +344,7 @@ namespace WpfApplication2
                     AggregationDesign ad = null;
                     ad = Meg.AggregationDesigns.Add();
                     int ordre = Meg.AggregationDesigns.Count + 1;
-                    ad.Name = "Metro" + ordre;
+                    ad.Name = "Mater" + ordre;
                     ad.InitializeDesign();
                     ad.FinalizeDesign();
 
@@ -491,7 +491,8 @@ namespace WpfApplication2
                                "FROM " +
                                "     $SYSTEM.MDSCHEMA_DIMENSIONS " +
                                "WHERE " +
-                               "     CUBE_NAME = 'Data Warehouse ODE' AND " +
+            //CVA                   "     CUBE_NAME = 'Data Warehouse ODE' AND " +
+                               "     CUBE_NAME = '" + cubeId + "' AND " +
                                "    DIMENSION_CAPTION <> 'Measures' " +
                                "ORDER BY DIMENSION_NAME";
 
@@ -512,13 +513,39 @@ namespace WpfApplication2
 
             // Etape 2 : Récuperation des tailles (Octets)
             // Utilisation mémoire : https://msdn.microsoft.com/en-us/library/bb934098(v=sql.120).aspx
+            
+            //CVA : gestion liste des dimensions
+            String Liste_dim = "";
+            for (int i = 0; i < listDim1D.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    Liste_dim = "(OBJECT_ID = '" + listDim1D[i].GetDimensionName() + "' ";
+                }
+                else
+                {
+                    if (i == listDim1D.Count() - 1)
+                    {
+                        Liste_dim = Liste_dim + "OR OBJECT_ID = '" + listDim1D[i].GetDimensionName() + "')";
+                    }
+                    else
+                    {
+                        Liste_dim = Liste_dim + "OR OBJECT_ID = '" + listDim1D[i].GetDimensionName() + "' ";
+                    }
+                }
+            }
+            // CVA : fin
+            //    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')
+
+
             cmdPart2.CommandText = "SELECT " +
                                     "   (OBJECT_MEMORY_SHRINKABLE + OBJECT_MEMORY_NONSHRINKABLE + OBJECT_MEMORY_CHILD_SHRINKABLE + OBJECT_MEMORY_CHILD_NONSHRINKABLE) " +
                                     "FROM " +
                                     "    $SYSTEM.DISCOVER_OBJECT_MEMORY_USAGE " +
                                     "WHERE " +
                                     "    OBJECT_TYPE_ID = 100006 AND " +
-                                    "    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')" +
+            //CVA                        "    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')" +
+                                    Liste_dim +
                                     "ORDER BY OBJECT_ID";
 
             // Ouverture du reader XML
@@ -565,21 +592,29 @@ namespace WpfApplication2
         // -- Fin THOMAS
 
         // -- Début THOMAS : Algorithme qui récupère le nombre de lignes des cuboides
-        static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d, String datasource, String catalog)
+        //CVA static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d, String datasource, String catalog)
+        static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d, AdomdConnection conn)
         {
             // Chaine de connexion SSAS
-            AdomdConnection conn = new AdomdConnection("Data Source=" + datasource + ";Catalog=" + catalog);  // CATALOG : Nom du cube
+            //CVA AdomdConnection conn = new AdomdConnection("Data Source=" + datasource + ";Catalog=" + catalog);  // CATALOG : Nom du cube
 
             // Membres
             DataSet ds;
             DataTable dt;
 
+            // CVA : debut
             // Ouverture de la connexion SSAS
-            conn.Open();
+            //conn.Open();
+            AdomdRestrictionCollection restrictions = new AdomdRestrictionCollection();
+            restrictions.Add("CUBE_NAME", Glb_Nom_Cube);
+            //restrictions.Add("COORDINATE", null);
+            ds = conn.GetSchemaDataSet("MDSCHEMA_MEASUREGROUP_DIMENSIONS", restrictions);
+            //ds = conn.GetSchemaDataSet(AdomdSchemaGuid.MeasureGroupDimensions, null);
+            //CVA : fin
 
-            ds = conn.GetSchemaDataSet(AdomdSchemaGuid.MeasureGroupDimensions, null);
+
+
             dt = ds.Tables[0];
-
             String[] test_dimensions = new String[nb_dim_1d * 2];
             int cpt = 0;
             int poids_une_ligne = 0;
