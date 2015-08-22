@@ -19,7 +19,7 @@ http://www.techheadbrothers.com/Articles.aspx/optimisation-cubes-design-agregati
 https://social.msdn.microsoft.com/Forums/en-US/dd318163-810e-48e4-b272-791ee300a658/extracting-cube-dimensions-with-c?forum=sqlanalysisservices
 
 
-
+https://msdn.microsoft.com/fr-fr/library/ms174758%28v=SQL.120%29.aspx
 */
 
 
@@ -244,18 +244,10 @@ namespace WpfApplication2
 
                 Console.WriteLine();
                 Console.WriteLine("CUBOÏDES A MATERIALISER :");
-                for (int i = 0; i < solution.Length; i++)
-                {
-                    if (solution[i] == 1)
-                    {
-                        Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
-                    }
-                }
-                Console.WriteLine();
 
                 Deconnexion_Base(StrConnexion);
 
-                // Gestion des agrégats
+                // Gestion des agrégats en fonction de la solution retournée
                 Server srv = new Server();
                 srv.Connect(Glb_Nom_Server);
                 Database db = srv.Databases.FindByName(Glb_Nom_Database);
@@ -263,23 +255,62 @@ namespace WpfApplication2
 
                 foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
                 {
-                    //Ajout de l'aggrégat
+                    //Ajout de l'aggrégation Design
                     AggregationDesign ad = null;
                     ad = Meg.AggregationDesigns.Add();
-                    int ordre = Meg.AggregationDesigns.Count + 1;
-                    ad.Name = "Metro" + ordre;
+                    ad.Name = "Metro" + Meg.AggregationDesigns.Count;
                     ad.InitializeDesign();
+                    int indice = 0;
                     ad.FinalizeDesign();
+                    ad.Aggregations.Clear();
 
+                    // Balayage des solutions pour créer de nouvelles aggrégations
+                    for (int i = 0; i < solution.Length; i++)
+                    {
+                        if (solution[i] == 1)
+                        {
+                            Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
+                            
+                            // Création d'une nouvelle aggrégation
+                            Aggregation agg = new Aggregation();
+                            indice++;
+                            agg.Name = ad.Name + "-" + indice;
+
+                            // Balayage des dimensions
+                            foreach (CubeDimension dim in Cube_maj.Dimensions)
+                            {
+                                // Report de la dimension sur l'aggrégat
+                                agg.Dimensions.Add(dim.ID);
+
+                                //Recherche si dimension présente dans la solution séléctionnée
+                                int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
+                                
+                                if (Ind_Rech != -1)
+                                {
+                                // Si présente, on ajoute l'ensemble des champs à l'aggregation
+                                    AggregationDimension aggDim = agg.Dimensions[dim.ID];
+                                    foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
+                                    {
+                                        AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
+                                        aggDim.Attributes.Add(att);
+                                    }
+                                }
+                            }
+                            ad.Aggregations.Add(agg);
+                        }
+                    }
+                    ad.Update();
+                    
                     //Mise à jour du lien sur les partitions
                     foreach (Partition part in Meg.Partitions)
                     {
                         part.AggregationDesignID = ad.ID;
                     }
+                    Console.WriteLine();
                 }
 
                 //Mise à jour des dimensions en fonction de l'aggrégation
-                foreach (CubeDimension Dim in Cube_maj.Dimensions)
+                /*foreach (CubeDimension Dim in Cube_maj.Dimensions)
                 {
                     foreach (CubeAttribute Att in Dim.Attributes)
                     {
@@ -294,7 +325,7 @@ namespace WpfApplication2
                             Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Default;
                         }
                     }
-                }
+                }*/
                 Cube_maj.Update(UpdateOptions.ExpandFull);
                 Cube_maj.Process(ProcessType.ProcessFull);
                 srv.Disconnect();
@@ -356,7 +387,7 @@ namespace WpfApplication2
                 }
 
                 //Mise à jour des dimensions en fonction de l'aggrégation
-                foreach (CubeDimension Dim in Cube_maj.Dimensions)
+                /*foreach (CubeDimension Dim in Cube_maj.Dimensions)
                 {
                     foreach (CubeAttribute Att in Dim.Attributes)
                     {
@@ -371,7 +402,7 @@ namespace WpfApplication2
                             Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Default;
                         }
                     }
-                }
+                }*/
                 Cube_maj.Update(UpdateOptions.ExpandFull);
                 Cube_maj.Process(ProcessType.ProcessFull);
                 srv.Disconnect();
@@ -647,22 +678,26 @@ namespace WpfApplication2
                 // on lance une requête MDX selon le nombre de dimensions à croiser /!\ : 4 maximum pour le moment /!\
                 if (cuboides[i].Length == 1)
                 {
-                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i])].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 2)
                 {
-                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 3)
                 {
-                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 4)
                 {
-                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
+                    commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionMemory();
                 }
 
