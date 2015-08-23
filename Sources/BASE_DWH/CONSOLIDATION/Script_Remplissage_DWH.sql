@@ -4,7 +4,7 @@
 
   Résumé:  Rempli le DWH (OLTP) du projet ODE
   Date:     26/07/2015
-  Updated:  04/08/2015
+  Updated:  23/08/2015
 
   SQL Server Version: 2014
   
@@ -308,9 +308,7 @@ GO
 
 -- BERNARD # 09/07/2015
 
-BULK 
-INSERT [ODE_DATAWAREHOUSE].[DIM_VILLES]
-FROM N'$(OdeCsvPath)Script_villes_france.csv'
+BULK INSERT [ODE_DATAWAREHOUSE].[DIM_VILLES] FROM N'$(OdeCsvPath)Script_villes_france.csv'
 WITH (
     --CHECK_CONSTRAINTS,
     --CODEPAGE='ACP',
@@ -368,6 +366,77 @@ WHERE [POPULATION] IS NULL;
 
 -- Drop de la table temporaire
 DROP TABLE [ODE_DATAWAREHOUSE].[VILLES_POPULATION]
+GO
+
+
+-- ------------------
+-- Olivier 23/08/2015
+-- MAJ TABLE VILLES
+-- ------------------
+
+-- Création de tables temporaires pour charger les fichiers csv
+CREATE TABLE [ODE_DATAWAREHOUSE].[VILLES_REGIONS](
+ 	[CODE_REGION]			[INT]					NOT NULL, 
+ 	[NOM_REGION_MAJ]		[NVARCHAR](50)			NOT NULL,
+ 	[NOM_REGION_MIN]		[NVARCHAR](50)			NOT NULL,
+) ON [PRIMARY]; 
+
+
+BULK INSERT [ODE_DATAWAREHOUSE].[VILLES_REGIONS] FROM N'$(OdeCsvPath)RegionsINSEE.csv' -- chargement du fichier csv dans la table
+WITH (
+    CODEPAGE='1252', -- CodePage du LATIN-1 pour gestion des accents
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='0x0a' -- Fin de lignes des CSV en LF seul (/n <=> CR + LF)
+);
+
+--Remplissage de la table catégories à partir des tables temporaires créées précedemment
+
+UPDATE [ODE_DATAWAREHOUSE].[DIM_VILLES]
+SET 
+	[NOM_REGION_MAJ] = V.[NOM_REGION_MAJ],
+	[NOM_REGION_MIN] = V.[NOM_REGION_MIN]
+FROM		
+	[ODE_DATAWAREHOUSE].[VILLES_REGIONS] AS V
+WHERE	
+	V.[CODE_REGION] = [DIM_VILLES].[CODE_REGION]
+;
+
+-- Drop de la table temporaire
+DROP TABLE [ODE_DATAWAREHOUSE].[VILLES_REGIONS]
+GO
+
+
+-- Création de tables temporaires pour charger les fichiers csv
+CREATE TABLE [ODE_DATAWAREHOUSE].[VILLES_DEPARTEMENTS](
+	[CODE_REGION]				[INT]					NOT NULL, 
+ 	[CODE_DEPARTEMENT]			[NVARCHAR](3)			NOT NULL, 
+ 	[NOM_DEPARTEMENT_MAJ]		[NVARCHAR](50)			NOT NULL,
+ 	[NOM_DEPARTEMENT_MIN]		[NVARCHAR](50)			NOT NULL,
+) ON [PRIMARY]; 
+
+
+BULK INSERT [ODE_DATAWAREHOUSE].[VILLES_DEPARTEMENTS] FROM N'$(OdeCsvPath)DepartementsINSEE.csv' -- chargement du fichier csv dans la table
+WITH (
+    CODEPAGE='1252', -- CodePage du LATIN-1 pour gestion des accents
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='0x0a' -- Fin de lignes des CSV en LF seul (/n <=> CR + LF)
+);
+
+--Remplissage de la table catégories à partir des tables temporaires créées précedemment
+
+UPDATE [ODE_DATAWAREHOUSE].[DIM_VILLES]
+SET 
+	[NOM_DEPARTEMENT_MAJ] = V.[NOM_DEPARTEMENT_MAJ],
+	[NOM_DEPARTEMENT_MIN] = V.[NOM_DEPARTEMENT_MIN]
+FROM		
+	[ODE_DATAWAREHOUSE].[VILLES_DEPARTEMENTS] AS V
+WHERE	
+	V.[CODE_REGION] = [DIM_VILLES].[CODE_REGION] AND
+	V.[CODE_DEPARTEMENT] = [DIM_VILLES].[CODE_DEPARTEMENT]
+;
+
+-- Drop de la table temporaire
+DROP TABLE [ODE_DATAWAREHOUSE].[VILLES_DEPARTEMENTS]
 GO
 
 

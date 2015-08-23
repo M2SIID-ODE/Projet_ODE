@@ -4,7 +4,7 @@
 
   Résumé:  Crée le DWH (OLTP) du projet ODE
   Date:     02/07/2015
-  Updated:  04/08/2015
+  Updated:  23/08/2015
 
   SQL Server Version: 2014
   
@@ -324,11 +324,15 @@ CREATE TABLE [ODE_DATAWAREHOUSE].[DIM_VILLES] (
 	[CODE_POSTAL]			[NVARCHAR](6)			NOT NULL,
 	[CODE_COMMUNE]			[INT]					NOT NULL,
 	[CODE_REGION]			[INT]					NOT NULL,
-	[CODE_DEPARTEMENT]		[INT]					NOT NULL,
+	[CODE_DEPARTEMENT]		[NVARCHAR](3)			NOT NULL, -- Olivier # 23/08/2015
 	[CODE_ARRONDISEMENT]	[INT]					NOT NULL,
 	[CODE_CANTON]			[INT]					NOT NULL,
 	[NOM_VILLE_MAJ]			[NVARCHAR](256)			NOT NULL,
 	[NOM_VILLE_MIN]			[NVARCHAR](256)			NOT NULL,
+	[NOM_REGION_MAJ]		[NVARCHAR](64)			NOT NULL, -- Olivier # 23/08/2015
+	[NOM_REGION_MIN]		[NVARCHAR](64)			NOT NULL, -- Olivier # 23/08/2015
+	[NOM_DEPARTEMENT_MAJ]	[NVARCHAR](64)			NOT NULL, -- Olivier # 23/08/2015
+	[NOM_DEPARTEMENT_MIN]	[NVARCHAR](64)			NOT NULL, -- Olivier # 23/08/2015
 	[POPULATION]			[INT]					NULL,	-- N existe pas dans la base operationelle : A remplir SSIS source fichier Excel !
 ) ON [PRIMARY];
 GO
