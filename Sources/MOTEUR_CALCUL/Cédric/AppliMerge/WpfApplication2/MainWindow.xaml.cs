@@ -291,8 +291,11 @@ namespace WpfApplication2
                                     AggregationDimension aggDim = agg.Dimensions[dim.ID];
                                     foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
                                     {
-                                        AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
-                                        aggDim.Attributes.Add(att);
+                                        if (DimAtt.Usage.ToString() == "Key")
+                                        {
+                                            AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
+                                            aggDim.Attributes.Add(att);
+                                        }
                                     }
                                 }
                             }
