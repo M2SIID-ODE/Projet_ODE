@@ -45,6 +45,7 @@ using Microsoft.AnalysisServices;
 //using Microsoft.SqlServer.Management.Smo;
 //using System.Data.SqlClient;
 using System.Data;
+using System.Numerics;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -112,6 +113,7 @@ namespace WpfApplication2
         public static string Glb_Nom_Server = "";
         public static string Glb_Nom_Database = "";
         public static string Glb_Nom_Cube = "";
+        public static int Glb_Size = 0;
         public static List<string> Tab_Agr = new List<string>();
 
         public MainWindow()
@@ -129,7 +131,23 @@ namespace WpfApplication2
             Bouton_Algo_2.IsEnabled = false;
             Nom_Server.Text = "";
             Pres_Aggregat.Content = "";
+            Size_Util.Content = "";
             Liste_Cube.Items.Clear();
+
+            Size_MB.Items.Clear();
+            for (int i = 0; i <1024; i++)
+            {
+                Size_MB.Items.Add(i);
+            }
+            Size_MB.IsEnabled = false;
+            Size_MB.SelectedValue = 0;
+            Size_GB.Items.Clear();
+            for (int i = 0; i < 200; i++)
+            {
+                Size_GB.Items.Add(i);
+            }
+            Size_GB.IsEnabled = false;
+            Size_GB.SelectedValue = 0;
         }
 
         // Gestion de la modification du champs "Nom du server"
@@ -157,9 +175,17 @@ namespace WpfApplication2
          private void Bouton_Connexion_Click(object sender, RoutedEventArgs e)
          {
             // Valeur par défaut des champs
-            Liste_Cube.Items.Clear();
+            Bouton_Aggr.IsEnabled = false;
+            Bouton_Algo_1.IsEnabled = false;
+            Bouton_Algo_2.IsEnabled = false;
             Pres_Aggregat.Content = "";
+            Size_Util.Content = "";
+            Liste_Cube.Items.Clear();
             Tab_Agr.Clear();
+            Size_MB.IsEnabled = false;
+            Size_MB.SelectedValue = 0;
+            Size_GB.IsEnabled = false;
+            Size_GB.SelectedValue = 0;
 
             // Tentative de connexion au server
             Server svr = new Server();
@@ -237,7 +263,8 @@ namespace WpfApplication2
                 // -- Fin Thomas
 
                 // Partie 2 - Algo Spécifique Thomas
-                int seuil_poids = 1000000; // le seuil de poids à ne pas dépasser : à récupérer via l'interface plus tard
+                //CVA int seuil_poids = 1000000; // le seuil de poids à ne pas dépasser : à récupérer via l'interface plus tard
+                int seuil_poids = Glb_Size;
                 int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
                 int nb_boucle = 100; // le nombre de boucle que l'on veut faire à l'algo de Metropolis : éventuellement à faire saisir par l'utilisateur
                 Metropolis(listCuboides, seuil_poids, nb_boucle, solution); // appel de l'algo de Metropolis
@@ -429,7 +456,7 @@ namespace WpfApplication2
                 Glb_Nom_Database = Selection.Substring(0, FirstOccurs);
                 Glb_Nom_Cube = Selection.Substring(FirstOccurs + 1);
 
-                // Alimenation des informations sur le cube
+                // Alimentation des informations sur le cube
                 Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
                 if (Tab_Agr[Liste_Cube.SelectedIndex] == "Présent")
                 {
@@ -441,9 +468,60 @@ namespace WpfApplication2
                 }
                 Bouton_Algo_1.IsEnabled = true;
                 Bouton_Algo_2.IsEnabled = true;
+                Size_Util.Content = "0 Mo";
+                Size_MB.IsEnabled = true;
+                Size_MB.SelectedValue = 0;
+                Size_GB.IsEnabled = true;
+                Size_GB.SelectedValue = 0;
             }
         }
 
+        // Modification du choix nombre GB
+        private void Size_GB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Glb_Size = 100000;
+            if (Size_GB.SelectedValue != null)
+            {
+                Size_Util.Content = "";
+                if (Size_GB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_GB.SelectedValue.ToString() + " Go";
+                }
+                if (Size_GB.SelectedValue.ToString() != "0" & Size_MB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_Util.Content + " et ";
+                }
+
+                if (Size_MB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_Util.Content + Size_MB.SelectedValue.ToString() + " Mo";
+                }
+            }
+        }
+
+        // Modification du choix nombre MB
+        private void Size_MB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Glb_Size = 100000;
+            if (Size_MB.SelectedValue != null)
+            {
+                Size_Util.Content = "";
+                if (Size_GB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_GB.SelectedValue.ToString() + " Go";
+                }
+                if (Size_GB.SelectedValue.ToString() != "0" & Size_MB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_Util.Content + " et ";
+                }
+
+                if (Size_MB.SelectedValue.ToString() != "0")
+                {
+                    Size_Util.Content = Size_Util.Content + Size_MB.SelectedValue.ToString() + " Mo";
+                }
+            }
+        }
+        
         //Gestion clic sur bouton de suppression des aggrégations
         private void Bouton_Aggr_Click(object sender, RoutedEventArgs e)
         {
@@ -794,15 +872,9 @@ namespace WpfApplication2
             }
             Console.WriteLine();
         }
+
         // -- Fin THOMAS
 
 
     }
 }
-
-
-
-
-
-
-
