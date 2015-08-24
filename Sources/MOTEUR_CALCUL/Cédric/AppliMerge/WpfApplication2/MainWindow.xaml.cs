@@ -135,7 +135,7 @@ namespace WpfApplication2
             Liste_Cube.Items.Clear();
 
             Size_MB.Items.Clear();
-            for (int i = 0; i <1024; i++)
+            for (int i = 0; i < 1024; i++)
             {
                 Size_MB.Items.Add(i);
             }
@@ -162,18 +162,18 @@ namespace WpfApplication2
 
             // On rend actif le bouton de connexion si le nom du server est resneigné
             if (Nom_Server.Text != "")
-             {
-                 Bouton_Connexion.IsEnabled = true;
-             }
-             else
-             {
-                 Bouton_Connexion.IsEnabled = false;
-             }
-         }
+            {
+                Bouton_Connexion.IsEnabled = true;
+            }
+            else
+            {
+                Bouton_Connexion.IsEnabled = false;
+            }
+        }
 
-         // Demande de connexion au server
-         private void Bouton_Connexion_Click(object sender, RoutedEventArgs e)
-         {
+        // Demande de connexion au server
+        private void Bouton_Connexion_Click(object sender, RoutedEventArgs e)
+        {
             // Valeur par défaut des champs
             Bouton_Aggr.IsEnabled = false;
             Bouton_Algo_1.IsEnabled = false;
@@ -204,7 +204,7 @@ namespace WpfApplication2
                         Liste_Cube.Items.Add(db.Name + "/" + cube.Name);
 
                         // Récupération présence d'aggrégats
-                        String Stat_Agr = "Aucun"; 
+                        String Stat_Agr = "Aucun";
                         foreach (MeasureGroup Meg in cube.MeasureGroups)
                         {
                             if (Meg.AggregationDesigns.Count > 0)
@@ -297,7 +297,7 @@ namespace WpfApplication2
                         if (solution[i] == 1)
                         {
                             Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
-                            
+
                             // Création d'une nouvelle aggrégation
                             Aggregation agg = new Aggregation();
                             indice++;
@@ -311,10 +311,10 @@ namespace WpfApplication2
 
                                 //Recherche si dimension présente dans la solution séléctionnée
                                 int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
-                                
+
                                 if (Ind_Rech != -1)
                                 {
-                                // Si présente, on ajoute l'ensemble des champs à l'aggregation
+                                    // Si présente, on ajoute l'ensemble des champs à l'aggregation
                                     AggregationDimension aggDim = agg.Dimensions[dim.ID];
                                     foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
                                     {
@@ -330,7 +330,7 @@ namespace WpfApplication2
                         }
                     }
                     ad.Update();
-                    
+
                     //Mise à jour du lien sur les partitions
                     foreach (Partition part in Meg.Partitions)
                     {
@@ -368,32 +368,47 @@ namespace WpfApplication2
 
         private void Bouton_Algo_2_Click(object sender, RoutedEventArgs e)
         {
+            //Connexion à la base
             string StrConnexion = "Datasource=" + Glb_Nom_Server + ";Catalog=" + Glb_Nom_Database + ";";
             AdomdConnection conn = Connexion_Base(StrConnexion);
 
             if (Status_Traitement == "OK")
             {
-                // Partie 1 - Commune : récupération des 1D-dimensions et des propriétés
-
-                // -- Debut OLIVIER
-                //CVA : string cubeId = "[Data Warehouse ODE]"; // Nom du cube 
-
+                // -- Debut OLIVIER : récupération des 1D-dimensions et des propriétés
                 // Instance de classe de dimensions 1D
                 List<Dimension> listDim1D = new List<Dimension>();
 
                 // Liste de toutes les dimensions 1D: 
-                //CVA : GetDimension1DProperties(conn, cubeId, listDim1D);
                 GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
                 // -- Fin OLIVIER
 
+                // -- Début THOMAS : "récupération" du treillis des cuboïdes
+                List<Dimension> listCuboides = new List<Dimension>(); // liste des cuboïdes
+                List<String> index_cuboides = new List<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
+                String prefix_index = "";
+                Console.WriteLine("LISTE DES CUBOÏDES :");
+                GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index); // appel de la fonction qui crée les combinaisons
+                Console.WriteLine();
+                // -- Fin THOMAS
+
+                // -- Début THOMAS : "récupération" du nombre de lignes des cuboïdes
+                //CVA : GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
+                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
+
+                Console.WriteLine();
+                // -- Fin Thomas
+
                 // Partie 2 - Algo Spécifique Olivier
+                int seuil_poids = Glb_Size;
+                int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
+                MaterialisationPartielle(listCuboides, seuil_poids, solution); // appel de l'algo de Metropolis
 
-
-                // Partie 3 - Commune
+                Console.WriteLine();
+                Console.WriteLine("CUBOÏDES A MATERIALISER :");
 
                 Deconnexion_Base(StrConnexion);
 
-                // Gestion des agrégats
+                // Gestion des agrégats en fonction de la solution retournée
                 Server srv = new Server();
                 srv.Connect(Glb_Nom_Server);
                 Database db = srv.Databases.FindByName(Glb_Nom_Database);
@@ -401,38 +416,64 @@ namespace WpfApplication2
 
                 foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
                 {
-                    //Ajout de l'aggrégat
+                    //Ajout de l'aggrégation Design
                     AggregationDesign ad = null;
                     ad = Meg.AggregationDesigns.Add();
-                    int ordre = Meg.AggregationDesigns.Count + 1;
-                    ad.Name = "Mater" + ordre;
+                    ad.Name = "MatPart" + Meg.AggregationDesigns.Count;
                     ad.InitializeDesign();
+                    int indice = 0;
                     ad.FinalizeDesign();
+                    ad.Aggregations.Clear();
+
+                    // Balayage des solutions pour créer de nouvelles aggrégations
+                    for (int i = 0; i < solution.Length; i++)
+                    {
+                        if (solution[i] == 1)
+                        {
+                            Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
+
+                            // Création d'une nouvelle aggrégation
+                            Aggregation agg = new Aggregation();
+                            indice++;
+                            agg.Name = ad.Name + "-" + indice;
+
+                            // Balayage des dimensions
+                            foreach (CubeDimension dim in Cube_maj.Dimensions)
+                            {
+                                // Report de la dimension sur l'aggrégat
+                                agg.Dimensions.Add(dim.ID);
+
+                                //Recherche si dimension présente dans la solution séléctionnée
+                                int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
+
+                                if (Ind_Rech != -1)
+                                {
+                                    // Si présente, on ajoute l'ensemble des champs à l'aggregation
+                                    AggregationDimension aggDim = agg.Dimensions[dim.ID];
+                                    foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
+                                    {
+                                        if (DimAtt.Usage.ToString() == "Key")
+                                        {
+                                            AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
+                                            aggDim.Attributes.Add(att);
+                                        }
+                                    }
+                                }
+                            }
+                            ad.Aggregations.Add(agg);
+                        }
+                    }
+                    ad.Update();
 
                     //Mise à jour du lien sur les partitions
                     foreach (Partition part in Meg.Partitions)
                     {
                         part.AggregationDesignID = ad.ID;
                     }
+                    Console.WriteLine();
                 }
 
                 //Mise à jour des dimensions en fonction de l'aggrégation
-                /*foreach (CubeDimension Dim in Cube_maj.Dimensions)
-                {
-                    foreach (CubeAttribute Att in Dim.Attributes)
-                    {
-
-                        // A faire comparaison avec envoyé Olivier / Thomas
-                        if (Dim.Name == "DIM CLIENTS")
-                        {
-                            Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Unrestricted;
-                        }
-                        else
-                        {
-                            Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Default;
-                        }
-                    }
-                }*/
                 Cube_maj.Update(UpdateOptions.ExpandFull);
                 Cube_maj.Process(ProcessType.ProcessFull);
                 srv.Disconnect();
@@ -440,8 +481,8 @@ namespace WpfApplication2
                 Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
                 Bouton_Aggr.IsEnabled = true;
             }
-
         }
+
 
         private void Liste_Cube_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -521,7 +562,7 @@ namespace WpfApplication2
                 }
             }
         }
-        
+
         //Gestion clic sur bouton de suppression des aggrégations
         private void Bouton_Aggr_Click(object sender, RoutedEventArgs e)
         {
@@ -625,7 +666,7 @@ namespace WpfApplication2
 
             // Etape 2 : Récuperation des tailles (Octets)
             // Utilisation mémoire : https://msdn.microsoft.com/en-us/library/bb934098(v=sql.120).aspx
-            
+
             //CVA : gestion liste des dimensions
             String Liste_dim = "";
             for (int i = 0; i < listDim1D.Count(); i++)
@@ -799,7 +840,7 @@ namespace WpfApplication2
 
 
                     Console.WriteLine(" | Nb ligne  = " + poids);
-                    listCuboides[i].SetDimensionCount(poids); // on affece le nombre de lignes au cuboide
+                    listCuboides[i].SetDimensionCount(poids); // on affecte le nombre de lignes au cuboide
                     listCuboides[i].SetDimensionMemory(poids_une_ligne);
 
                 }
@@ -876,5 +917,137 @@ namespace WpfApplication2
         // -- Fin THOMAS
 
 
+
+
+        // -- Olivier # 24/08/2015
+
+        /// <summary>
+        /// Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
+        /// Solution retournée : Tab [INT] de 0 / 1
+        /// </summary>
+        /// <param name="listCuboides"></param>
+        /// <param name="seuil_poids"></param>
+        /// <param name="nb_boucle"></param>
+        /// <param name="sol_act"></param>
+
+        static void MaterialisationPartielle(List<Dimension> listCuboides, int seuil_poids, int[] selectedViews)
+        {
+            int totalSize = 0;
+            int benefit;
+            int maxBenefit;
+            int parentView;
+            int bestView;
+
+
+            // RAZ de la liste des vues selectionnees
+            foreach (int i in selectedViews)
+            {
+                selectedViews[i] = 0;
+            }
+
+
+            Console.WriteLine("ALGORITHME DE MATERIALISATION PARTIELLE : ");
+
+            // On commence par selectioner la vue de dimension la plus élevée
+            // Toujours le dernier item de la liste des vues, cf. remplissage de "listCuboides" par la méthode "GetCombinaisons"
+            selectedViews[selectedViews.Length - 1] = 1;
+
+
+            // Tant qu'il reste de la mémoire à occuper
+            while (totalSize < seuil_poids)
+            {
+
+                // RAZ du max du bénéfice et de l'index de la meilleure vue
+                maxBenefit = 0;
+                bestView = 0;
+
+                // Sur toutes les vues i encore disponibles
+                foreach (int i in selectedViews)
+                {
+                    // Vue déjà traitée : On passe
+                    if (selectedViews[i] == 1) { continue; }
+
+                    // RAZ du bénéfice en cours
+                    benefit = 0;
+
+                    // Sur toutes les vues encore j disponibles et enfants de i : On va sommer leurs bénéfices
+                    foreach (int j in selectedViews)
+                    {
+                        // Vue déjà traitée ou celle en cours : On passe
+                        if (selectedViews[j] == 1) { continue; }
+
+                        // Si la vue j n'est pas enfant de la vue i, ou la vue i elle-même : On ne l'inclut pas dans le benefice total
+                        // Operateur booléen IMP : 
+                        // Soit la liste de dépendances dimensionels d'une vue P : {p1, p2, p3, p4}
+                        // Idem pour une autre vue E dont on cherche le lien parent-enfant : {e1, e2, e3, e4}
+                        // P est parent de E <=> (Si pi = 1 Alors ei = 1) + (Si pi = 0 Alors ei = {0/1})
+                        // 
+                        // if (***) { continue; } // TO DO - Olivier
+
+                        // RAZ de l'index du 1er parent "matérialisé"
+                        parentView = 0;
+
+                        // Recherche du 1er parent "matérialisé" de la vue i (Et non j !)
+                        //      TO DO : Traiter les relations avec une vue materialisée autre (FORK)
+                        // parentView = ***; // TO DO - Olivier
+
+                        // Calcul du gain : Count du parent materialisé de i - Count de la vue i
+                        benefit += (listCuboides[parentView].GetDimensionCount() - listCuboides[i].GetDimensionCount());
+                    }
+
+                    // Actualisation de la meilleure vue et du meilleur bénéfice
+                    if (benefit > maxBenefit)
+                    {
+                        bestView = i;
+                        maxBenefit = benefit;
+                    }
+                }
+
+                // Enregistrement de la best view comme selectionnée
+                selectedViews[bestView] = 1;
+            }
+            /*
+                                // Dans le cas particulier d'un treilis entièrement relié de N dimensions, un niveau de dimension D a Somme(A(i,N), i = D, i = N) 
+                                // Chaque vue de N elements a (NBR_DIM_CUBE - N) enfants
+                                // Ex : Il y a 4 dimensions dans le cube, la vue CLIENTS-DATES est N=2D => (4-2)=2 parents  
+                                // Ex : Il y a 4 dimensions dans le cube, la vue CLIENTS est N=1D => (4-1)=3 parents 
+
+                                // Nom de la vue
+                                listCuboides[i].GetDimensionName;
+
+                                // Dimension de la vue
+                                listCuboides[i].GetDimensionOrder;
+
+                                // Nombre de lignes de la vue
+                                listCuboides[i].GetDimensionCount()
+            */
+
+
+
+            // Affichage de la solution retournée
+            Console.Write("Solution trouvée : ");
+            foreach (int item in selectedViews)
+            {
+                System.Console.Write(item + " ");
+            }
+            Console.WriteLine();
+        }
+
+
+        // Fonction de calcul de combinatoire
+        static int Combinatoire(int borneInf, int borneSup)
+        {
+            return (Factorielle(borneSup) / (Factorielle(borneInf) * Factorielle(borneSup - borneInf)));
+        }
+
+
+        // Fonction recursive de factorielle
+        static int Factorielle(int n)
+        {
+            if (n > 0) { return (n * Factorielle(n - 1)); }
+            else { return (1); }
+        }
+
+    // -- Fin Olivier # 24/08/2015
     }
 }
