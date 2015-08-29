@@ -1,0 +1,138 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="4dede378-54bd-4b2a-b326-8bc8b6482f75" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DIM VILLES</ID>
+  <Name>DIM VILLES</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="b945d043-c377-4e33-9905-8578c999d68f">
+    <DataSourceViewID>Data Warehouse ODE1</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="5cf88a5b-ef8b-44f2-bb2a-1abf5a4450da">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="e86650e9-60fe-4ed2-b9ae-07eababd20b3">
+      <ID>VILLE PK</ID>
+      <Name>VILLE PK</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="668cc0f4-c519-45a7-b92d-36030999d09d">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d160c6d7-edb7-47d6-af07-171fa9908aa6">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>VILLE_PK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="679fb812-94cf-48c3-8804-dbdc0d1cb437">
+          <AttributeID>NOM REGION MAJ</AttributeID>
+          <Name>NOM REGION MAJ</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e23e2702-56d0-4f72-9ad0-0d3ccf96c266">
+          <AttributeID>NOM DEPARTEMENT MAJ</AttributeID>
+          <Name>NOM DEPARTEMENT MAJ</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="790a2661-1565-4ec4-a9a3-e75e20d38d95">
+          <AttributeID>POPULATION</AttributeID>
+          <Name>POPULATION</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="214ccc9c-0ff4-42cc-b1f9-a015081ee0a4">
+      <ID>NOM REGION MAJ</ID>
+      <Name>NOM REGION MAJ</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e37e0fc4-08e2-4cc3-92a5-0eb5c79ec169">
+          <DataType>WChar</DataType>
+          <DataSize>64</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="77514f82-7ab6-4094-87e5-6d5349e21b14">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>NOM_REGION_MAJ</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ab69b3fa-5851-4edd-89c2-acb4059791e7">
+      <ID>NOM DEPARTEMENT MAJ</ID>
+      <Name>NOM DEPARTEMENT MAJ</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="be12587f-1b2f-4513-a407-5d7acc855f3d">
+          <DataType>WChar</DataType>
+          <DataSize>64</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2b01a283-4e95-4f74-8d4a-ec962044d2a9">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>NOM_DEPARTEMENT_MAJ</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5a0b8656-69e6-4069-b02c-176ca0ea48d7">
+      <ID>POPULATION</ID>
+      <Name>POPULATION</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ab52c2e2-9832-4d85-8547-f6d6eac0e3d8">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8abbeb48-b942-445b-a663-1c275ae6bf18">
+            <TableID>ODE_DATAWAREHOUSE_DIM_VILLES</TableID>
+            <ColumnID>POPULATION</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

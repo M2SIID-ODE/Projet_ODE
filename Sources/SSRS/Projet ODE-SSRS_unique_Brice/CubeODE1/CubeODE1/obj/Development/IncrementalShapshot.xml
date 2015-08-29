@@ -1,0 +1,96 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>CubeODE</Database>
+    <Server>onyx_pc</Server>
+    <ConnectionString>DataSource=onyx_pc;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Full</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>MGaaHMUfZIQRHmrbrRNr5TkBWqs=28/08/2015 22:34:0928/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>Data Warehouse ODE</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>p9RpSXdtNcme2wM3EJVlZ0R6iJU=25/08/2015 09:39:4028/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>Data Warehouse ODE1</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>RhnSXix4lmw8mAfhKTZ8eBmWiO8=25/08/2015 10:19:0328/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM CLIENTS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Q0eqzCZ8E6L1iu31PsxwMicsZRM=25/08/2015 09:11:5728/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM PRODUITS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>EvmwYk9Iv0ImygL6EPQ7/GnII/M=24/08/2015 21:03:3228/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM CATEGORIES</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>3ton3Vb1jShN9IBjGXNPekWxEUE=24/08/2015 21:04:1628/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM VILLES</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>SW1PXtlai0cyHSb+vXNXnQ/FS+4=29/08/2015 12:48:0528/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM LIEUX</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>cLje4lHISUwG2nM2t8vAsMjKOTc=25/08/2015 10:10:2828/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>DIM TEMPS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>RkmkfOX1dgAgUXVK+XqyDTmGkV8=29/08/2015 12:48:0428/08/2015 21:48:52ynt5WRtVQuNC/h+UWhFVOXRx334=24/08/2015 21:07:3628/08/2015 21:48:52</TimeStamp>
+        <ID>
+          <String>Data Warehouse ODE</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>jhKeM6LSNXNkD/xrQ62Wp9vg+40=25/08/2015 09:39:4028/08/2015 21:48:52</TimeStamp>
+      <ID>
+        <String>CubeODE</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2015-08-29T10:48:42.606667Z</LastDeployed>
+</DeploymentSnapshot>

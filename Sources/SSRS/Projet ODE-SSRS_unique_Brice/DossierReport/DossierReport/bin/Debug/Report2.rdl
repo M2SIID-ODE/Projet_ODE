@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <SharedDataSet>
+        <SharedDataSetReference>DataSet_Evolution CA et Marge par année</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___ANNEE_NOM___ANNEE_NOM_____">
+          <DataField>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___ANNEE_NOM___ANNEE_NOM_____</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MONTANT_HT_VENTE_____">
+          <DataField>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MONTANT_HT_VENTE_____</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_CA_____">
+          <DataField>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_CA_____</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MARGE_BRUTE_____">
+          <DataField>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MARGE_BRUTE_____</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Marge_____">
+          <DataField>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Marge_____</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>6.73333cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>2.5cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle1">
+                          <ReportItems>
+                            <Textbox Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MONTANT_HT_VENTE_____">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MONTANT_HT_VENTE_____.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___MONTANT_HT_VENTE_____</rd:DefaultName>
+                              <Top>1.16417cm</Top>
+                              <Left>1.77271cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___ANNEE_NOM___ANNEE_NOM_____">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___ANNEE_NOM___ANNEE_NOM_____.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___ANNEE_NOM___ANNEE_NOM_____</rd:DefaultName>
+                              <Top>0.58208cm</Top>
+                              <Left>1.27cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_CA_____">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_CA_____.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_CA_____</rd:DefaultName>
+                              <Top>1.56104cm</Top>
+                              <Left>0.635cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Marge_____">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Marge_____.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Marge_____</rd:DefaultName>
+                              <Top>0.55562cm</Top>
+                              <Left>4.23333cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Détails" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet1</DataSetName>
+            <Top>1.18745cm</Top>
+            <Left>1.0287cm</Left>
+            <Height>2.5cm</Height>
+            <Width>6.73333cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>2cm</RightMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>bd95b69d-9949-4709-bb36-39a4ecc27060</rd:ReportID>
+</Report>
