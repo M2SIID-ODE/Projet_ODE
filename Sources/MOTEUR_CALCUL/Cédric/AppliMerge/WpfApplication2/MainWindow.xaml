@@ -5,31 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
         mc:Ignorable="d"
-        Title="Remplissage cube" Height="540" Width="820" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStartupLocation="CenterScreen" Background="#FFCDCDCD">
+        Title="Remplissage cube" Height="585" Width="820" ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen" Background="#FFCDCDCD" Closing="Principal_Closing">
     <Grid HorizontalAlignment="Left" Height="214" Margin="50,20,0,0" VerticalAlignment="Top" Width="720" Background="#FFCDCDCD">
-        <Grid HorizontalAlignment="Right" Height="150" Margin="0,200,0,-200" VerticalAlignment="Top" Width="720" Background="#FFCDCDCD">
+        <Grid HorizontalAlignment="Right" Margin="0,193,0,-73" Width="720" Background="#FFCDCDCD">
             <Label x:Name="Libelle_Barre" HorizontalAlignment="Left" Margin="339,63,0,0" VerticalAlignment="Top" Width="224"/>
-            <Label x:Name="Libelle_Souhaite" Content="Taille maximale souhaitée :" HorizontalAlignment="Left" Height="26" Margin="17,55,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label" Content="Aggrégat :" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Pres_Aggregat" Content="Label" HorizontalAlignment="Left" Margin="174,10,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="Bouton_Aggr" Content="Init Aggr" HorizontalAlignment="Left" Height="26" Margin="319,10,0,0" VerticalAlignment="Top" Width="77" IsHitTestVisible="True" Click="Bouton_Aggr_Click"/>
-            <Label x:Name="Size_Util" Content="Label" HorizontalAlignment="Left" Margin="174,55,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="Size_MB" HorizontalAlignment="Left" Height="26" Margin="414,55,0,0" VerticalAlignment="Top" Width="56" SelectionChanged="Size_MB_SelectionChanged"/>
-            <ComboBox x:Name="Size_GB" HorizontalAlignment="Left" Height="26" Margin="319,55,0,0" VerticalAlignment="Top" Width="60" SelectionChanged="Size_GB_SelectionChanged"/>
-            <Label x:Name="label1" Content="GB" HorizontalAlignment="Left" Margin="384,55,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label2" Content="MB" HorizontalAlignment="Left" Margin="470,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.192"/>
+            <Label x:Name="Libelle_Souhaite" Content="Selection espace alloué :" HorizontalAlignment="Left" Height="26" Margin="17,55,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label" Content="Aggrégat :" HorizontalAlignment="Left" Margin="91,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Pres_Aggregat" Content="Label" HorizontalAlignment="Left" Margin="183,0,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="Bouton_Aggr" Content="Suppr. Aggr" HorizontalAlignment="Left" Height="26" Margin="614,10,0,0" VerticalAlignment="Top" Width="77" IsHitTestVisible="True" Click="Bouton_Aggr_Click"/>
+            <Label x:Name="Size_Util" Content="Label" HorizontalAlignment="Left" Margin="539,55,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="Size_MB" HorizontalAlignment="Left" Height="26" Margin="278,56,0,0" VerticalAlignment="Top" Width="56" SelectionChanged="Size_MB_SelectionChanged"/>
+            <ComboBox x:Name="Size_GB" HorizontalAlignment="Left" Height="26" Margin="183,55,0,0" VerticalAlignment="Top" Width="60" SelectionChanged="Size_GB_SelectionChanged"/>
+            <Label x:Name="label1" Content="GB" HorizontalAlignment="Left" Margin="248,56,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label2" Content="MB" HorizontalAlignment="Left" Margin="339,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.192"/>
+            <Label x:Name="label5" Content="Taille allouée :" HorizontalAlignment="Left" Margin="449,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.735,0.519"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="109" Margin="0,374,0,-333" VerticalAlignment="Top" Width="720" Background="#FFCDCDCD">
+        <Grid HorizontalAlignment="Left" Height="191" Margin="0,287,0,-264" VerticalAlignment="Top" Width="720" Background="#FFCDCDCD">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="135*"/>
+                <ColumnDefinition Width="586*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Bouton_Algo_1" Content="Go" HorizontalAlignment="Left" Margin="205,23,0,0" VerticalAlignment="Top" Width="75" Click="Bouton_Algo_1_Click" Height="26"/>
-            <Button x:Name="Bouton_Algo_2" Content="Go" HorizontalAlignment="Left" Margin="587,23,0,0" VerticalAlignment="Top" Width="75" Click="Bouton_Algo_2_Click" Height="28"/>
-            <Label x:Name="Libelle_Algo_1" Content="Algorithme  Metropolis" HorizontalAlignment="Left" Margin="176,-8,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Libelle_Algo_2" Content="Algorithme Matérialisation" HorizontalAlignment="Left" Margin="542,-8,0,91" VerticalAlignment="Bottom"/>
+            <Button x:Name="Bouton_Algo_1" Content="Metropolis" HorizontalAlignment="Left" Margin="45,31,0,0" VerticalAlignment="Top" Width="108" Click="Bouton_Algo_1_Click" Height="26" RenderTransformOrigin="-1.074,0.692" Grid.Column="1"/>
+            <Button x:Name="Bouton_Algo_2" Content="Matérialisation" HorizontalAlignment="Left" Margin="45,62,0,0" VerticalAlignment="Top" Width="108" Click="Bouton_Algo_2_Click" Height="28" Grid.Column="1" RenderTransformOrigin="0.426,-0.089"/>
+            <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="45,95,0,0" VerticalAlignment="Top" Width="108" Click="Cancel_Click" Grid.Column="1"/>
+            <ProgressBar x:Name="Barre_Progress" HorizontalAlignment="Left" Height="13" Margin="10,144,0,0" VerticalAlignment="Top" Width="681" Grid.ColumnSpan="2"/>
+            <Label x:Name="Lib_Progress" Content="Initialisaiton" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" FontStyle="Italic" Grid.ColumnSpan="2"/>
+            <Label x:Name="label4" Content="Selection algorithme de traitement :" HorizontalAlignment="Left" Margin="-26,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         </Grid>
         <Label x:Name="Libelle_Server" Content="Server :" HorizontalAlignment="Left" Margin="122,8,0,0" VerticalAlignment="Top" TabIndex="1"/>
-        <Button x:Name="Bouton_Connexion" Content="Connexion" HorizontalAlignment="Left" Margin="319,37,0,0" Width="77" RenderTransformOrigin="0.56,-0.932" Click="Bouton_Connexion_Click" TabIndex="3" Height="26" VerticalAlignment="Top"/>
+        <Button x:Name="Bouton_Connexion" Content="Connexion" HorizontalAlignment="Left" Margin="176,39,0,0" Width="77" RenderTransformOrigin="0.56,-0.932" Click="Bouton_Connexion_Click" TabIndex="3" Height="26" VerticalAlignment="Top"/>
         <ListBox x:Name="Liste_Cube" HorizontalAlignment="Left" Height="118" Margin="176,75,0,0" VerticalAlignment="Top" Width="515" SelectionChanged="Liste_Cube_SelectionChanged"/>
         <Label x:Name="Libelle_Database_Copy" Content="Database / Cube :" HorizontalAlignment="Left" Margin="67,75,0,0" VerticalAlignment="Top" TabIndex="3"/>
         <TextBox x:Name="Nom_Server" HorizontalAlignment="Left" Margin="176,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="515" TextChanged="Nom_Server_TextChanged"/>

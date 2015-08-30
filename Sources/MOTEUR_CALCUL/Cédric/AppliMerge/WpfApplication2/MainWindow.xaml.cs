@@ -1,60 +1,29 @@
-﻿/* 
-A VOIR ................
-pour les variables, voir on ne peut pas utiliser un fichier de configuration http://www.techheadbrothers.com/Articles.aspx/adomd-net-bases-requeteur-olap-multidimensionnel-page-3
-http://www.developpez.net/forums/d989898/logiciels/solutions-d-entreprise/business-intelligence/microsoft-bi/ssas/2k8-extraire-storagemode-cube/
-
-
-
-aggreagtion :
-https://msdn.microsoft.com/en-us/library/ms345091.aspx
-
-http://www.ssas-info.com/analysis-services-scripts/1622-script-to-automate-ssas-partition-management-sql-ssis
-
-https://technet.microsoft.com/en-us/library/ms345091%28v=sql.105%29.aspx
-http://www.techheadbrothers.com/Articles.aspx/optimisation-cubes-design-agregations-page-4
-https://msdn.microsoft.com/en-us/library/bb934053.aspx
-
-http://www.techheadbrothers.com/Articles.aspx/optimisation-cubes-design-agregations-page-4
-
-https://social.msdn.microsoft.com/Forums/en-US/dd318163-810e-48e4-b272-791ee300a658/extracting-cube-dimensions-with-c?forum=sqlanalysisservices
-
-
-https://msdn.microsoft.com/fr-fr/library/ms174758%28v=SQL.120%29.aspx
-*/
-
+﻿/****************************************************************************************************************************************************
+Nom ......... : OptimiseurODE
+Role ........ : Programme de gestion de l'interface de saisie et de traitement de l'optimisation des aggrégations dans le cadre du projet Optimiseur ODE
+                Le traitement principal aiguillera sur deux traitements annexes :
+                       - Algorithme de Metropolis
+                       - Algorithme de Matérialisation
+Auteurs ..... : Thomas CHOURREAU  
+                Olivier ESSNER    
+                Cédric VANDEVORDE 
+Version ..... : V1.0 du 04/08/2015
+*****************************************************************************************************************************************************/
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using Microsoft.AnalysisServices.AdomdClient;
 using Microsoft.AnalysisServices;
-//using Microsoft.SqlServer.Management.Common;
-//using Microsoft.SqlServer.Management.Sdk;
-//using Microsoft.SqlServer.Management.Smo;
-//using System.Data.SqlClient;
 using System.Data;
-using System.Numerics;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using System.Windows.Forms;
-//using System.Windows.Forms.View;
-//using System.Data.OleDb;
+using System.ComponentModel;
+using System.Threading;
 
 namespace WpfApplication2
 {
-    // -- Debut OLIVIER
 
     /// <summary>
     /// Classe des dimensions 1D : DIM_TEMPS, DIM_CLIENTS, DIM_LIEUX et DIM_PRODUITS
@@ -67,7 +36,6 @@ namespace WpfApplication2
         private int dimensionCount; // Nombre de lignes de la dimension
         private int dimensionMemory; // Taille d'une ligne, en octets
         private int dimensionOrder; // Indique la dimension du cuboide. Ex : 1 - 1D / 2 : 2D...
-
 
         // Constructeur avec dimensionOrder comme argument
         public Dimension(int inDimensionOrder)
@@ -98,69 +66,106 @@ namespace WpfApplication2
         public int GetDimensionMemory() { return (dimensionMemory); }
         public int GetDimensionOrder() { return (dimensionOrder); }
     }
-    // -- Fin OLIVIER
-
-
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-
     public partial class MainWindow : Window
     {
-        public static string Status_Traitement = "OK";       // A voir
+        /// <summary>
+        /// DECLARATION DES GLOBALES ----------------------------------------------------------------------------------------------------------------
+        /// </summary>
+        /// 
+        // Définition des globales utilisées par le programme
+        public static string Status_Traitement = "OK";
         public static string Glb_Nom_Server = "";
         public static string Glb_Nom_Database = "";
         public static string Glb_Nom_Cube = "";
-        public static int Glb_Size = 0;
-        public static List<string> Tab_Agr = new List<string>();
+        public static double Glb_Size = 0;
+        public static bool Thread_en_cours = false;
+        public static int Glb_Num_Trait; // 1 : Algo Metropolis / 2 : Algo Materialisation
+        public static int Glb_Pct;
+        public static List<int> Tab_Agr = new List<int>();
+        Thread myThread;
+        private delegate void ProgressBarDelegateHandler(int step, string etape);
+        private ProgressBarDelegateHandler ProgressBarDelegate;
 
         public MainWindow()
         {
             InitializeComponent();
+            ProgressBarDelegate = new ProgressBarDelegateHandler(UpdateProgressBar);
             InitializeBis();
         }
 
-        // Initialisation de l'interface lors du premier affichage
+        /// <summary>
+        /// GESTION DES INITIALISATIONS -------------------------------------------------------------------------------------------------------------
+        /// </summary>
+        /// 
         public void InitializeBis()
         {
+            Nom_Server.Text = "";
             Bouton_Connexion.IsEnabled = false;
+            Init_Liste_Database();
+            Init_Liste_Size();
+            Init_Info_Cube();
+        }
+
+        public void Init_Liste_Database()
+        {
+            Liste_Cube.Items.Clear();
+        }
+
+        public void Init_Info_Cube()
+        {
             Bouton_Aggr.IsEnabled = false;
             Bouton_Algo_1.IsEnabled = false;
             Bouton_Algo_2.IsEnabled = false;
-            Nom_Server.Text = "";
+            Cancel.IsEnabled = false;
+            Size_MB.IsEnabled = false;
+            Size_GB.IsEnabled = false;
+
+            Tab_Agr.Clear();
             Pres_Aggregat.Content = "";
             Size_Util.Content = "";
-            Liste_Cube.Items.Clear();
 
+            Size_MB.SelectedIndex = 0;
+            Size_GB.SelectedIndex = 0;
+
+            Barre_Progress.Minimum = 0;
+            Barre_Progress.Maximum = 100;
+            Barre_Progress.Value = 0;
+            Lib_Progress.Content = "";
+        }
+
+        public void Init_Liste_Size()
+        {
+            int i;
             Size_MB.Items.Clear();
-            for (int i = 0; i < 1024; i++)
+            Size_GB.Items.Clear();
+
+            for (i = 0; i < 1024; i++)
             {
                 Size_MB.Items.Add(i);
             }
-            Size_MB.IsEnabled = false;
-            Size_MB.SelectedValue = 0;
-            Size_GB.Items.Clear();
-            for (int i = 0; i < 200; i++)
+
+            for (i = 0; i < 200; i++)
             {
                 Size_GB.Items.Add(i);
             }
-            Size_GB.IsEnabled = false;
-            Size_GB.SelectedValue = 0;
         }
 
+        /// <summary>
+        /// GESTION DES EVENEMENTS ------------------------------------------------------------------------------------------------------------------
+        /// </summary>
+        /// 
         // Gestion de la modification du champs "Nom du server"
         private void Nom_Server_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Liste_Cube.Items.Clear();
-            Pres_Aggregat.Content = "";
-            Bouton_Aggr.IsEnabled = false;
-            Bouton_Algo_1.IsEnabled = false;
-            Bouton_Algo_2.IsEnabled = false;
-            Tab_Agr.Clear();
+            Init_Liste_Database();
+            Init_Info_Cube();
 
-            // On rend actif le bouton de connexion si le nom du server est resneigné
+            // On rend actif le bouton de connexion si le nom du server est renseigné
             if (Nom_Server.Text != "")
             {
                 Bouton_Connexion.IsEnabled = true;
@@ -174,18 +179,8 @@ namespace WpfApplication2
         // Demande de connexion au server
         private void Bouton_Connexion_Click(object sender, RoutedEventArgs e)
         {
-            // Valeur par défaut des champs
-            Bouton_Aggr.IsEnabled = false;
-            Bouton_Algo_1.IsEnabled = false;
-            Bouton_Algo_2.IsEnabled = false;
-            Pres_Aggregat.Content = "";
-            Size_Util.Content = "";
-            Liste_Cube.Items.Clear();
-            Tab_Agr.Clear();
-            Size_MB.IsEnabled = false;
-            Size_MB.SelectedValue = 0;
-            Size_GB.IsEnabled = false;
-            Size_GB.SelectedValue = 0;
+            Init_Liste_Database();
+            Init_Info_Cube();
 
             // Tentative de connexion au server
             Server svr = new Server();
@@ -204,15 +199,13 @@ namespace WpfApplication2
                         Liste_Cube.Items.Add(db.Name + "/" + cube.Name);
 
                         // Récupération présence d'aggrégats
-                        String Stat_Agr = "Aucun";
+                        int Nb_aggregat = 0;
+                        //AVOIR
                         foreach (MeasureGroup Meg in cube.MeasureGroups)
                         {
-                            if (Meg.AggregationDesigns.Count > 0)
-                            {
-                                Stat_Agr = "Présent";
-                            }
+                            Nb_aggregat = Meg.AggregationDesigns.Count;
                         }
-                        Tab_Agr.Add(Stat_Agr);
+                        Tab_Agr.Add(Nb_aggregat);
                     }
                 }
             }
@@ -226,264 +219,7 @@ namespace WpfApplication2
             }
         }
 
-
-        private void Bouton_Algo_1_Click(object sender, RoutedEventArgs e)
-        {
-            //Connexion à la base
-            string StrConnexion = "Datasource=" + Glb_Nom_Server + ";Catalog=" + Glb_Nom_Database + ";";
-            AdomdConnection conn = Connexion_Base(StrConnexion);
-
-            if (Status_Traitement == "OK")
-            {
-                // -- Debut OLIVIER : récupération des 1D-dimensions et des propriétés
-                //CVA : string cubeId = "[Data Warehouse ODE]"; // Nom du cube 
-
-                // Instance de classe de dimensions 1D
-                List<Dimension> listDim1D = new List<Dimension>();
-
-                // Liste de toutes les dimensions 1D: 
-                //CVA : GetDimension1DProperties(conn, cubeId, listDim1D);
-                GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
-                // -- Fin OLIVIER
-
-                // -- Début THOMAS : "récupération" du treillis des cuboïdes
-                List<Dimension> listCuboides = new List<Dimension>(); // liste des cuboïdes
-                List<String> index_cuboides = new List<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
-                String prefix_index = "";
-                Console.WriteLine("LISTE DES CUBOÏDES :");
-                GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index); // appel de la fonction qui crée les combinaisons
-                Console.WriteLine();
-                // -- Fin THOMAS
-
-                // -- Début THOMAS : "récupération" du nombre de lignes des cuboïdes
-                //CVA : GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
-                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
-
-                Console.WriteLine();
-                // -- Fin Thomas
-
-                // Partie 2 - Algo Spécifique Thomas
-                //CVA int seuil_poids = 1000000; // le seuil de poids à ne pas dépasser : à récupérer via l'interface plus tard
-                int seuil_poids = Glb_Size;
-                int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
-                int nb_boucle = 100; // le nombre de boucle que l'on veut faire à l'algo de Metropolis : éventuellement à faire saisir par l'utilisateur
-                Metropolis(listCuboides, seuil_poids, nb_boucle, solution); // appel de l'algo de Metropolis
-
-                Console.WriteLine();
-                Console.WriteLine("CUBOÏDES A MATERIALISER :");
-
-                Deconnexion_Base(StrConnexion);
-
-                // Gestion des agrégats en fonction de la solution retournée
-                Server srv = new Server();
-                srv.Connect(Glb_Nom_Server);
-                Database db = srv.Databases.FindByName(Glb_Nom_Database);
-                Cube Cube_maj = db.Cubes.FindByName(Glb_Nom_Cube);
-
-                foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
-                {
-                    //Ajout de l'aggrégation Design
-                    AggregationDesign ad = null;
-                    ad = Meg.AggregationDesigns.Add();
-                    ad.Name = "Metro" + Meg.AggregationDesigns.Count;
-                    ad.InitializeDesign();
-                    int indice = 0;
-                    ad.FinalizeDesign();
-                    ad.Aggregations.Clear();
-
-                    // Balayage des solutions pour créer de nouvelles aggrégations
-                    for (int i = 0; i < solution.Length; i++)
-                    {
-                        if (solution[i] == 1)
-                        {
-                            Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
-
-                            // Création d'une nouvelle aggrégation
-                            Aggregation agg = new Aggregation();
-                            indice++;
-                            agg.Name = ad.Name + "-" + indice;
-
-                            // Balayage des dimensions
-                            foreach (CubeDimension dim in Cube_maj.Dimensions)
-                            {
-                                // Report de la dimension sur l'aggrégat
-                                agg.Dimensions.Add(dim.ID);
-
-                                //Recherche si dimension présente dans la solution séléctionnée
-                                int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
-
-                                if (Ind_Rech != -1)
-                                {
-                                    // Si présente, on ajoute l'ensemble des champs à l'aggregation
-                                    AggregationDimension aggDim = agg.Dimensions[dim.ID];
-                                    foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
-                                    {
-                                        if (DimAtt.Usage.ToString() == "Key")
-                                        {
-                                            AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
-                                            aggDim.Attributes.Add(att);
-                                        }
-                                    }
-                                }
-                            }
-                            ad.Aggregations.Add(agg);
-                        }
-                    }
-                    ad.Update();
-
-                    //Mise à jour du lien sur les partitions
-                    foreach (Partition part in Meg.Partitions)
-                    {
-                        part.AggregationDesignID = ad.ID;
-                    }
-                    Console.WriteLine();
-                }
-
-                //Mise à jour des dimensions en fonction de l'aggrégation
-                /*foreach (CubeDimension Dim in Cube_maj.Dimensions)
-                {
-                    foreach (CubeAttribute Att in Dim.Attributes)
-                    {
-
-                        // A faire comparaison avec envoyé Olivier / Thomas
-                        if (Dim.Name == "DIM CLIENTS")
-                        {
-                            Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Unrestricted;
-                        }
-                        else
-                        {
-                            Att.AggregationUsage = Microsoft.AnalysisServices.AggregationUsage.Default;
-                        }
-                    }
-                }*/
-                Cube_maj.Update(UpdateOptions.ExpandFull);
-                Cube_maj.Process(ProcessType.ProcessFull);
-                srv.Disconnect();
-                Tab_Agr[Liste_Cube.SelectedIndex] = "Ajouté";
-                Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
-                Bouton_Aggr.IsEnabled = true;
-            }
-        }
-
-
-        private void Bouton_Algo_2_Click(object sender, RoutedEventArgs e)
-        {
-            //Connexion à la base
-            string StrConnexion = "Datasource=" + Glb_Nom_Server + ";Catalog=" + Glb_Nom_Database + ";";
-            AdomdConnection conn = Connexion_Base(StrConnexion);
-
-            if (Status_Traitement == "OK")
-            {
-                // -- Debut OLIVIER : récupération des 1D-dimensions et des propriétés
-                // Instance de classe de dimensions 1D
-                List<Dimension> listDim1D = new List<Dimension>();
-
-                // Liste de toutes les dimensions 1D: 
-                GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
-                // -- Fin OLIVIER
-
-                // -- Début THOMAS : "récupération" du treillis des cuboïdes
-                List<Dimension> listCuboides = new List<Dimension>(); // liste des cuboïdes
-                List<String> index_cuboides = new List<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
-                String prefix_index = "";
-                Console.WriteLine("LISTE DES CUBOÏDES :");
-                GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index); // appel de la fonction qui crée les combinaisons
-                Console.WriteLine();
-                // -- Fin THOMAS
-
-                // -- Début THOMAS : "récupération" du nombre de lignes des cuboïdes
-                //CVA : GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, Nom_Server.Text, Nom_Database.Text); // appel de la fonction qui récupère le nombre de lignes des cuboides
-                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
-
-                Console.WriteLine();
-                // -- Fin Thomas
-
-                // Partie 2 - Algo Spécifique Olivier
-                int seuil_poids = Glb_Size;
-                int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
-                MaterialisationPartielle(listCuboides, seuil_poids, solution); // appel de l'algo de Metropolis
-
-                Console.WriteLine();
-                Console.WriteLine("CUBOÏDES A MATERIALISER :");
-
-                Deconnexion_Base(StrConnexion);
-
-                // Gestion des agrégats en fonction de la solution retournée
-                Server srv = new Server();
-                srv.Connect(Glb_Nom_Server);
-                Database db = srv.Databases.FindByName(Glb_Nom_Database);
-                Cube Cube_maj = db.Cubes.FindByName(Glb_Nom_Cube);
-
-                foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
-                {
-                    //Ajout de l'aggrégation Design
-                    AggregationDesign ad = null;
-                    ad = Meg.AggregationDesigns.Add();
-                    ad.Name = "MatPart" + Meg.AggregationDesigns.Count;
-                    ad.InitializeDesign();
-                    int indice = 0;
-                    ad.FinalizeDesign();
-                    ad.Aggregations.Clear();
-
-                    // Balayage des solutions pour créer de nouvelles aggrégations
-                    for (int i = 0; i < solution.Length; i++)
-                    {
-                        if (solution[i] == 1)
-                        {
-                            Console.Write(listCuboides[i].GetDimensionName() + " | "); // affichage de la solution finale à matérialiser
-
-                            // Création d'une nouvelle aggrégation
-                            Aggregation agg = new Aggregation();
-                            indice++;
-                            agg.Name = ad.Name + "-" + indice;
-
-                            // Balayage des dimensions
-                            foreach (CubeDimension dim in Cube_maj.Dimensions)
-                            {
-                                // Report de la dimension sur l'aggrégat
-                                agg.Dimensions.Add(dim.ID);
-
-                                //Recherche si dimension présente dans la solution séléctionnée
-                                int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
-
-                                if (Ind_Rech != -1)
-                                {
-                                    // Si présente, on ajoute l'ensemble des champs à l'aggregation
-                                    AggregationDimension aggDim = agg.Dimensions[dim.ID];
-                                    foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
-                                    {
-                                        if (DimAtt.Usage.ToString() == "Key")
-                                        {
-                                            AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
-                                            aggDim.Attributes.Add(att);
-                                        }
-                                    }
-                                }
-                            }
-                            ad.Aggregations.Add(agg);
-                        }
-                    }
-                    ad.Update();
-
-                    //Mise à jour du lien sur les partitions
-                    foreach (Partition part in Meg.Partitions)
-                    {
-                        part.AggregationDesignID = ad.ID;
-                    }
-                    Console.WriteLine();
-                }
-
-                //Mise à jour des dimensions en fonction de l'aggrégation
-                Cube_maj.Update(UpdateOptions.ExpandFull);
-                Cube_maj.Process(ProcessType.ProcessFull);
-                srv.Disconnect();
-                Tab_Agr[Liste_Cube.SelectedIndex] = "Ajouté";
-                Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
-                Bouton_Aggr.IsEnabled = true;
-            }
-        }
-
-
+        //Modification du cube selectionné
         private void Liste_Cube_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Liste_Cube.SelectedIndex != -1)
@@ -497,73 +233,102 @@ namespace WpfApplication2
                 Glb_Nom_Database = Selection.Substring(0, FirstOccurs);
                 Glb_Nom_Cube = Selection.Substring(FirstOccurs + 1);
 
-                // Alimentation des informations sur le cube
-                Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
-                if (Tab_Agr[Liste_Cube.SelectedIndex] == "Présent")
-                {
-                    Bouton_Aggr.IsEnabled = true;
-                }
-                else
-                {
-                    Bouton_Aggr.IsEnabled = false;
-                }
-                Bouton_Algo_1.IsEnabled = true;
-                Bouton_Algo_2.IsEnabled = true;
-                Size_Util.Content = "0 Mo";
+                Alim_Lib_Agg();
+
+                //Activation des boutons infos cube
+                Bouton_Algo_1.IsEnabled = false;
+                Bouton_Algo_2.IsEnabled = false;
                 Size_MB.IsEnabled = true;
-                Size_MB.SelectedValue = 0;
                 Size_GB.IsEnabled = true;
-                Size_GB.SelectedValue = 0;
+
+                Size_Util.Content = "0 Mo";
+                Size_MB.SelectedIndex = 0;
+                Size_GB.SelectedIndex = 0;
+                Barre_Progress.Value = 0;
+                Lib_Progress.Content = "";
+            }
+        }
+        // Alimentation des informations sur les aggrégats du cube
+        private void Alim_Lib_Agg()
+        {
+            // Alimentation des informations sur les aggrégats du cube
+            int Nb_aggregat = Tab_Agr[Liste_Cube.SelectedIndex];
+
+            if (Nb_aggregat == 0)
+            {
+                Pres_Aggregat.Content = "Aucun aggrégat Design présent";
+                Bouton_Aggr.IsEnabled = false;
+            }
+            if (Nb_aggregat == 1)
+            {
+                Pres_Aggregat.Content = "1 seul aggrégat Design présent";
+                Bouton_Aggr.IsEnabled = true;
+            }
+            if (Nb_aggregat > 1)
+            {
+                Pres_Aggregat.Content = Nb_aggregat + " aggrégats Design présents";
+                Bouton_Aggr.IsEnabled = true;
             }
         }
 
         // Modification du choix nombre GB
         private void Size_GB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Glb_Size = 100000;
-            if (Size_GB.SelectedValue != null)
-            {
-                Size_Util.Content = "";
-                if (Size_GB.SelectedValue.ToString() != "0")
-                {
-                    Size_Util.Content = Size_GB.SelectedValue.ToString() + " Go";
-                }
-                if (Size_GB.SelectedValue.ToString() != "0" & Size_MB.SelectedValue.ToString() != "0")
-                {
-                    Size_Util.Content = Size_Util.Content + " et ";
-                }
-
-                if (Size_MB.SelectedValue.ToString() != "0")
-                {
-                    Size_Util.Content = Size_Util.Content + Size_MB.SelectedValue.ToString() + " Mo";
-                }
-            }
+            Gestion_Modif_Size();
         }
 
         // Modification du choix nombre MB
         private void Size_MB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Glb_Size = 100000;
-            if (Size_MB.SelectedValue != null)
+            Gestion_Modif_Size();
+        }
+
+        // Traitement commun modification size GB/MB
+        public void Gestion_Modif_Size()
+        {
+            //Alimentation par défaut
+            Glb_Size = 0;
+            Size_Util.Content = "";
+
+            if ((Size_GB.SelectedIndex != -1) && (Size_MB.SelectedIndex != -1))
             {
-                Size_Util.Content = "";
-                if (Size_GB.SelectedValue.ToString() != "0")
+                if (Size_GB.SelectedIndex != 0)
                 {
                     Size_Util.Content = Size_GB.SelectedValue.ToString() + " Go";
+                    double temp = 1024 * 1024;
+                    temp = temp * 1024;
+                    temp = temp * Size_GB.SelectedIndex;
+                    Glb_Size = Glb_Size + temp;
                 }
-                if (Size_GB.SelectedValue.ToString() != "0" & Size_MB.SelectedValue.ToString() != "0")
+
+                if (Size_GB.SelectedIndex != 0 & Size_MB.SelectedIndex != 0)
                 {
                     Size_Util.Content = Size_Util.Content + " et ";
                 }
 
-                if (Size_MB.SelectedValue.ToString() != "0")
+                if (Size_MB.SelectedIndex != 0)
                 {
                     Size_Util.Content = Size_Util.Content + Size_MB.SelectedValue.ToString() + " Mo";
+                    double temp = 1024 * 1024;
+                    temp = temp * Size_MB.SelectedIndex;
+                    Glb_Size = Glb_Size + temp;
                 }
+            }
+
+            if (Glb_Size > 0)
+            {
+                Bouton_Algo_1.IsEnabled = true;
+                Bouton_Algo_2.IsEnabled = true;
+            }
+            else
+            {
+                Size_Util.Content = "0 Mo";
+                Bouton_Algo_1.IsEnabled = false;
+                Bouton_Algo_2.IsEnabled = false;
             }
         }
 
-        //Gestion clic sur bouton de suppression des aggrégations
+        //Gestion bouton de suppression des aggrégations
         private void Bouton_Aggr_Click(object sender, RoutedEventArgs e)
         {
             // Gestion d'un message de confirmation
@@ -584,12 +349,185 @@ namespace WpfApplication2
                 Cube_maj.Update(UpdateOptions.ExpandFull);
                 Cube_maj.Process(ProcessType.ProcessFull);
                 srv.Disconnect();
-                Tab_Agr[Liste_Cube.SelectedIndex] = "Supprimé";
-                Pres_Aggregat.Content = Tab_Agr[Liste_Cube.SelectedIndex];
+                Tab_Agr[Liste_Cube.SelectedIndex] = 0;
+                Pres_Aggregat.Content = "Aggrégat Design supprimé";
                 Bouton_Aggr.IsEnabled = false;
             }
         }
 
+        //Gestion bouton algorithme de Metropolis
+        private void Bouton_Algo_1_Click(object sender, RoutedEventArgs e)
+        {
+            Thread_en_cours = !Thread_en_cours;
+            Glb_Num_Trait = 1;
+            myThread = new Thread(new ThreadStart(ThreadPrinc));
+            myThread.Start();
+        }
+
+        //Gestion bouton algorithme de Matérialisation
+        private void Bouton_Algo_2_Click(object sender, RoutedEventArgs e)
+        {
+            Thread_en_cours = !Thread_en_cours;
+            Glb_Num_Trait = 2;
+            myThread = new Thread(new ThreadStart(ThreadPrinc));
+            myThread.Start();
+        }
+
+        //Gestion bouton Cancel
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            // Arrêt du Thread en cours (algo 1 ou algo 2 en cours)
+            myThread.Abort();
+            Barre_Progress.Value = 100;
+            Lib_Progress.Content = "Traitement annulé par l'utilisateur";
+            Thread_en_cours = !Thread_en_cours;
+            Deblocage_Zones();
+        }
+
+        //Blocage de l'ensemble des zones saisissables et activation bouton cancel
+        public void Blocage_Zones()
+        {
+            Nom_Server.IsEnabled = false;
+            Bouton_Connexion.IsEnabled = false;
+            Liste_Cube.IsEnabled = false;
+            Bouton_Aggr.IsEnabled = false;
+            Bouton_Algo_1.IsEnabled = false;
+            Bouton_Algo_2.IsEnabled = false;
+            Size_MB.IsEnabled = false;
+            Size_GB.IsEnabled = false;
+
+            Cancel.IsEnabled = true;
+        }
+
+        //Deblocage de l'ensemble des zones saisissables et désactivation bouton cancel
+        public void Deblocage_Zones()
+        {
+            Nom_Server.IsEnabled = true;
+            Bouton_Connexion.IsEnabled = true;
+            Liste_Cube.IsEnabled = true;
+            Alim_Lib_Agg();
+
+            Bouton_Algo_1.IsEnabled = true;
+            Bouton_Algo_2.IsEnabled = true;
+            Size_MB.IsEnabled = true;
+            Size_GB.IsEnabled = true;
+
+            Cancel.IsEnabled = false;
+        }
+
+        // Gestion fermeture de l'application
+        private void Principal_Closing(object sender, CancelEventArgs e)
+        {
+            //On doit arreter le Thread en cours si necessaire
+            if (Thread_en_cours)
+            {
+                myThread.Abort();
+            }
+        }
+
+        /// <summary>
+        /// THREAD PRINCIPAL EN CAS DE LANCEMENT ALGO 1 OU 2 ----------------------------------------------------------------------------------------
+        ///  </summary>
+        /// 
+        private void ThreadPrinc()
+        {
+            DateTime exeStart = DateTime.Now;
+
+            //Etape : Initialisation
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 0, "Initialisation" });
+            Glb_Pct = 0;
+
+            //Etape : Connexion à la base
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Connexion base" });
+            string StrConnexion = "Datasource=" + Glb_Nom_Server + ";Catalog=" + Glb_Nom_Database + ";";
+            AdomdConnection conn = Connexion_Base(StrConnexion);
+
+            if (Status_Traitement != "OK")
+            {
+                return;
+            }
+
+            // Instance de classe de dimensions 1D
+            List<Dimension> listDim1D = new List<Dimension>();
+
+            //Etape : Liste de toutes les dimensions 1D
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Liste dimensions 1D" });
+            GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
+
+            //Etape : Récupération du treillis des cuboïdes
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Récupération du treillis des cuboïdes" });
+            List<Dimension> listCuboides = new List<Dimension>(); // liste des cuboïdes
+            List<String> index_cuboides = new List<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
+            String prefix_index = "";
+            GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index); // appel de la fonction qui crée les combinaisons
+
+            //Etape : Récupération du nombre de lignes des cuboïdes
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Récupération du nombre de lignes des cuboïdes" });
+            GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
+
+            //Etape : Algorithme de Metropolis ou de Matérialisation
+            double seuil_poids = Glb_Size;
+            int[] solution = new int[listCuboides.Count]; // la solution que va retrouner Metropolis sous forme de 0 et de 1
+            switch (Glb_Num_Trait)
+            {
+                case 1:
+                    Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Algorithme de Metropolis" });
+                    int nb_boucle = 100; // le nombre de boucle que l'on veut faire faire à l'algo de Metropolis
+                    Metropolis(listCuboides, seuil_poids, nb_boucle, solution); // appel de l'algo de Metropolis
+                    break;
+                case 2:
+                    Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Algorithme de Matérialisation" });
+                    MaterialisationPartielle(listCuboides, seuil_poids, solution); // appel de l'algo de Matérialisation
+                    break;
+                default:
+                    break;
+            }
+
+            //Etape : Deconnexion à la base
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 30, "Deconnexion base" });
+            Deconnexion_Base(StrConnexion);
+
+            //Etape : Création aggrégat Design en fonction de la solution
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Création Aggrégat" });
+            int nb_aggregats = CreateAgg(solution, listCuboides);
+
+            TimeSpan exeDuration = DateTime.Now.Subtract(exeStart);
+            string exeTime = string.Format(" : {0}h, {1}m, {2}s et {3}ms",exeDuration.Hours,exeDuration.Minutes,exeDuration.Seconds,exeDuration.Milliseconds);
+            
+            //Etape : Fin du traitement
+            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 30, "Traitement terminé avec succès en " + exeTime + " - Création d'un aggrégat Design et " + nb_aggregats + " aggrégats" });
+            
+            Thread_en_cours = !Thread_en_cours;
+        }
+
+        //Fonction de mise à jour de la barre de progression hors du thread
+        private void UpdateProgressBar(int step, string etape)
+        {
+            // Mise à jour de la barre de progression en fonction de l'étape
+            Glb_Pct = Glb_Pct + step;
+            Barre_Progress.Value = Glb_Pct;
+
+            switch (Glb_Pct)
+            {
+                case 0:
+                    //Blocage des zones saisissables - Debut du traitement
+                    Blocage_Zones();
+                    break;
+                case 100:
+                    //Deblocage des zones saisissables - Fin du traitement
+                    Tab_Agr[Liste_Cube.SelectedIndex] = Tab_Agr[Liste_Cube.SelectedIndex] + 1;
+                    Deblocage_Zones();
+                    break;
+                default:
+                    break;
+            }
+            Lib_Progress.Content = Glb_Pct + "%" + " - " + etape;
+        }
+
+        /// <summary>
+        /// FONCTIONS UTILISEES ---------------------------------------------------------------------------------------------------------------------
+        ///  </summary>
+        ///
         //Fonction de connexion à la base
         private AdomdConnection Connexion_Base(string StrConnect)
         {
@@ -618,20 +556,11 @@ namespace WpfApplication2
             return StatusDeconnect;
         }
 
-
-        // -- Debut OLIVIER
-
-        /// <summary>
-        /// Exploration DMV de SSAS (Vues prédefinies sur tables systeme)
-        /// </summary>
-        /// 
+        // Exploration DMV de SSAS (Vues prédefinies sur tables systeme)
         static void GetDimension1DProperties(AdomdConnection adoConnect, string cubeId, List<Dimension> listDim1D)
         {
             AdomdCommand cmdPart1 = adoConnect.CreateCommand();
             AdomdCommand cmdPart2 = adoConnect.CreateCommand();
-
-            // Dimension tempDim1D = new Dimension(1);
-
 
             // Toutes les dimensions d'un cube, leur type et leur cardinalité
             // https://msdn.microsoft.com/en-us/library/ms126309.aspx
@@ -644,7 +573,6 @@ namespace WpfApplication2
                                "FROM " +
                                "     $SYSTEM.MDSCHEMA_DIMENSIONS " +
                                "WHERE " +
-            //CVA                   "     CUBE_NAME = 'Data Warehouse ODE' AND " +
                                "     CUBE_NAME = '" + cubeId + "' AND " +
                                "    DIMENSION_CAPTION <> 'Measures' " +
                                "ORDER BY DIMENSION_NAME";
@@ -662,12 +590,9 @@ namespace WpfApplication2
             // Fermeture du reader XML
             readerPart1.Close();
 
-
-
             // Etape 2 : Récuperation des tailles (Octets)
             // Utilisation mémoire : https://msdn.microsoft.com/en-us/library/bb934098(v=sql.120).aspx
 
-            //CVA : gestion liste des dimensions
             String Liste_dim = "";
             for (int i = 0; i < listDim1D.Count(); i++)
             {
@@ -687,9 +612,6 @@ namespace WpfApplication2
                     }
                 }
             }
-            // CVA : fin
-            //    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')
-
 
             cmdPart2.CommandText = "SELECT " +
                                     "   (OBJECT_MEMORY_SHRINKABLE + OBJECT_MEMORY_NONSHRINKABLE + OBJECT_MEMORY_CHILD_SHRINKABLE + OBJECT_MEMORY_CHILD_NONSHRINKABLE) " +
@@ -697,7 +619,6 @@ namespace WpfApplication2
                                     "    $SYSTEM.DISCOVER_OBJECT_MEMORY_USAGE " +
                                     "WHERE " +
                                     "    OBJECT_TYPE_ID = 100006 AND " +
-            //CVA                        "    (OBJECT_ID = 'DIM TEMPS' OR OBJECT_ID = 'DIM LIEUX' OR OBJECT_ID = 'DIM PRODUITS' OR OBJECT_ID = 'DIM CLIENTS')" +
                                     Liste_dim +
                                     "ORDER BY OBJECT_ID";
 
@@ -705,8 +626,6 @@ namespace WpfApplication2
             AdomdDataReader readerPart2 = cmdPart2.ExecuteReader();
 
             // Enregistrement des données dans des instances de Dimension
-
-            // while (readerPart2.Read())
             for (int i = 0; i < listDim1D.Count(); i++)
             {
                 readerPart2.Read();
@@ -726,13 +645,12 @@ namespace WpfApplication2
             readerPart2.Close();
         }
 
-        // -- Début THOMAS : Algorithme des combinaisons (fonction récursive qui retroune l'ensemble des combinaisons possibles de notre liste listDim1D
+        // Algorithme des combinaisons (fonction récursive qui retroune l'ensemble des combinaisons possibles de notre liste listDim1D
         static void GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
         {
             for (int i = rang; i < listDim1D.Count; i++)
             {
                 listCuboides.Add(new Dimension(prefix + listDim1D[i].GetDimensionName(), 0, profCourante + 1));
-                Console.WriteLine("Nom : " + prefix + listDim1D[i].GetDimensionName() + " | Nb lignes : ND | Dimension : " + (profCourante + 1).ToString());
                 index_cuboides.Add(prefix_index + i.ToString());
             }
 
@@ -742,37 +660,22 @@ namespace WpfApplication2
                       + listDim1D[i].GetDimensionName() + " * ", i + 1, listCuboides, index_cuboides, prefix_index + i.ToString());
             }
         }
-        // -- Fin THOMAS
 
-        // -- Début THOMAS : Algorithme qui récupère le nombre de lignes des cuboides
-        //CVA static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d, String datasource, String catalog)
+        // Algorithme qui récupère le nombre de lignes des cuboides
         static void GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d, AdomdConnection conn)
         {
-            // Chaine de connexion SSAS
-            //CVA AdomdConnection conn = new AdomdConnection("Data Source=" + datasource + ";Catalog=" + catalog);  // CATALOG : Nom du cube
-
             // Membres
             DataSet ds;
             DataTable dt;
 
-            // CVA : debut
-            // Ouverture de la connexion SSAS
-            //conn.Open();
             AdomdRestrictionCollection restrictions = new AdomdRestrictionCollection();
             restrictions.Add("CUBE_NAME", Glb_Nom_Cube);
-            //restrictions.Add("COORDINATE", null);
             ds = conn.GetSchemaDataSet("MDSCHEMA_MEASUREGROUP_DIMENSIONS", restrictions);
-            //ds = conn.GetSchemaDataSet(AdomdSchemaGuid.MeasureGroupDimensions, null);
-            //CVA : fin
-
-
-
             dt = ds.Tables[0];
             String[] test_dimensions = new String[nb_dim_1d * 2];
             int cpt = 0;
             int poids_une_ligne = 0;
 
-            Console.WriteLine("RÉCUPÉRATION DES CLÉS PRIMAIRES :");
             foreach (DataRow row in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
@@ -780,49 +683,35 @@ namespace WpfApplication2
                     {
                         test_dimensions[cpt] = row[col].ToString(); // récupération des clés primaire pour faire les requêtes MDX ensuite
                         cpt = cpt + 1;
-                        Console.WriteLine(row[col].ToString());
                     }
             }
-            Console.WriteLine();
 
             int poids;
             String commandText = "";
-
-            Console.WriteLine("CALCULS DU NOMBRE DE LIGNES DES CUBOÏDES :");
             for (int i = 0; i < cuboides.Count; i++)
-
             {
-
                 poids = 0;
-
-                Console.Write("Cuboide : " + listCuboides[i].GetDimensionName() + " | Dimension = " + listCuboides[i].GetDimensionOrder());
-
                 // on lance une requête MDX selon le nombre de dimensions à croiser /!\ : 4 maximum pour le moment /!\
                 if (cuboides[i].Length == 1)
                 {
-                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i])].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 2)
                 {
-                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 3)
                 {
-                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory();
                 }
                 if (cuboides[i].Length == 4)
                 {
-                    //CVA commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [Data Warehouse ODE]";
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionMemory();
                 }
-
 
                 try
                 {
@@ -838,8 +727,6 @@ namespace WpfApplication2
                         }
                     }
 
-
-                    Console.WriteLine(" | Nb ligne  = " + poids);
                     listCuboides[i].SetDimensionCount(poids); // on affecte le nombre de lignes au cuboide
                     listCuboides[i].SetDimensionMemory(poids_une_ligne);
 
@@ -850,31 +737,20 @@ namespace WpfApplication2
                 }
             }
         }
-        // -- Fin THOMAS
 
-        // -- Début THOMAS
-        static void Metropolis(List<Dimension> listCuboides, int seuil_poids, int nb_boucle, int[] sol_act)
+        // Algorithme de Metropolis
+        static void Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, int[] sol_act)
         {
-            int poids_act = 0;
-            int poids_next = 0;
+            double poids_act = 0;
+            double poids_next = 0;
             int i = 0;
             int choix_cube = 0;
             Random rand = new Random();
             double ratio = 0;
 
-            Console.WriteLine("ALGORITHME DE METROPOLIS : ");
             while (i < nb_boucle)
             {
-                Console.Write("Solution actuelle : ");
-                foreach (int element in sol_act)
-                {
-                    System.Console.Write(element + " ");
-                }
-
-                Console.WriteLine(" - Itération : " + i);
-
                 choix_cube = rand.Next(0, listCuboides.Count); // on choisit un cube à permuter
-                Console.Write("Cube choisi pour permutation : n°" + choix_cube);
                 if (sol_act[choix_cube] == 0) // s'il est à 0, on ajoute son poids
                     poids_next = poids_act + (listCuboides[choix_cube].GetDimensionCount() * listCuboides[choix_cube].GetDimensionMemory());
                 else // sinon on on l'enlève
@@ -884,40 +760,23 @@ namespace WpfApplication2
                 {
                     if (poids_next >= poids_act) // si c'est une meilleure solution, on effecture la permutation
                     {
-                        Console.Write(" | Poids solution " + i + " (" + poids_act + ") < Poids solution " + (i + 1) + " (" + poids_next + ") ET inférieur au seuil (" + seuil_poids + ") => Permutation effectué");
-                        sol_act[choix_cube] = 1;
+                       sol_act[choix_cube] = 1;
                         poids_act = poids_next;
                     }
                     else // sinon, on effectueun tirage de Bernouilli
                     {
 
                         ratio = Convert.ToDouble(poids_next) / Convert.ToDouble(poids_act);
-
-                        Console.Write(" | Ratio : " + poids_next + "/" + poids_act + " = " + ratio);
-
                         if (rand.NextDouble() < ratio) // si le tirage est inférieur au ratio (poids de la solution suivante / poids de la solution actuelle), on permute
                         {
-                            Console.Write(" | Tirage Bernoulli = Succes => Permutation effectué");
                             sol_act[choix_cube] = 0;
                             poids_act = poids_next;
                         }
                     }
                 }
                 i = i + 1;
-                Console.WriteLine();
             }
-            Console.Write("Solution finale : ");
-            foreach (int element in sol_act)
-            {
-                System.Console.Write(element + " ");
-            }
-            Console.WriteLine();
         }
-
-        // -- Fin THOMAS
-
-
-
 
         // -- Olivier # 24/08/2015
 
@@ -930,7 +789,7 @@ namespace WpfApplication2
         /// <param name="nb_boucle"></param>
         /// <param name="sol_act"></param>
 
-        static void MaterialisationPartielle(List<Dimension> listCuboides, int seuil_poids, int[] selectedViews)
+        static void MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, int[] selectedViews)
         {
             int totalSize = 0;
             int benefit;
@@ -1048,6 +907,75 @@ namespace WpfApplication2
             else { return (1); }
         }
 
-    // -- Fin Olivier # 24/08/2015
+        // -- Fin Olivier # 24/08/2015
+   
+    // Fonction de création des aggrgéats
+    static int CreateAgg(int[] solution, List<Dimension> listCuboides)
+        {
+            int indice = 0;
+            Server srv = new Server();
+            srv.Connect(Glb_Nom_Server);
+            Database db = srv.Databases.FindByName(Glb_Nom_Database);
+            Cube Cube_maj = db.Cubes.FindByName(Glb_Nom_Cube);
+
+            foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
+            {
+                //Ajout de l'aggrégation Design
+                AggregationDesign ad = null;
+                ad = Meg.AggregationDesigns.Add();
+                ad.Name = "Metro" + Meg.AggregationDesigns.Count;
+                ad.InitializeDesign();
+                ad.FinalizeDesign();
+                ad.Aggregations.Clear();
+
+                for (int i = 0; i < solution.Length; i++)
+                {
+                    if (solution[i] == 1)
+                    {
+                        // Création d'une nouvelle aggrégation
+                        Aggregation agg = new Aggregation();
+                        indice++;
+                        agg.Name = ad.Name + "-" + indice;
+
+                        // Balayage des dimensions
+                        foreach (CubeDimension dim in Cube_maj.Dimensions)
+                        {
+                            // Report de la dimension sur l'aggrégat
+                            agg.Dimensions.Add(dim.ID);
+
+                            //Recherche si dimension présente dans la solution séléctionnée
+                            int Ind_Rech = listCuboides[i].GetDimensionName().IndexOf(dim.ID);
+
+                            if (Ind_Rech != -1)
+                            {
+                                // Si présente, on ajoute l'ensemble des champs à l'aggregation
+                                AggregationDimension aggDim = agg.Dimensions[dim.ID];
+                                foreach (DimensionAttribute DimAtt in dim.Dimension.Attributes)
+                                {
+                                    if (DimAtt.Usage.ToString() == "Key")
+                                    {
+                                        AggregationAttribute att = new AggregationAttribute(Cube_maj.Dimensions[dim.ID].Attributes[DimAtt.ID].AttributeID);
+                                        aggDim.Attributes.Add(att);
+                                    }
+                                }
+                            }
+                        }
+                        ad.Aggregations.Add(agg);
+                    }
+                }
+                ad.Update();
+
+                //Mise à jour des liens des partitions
+                foreach (Partition part in Meg.Partitions)
+                {
+                    part.AggregationDesignID = ad.ID;
+                }
+                Cube_maj.Update(UpdateOptions.ExpandFull);
+                Cube_maj.Process(ProcessType.ProcessFull);
+                srv.Disconnect();
+            }
+            return indice;
+        }
     }
 }
+

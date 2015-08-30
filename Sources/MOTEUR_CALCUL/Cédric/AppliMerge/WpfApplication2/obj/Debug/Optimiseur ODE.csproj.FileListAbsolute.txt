@@ -88,53 +88,19 @@ C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Sources\MOTEUR_CALCUL\Th
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.ResolveComReference.cache
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.exe
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Sources\MOTEUR_CALCUL\Thomas\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.pdb
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Interop.ADODB.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Interop.ADOMD.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.ResolveComReference.cache
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2_MarkupCompile.cache
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2_MarkupCompile.lref
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.exe.config
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.exe
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.pdb
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.DLL
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Management.Sdk.Sfc.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Smo.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Dmf.dll
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.g.resources
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.exe
-C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.pdb
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.exe.config
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Interop.ADODB.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Interop.ADOMD.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.ResolveComReference.cache
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.exe
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.pdb
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2_MarkupCompile.cache
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2_MarkupCompile.lref
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.exe
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\WpfApplication2.pdb
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Management.Sdk.Sfc.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Smo.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.Dmf.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.g.resources
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
-Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
