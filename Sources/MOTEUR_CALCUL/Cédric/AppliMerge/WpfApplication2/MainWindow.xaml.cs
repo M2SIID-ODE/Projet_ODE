@@ -778,7 +778,7 @@ namespace WpfApplication2
             }
         }
 
-        // -- Olivier # 24/08/2015
+		// -- Olivier # 31/08/2015
 
         /// <summary>
         /// Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
@@ -794,8 +794,11 @@ namespace WpfApplication2
             int totalSize = 0;
             int benefit;
             int maxBenefit;
-            int parentView;
+            int childrenView;
             int bestView;
+            string stmt;
+            // List<String> listDim1Di = new List<String>();
+
 
 
             // RAZ de la liste des vues selectionnees
@@ -829,29 +832,36 @@ namespace WpfApplication2
                     // RAZ du bénéfice en cours
                     benefit = 0;
 
-                    // Sur toutes les vues encore j disponibles et enfants de i : On va sommer leurs bénéfices
+                    // On crée la liste des composantes 1D de la vue j à partir de ses noms
+                    stmt = string.Copy(listCuboides[i].GetDimensionName());
+                    stmt.Trim();  // Supression de tous les espaces
+                    string[] listDim1Di = stmt.Split(new Char[] {'*'});  // Découpage par le séparateur '*'
+
+
+                    // Sur toutes les vues j encore disponibles et uniquements les enfants de i : On va sommer leurs bénéfices
                     foreach (int j in selectedViews)
                     {
                         // Vue déjà traitée ou celle en cours : On passe
                         if (selectedViews[j] == 1) { continue; }
 
-                        // Si la vue j n'est pas enfant de la vue i, ou la vue i elle-même : On ne l'inclut pas dans le benefice total
-                        // Operateur booléen IMP : 
-                        // Soit la liste de dépendances dimensionels d'une vue P : {p1, p2, p3, p4}
-                        // Idem pour une autre vue E dont on cherche le lien parent-enfant : {e1, e2, e3, e4}
-                        // P est parent de E <=> (Si pi = 1 Alors ei = 1) + (Si pi = 0 Alors ei = {0/1})
-                        // 
-                        // if (***) { continue; } // TO DO - Olivier
+                        // La vue j est-elle enfant de la vue i ?
 
-                        // RAZ de l'index du 1er parent "matérialisé"
-                        parentView = 0;
+                        // Test 1 : Les enfants ont TOUJOURS un rang plus élévé que leurs parents
+                        if (listCuboides[j].GetDimensionOrder() < listCuboides[i].GetDimensionOrder()) { continue; }   // Non car hierarchiquement superieure ou de même niveau
 
-                        // Recherche du 1er parent "matérialisé" de la vue i (Et non j !)
-                        //      TO DO : Traiter les relations avec une vue materialisée autre (FORK)
-                        // parentView = ***; // TO DO - Olivier
+                        // Test 2 : Les parents contienent toujours TOUTES les dimensions 1D de leurs enfants
+                        foreach(string item in listDim1Di)
+                        {
+                            if(item == null) { continue;  } // Securité
+                            if(listCuboides[i].GetDimensionName().IndexOf(item) == -1) { continue; } // Si au moins un élement est introuvable => Pas parent => On passe
+                        }
 
-                        // Calcul du gain : Count du parent materialisé de i - Count de la vue i
-                        benefit += (listCuboides[parentView].GetDimensionCount() - listCuboides[i].GetDimensionCount());
+
+                        // Si les tests 1 & 2 sont OK : j est bien enfant de i
+                        childrenView = j;
+
+                        // Calcul du gain : Count de la vue-parent (i) - Count de la vue-enfant (j)
+                        benefit += (listCuboides[i].GetDimensionCount() - listCuboides[childrenView].GetDimensionCount());
                     }
 
                     // Actualisation de la meilleure vue et du meilleur bénéfice
@@ -865,22 +875,6 @@ namespace WpfApplication2
                 // Enregistrement de la best view comme selectionnée
                 selectedViews[bestView] = 1;
             }
-            /*
-                                // Dans le cas particulier d'un treilis entièrement relié de N dimensions, un niveau de dimension D a Somme(A(i,N), i = D, i = N) 
-                                // Chaque vue de N elements a (NBR_DIM_CUBE - N) enfants
-                                // Ex : Il y a 4 dimensions dans le cube, la vue CLIENTS-DATES est N=2D => (4-2)=2 parents  
-                                // Ex : Il y a 4 dimensions dans le cube, la vue CLIENTS est N=1D => (4-1)=3 parents 
-
-                                // Nom de la vue
-                                listCuboides[i].GetDimensionName;
-
-                                // Dimension de la vue
-                                listCuboides[i].GetDimensionOrder;
-
-                                // Nombre de lignes de la vue
-                                listCuboides[i].GetDimensionCount()
-            */
-
 
 
             // Affichage de la solution retournée
@@ -893,21 +887,7 @@ namespace WpfApplication2
         }
 
 
-        // Fonction de calcul de combinatoire
-        static int Combinatoire(int borneInf, int borneSup)
-        {
-            return (Factorielle(borneSup) / (Factorielle(borneInf) * Factorielle(borneSup - borneInf)));
-        }
-
-
-        // Fonction recursive de factorielle
-        static int Factorielle(int n)
-        {
-            if (n > 0) { return (n * Factorielle(n - 1)); }
-            else { return (1); }
-        }
-
-        // -- Fin Olivier # 24/08/2015
+        // -- Fin Olivier # 31/08/2015
    
     // Fonction de création des aggrgéats
     static int CreateAgg(int[] solution, List<Dimension> listCuboides)
