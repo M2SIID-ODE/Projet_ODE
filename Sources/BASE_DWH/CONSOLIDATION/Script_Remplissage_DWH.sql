@@ -219,21 +219,33 @@ WITH (
     --TABLOCK
 );
 
--- on crée une table temporaire grâce aux jointures (left join) pour obtenir un "catalogue" de 24 240 références différentes
-SELECT ROW_NUMBER() OVER(ORDER BY NEWID()) as id,
-	SOUS_FAMILLES.SOUS_FAMILLES_PK as categorie,
-	SOUS_FAMILLES.LIB_SOUS_FAMILLES+' '+PRODUITS.LIB_PRODUIT as Lib_prod, -- on crée le champ du libellé du produit (tant qu on y est) en concaténant le libellé de la sous-famille avec la spécification du produit
-	MARQUES.LIB_MARQUE as marque,
-	FOURNISSEURS.LIB_FOURNISSEUR as fournisseur
-INTO [ODE_DATAWAREHOUSE].[TABLE_TEMP]
-FROM [ODE_DATAWAREHOUSE].[UNIVERS]
-	LEFT JOIN [ODE_DATAWAREHOUSE].[RAYONS] ON UNIVERS.UNIVERS_PK = RAYONS.UNIVERS_RAY
-	LEFT JOIN [ODE_DATAWAREHOUSE].[FOURNISSEURS] ON UNIVERS.UNIVERS_PK = FOURNISSEURS.UNIVERS_FOUR
-	LEFT JOIN [ODE_DATAWAREHOUSE].[FAMILLES] ON RAYONS.RAYONS_PK = FAMILLES.RAYONS_FAM
-	LEFT JOIN [ODE_DATAWAREHOUSE].[MARQUES] ON RAYONS.RAYONS_PK = MARQUES.RAYONS_MAR
-	LEFT JOIN [ODE_DATAWAREHOUSE].[PRODUITS] ON RAYONS.RAYONS_PK = PRODUITS.RAYONS_PDT
-	LEFT JOIN [ODE_DATAWAREHOUSE].[SOUS_FAMILLES] ON FAMILLES.FAMILLES_PK = SOUS_FAMILLES.FAMILLES_SFAM
-ORDER BY NEWID()
+-- Transformation pour créer 1 million de produits (24 240 * 40)
+-- Olivier # 07/09/2015
+
+DECLARE @i INT = 0
+
+WHILE @i < 40
+BEGIN
+	-- on crée une table temporaire grâce aux jointures (left join) pour obtenir un "catalogue" de 24 240 références différentes
+	SELECT ROW_NUMBER() OVER(ORDER BY NEWID()) as id,
+		SOUS_FAMILLES.SOUS_FAMILLES_PK as categorie,
+		SOUS_FAMILLES.LIB_SOUS_FAMILLES + ' ' + PRODUITS.LIB_PRODUIT + '_' + @i as Lib_prod, -- on crée le champ du libellé du produit (tant qu on y est) en concaténant le libellé de la sous-famille avec la spécification du produit
+		MARQUES.LIB_MARQUE as marque,
+		FOURNISSEURS.LIB_FOURNISSEUR as fournisseur
+	INTO [ODE_DATAWAREHOUSE].[TABLE_TEMP]
+	FROM [ODE_DATAWAREHOUSE].[UNIVERS]
+		LEFT JOIN [ODE_DATAWAREHOUSE].[RAYONS] ON UNIVERS.UNIVERS_PK = RAYONS.UNIVERS_RAY
+		LEFT JOIN [ODE_DATAWAREHOUSE].[FOURNISSEURS] ON UNIVERS.UNIVERS_PK = FOURNISSEURS.UNIVERS_FOUR
+		LEFT JOIN [ODE_DATAWAREHOUSE].[FAMILLES] ON RAYONS.RAYONS_PK = FAMILLES.RAYONS_FAM
+		LEFT JOIN [ODE_DATAWAREHOUSE].[MARQUES] ON RAYONS.RAYONS_PK = MARQUES.RAYONS_MAR
+		LEFT JOIN [ODE_DATAWAREHOUSE].[PRODUITS] ON RAYONS.RAYONS_PK = PRODUITS.RAYONS_PDT
+		LEFT JOIN [ODE_DATAWAREHOUSE].[SOUS_FAMILLES] ON FAMILLES.FAMILLES_PK = SOUS_FAMILLES.FAMILLES_SFAM
+	ORDER BY NEWID()
+	
+	SET @i = 1 + @i;
+END
+
+
 
 -- REMPLISSAGE TABLES
 -- on crée les variables qui vont bien
@@ -667,8 +679,25 @@ SET @traceOn = 0;						-- Activation de la trace : 1
 
 --La table ville devra etre chargée en amont
 --!!!!!! modifier ici le nombre poste total souhaité à la fin du traitement
-SET @nb_poste_total = 10000
+SET @nb_poste_total = 100000
 --!!!!!!!!!!!!!!!!!!!!!!!
+
+
+-- Création de tables temporaires pour charger les fichiers csv
+-- Olivier # 07/09/2015
+CREATE TABLE [ODE_DATAWAREHOUSE].[NOMS](
+	[NOM]				[NVARCHAR](50)			NOT NULL
+) ON [PRIMARY]; 
+
+-- Olivier # 07/09/2015
+BULK INSERT [ODE_DATAWAREHOUSE].[NOMS] FROM N'$(OdeCsvPath)NomsFamilles.csv' -- chargement du fichier csv dans la table
+WITH (
+    CODEPAGE='1252', -- CodePage du LATIN-1 pour gestion des accents
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='0x0a' -- Fin de lignes des CSV en LF seul (/n <=> CR + LF)
+);
+
+
 
 -- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
 IF @traceOn = 1
@@ -695,7 +724,7 @@ IF @traceOn = 1
 SET @nb_anonyme = @nb_insert* 40 / 100 
 SET @nb_internet = @nb_insert * 20 / 100 
 SET @nb_nominatif = @nb_insert * 20 / 100 
-SET @nb_pro = @nb_insert *10 / 100 
+SET @nb_pro = @nb_insert * 10 / 100 
 SET @nb_societe = @nb_insert - @nb_anonyme - @nb_internet - @nb_nominatif - @nb_pro
 
 -- OLIVIER # 24/07/2015 - Globalisation de l activation de la trace sur tous les print
@@ -732,7 +761,7 @@ WHILE(@i <= @nb_insert)
 			WHEN @i> 0                                                    THEN 'A'
 	END
 
--- Nom du client aléatoire selon le type de client
+		-- Nom du client aléatoire selon le type de client
 		IF @typeChar = 'A' 
 		BEGIN
 			SET @nom = 'Client anonyme'
@@ -741,7 +770,16 @@ WHILE(@i <= @nb_insert)
 
 		IF @typeChar = 'I' OR @typeChar = 'N' OR @typeChar = 'S' OR @typeChar = 'P'
 		BEGIN
-		    -- recup nom aléatoire avec longueur aléatoire entre 2 et 102
+			-- Olivier # 07/09/2015
+			-- Tirage aléatoire d un nom (Simple ou composé de 2 une fois sur 3)
+			SET @taux_remise = (select cast(round((30)* rand() + 1,0) as integer))
+			SET @nom = (SELECT TOP 1 UPPER(NOM) FROM [ODE_DATAWAREHOUSE].[NOMS] ORDER BY NEWID()) --on choisit un nom au hasard dans la table des noms
+			IF 3 * rand() <= 1
+			BEGIN
+				SET @nom = @nom + '-' + (SELECT TOP 1 UPPER(NOM) FROM [ODE_DATAWAREHOUSE].[NOMS] ORDER BY NEWID()) --on choisit un nom au hasard dans la table des noms
+			END
+			/*
+			-- recup nom aléatoire avec longueur aléatoire entre 2 et 102
 			SET @length = (select cast(round((50 -1)* rand() + 1,0) as integer)) + 2
 			SET @j = 1
 			SET @nom =''
@@ -752,55 +790,60 @@ WHILE(@i <= @nb_insert)
 				SET @nom = @nom + substring(@voyelle, convert(int, rand()*6), 1)
 				SET @j += 1
 			END
+			*/
+			; -- Olivier # 07/09/2015
 		END
 
 		IF @typeChar = 'I'
 		BEGIN
-			SET @nom = @nom + ' INT ' + CAST(@i as nvarchar)
+			SET @nom = 'INT ' + @nom -- Olivier # 07/09/2015
 			SET @taux_remise = 0
 		END
 
 		IF @typeChar = 'N'
 		BEGIN
-			SET @nom = @nom + ' BOB ' + CAST(@i as nvarchar)
-			SET @taux_remise = (select cast(round((49)* rand() + 1,0) as integer))
+			-- SET @nom = @nom + ' BOB ' + CAST(@i as nvarchar) -- Olivier # 07/09/2015
+			-- Ajout du prénom
+			SET @nom = @nom + ', ' + (SELECT TOP 1 NOM FROM [ODE_DATAWAREHOUSE].[NOMS] ORDER BY NEWID()) --on choisit un prénom au hasard dans la table des noms
+			SET @taux_remise = (select cast(round((30)* rand() + 1,0) as integer))
 		END
 
 		IF @typeChar = 'S'
 		BEGIN
-			SET @nom = @nom + 'SARL'
-			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
-			IF @taux_remise > 50 
-			BEGIN
-				SET @taux_remise = 0
-			END
+			SET @nom = 'SARL ' + @nom -- Olivier # 07/09/2015
+			SET @taux_remise = (select cast(30* rand() + 1) as integer))
 		END
 		
 		IF @typeChar = 'P'
 		BEGIN
-			SET @nom = @nom + ' PRO ' + CAST(@i as nvarchar)
-			SET @taux_remise = (select cast(round((99)* rand() + 1,0) as integer))
-			IF @taux_remise > 50 
-			BEGIN
-				SET @taux_remise = 0
-			END
+			SET @nom = 'PRO ' + @nom -- Olivier # 07/09/2015
+			SET @taux_remise = (select cast(30* rand() + 1) as integer))
 		END
 
--- Date de naissance aléatoire sur les 80 dernières années
+		
+		-- Date de naissance aléatoire sur les 80 dernières années
 		IF @typeChar = 'I' OR @typeChar = 'N' OR @typeChar = 'P' 
 		BEGIN
-			SET @date_naissance = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 31025) * -1, getdate()))
+			-- SET @date_naissance = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 31025) * -1, getdate()))
+			SET @date_naissance = DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 29200), '01/01/1920'); -- Olivier # 07/09/2015
 		END
 		ELSE
 		BEGIN
 			SET @date_naissance = '01/01/0001' 
 		END
 		
--- Date de souscription aléatoire sur les 20 dernières années
-		SET @date_souscription = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 7300) * -1, getdate()))
+		-- Date de souscription aléatoire sur les 20 dernières années
+		-- SET @date_souscription = (SELECT dateadd(day, (abs(CHECKSUM(newid())) % 7300) * -1, getdate()))
+		SET @date_souscription = DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 7300), '01/01/1995') -- Olivier # 07/09/2015
 
--- Code fidélité aléatoire
-        SET @code_fidelite = ''
+		
+		-- Code fidélité aléatoire : Série de 12 chiffres 
+        IF @taux_remise > 0
+		BEGIN
+			@code_fidelite = FORMAT (cast((1000000000000-1) * rand() + 1) as integer, '000000000000') -- Olivier # 07/09/2015  
+		END
+		/*
+		SET @code_fidelite = ''
 	    IF @taux_remise > 0
 		BEGIN
 		   	SET @length = (select cast(round((16 -1)* rand() + 1,0) as integer)) + 1
@@ -812,6 +855,7 @@ WHILE(@i <= @nb_insert)
 				SET @j += 1
 			END
 		END
+		*/
 
 -- Insertion en table Clients
 	INSERT INTO [ODE_DATAWAREHOUSE].[DIM_CLIENTS]
@@ -834,6 +878,12 @@ WHILE(@i <= @nb_insert)
     SET @i += 1
 
 END
+
+-- Drop de la table temporaire
+-- Olivier # 07/09/2015
+DROP TABLE [ODE_DATAWAREHOUSE].[NOMS]
+GO
+
 
 
 
@@ -914,8 +964,8 @@ DECLARE @ecartMoyenMarge NUMERIC(4,1);
 
 
 -- Constantes du code
-SET @nbrAnnuelVenteInternet = 2; -- 2200000;	 -- Nombre de ventes anuelles sur Internet. Cible : 2.2 M
-SET @nbrAnnuelVenteMagasin = 9; -- 9600000;	-- Nombre de ventes anuelles en Magasin. Cible : 9.6 M
+SET @nbrAnnuelVenteInternet = 200000;	 -- Nombre de ventes anuelles sur Internet. Cible : 200 000
+SET @nbrAnnuelVenteMagasin  = 800000;	-- Nombre de ventes anuelles en Magasin. Cible : 800 000
 SET @anneeDebut = 2010;					-- Annee de debut, incluse
 SET @anneeFin = 2015;					-- Annee de fin, incluse
 SET @numTickets = 1;					-- Numero du 1er ticket de caisse (Arbitraire)
@@ -1110,10 +1160,10 @@ BEGIN
 		END;
 		
 
-		-----------------------------------------------------------------
-		-- Affichage pour suivi du script tous les 1000 tickets de caisse
-		-----------------------------------------------------------------
-		IF(@numTickets % 1000 = 0)
+		------------------------------------------------------------------
+		-- Affichage pour suivi du script tous les 10000 tickets de caisse
+		------------------------------------------------------------------
+		IF(@numTickets % 10000 = 0)
 		BEGIN
 			PRINT 'Ticket de caisse no. ' + cast(@numTickets as nvarchar);
 		END;
