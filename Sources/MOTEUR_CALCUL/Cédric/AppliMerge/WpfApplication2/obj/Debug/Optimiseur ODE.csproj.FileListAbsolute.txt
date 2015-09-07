@@ -104,3 +104,19 @@ C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
 C:\Users\Cédric\Desktop\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.dll
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache

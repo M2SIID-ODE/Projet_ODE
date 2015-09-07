@@ -33,7 +33,7 @@ namespace WpfApplication2
     {
         // Membres
         private string dimensionName; // Nom "officiel" de la dimension - potentiellement plusieurs si "dimensionOrder" >= 2
-        private int dimensionCount; // Nombre de lignes de la dimension
+        private long dimensionCount; // Nombre de lignes de la dimension
         private int dimensionMemory; // Taille d'une ligne, en octets
         private int dimensionOrder; // Indique la dimension du cuboide. Ex : 1 - 1D / 2 : 2D...
 
@@ -47,7 +47,7 @@ namespace WpfApplication2
         }
 
         // Constructeur avec (name, count, dimensionOrder) comme arguments
-        public Dimension(string inDimensionName, int inDimensionCount, int inDimensionOrder)
+        public Dimension(string inDimensionName, long inDimensionCount, int inDimensionOrder)
         {
             SetDimensionName(inDimensionName);
             SetDimensionCount(inDimensionCount);
@@ -57,12 +57,12 @@ namespace WpfApplication2
 
         // Methodes
         public void SetDimensionName(string inDimensionName) { dimensionName = String.Copy(inDimensionName); }
-        public void SetDimensionCount(int inDimensionCount) { dimensionCount = inDimensionCount; }
+        public void SetDimensionCount(long inDimensionCount) { dimensionCount = inDimensionCount; }
         public void SetDimensionMemory(int inDimensionMemory) { dimensionMemory = inDimensionMemory; }
         // REM : Pas d'accesseur Set pour "dimensionOrder" car parametré à l'instanciation de classe
 
         public string GetDimensionName() { return (dimensionName); }
-        public int GetDimensionCount() { return (dimensionCount); }
+        public long GetDimensionCount() { return (dimensionCount); }
         public int GetDimensionMemory() { return (dimensionMemory); }
         public int GetDimensionOrder() { return (dimensionOrder); }
     }
@@ -633,7 +633,7 @@ namespace WpfApplication2
                 // 3eme retour : [TOTAL_MEM_SIZE]
                 if (listDim1D[i].GetDimensionCount() != 0)
                 {
-                    listDim1D[i].SetDimensionMemory(readerPart2.GetInt32(0) / listDim1D[i].GetDimensionCount());
+                    listDim1D[i].SetDimensionMemory((int)(readerPart2.GetInt32(0) / listDim1D[i].GetDimensionCount()));
                 }
                 else
                 {
@@ -645,6 +645,10 @@ namespace WpfApplication2
             readerPart2.Close();
         }
 
+		/* ************************** */
+        /* TO DO : passage en WS JAVA */
+        /* ************************** */
+		
         // Algorithme des combinaisons (fonction récursive qui retroune l'ensemble des combinaisons possibles de notre liste listDim1D
         static void GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
         {
@@ -738,6 +742,10 @@ namespace WpfApplication2
             }
         }
 
+		/* ************************** */
+        /* TO DO : passage en WS JAVA */
+        /* ************************** */
+		
         // Algorithme de Metropolis
         static void Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, int[] sol_act)
         {
@@ -778,27 +786,24 @@ namespace WpfApplication2
             }
         }
 
-		// -- Olivier # 31/08/2015
+		// -- Olivier # 07/09/2015
 
-        /// <summary>
-        /// Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
-        /// Solution retournée : Tab [INT] de 0 / 1
-        /// </summary>
-        /// <param name="listCuboides"></param>
-        /// <param name="seuil_poids"></param>
-        /// <param name="nb_boucle"></param>
-        /// <param name="sol_act"></param>
-
+		/* ************************** */
+        /* TO DO : passage en WS JAVA */
+        /* ************************** */
+		
+		// Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
         static void MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, int[] selectedViews)
         {
-            int totalSize = 0;
-            int benefit;
-            int maxBenefit;
+            long totalSize;
+            long viewSize;
+            long benefit;
+            long maxBenefit;
             int childrenView;
             int bestView;
             string stmt;
-            // List<String> listDim1Di = new List<String>();
-
+            int maxDim;
+            int selection;
 
 
             // RAZ de la liste des vues selectionnees
@@ -810,71 +815,103 @@ namespace WpfApplication2
 
             Console.WriteLine("ALGORITHME DE MATERIALISATION PARTIELLE : ");
 
-            // On commence par selectioner la vue de dimension la plus élevée
-            // Toujours le dernier item de la liste des vues, cf. remplissage de "listCuboides" par la méthode "GetCombinaisons"
-            selectedViews[selectedViews.Length - 1] = 1;
+            // On commence par selectioner la vue de dimension la plus élevée (le "non-sommé")
+            maxDim = 0;
+            selection = 0;
+            for(int i=0; i<listCuboides.Count; i++)
+            {
+                if (listCuboides[i].GetDimensionOrder() > maxDim) { maxDim = listCuboides[i].GetDimensionOrder(); selection = i; }
+            }
+            selectedViews[selection] = 1;
+            // Console.WriteLine("Top {0} = {1}", selection, maxDim);  // TEMP
 
 
             // Tant qu'il reste de la mémoire à occuper
+            totalSize = listCuboides[selection].GetDimensionCount() * listCuboides[selection].GetDimensionMemory();
+            Console.WriteLine("Initial size : {0} Go", totalSize/(1024 * 1024 * 1024)); // TEMP
+            Console.WriteLine("Seuil size : {0} Go", seuil_poids / (1024 * 1024 * 1024)); // TEMP
+
             while (totalSize < seuil_poids)
             {
+                // Console.WriteLine("Memoire {0} sur {1}", totalSize, seuil_poids);  // TEMP
 
                 // RAZ du max du bénéfice et de l'index de la meilleure vue
                 maxBenefit = 0;
-                bestView = 0;
+                bestView = -1;
 
                 // Sur toutes les vues i encore disponibles
-                foreach (int i in selectedViews)
+                for (int i=0; i<selectedViews.Count(); i++)
                 {
+                    // Stop utilisateur                              
+                    // Console.WriteLine("Press any key to continue"); Console.ReadKey(); // TEMP
+
                     // Vue déjà traitée : On passe
                     if (selectedViews[i] == 1) { continue; }
 
                     // RAZ du bénéfice en cours
-                    benefit = 0;
+                    benefit = 0L;
 
                     // On crée la liste des composantes 1D de la vue j à partir de ses noms
                     stmt = string.Copy(listCuboides[i].GetDimensionName());
                     stmt.Trim();  // Supression de tous les espaces
-                    string[] listDim1Di = stmt.Split(new Char[] {'*'});  // Découpage par le séparateur '*'
+                    string[] listDim1Di = (stmt.Split(new Char[] { '*' }));  // Découpage par le séparateur '*'
+                    for (int k=0; k<listDim1Di.Count(); k++) { listDim1Di[k] = listDim1Di[k].Trim(); }
 
+                    // foreach (string s in listDim1Di) { Console.WriteLine("{0} >" + s + "< {1}",i, listCuboides[i].GetDimensionOrder()); }  // TEMP
 
                     // Sur toutes les vues j encore disponibles et uniquements les enfants de i : On va sommer leurs bénéfices
-                    foreach (int j in selectedViews)
+                    for (int j=0; j < selectedViews.Count(); j++)
                     {
                         // Vue déjà traitée ou celle en cours : On passe
-                        if (selectedViews[j] == 1) { continue; }
+                        if (selectedViews[j] == 1 || i == j) { continue; }
 
                         // La vue j est-elle enfant de la vue i ?
 
                         // Test 1 : Les enfants ont TOUJOURS un rang plus élévé que leurs parents
                         if (listCuboides[j].GetDimensionOrder() < listCuboides[i].GetDimensionOrder()) { continue; }   // Non car hierarchiquement superieure ou de même niveau
 
-                        // Test 2 : Les parents contienent toujours TOUTES les dimensions 1D de leurs enfants
-                        foreach(string item in listDim1Di)
-                        {
-                            if(item == null) { continue;  } // Securité
-                            if(listCuboides[i].GetDimensionName().IndexOf(item) == -1) { continue; } // Si au moins un élement est introuvable => Pas parent => On passe
-                        }
+                        // Console.WriteLine("i : {0} // dimOrder : {1} # j : {2} // dimOrder : {3}", i, listCuboides[i].GetDimensionOrder(), j, listCuboides[j].GetDimensionOrder()); // TEMP
 
+                        
+                        // Test 2 : Les parents contienent toujours TOUTES les dimensions 1D de leurs enfants
+                        foreach (string item in listDim1Di)
+                        {
+                            if (item == null) { continue; } // Securité
+                            if (listCuboides[i].GetDimensionName().IndexOf(item) == -1) { continue; } // Si au moins un élement est introuvable => Pas parent => On passe
+                        }
 
                         // Si les tests 1 & 2 sont OK : j est bien enfant de i
                         childrenView = j;
 
                         // Calcul du gain : Count de la vue-parent (i) - Count de la vue-enfant (j)
                         benefit += (listCuboides[i].GetDimensionCount() - listCuboides[childrenView].GetDimensionCount());
-                    }
+                    } // FIN du for int j
 
-                    // Actualisation de la meilleure vue et du meilleur bénéfice
-                    if (benefit > maxBenefit)
+                    // Actualisation de la meilleure vue et du meilleur bénéfice SSI taille acceptable !
+                    viewSize = listCuboides[i].GetDimensionMemory() * listCuboides[i].GetDimensionCount();
+                    Console.WriteLine("View[{0}] : {1}", i, viewSize / (1024 * 1024 * 1024)); // TEMP
+                    if (benefit > maxBenefit && viewSize + totalSize < seuil_poids)
                     {
-                        bestView = i;
+                        bestView = i;  // Désigne la vue i ayant le meilleur bénéfice "maxBenefit"
                         maxBenefit = benefit;
                     }
-                }
+                } // FIN du for int i
+
 
                 // Enregistrement de la best view comme selectionnée
-                selectedViews[bestView] = 1;
-            }
+                if (bestView == -1){ break; } // Rien de convaincant... WHILE fini
+                else {
+                    // Validation de la vue comme selectionnée
+                    selectedViews[bestView] = 1;
+
+                    // Ajout du poids de la nouvelle vue
+                    Console.WriteLine("bestView:{0} / size:{1} / line:{2}", bestView, listCuboides[bestView].GetDimensionMemory(), listCuboides[bestView].GetDimensionCount());  // TEMP
+                    totalSize += listCuboides[bestView].GetDimensionMemory() * listCuboides[bestView].GetDimensionCount();
+                    Console.WriteLine("Total size apres selection de {0} : {1} Go", bestView, totalSize / (1024 * 1024 * 1024)); // TEMP
+                }
+                
+
+            } // FIN du while totalSize < seuil_poids
 
 
             // Affichage de la solution retournée
@@ -885,12 +922,16 @@ namespace WpfApplication2
             }
             Console.WriteLine();
         }
-
-
-        // -- Fin Olivier # 31/08/2015
+        // -- Fin Olivier # 07/09/2015
    
-    // Fonction de création des aggrgéats
-    static int CreateAgg(int[] solution, List<Dimension> listCuboides)
+   
+   
+   		/* ************************** */
+        /* TO DO : passage en WS JAVA */
+        /* ************************** */
+		
+		// Fonction de création des aggrgéats
+		static int CreateAgg(int[] solution, List<Dimension> listCuboides)
         {
             int indice = 0;
             Server srv = new Server();
