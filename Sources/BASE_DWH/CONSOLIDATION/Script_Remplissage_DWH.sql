@@ -1,4 +1,4 @@
-/*============================================================================
+﻿/*============================================================================
   
   Fichier:     Script_Remplissage_DWH.sql
 
@@ -22,7 +22,7 @@ GO
 
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
-:setvar OdeCsvPath "Z:\GitHub\Projet_ODE\Sources\BASE_DWH\CONSOLIDATION\Donnees\"
+:setvar OdeCsvPath "C:\CONSOLIDATION\Donnees\"
 
 
 
@@ -224,12 +224,10 @@ WITH (
 
 DECLARE @i INT = 0
 
-WHILE @i < 40
-BEGIN
-	-- on crée une table temporaire grâce aux jointures (left join) pour obtenir un "catalogue" de 24 240 références différentes
+-- on crée une table temporaire grâce aux jointures (left join) pour obtenir un "catalogue" de 24 240 références différentes
 	SELECT ROW_NUMBER() OVER(ORDER BY NEWID()) as id,
 		SOUS_FAMILLES.SOUS_FAMILLES_PK as categorie,
-		SOUS_FAMILLES.LIB_SOUS_FAMILLES + ' ' + PRODUITS.LIB_PRODUIT + '_' + @i as Lib_prod, -- on crée le champ du libellé du produit (tant qu on y est) en concaténant le libellé de la sous-famille avec la spécification du produit
+		SOUS_FAMILLES.LIB_SOUS_FAMILLES + ' ' + PRODUITS.LIB_PRODUIT + '_' + cast(@i as varchar) as Lib_prod , -- on crée le champ du libellé du produit (tant qu on y est) en concaténant le libellé de la sous-famille avec la spécification du produit -- Bernard 10/09/2015
 		MARQUES.LIB_MARQUE as marque,
 		FOURNISSEURS.LIB_FOURNISSEUR as fournisseur
 	INTO [ODE_DATAWAREHOUSE].[TABLE_TEMP]
@@ -242,6 +240,32 @@ BEGIN
 		LEFT JOIN [ODE_DATAWAREHOUSE].[SOUS_FAMILLES] ON FAMILLES.FAMILLES_PK = SOUS_FAMILLES.FAMILLES_SFAM
 	ORDER BY NEWID()
 	
+	SET @i = 1 + @i;
+
+WHILE @i < 40
+BEGIN
+	-- on insert les enrigistrements dans la  table temporaire grâce aux jointures (left join) pour obtenir un "catalogue" de 24 240 références différentes -- Bernard - 10/09/2015
+	INSERT INTO [ODE_DATAWAREHOUSE].[TABLE_TEMP]
+           ([id]
+           ,[categorie]
+           ,[Lib_prod]
+           ,[marque]
+           ,[fournisseur])
+	(
+	SELECT ROW_NUMBER() OVER(ORDER BY NEWID()) as id,
+		SOUS_FAMILLES.SOUS_FAMILLES_PK as categorie,
+		SOUS_FAMILLES.LIB_SOUS_FAMILLES + ' ' + PRODUITS.LIB_PRODUIT + '_' + cast(@i as varchar) as Lib_prod , -- on crée le champ du libellé du produit (tant qu on y est) en concaténant le libellé de la sous-famille avec la spécification du produit
+		MARQUES.LIB_MARQUE as marque,
+		FOURNISSEURS.LIB_FOURNISSEUR as fournisseur
+		FROM [ODE_DATAWAREHOUSE].[UNIVERS]
+		LEFT JOIN [ODE_DATAWAREHOUSE].[RAYONS] ON UNIVERS.UNIVERS_PK = RAYONS.UNIVERS_RAY
+		LEFT JOIN [ODE_DATAWAREHOUSE].[FOURNISSEURS] ON UNIVERS.UNIVERS_PK = FOURNISSEURS.UNIVERS_FOUR
+		LEFT JOIN [ODE_DATAWAREHOUSE].[FAMILLES] ON RAYONS.RAYONS_PK = FAMILLES.RAYONS_FAM
+		LEFT JOIN [ODE_DATAWAREHOUSE].[MARQUES] ON RAYONS.RAYONS_PK = MARQUES.RAYONS_MAR
+		LEFT JOIN [ODE_DATAWAREHOUSE].[PRODUITS] ON RAYONS.RAYONS_PK = PRODUITS.RAYONS_PDT
+		LEFT JOIN [ODE_DATAWAREHOUSE].[SOUS_FAMILLES] ON FAMILLES.FAMILLES_PK = SOUS_FAMILLES.FAMILLES_SFAM
+	
+	)
 	SET @i = 1 + @i;
 END
 
@@ -811,13 +835,13 @@ WHILE(@i <= @nb_insert)
 		IF @typeChar = 'S'
 		BEGIN
 			SET @nom = 'SARL ' + @nom -- Olivier # 07/09/2015
-			SET @taux_remise = (select cast(30* rand() + 1) as integer))
+			SET @taux_remise = cast(30* rand() + 1 as integer)
 		END
 		
 		IF @typeChar = 'P'
 		BEGIN
 			SET @nom = 'PRO ' + @nom -- Olivier # 07/09/2015
-			SET @taux_remise = (select cast(30* rand() + 1) as integer))
+			SET @taux_remise = cast(30* rand() + 1 as integer)
 		END
 
 		
@@ -840,7 +864,7 @@ WHILE(@i <= @nb_insert)
 		-- Code fidélité aléatoire : Série de 12 chiffres 
         IF @taux_remise > 0
 		BEGIN
-			@code_fidelite = FORMAT (cast((1000000000000-1) * rand() + 1) as integer, '000000000000') -- Olivier # 07/09/2015  
+		SET	@code_fidelite = FORMAT ((1000000000000-1) * rand() + 1, '000000000000') -- Olivier # 07/09/2015  
 		END
 		/*
 		SET @code_fidelite = ''
