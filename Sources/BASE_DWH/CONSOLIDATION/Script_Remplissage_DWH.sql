@@ -22,7 +22,7 @@ GO
 
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
-:setvar OdeCsvPath "C:\CONSOLIDATION\Donnees\"
+:setvar OdeCsvPath "F:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\Donnees\"
 
 
 
@@ -703,7 +703,7 @@ SET @traceOn = 0;						-- Activation de la trace : 1
 
 --La table ville devra etre chargée en amont
 --!!!!!! modifier ici le nombre poste total souhaité à la fin du traitement
-SET @nb_poste_total = 100000
+SET @nb_poste_total = 100000 -- Cible : 100 000
 --!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -1104,7 +1104,7 @@ BEGIN
 			BEGIN
 				SET @tauxMargeMoyen = @tauxMargeMoyenMagasin; -- Entre 14.8 et 54.8 pourcents de marge en Magasin - Moyenne 34.8
 			END;
-			SET @tauxMargeArticle = cast(@tauxMargeMoyen + @ecartMoyenMarge * (2* rand() - 1) as NUMERIC(4,1));
+			SET @tauxMargeArticle = cast(@tauxMargeMoyen as NUMERIC(4,1));
 
 			IF(@traceOn = 1)
 				PRINT '@tauxMargeArticle = '+ cast(@tauxMargeArticle as nvarchar);
@@ -1136,12 +1136,12 @@ BEGIN
 			-------------------------------------------------------------
 			-- Egale à [MONTANT_HT_VENTE] * [DIM_PRODUITS.TAUX_TVA] / 100
 			-------------------------------------------------------------
-			SELECT @montantTvaVente = @montantHtVente * (1 + [TAUX_TVA] / 100) FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS] WHERE [PRODUIT_PK] = @produitFk;
+			SELECT @montantTvaVente = @montantHtVente * ([TAUX_TVA] / 100) FROM [ODE_DATAWAREHOUSE].[DIM_PRODUITS] WHERE [PRODUIT_PK] = @produitFk;
 
 			-------------------------------------------------------
 			-- Egale au taux de marge de l article * son montant HT
 			-------------------------------------------------------
-			SET @margeBrute = @montantHtVente * (1 + @tauxMargeArticle / 100);
+			SET @margeBrute = @montantHtVente * (@tauxMargeArticle / 100);
 
 			IF(@traceOn = 1)
 			BEGIN
