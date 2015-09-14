@@ -356,6 +356,12 @@ WITH (
 )
 GO
 
+-- Olivier # 14/09/2015
+-- MAJ pour les codes postaux à 4 chiffres - Toujours sur 5 en France
+UPDATE DATAWAREHOUSEODE.ODE_DATAWAREHOUSE.DIM_VILLES
+SET CODE_POSTAL = '0'+ RTRIM(CODE_POSTAL)
+WHERE LEN(CODE_POSTAL)=4;
+
 
 -- ------------------
 -- Olivier 04/08/2015
