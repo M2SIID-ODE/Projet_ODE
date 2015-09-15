@@ -1,8 +1,8 @@
-Ville;Taux_remise;Type;Nom;D_naiss;D_inscr;C_fid;C_fid_bis
-4;20;A;JulesCesar;23/07/1985;28/08/2015;1;1
-4;10;P;JulesCesar;23/07/1985;29/08/2015;1;1
-5;10;I;FrancoisHollande;23/03/2013;29/08/2015;2;2
-6;0;N;AngelaMerkel;24/01/1952;30/08/2015;3;3
-7;50;P;BarakObama;05/09/1979;31/08/2015;4;4
-4;0;P;Chourreau;01/01/1965;01/09/2015;5;5
-11;12;A;Boris;26/03/1668;02/09/2015;5;5
+Ville;Taux_remise;Type;Nom;D_naiss;D_inscr;C_fid
+4;20;A;JulesCesar;23/07/1985;28/08/2015;1
+4;10;P;JulesCesar;23/07/1985;29/08/2015;1
+5;10;I;FrancoisHollande;23/03/2013;29/08/2015;2
+6;0;N;AngelaMerkel;24/01/1952;30/08/2015;3
+7;50;P;BarakObama;05/09/1979;31/08/2015;4
+4;0;P;Chourreau;01/01/1965;01/09/2015;5
+11;12;A;Boris;26/03/1668;02/09/2015;5

@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x003C_none_x003E_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="C:\Users\Beatrice\Documents\Visual Studio 2012\projects\ETL Test\Base_Clients_Marketing.csv">
+      DTS:ConnectionString="C:\Users\Beatrice\Documents\Visual Studio 2012\projects\ETL Test - V2\Base_Clients_Marketing.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -20,7 +20,7 @@
           DTS:DataType="3"
           DTS:TextQualified="True"
           DTS:ObjectName="Ville"
-          DTS:DTSID="{88F932B1-18AB-4BF6-BD9F-E702F98915B3}"
+          DTS:DTSID="{A501E90E-BB8F-4EDE-9B15-41AB816B222B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,16 +30,16 @@
           DTS:DataScale="2"
           DTS:TextQualified="True"
           DTS:ObjectName="Taux_remise"
-          DTS:DTSID="{93F64C66-D01C-4D99-8883-FBAFB7D916B9}"
+          DTS:DTSID="{B18A1971-62FB-4641-9855-38BF618AAD4D}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x003B_"
-          DTS:MaximumWidth="1"
+          DTS:MaximumWidth="255"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="Type"
-          DTS:DTSID="{DAC10058-507C-45B2-9004-C85355672384}"
+          DTS:DTSID="{7FC4863D-E398-43CB-BC9E-C0F91925222F}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,24 +48,32 @@
           DTS:DataType="130"
           DTS:TextQualified="True"
           DTS:ObjectName="Nom"
-          DTS:DTSID="{791D0D67-18DF-4C4E-9CEC-2C7FC632BA84}"
+          DTS:DTSID="{134212E8-E6DB-431A-85BE-226369F1F97B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x003B_"
           DTS:DataType="133"
           DTS:TextQualified="True"
-          DTS:ObjectName="Date_naiss"
-          DTS:DTSID="{61ADF420-60B0-4F42-98F2-C1D1978C23D8}"
+          DTS:ObjectName="D_naiss"
+          DTS:DTSID="{B7DCA98A-43E4-451E-8232-AA66C50C48C2}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x003B_"
+          DTS:DataType="133"
+          DTS:TextQualified="True"
+          DTS:ObjectName="D_inscr"
+          DTS:DTSID="{222F1F98-7338-4167-B42F-C34F73217F90}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x000D__x000A_"
-          DTS:MaximumWidth="50"
-          DTS:DataType="129"
+          DTS:MaximumWidth="255"
+          DTS:DataType="130"
           DTS:TextQualified="True"
-          DTS:ObjectName="Date_inscr"
-          DTS:DTSID="{8D9613B3-CD5A-4B72-AD8B-75C840C2EA09}"
+          DTS:ObjectName="C_fid"
+          DTS:DTSID="{05E93554-87E0-42EB-BDF5-9DCE68C2702B}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>
