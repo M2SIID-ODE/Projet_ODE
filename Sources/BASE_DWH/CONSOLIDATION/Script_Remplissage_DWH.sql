@@ -22,7 +22,7 @@ GO
 
  
 -- OLIVIER # 13/07/2015 : Mise en variable du PATH vers le répertoire contenant les CSV à charger
-:setvar OdeCsvPath "F:\Master 2\D3XX - Projet\1 - Projet ODE\TO COMMIT\Donnees\"
+:setvar OdeCsvPath "Z:\GitHub\Projet_ODE\Sources\BASE_DWH\CONSOLIDATION\Donnees\"
 
 
 
@@ -273,7 +273,7 @@ END
 
 -- REMPLISSAGE TABLES
 -- on crée les variables qui vont bien
-declare @nb_lignes_2 int = 10
+declare @nb_lignes_2 int = 24000 -- Olivier # 19/09/2015 : Augmentation du nombre de produit de 10 à 24 000
 declare @compteur_2 int = 0
 
 declare @categorie_fk int
@@ -286,7 +286,7 @@ declare @grossiste nvarchar(256)
 declare @id int
 
 
-WHILE @compteur_2 < @nb_lignes_2 -- on lance une boucle while pour remplir notre table TABLE_TEMP ?
+WHILE @compteur_2 < @nb_lignes_2 -- on lance une boucle while pour remplir notre table TABLE_TEMP
 BEGIN
 	SET @categorie_fk = (SELECT TOP 1 categorie FROM [ODE_DATAWAREHOUSE].[TABLE_TEMP]) --on récupère les champs qui nous intéresse
 	SET @lib_pdt = (SELECT TOP 1 Lib_prod FROM [ODE_DATAWAREHOUSE].[TABLE_TEMP])
@@ -994,8 +994,8 @@ DECLARE @ecartMoyenMarge NUMERIC(4,1);
 
 
 -- Constantes du code
-SET @nbrAnnuelVenteInternet = 200000;	 -- Nombre de ventes anuelles sur Internet. Cible : 200 000
-SET @nbrAnnuelVenteMagasin  = 800000;	-- Nombre de ventes anuelles en Magasin. Cible : 800 000
+SET @nbrAnnuelVenteInternet = 46000;	 -- Nombre de ventes anuelles sur Internet. Cible : 46 000
+SET @nbrAnnuelVenteMagasin  = 180000;	-- Nombre de ventes anuelles en Magasin. Cible : 180 000
 SET @anneeDebut = 2010;					-- Annee de debut, incluse
 SET @anneeFin = 2015;					-- Annee de fin, incluse
 SET @numTickets = 1;					-- Numero du 1er ticket de caisse (Arbitraire)
