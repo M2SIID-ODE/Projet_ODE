@@ -21,7 +21,7 @@
 :on error exit
 
 -- PATH vers le répertoire /DATA de votre SQL SERVER 2014
-:setvar OdeDwhPath "F:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA\"
+:setvar OdeDwhPath "Y:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA2\"
 
 IF '$(OdeDwhPath)' IS NULL OR '$(OdeDwhPath)' = ''
 BEGIN
