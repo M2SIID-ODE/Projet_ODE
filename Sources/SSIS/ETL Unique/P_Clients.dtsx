@@ -11,8 +11,8 @@
   DTS:LocaleID="1036"
   DTS:ObjectName="P_Clients"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{9B37CEAA-0C67-4DDD-990B-48E61818280E}">
+  DTS:VersionBuild="65"
+  DTS:VersionGUID="{2150432E-3511-42AA-A528-8E95359E5191}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3216,7 +3216,7 @@
         <NodeLayout
           Size="202,42"
           Id="Package\Tâche de flux de données"
-          TopLeft="5.5,5.5" />
+          TopLeft="53.5,35.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

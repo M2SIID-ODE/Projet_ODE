@@ -3,15 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_Unique", "..\..\ETL Unique\ETL_Unique.dtproj", "{54101646-6BA9-491D-87B8-EF36EAC32C00}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_Unique", "ETL_Unique.dtproj", "{41C3E664-0ABB-4D47-90C2-E85090C109CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{54101646-6BA9-491D-87B8-EF36EAC32C00}.Development|Default.ActiveCfg = Development
-		{54101646-6BA9-491D-87B8-EF36EAC32C00}.Development|Default.Build.0 = Development
+		{41C3E664-0ABB-4D47-90C2-E85090C109CD}.Development|Default.ActiveCfg = Development
+		{41C3E664-0ABB-4D47-90C2-E85090C109CD}.Development|Default.Build.0 = Development
+		{41C3E664-0ABB-4D47-90C2-E85090C109CD}.Development|Default.Deploy.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
