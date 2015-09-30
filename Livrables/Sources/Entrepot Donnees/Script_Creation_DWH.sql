@@ -4,7 +4,7 @@
 
   Résumé:  Crée le DWH (OLTP) du projet ODE
   Date:     02/07/2015
-  Updated:  30/09/2015
+  Updated:  23/08/2015
 
   SQL Server Version: 2014
   
@@ -21,8 +21,7 @@
 :on error exit
 
 -- PATH vers le répertoire /DATA de votre SQL SERVER 2014
--- NOTE : Lors de l'execution de ce script, si erreur d'acces à ce répertoire : Changer /DATA en /DATA2 ou /DATA3
-:setvar OdeDwhPath "Y:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA\"
+:setvar OdeDwhPath "Y:\OLTP\MSSQL12.MSSQLSERVER\MSSQL\DATA2\"
 
 IF '$(OdeDwhPath)' IS NULL OR '$(OdeDwhPath)' = ''
 BEGIN
