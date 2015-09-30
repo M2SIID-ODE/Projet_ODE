@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Evolution des Ventes par mois et par Famille de Produit.</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>20pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Height>0.36in</Height>
+        <Width>7.98958in</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Tablix Name="table1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.66319in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.66319in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.66319in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.22in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>FAMILLE</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>SteelBlue</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>MOIS</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>SteelBlue</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>UNITES VENDUES</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>SteelBlue</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.21in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="LIBEL_FAMILLE">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!LIBEL_FAMILLE.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>LIBEL_FAMILLE</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MOIS_NOM">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!MOIS_NOM.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>MOIS_NOM</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="UNITES_VENDUES">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!UNITES_VENDUES.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>UNITES_VENDUES</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="table1_Details_Group">
+                <DataElementName>Detail</DataElementName>
+              </Group>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+              <DataElementName>Detail_Collection</DataElementName>
+              <DataElementOutput>Output</DataElementOutput>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>REQ6</DataSetName>
+        <Top>0.36in</Top>
+        <Height>0.43in</Height>
+        <Width>7.98957in</Width>
+        <ZIndex>1</ZIndex>
+        <Style />
+      </Tablix>
+    </ReportItems>
+    <Height>0.79in</Height>
+    <Style />
+  </Body>
+  <Width>7.98958in</Width>
+  <Page>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSourceODE">
+      <ConnectionProperties>
+        <DataProvider>OLEDB-MD</DataProvider>
+        <ConnectString>Data Source=onyx_pc;Initial Catalog=CubeODE</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>fe11788c-6d21-46eb-8384-5b49c7eb31c8</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="REQ6">
+      <Query>
+        <DataSourceName>DataSourceODE</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="DIMTEMPSMOISNOM">
+            <Value>=Parameters!DIMTEMPSMOISNOM.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="DIMPRODUITSLIBELFAMILLE">
+            <Value>=Parameters!DIMPRODUITSLIBELFAMILLE.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText> SELECT NON EMPTY { [Measures].[UNITES VENDUES] } ON COLUMNS, NON EMPTY { ([DIM PRODUITS].[LIBEL FAMILLE].[LIBEL FAMILLE].ALLMEMBERS * [DIM TEMPS].[MOIS NOM].[MOIS NOM].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( STRTOSET(@DIMPRODUITSLIBELFAMILLE, CONSTRAINED) ) ON COLUMNS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
+            <CommandType>MDX</CommandType>
+            <QuerySpecification xsi:type="MDXQuerySpecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+              <Select>
+                <Items>
+                  <Item>
+                    <ID xsi:type="Level">
+                      <DimensionName>DIM PRODUITS</DimensionName>
+                      <HierarchyName>LIBEL FAMILLE</HierarchyName>
+                      <HierarchyUniqueName>[DIM PRODUITS].[LIBEL FAMILLE]</HierarchyUniqueName>
+                      <LevelName>LIBEL FAMILLE</LevelName>
+                      <UniqueName>[DIM PRODUITS].[LIBEL FAMILLE].[LIBEL FAMILLE]</UniqueName>
+                    </ID>
+                    <ItemCaption>LIBEL FAMILLE</ItemCaption>
+                    <UniqueName>true</UniqueName>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Level">
+                      <DimensionName>DIM TEMPS</DimensionName>
+                      <HierarchyName>MOIS NOM</HierarchyName>
+                      <HierarchyUniqueName>[DIM TEMPS].[MOIS NOM]</HierarchyUniqueName>
+                      <LevelName>MOIS NOM</LevelName>
+                      <UniqueName>[DIM TEMPS].[MOIS NOM].[MOIS NOM]</UniqueName>
+                    </ID>
+                    <ItemCaption>MOIS NOM</ItemCaption>
+                    <UniqueName>true</UniqueName>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>UNITES VENDUES</MeasureName>
+                      <UniqueName>[Measures].[UNITES VENDUES]</UniqueName>
+                    </ID>
+                    <ItemCaption>UNITES VENDUES</ItemCaption>
+                    <BackColor>true</BackColor>
+                    <ForeColor>true</ForeColor>
+                    <FontFamily>true</FontFamily>
+                    <FontSize>true</FontSize>
+                    <FontWeight>true</FontWeight>
+                    <FontStyle>true</FontStyle>
+                    <FontDecoration>true</FontDecoration>
+                    <FormattedValue>true</FormattedValue>
+                    <FormatString>true</FormatString>
+                  </Item>
+                </Items>
+              </Select>
+              <From>CubeODE</From>
+              <Filter>
+                <FilterItems>
+                  <FilterItem>
+                    <HierarchyUniqueName>[DIM TEMPS].[MOIS NOM]</HierarchyUniqueName>
+                    <Condition xsi:type="EqualTo">
+                      <Members>
+                        <Member>
+                          <MemberUniqueName>[DIM TEMPS].[MOIS NOM].[All]</MemberUniqueName>
+                        </Member>
+                      </Members>
+                      <Parametrized>true</Parametrized>
+                    </Condition>
+                  </FilterItem>
+                  <FilterItem>
+                    <HierarchyUniqueName>[DIM PRODUITS].[LIBEL FAMILLE]</HierarchyUniqueName>
+                    <Condition xsi:type="EqualTo">
+                      <Members>
+                        <Member>
+                          <MemberUniqueName>[DIM PRODUITS].[LIBEL FAMILLE].[All]</MemberUniqueName>
+                        </Member>
+                      </Members>
+                      <Parametrized>true</Parametrized>
+                    </Condition>
+                  </FilterItem>
+                </FilterItems>
+              </Filter>
+              <Calculations />
+              <Aggregates />
+              <QueryProperties />
+            </QuerySpecification>
+            <Query>
+              <Statement> SELECT NON EMPTY { [Measures].[UNITES VENDUES] } ON COLUMNS, NON EMPTY { ([DIM PRODUITS].[LIBEL FAMILLE].[LIBEL FAMILLE].ALLMEMBERS * [DIM TEMPS].[MOIS NOM].[MOIS NOM].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( STRTOSET(@DIMPRODUITSLIBELFAMILLE, CONSTRAINED) ) ON COLUMNS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</Statement>
+              <ParameterDefinitions>
+                <ParameterDefinition>
+                  <Name>DIMTEMPSMOISNOM</Name>
+                  <DefaultValues>
+                    <DefaultValue>[DIM TEMPS].[MOIS NOM].[All]</DefaultValue>
+                  </DefaultValues>
+                  <Caption>MOIS NOM</Caption>
+                  <HierarchyUniqueName>[DIM TEMPS].[MOIS NOM]</HierarchyUniqueName>
+                  <ParameterValuesQuery>
+                    <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM TEMPS].[MOIS NOM].ALLMEMBERS ON ROWS FROM [CubeODE]</Statement>
+                    <ParameterizedStatement>
+                      <ReferencedParameters />
+                    </ParameterizedStatement>
+                  </ParameterValuesQuery>
+                  <MultipleValues>true</MultipleValues>
+                </ParameterDefinition>
+                <ParameterDefinition>
+                  <Name>DIMPRODUITSLIBELFAMILLE</Name>
+                  <DefaultValues>
+                    <DefaultValue>[DIM PRODUITS].[LIBEL FAMILLE].[All]</DefaultValue>
+                  </DefaultValues>
+                  <Caption>LIBEL FAMILLE</Caption>
+                  <HierarchyUniqueName>[DIM PRODUITS].[LIBEL FAMILLE]</HierarchyUniqueName>
+                  <ParameterValuesQuery>
+                    <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM PRODUITS].[LIBEL FAMILLE].ALLMEMBERS ON ROWS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])</Statement>
+                    <ParameterizedStatement>
+                      <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM PRODUITS].[LIBEL FAMILLE].ALLMEMBERS ON ROWS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])</Statement>
+                      <ReferencedParameters>
+                        <ReferencedParameter>
+                          <Name>DIMTEMPSMOISNOM</Name>
+                        </ReferencedParameter>
+                      </ReferencedParameters>
+                    </ParameterizedStatement>
+                  </ParameterValuesQuery>
+                  <MultipleValues>true</MultipleValues>
+                </ParameterDefinition>
+              </ParameterDefinitions>
+            </Query>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="LIBEL_FAMILLE">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[DIM PRODUITS].[LIBEL FAMILLE].[LIBEL FAMILLE]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MOIS_NOM">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[DIM TEMPS].[MOIS NOM].[MOIS NOM]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UNITES_VENDUES">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[UNITES VENDUES]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DIMTEMPSMOISNOM">
+      <Query>
+        <DataSourceName>DataSourceODE</DataSourceName>
+        <CommandText>WITH MEMBER [Measures].[ParameterCaption] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM TEMPS].[MOIS NOM].ALLMEMBERS ON ROWS FROM [CubeODE]</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
+            <CommandType>MDX</CommandType>
+            <Type>Query</Type>
+            <QuerySpecification xsi:type="MDXQuerySpecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+              <Select>
+                <Items>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterCaption</MeasureName>
+                      <UniqueName>[Measures].[ParameterCaption]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterCaption</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterValue</MeasureName>
+                      <UniqueName>[Measures].[ParameterValue]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterValue</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterLevel</MeasureName>
+                      <UniqueName>[Measures].[ParameterLevel]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterLevel</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                </Items>
+              </Select>
+              <From>CubeODE</From>
+              <Filter>
+                <FilterItems />
+              </Filter>
+              <Calculations />
+              <Aggregates />
+              <QueryProperties />
+            </QuerySpecification>
+            <Query>
+              <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM TEMPS].[MOIS NOM].ALLMEMBERS ON ROWS FROM [CubeODE]</Statement>
+              <ParameterDefinitions />
+            </Query>
+          </QueryDefinition>
+        </rd:DesignerState>
+        <rd:AutoGenerated>true</rd:AutoGenerated>
+        <rd:Hidden>true</rd:Hidden>
+      </Query>
+      <Fields>
+        <Field Name="ParameterCaption">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterCaption]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterValue">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterValue]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterLevel">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterLevel]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterCaptionIndented">
+          <Value>=Space(3*Fields!ParameterLevel.Value) + Fields!ParameterCaption.Value</Value>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DIMPRODUITSLIBELFAMILLE">
+      <Query>
+        <DataSourceName>DataSourceODE</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="DIMTEMPSMOISNOM">
+            <Value>=Parameters!DIMTEMPSMOISNOM.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>WITH MEMBER [Measures].[ParameterCaption] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM PRODUITS].[LIBEL FAMILLE].ALLMEMBERS ON ROWS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
+            <CommandType>MDX</CommandType>
+            <Type>Query</Type>
+            <QuerySpecification xsi:type="MDXQuerySpecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+              <Select>
+                <Items>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterCaption</MeasureName>
+                      <UniqueName>[Measures].[ParameterCaption]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterCaption</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterValue</MeasureName>
+                      <UniqueName>[Measures].[ParameterValue]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterValue</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                  <Item>
+                    <ID xsi:type="Measure">
+                      <MeasureName>ParameterLevel</MeasureName>
+                      <UniqueName>[Measures].[ParameterLevel]</UniqueName>
+                    </ID>
+                    <ItemCaption>ParameterLevel</ItemCaption>
+                    <FormattedValue>true</FormattedValue>
+                  </Item>
+                </Items>
+              </Select>
+              <From>CubeODE</From>
+              <Filter>
+                <FilterItems />
+              </Filter>
+              <Calculations />
+              <Aggregates />
+              <QueryProperties />
+            </QuerySpecification>
+            <Query>
+              <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM PRODUITS].[LIBEL FAMILLE].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM PRODUITS].[LIBEL FAMILLE].ALLMEMBERS ON ROWS FROM ( SELECT ( STRTOSET(@DIMTEMPSMOISNOM, CONSTRAINED) ) ON COLUMNS FROM [CubeODE])</Statement>
+              <ParameterDefinitions>
+                <ParameterDefinition>
+                  <Name>DIMTEMPSMOISNOM</Name>
+                  <DefaultValues>
+                    <DefaultValue>[DIM TEMPS].[MOIS NOM].[All]</DefaultValue>
+                  </DefaultValues>
+                  <Caption>MOIS NOM</Caption>
+                  <HierarchyUniqueName>[DIM TEMPS].[MOIS NOM]</HierarchyUniqueName>
+                  <ParameterValuesQuery>
+                    <Statement>WITH MEMBER [Measures].[ParameterCaption] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [DIM TEMPS].[MOIS NOM].ALLMEMBERS ON ROWS FROM [CubeODE]</Statement>
+                    <ParameterizedStatement>
+                      <ReferencedParameters />
+                    </ParameterizedStatement>
+                  </ParameterValuesQuery>
+                  <MultipleValues>true</MultipleValues>
+                </ParameterDefinition>
+              </ParameterDefinitions>
+            </Query>
+          </QueryDefinition>
+        </rd:DesignerState>
+        <rd:AutoGenerated>true</rd:AutoGenerated>
+        <rd:Hidden>true</rd:Hidden>
+      </Query>
+      <Fields>
+        <Field Name="ParameterCaption">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterCaption]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterValue">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterValue]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterLevel">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterLevel]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterCaptionIndented">
+          <Value>=Space(3*Fields!ParameterLevel.Value) + Fields!ParameterCaption.Value</Value>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="DIMTEMPSMOISNOM">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>[DIM TEMPS].[MOIS NOM].[All]</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>MOIS</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DIMTEMPSMOISNOM</DataSetName>
+          <ValueField>ParameterValue</ValueField>
+          <LabelField>ParameterCaptionIndented</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="DIMPRODUITSLIBELFAMILLE">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>[DIM PRODUITS].[LIBEL FAMILLE].[All]</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>FAMILLE</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DIMPRODUITSLIBELFAMILLE</DataSetName>
+          <ValueField>ParameterValue</ValueField>
+          <LabelField>ParameterCaptionIndented</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>fr-FR</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>601b68a2-ab53-4ac9-b749-6adec685dffc</rd:ReportID>
+</Report>

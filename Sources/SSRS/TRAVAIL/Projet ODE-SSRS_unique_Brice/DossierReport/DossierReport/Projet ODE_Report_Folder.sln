@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Projet ODE_Report", "Projet ODE_Report.rptproj", "{3995F357-80A1-487E-805E-CBFB8BC3F02F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Debug|Default.ActiveCfg = Debug
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Debug|Default.Build.0 = Debug
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Debug|Default.Deploy.0 = Debug
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.DebugLocal|Default.Build.0 = DebugLocal
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Release|Default.ActiveCfg = Release
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Release|Default.Build.0 = Release
+		{3995F357-80A1-487E-805E-CBFB8BC3F02F}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
