@@ -120,3 +120,6 @@ Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\ob
 Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
 Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
 Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb

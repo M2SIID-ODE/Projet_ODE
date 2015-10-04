@@ -11,8 +11,8 @@
   DTS:LocaleID="1036"
   DTS:ObjectName="P_Execution"
   DTS:PackageType="5"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{9ED7650B-38AE-4CBE-A323-15BC2B0E9A54}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{DD2C8054-E1E2-42CB-97BF-B66B06A8DFA7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="localhost.CubeODE">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=CubeODE;Provider=MSOLAP.6;Impersonation Level=Impersonate;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Cube_consolide;Provider=MSOLAP.6;Impersonation Level=Impersonate;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -100,12 +100,12 @@
       DTS:To="Package\Exécution ETL VENTES" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
-<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
-<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="sql12">
-  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
@@ -123,40 +123,6 @@
           Size="188,42"
           Id="Package\Exécution ETL VENTES"
           TopLeft="520.5,242.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Contrainte 1]"
-          TopLeft="374.5,175">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="240,67.5"
-              Start="0,0"
-              End="240,60">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.75"
-                    Point2="0,33.75"
-                    Point3="4,33.75" />
-                  <mssgle:LineSegment
-                    End="236,33.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="236,33.75"
-                    Point2="240,33.75"
-                    Point3="240,37.75" />
-                  <mssgle:LineSegment
-                    End="240,60" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Contrainte]"
           TopLeft="123.5,77.5">
@@ -183,6 +149,40 @@
                     Point3="251,31.75" />
                   <mssgle:LineSegment
                     End="251,48" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Contrainte 1]"
+          TopLeft="374.5,175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="240,67.5"
+              Start="0,0"
+              End="240,60">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.75"
+                    Point2="0,33.75"
+                    Point3="4,33.75" />
+                  <mssgle:LineSegment
+                    End="236,33.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="236,33.75"
+                    Point2="240,33.75"
+                    Point3="240,37.75" />
+                  <mssgle:LineSegment
+                    End="240,60" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
