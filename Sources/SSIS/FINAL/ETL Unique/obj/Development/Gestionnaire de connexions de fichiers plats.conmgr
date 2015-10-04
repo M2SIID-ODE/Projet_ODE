@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x003C_none_x003E_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="G:\ODE\bel\SSIS\ETL Clients\Base_Clients_Marketing.csv">
+      DTS:ConnectionString="C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Clients\Base_Clients_Marketing.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -20,7 +20,7 @@
           DTS:DataType="3"
           DTS:TextQualified="True"
           DTS:ObjectName="Ville"
-          DTS:DTSID="{75ED4E07-8835-456D-8A08-2FA76C0CB174}"
+          DTS:DTSID="{B497FE0B-58EF-4A44-B523-A634726E6E8E}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataScale="2"
           DTS:TextQualified="True"
           DTS:ObjectName="Taux_remise"
-          DTS:DTSID="{ADFBBED2-FC83-4DD6-A4D3-A4DA88C625B2}"
+          DTS:DTSID="{B7F4CC07-EB39-42CE-BBAB-9DDE7EBC9F2A}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="Type"
-          DTS:DTSID="{022F2E51-DD9E-4DEB-A4CC-47DE9EF5570B}"
+          DTS:DTSID="{B92E2A38-8CCE-4E15-87BA-0B81E721A3F9}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="130"
           DTS:TextQualified="True"
           DTS:ObjectName="Nom"
-          DTS:DTSID="{3FB8979F-2D2D-47E5-8597-9E3F0D4E82D5}"
+          DTS:DTSID="{D236E75B-9E17-4C31-85A2-454569A868A6}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -56,7 +56,7 @@
           DTS:DataType="133"
           DTS:TextQualified="True"
           DTS:ObjectName="D_naiss"
-          DTS:DTSID="{C52F143C-7DB9-4EED-A0BC-381D50FB214B}"
+          DTS:DTSID="{3AC2673D-A659-4689-9463-FE653CD43281}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -64,7 +64,7 @@
           DTS:DataType="133"
           DTS:TextQualified="True"
           DTS:ObjectName="D_inscr"
-          DTS:DTSID="{CB938EF1-DD54-4E04-AA02-0E0E7CEE4F1F}"
+          DTS:DTSID="{DCF0FE06-561E-4D5A-839B-AC3C2875C24B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -73,7 +73,7 @@
           DTS:DataType="130"
           DTS:TextQualified="True"
           DTS:ObjectName="C_fid"
-          DTS:DTSID="{5488A9E7-A257-4729-9598-45A0B5273F5F}"
+          DTS:DTSID="{FE203AFB-9885-40F4-AA51-C031AFE0B0EB}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

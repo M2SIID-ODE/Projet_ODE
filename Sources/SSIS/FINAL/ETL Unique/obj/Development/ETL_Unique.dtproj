@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">BEATRICE-PC</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvqOyWjWPp0uf9DRpLmQTugAAAAACAAAAAAAQZgAAAAEAACAAAABXKfl8weLk7rXIy3KrUfHWS8yqgCGgkDVeaKQXCM8d2wAAAAAOgAAAAAIAACAAAAAItGvJYAkqroyWbOoo5HTsaBoXv1E98NQ701pg5IuftZAAAABjkb94k4JVVa0gUFPkvG0F8pK3oAIa/oq/tGmkh6AdDTevgCy/23kXaTnLBoXxKyVQBtkVZ6PjcLofkogTa2UWjmn1t1PYNKosPoV9CqbiLTEsYFCbkzL7NhJDOK25br8bvI93y4woi8oGcDJQSV7sEEdDNa5KlSZFvC7YUM91oMTTr/NRVgDWlsTL5HSuTAtAAAAAYYMM0U+rqY5g/dhjuNwYRLC25vHoc5lPQa64OB/4tkaJ/tM0aVaXXACQ80AWFUFfjOpHfNXUmIsDbxfCt9QP1Q==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2XeKxPl0bEqQMr9JpsN5OAAAAAACAAAAAAAQZgAAAAEAACAAAABWYhpgkitkRz5DSDfMEycZ2dDiXdp9tS5cHDxZ3bIsDAAAAAAOgAAAAAIAACAAAACQ0uz95j5PXe98gZrl0SaXezFKgtgfdD6Cq+mICsMEV5AAAABg1s26pc12dWbDrCwJ8v1PfQXBVVB33URwozZzQXxj8e1TDC1OK/rDf1SGLXD1YxG7AA6xoJZvJnX7jquXhqStgUzPsCDanP7muaKAsAvKMLbSEvkkMkXTxFEBg05E08qy6LjmUH3LNs9u35KXEetLUJAgGTjS+73M6xUh+g1wFvlxhrAMc5R42P4Uzzh+e6lAAAAAIhwykNTOOhc3dr6iJmkcqDnLh7+BDa/g9c+kLdraWC0lK6NbNDnGDE9SD3qrLf3ZX2JAf0/upRNpcUf8+nPoSA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -100,7 +100,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">G:\ODE\bel\SSIS\ETL Clients\Base_Clients_Marketing.csv</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Clients\Base_Clients_Marketing.csv</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -325,7 +325,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=G:\ODE\bel\SSIS\ETL Clients\Base_Clients_Ventes.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Clients\Base_Clients_Ventes.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -340,7 +340,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">G:\ODE\bel\SSIS\ETL Clients\Base_Clients_Ventes.xlsx</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Clients\Base_Clients_Ventes.xlsx</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -413,7 +413,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">G:\ODE\bel\SSIS\ETL Clients\Base_Clients_Ventes.xlsx</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Clients\Base_Clients_Ventes.xlsx</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -442,7 +442,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=C:\Users\Brice\Documents\Visual Studio 2013\BD_TEST.mdb;Provider=Microsoft.Jet.OLEDB.4.0;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\ETL Unique\BD_TEST.mdb;Provider=Microsoft.Jet.OLEDB.4.0;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -500,7 +500,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">C:\Users\Brice\Documents\Visual Studio 2013\BD_TEST.mdb</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\ETL Unique\BD_TEST.mdb</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -529,7 +529,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=G:\ODE\bel\SSIS\ETL Produits\Changements_produits.ods.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Produits\Changements_produits.ods.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -544,7 +544,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">G:\ODE\bel\SSIS\ETL Produits\Changements_produits.ods.xlsx</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Produits\Changements_produits.ods.xlsx</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -617,7 +617,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">G:\ODE\bel\SSIS\ETL Produits\Changements_produits.ods.xlsx</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\TRAVAIL\ETL Produits\Changements_produits.ods.xlsx</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -643,10 +643,10 @@
                 <SSIS:Property SSIS:Name="Name">P_Clients</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">65</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">66</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{2150432E-3511-42AA-A528-8E95359E5191}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2BA76D42-E257-4F25-BC09-F5BFF2FAAB36}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -888,6 +888,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -963,10 +965,10 @@
                 <SSIS:Property SSIS:Name="Name">P_Execution</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">21</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">22</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{9ED7650B-38AE-4CBE-A323-15BC2B0E9A54}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2E0C975D-0A10-4933-962E-5B6499377727}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
