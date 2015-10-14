@@ -690,7 +690,7 @@ namespace WpfApplication2
                     }
             }
 
-            int poids;
+            long poids;
             String commandText = "";
             for (int i = 0; i < cuboides.Count; i++)
             {
@@ -700,21 +700,25 @@ namespace WpfApplication2
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i])].GetDimensionMemory();
+                    //poids = (int)listDim1D[int.Parse(cuboides[i])].GetDimensionCount();
                 }
                 if (cuboides[i].Length == 2)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory();
+                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount());
                 }
                 if (cuboides[i].Length == 3)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory();
+                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionCount());
                 }
                 if (cuboides[i].Length == 4)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionMemory();
+                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionCount());
                 }
 
                 try

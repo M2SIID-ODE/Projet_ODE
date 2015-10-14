@@ -7,12 +7,12 @@
   DTS:CreatorName="Beatrice-PC\Beatrice"
   DTS:DTSID="{BF2F3819-D268-47E7-93FF-6FCB994743B0}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
   DTS:LocaleID="1036"
   DTS:ObjectName="P_Produits"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{92D77CD2-953A-4C65-B26B-CAA4CE6675FC}">
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{F8C2CA17-AEBB-461E-A499-61526C5FE8F3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1273,7 +1273,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="202,42"
+          Size="201.6,41.6"
           Id="Package\Tâche de flux de données"
           TopLeft="36.5,71.5" />
       </GraphLayout>
@@ -1285,27 +1285,27 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="141,42"
+          Size="140.8,41.6"
           Id="Package\Tâche de flux de données\Source Excel"
           TopLeft="259.5,5.49999999999989" />
         <NodeLayout
-          Size="182,42"
+          Size="182.4,41.6"
           Id="Package\Tâche de flux de données\Commande OLE DB 1"
           TopLeft="239,311.5" />
         <NodeLayout
-          Size="209,42"
+          Size="208.8,41.6"
           Id="Package\Tâche de flux de données\Dimension à variation lente"
           TopLeft="225.5,209.5" />
         <NodeLayout
-          Size="191,42"
+          Size="191.2,41.6"
           Id="Package\Tâche de flux de données\Conversion de données"
           TopLeft="234.5,107.5" />
         <NodeLayout
-          Size="173,42"
+          Size="172.8,41.6"
           Id="Package\Tâche de flux de données\Commande OLE DB"
           TopLeft="5.50000000000006,311.5" />
         <NodeLayout
-          Size="186,42"
+          Size="185.6,41.6"
           Id="Package\Tâche de flux de données\Destination d'insertion"
           TopLeft="482,311.5" />
         <EdgeLayout

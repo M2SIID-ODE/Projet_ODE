@@ -1,8 +1,8 @@
 ﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
   <Target>
     <Database>CubeODE</Database>
-    <Server>ASAT-PC\SIID_ODE</Server>
-    <ConnectionString>DataSource=ASAT-PC\SIID_ODE;Timeout=0</ConnectionString>
+    <Server>POMINHDSMQ32</Server>
+    <ConnectionString>DataSource=POMINHDSMQ32;Timeout=0</ConnectionString>
   </Target>
   <Options>
     <TransactionalDeployment>false</TransactionalDeployment>
@@ -19,63 +19,63 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>ZvCRz0TCIudYvWZOyzKioEYcws8=11/09/2015 18:19:0006/08/2015 12:45:55</TimeStamp>
+        <TimeStamp>kS2tanPf7k4vsAA8GOgw8DIspQA=06/10/2015 13:44:3010/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>Data Warehouse ODE</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>l1OvJJF1ZM7FgFZrseW3/28WW0I=14/09/2015 12:41:0306/08/2015 12:46:57</TimeStamp>
+        <TimeStamp>Bl1rsGzNncarGC1NmwOLl4xRzdg=05/10/2015 00:15:4110/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>Data Warehouse ODE1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>RhnSXix4lmw8mAfhKTZ8eBmWiO8=25/08/2015 10:19:0324/08/2015 10:13:50</TimeStamp>
+        <TimeStamp>3S+LKHebcU6C98hibIQ9HNXnlng=12/10/2015 10:51:1910/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM CLIENTS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Q0eqzCZ8E6L1iu31PsxwMicsZRM=25/08/2015 09:11:5724/08/2015 10:14:26</TimeStamp>
+        <TimeStamp>RWF9n5uU+51jm1YsJNZRvg65mZ8=12/10/2015 10:51:1910/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM PRODUITS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>EvmwYk9Iv0ImygL6EPQ7/GnII/M=24/08/2015 21:03:3224/08/2015 21:03:32</TimeStamp>
+        <TimeStamp>FBCVp6gjQJkH5bfcKD7fPL4/ZT4=05/10/2015 00:15:4110/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM CATEGORIES</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>3ton3Vb1jShN9IBjGXNPekWxEUE=24/08/2015 21:04:1624/08/2015 21:04:16</TimeStamp>
+        <TimeStamp>GcShTejfSSJonEegYWkdvtTIYiQ=05/10/2015 00:15:4110/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM VILLES</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>gkBiCimweL2Geg4dBi67/abPerM=29/08/2015 16:58:4224/08/2015 21:05:06</TimeStamp>
+        <TimeStamp>vIBWdI0eMDEJk6m+aNZtfKruMpY=12/10/2015 10:51:1910/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM LIEUX</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>0q+tqKTQGL5IhkHCCduuYQ/3Q1M=12/09/2015 08:26:4725/08/2015 10:05:57</TimeStamp>
+        <TimeStamp>C5/k5CFMfnVO7HnKTkhzY1JUYkk=12/10/2015 10:51:1910/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>DIM TEMPS</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>puxCfiV9Jr4guCZeEjbV2EX0PQg=14/09/2015 12:40:4924/08/2015 21:07:35ynt5WRtVQuNC/h+UWhFVOXRx334=24/08/2015 21:07:3624/08/2015 21:07:35</TimeStamp>
+        <TimeStamp>luM1fCWN/lBhWv6E0mmKD7EfeNQ=12/10/2015 10:52:2910/10/2015 15:45:57LXgnQyjYh5hDd/rVoL5z4Y3WEfI=12/10/2015 10:51:1910/10/2015 15:45:57</TimeStamp>
         <ID>
           <String>Data Warehouse ODE</String>
         </ID>
@@ -83,7 +83,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>jhKeM6LSNXNkD/xrQ62Wp9vg+40=25/08/2015 09:39:4004/08/2015 17:35:21</TimeStamp>
+      <TimeStamp>qW4Jv/0nz/2U7mr/KhiQep7NVS0=05/10/2015 00:15:4110/10/2015 15:45:57</TimeStamp>
       <ID>
         <String>CubeODE</String>
       </ID>
@@ -92,5 +92,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2015-09-19T16:40:35.61Z</LastDeployed>
+  <LastDeployed>2015-10-13T17:41:53.08Z</LastDeployed>
 </DeploymentSnapshot>

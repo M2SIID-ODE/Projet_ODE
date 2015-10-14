@@ -3,12 +3,11 @@
   <Name>Data Warehouse ODE</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
   <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
-  <ConnectionString>Provider=SQLNCLI11.1;Data Source=ASAT-PC\SIID_ODE;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
+  <ConnectionString>Provider=SQLNCLI11.1;Data Source=POMINHDSMQ32;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
   <ConnectionStringSecurity>Unchanged</ConnectionStringSecurity>
   <ImpersonationInfo>
-    <ImpersonationMode>ImpersonateAccount</ImpersonationMode>
-    <Account>ASAT-PC\ASAT</Account>
-    <ImpersonationInfoSecurity>PasswordRemoved</ImpersonationInfoSecurity>
+    <ImpersonationMode>ImpersonateServiceAccount</ImpersonationMode>
+    <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
   </ImpersonationInfo>
   <Timeout>PT0S</Timeout>
 </DataSource>

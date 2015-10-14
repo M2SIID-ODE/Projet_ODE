@@ -3,7 +3,7 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <TargetServer>ASAT-PC\SIID_ODE</TargetServer>
+        <TargetServer>POMINHDSMQ32</TargetServer>
         <TargetDatabase>CubeODE</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>

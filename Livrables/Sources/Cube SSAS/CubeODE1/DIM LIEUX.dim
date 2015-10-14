@@ -158,6 +158,7 @@
       <ID>LIEU PK</ID>
       <Name>LIEU PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>256</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="d3343bab-4281-4228-a95a-0caefbbd61bc">
           <DataType>Integer</DataType>
@@ -234,6 +235,7 @@
     <Attribute dwd:design-time-name="4aeca824-f756-4a2c-a247-b389ded0b4d5">
       <ID>NOM REGION MAJ</ID>
       <Name>NOM REGION MAJ</Name>
+      <EstimatedCount>20</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="fb6a595d-3d89-40f0-871e-950dce2653b3">
           <DataType>WChar</DataType>
@@ -251,6 +253,7 @@
     <Attribute dwd:design-time-name="be73f1dc-6d78-413e-acc2-f4900aa0fe89">
       <ID>NOM DEPARTEMENT MAJ</ID>
       <Name>NOM DEPARTEMENT MAJ</Name>
+      <EstimatedCount>68</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="74ae615f-46b0-457c-9bdb-accc97a3b79f">
           <DataType>WChar</DataType>

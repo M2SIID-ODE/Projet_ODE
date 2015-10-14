@@ -64,7 +64,7 @@
           <ConfigurationSetting>
             <Id>Data Warehouse ODE</Id>
             <Name>Data Warehouse ODE</Name>
-            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=ASAT-PC\SIID_ODE;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</Value>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=POMINHDSMQ32;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>

@@ -5,6 +5,6 @@
   DTS:CreationName="EXCEL">
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\SSIS\ETL Clients\Base_Clients_Ventes.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\olivier.essner\Desktop\ProjetODE_Demo_15-10-2015\Partie 3 - SSIS\Base_Clients_Ventes.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

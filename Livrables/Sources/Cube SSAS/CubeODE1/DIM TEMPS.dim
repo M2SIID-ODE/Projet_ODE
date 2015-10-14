@@ -109,6 +109,7 @@
       <ID>TEMPS PK</ID>
       <Name>TEMPS PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>3652</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="3b1d1684-ab0c-43d5-942e-f39bdd59ec17">
           <DataType>Date</DataType>
@@ -131,6 +132,7 @@
     <Attribute dwd:design-time-name="23a6cde3-2add-4602-ab55-04230a23ef61">
       <ID>Month Year</ID>
       <Name>Month Year</Name>
+      <EstimatedCount>120</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="041b0d19-b73b-4ad2-b214-70e2fc911cc9">
           <DataType>WChar</DataType>
@@ -153,6 +155,7 @@
     <Attribute dwd:design-time-name="76f1b8ca-7a3c-437f-9327-4345fcba54fa">
       <ID>Year</ID>
       <Name>Year</Name>
+      <EstimatedCount>10</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="ad7ce13e-81bb-4798-a9ad-85939edc8af7">
           <DataType>WChar</DataType>

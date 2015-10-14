@@ -304,6 +304,7 @@
       <ID>CLIENT PK</ID>
       <Name>CLIENT PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>100010</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="fd29575b-4aa9-44ca-9ce6-179952b78459">
           <DataType>Integer</DataType>

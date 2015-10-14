@@ -7,99 +7,14 @@
   DTS:CreatorName="Beatrice-PC\Beatrice"
   DTS:DTSID="{257944A7-183C-4755-95AD-BB102E9B74F0}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
   DTS:LocaleID="1036"
   DTS:ObjectName="P_Clients"
   DTS:PackageType="5"
-  DTS:VersionBuild="65"
-  DTS:VersionGUID="{2150432E-3511-42AA-A528-8E95359E5191}">
+  DTS:VersionBuild="66"
+  DTS:VersionGUID="{01AE7641-5D5F-4289-9475-7165C2DD9632}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[BEATRICE-PC.DataWarehouseODE]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{F5B0371E-0C42-4E6A-B358-7A88208F12A1}"
-      DTS:ObjectName="BEATRICE-PC.DataWarehouseODE">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=ONYX_PC;Initial Catalog=DataWarehouseODE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Gestionnaire de connexions de fichiers plats 1]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{A54D913A-B255-4EBE-8992-8BA948209AF7}"
-      DTS:ObjectName="Gestionnaire de connexions de fichiers plats 1">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1036"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\Beatrice\Documents\Visual Studio 2012\projects\ETL Test\PopulationINSEE.csv">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x003B_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 0"
-              DTS:DTSID="{BD0D7B1F-309F-4AE9-B613-7F3E3790308B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x003B_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 1"
-              DTS:DTSID="{F7975FC8-BFD9-4646-987F-22FF5B55E54F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x003B_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 2"
-              DTS:DTSID="{29E66D63-82A0-4ED1-B0AC-FD68F6B518BB}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x003B_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 3"
-              DTS:DTSID="{6BF51448-4724-4E98-8D07-5595EC6DD75D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x003B_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 4"
-              DTS:DTSID="{96A118B6-F83E-474A-B9DE-3B2F0A70B974}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Colonne 5"
-              DTS:DTSID="{8B038516-FDAE-49CB-9BC9-5260BD8743CF}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -3214,7 +3129,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="202,42"
+          Size="201.6,41.6"
           Id="Package\Tâche de flux de données"
           TopLeft="53.5,35.5" />
       </GraphLayout>

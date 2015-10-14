@@ -7,12 +7,12 @@
   DTS:CreatorName="ONYX_PC\Brice"
   DTS:DTSID="{06345265-103C-40B6-80EF-19D08AF925C9}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
   DTS:LocaleID="1036"
   DTS:ObjectName="P_Execution"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{DD2C8054-E1E2-42CB-97BF-B66B06A8DFA7}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{6E532B71-3C4C-43ED-9B90-FB0E8AD96877}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="localhost.CubeODE">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Cube_consolide;Provider=MSOLAP.6;Impersonation Level=Impersonate;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=CubeODE;Provider=MSOLAP.6;Persist Security Info=False;Integrated Security=SSPI;Impersonation Level=Impersonate;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -100,27 +100,27 @@
       DTS:To="Package\Exécution ETL VENTES" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
 <Objects
   Version="sql12">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="200,42"
+          Size="200,41.7777777777778"
           Id="Package\Exécution ETL CLIENTS"
           TopLeft="23.5,35.5" />
         <NodeLayout
-          Size="201,42"
+          Size="200.888888888889,41.7777777777778"
           Id="Package\Exécution ETL PRODUITS"
           TopLeft="274,133" />
         <NodeLayout
-          Size="188,42"
+          Size="188.444444444445,41.7777777777778"
           Id="Package\Exécution ETL VENTES"
           TopLeft="520.5,242.5" />
         <EdgeLayout

@@ -399,6 +399,7 @@
           <ID>CLIENT PK</ID>
           <Name>CLIENT PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>100010</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -664,6 +665,7 @@
           <ID>PRODUIT PK</ID>
           <Name>PRODUIT PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>24001</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -776,6 +778,7 @@
         <Attribute>
           <ID>LIBEL RAYON</ID>
           <Name>LIBEL RAYON</Name>
+          <EstimatedCount>39</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -830,6 +833,7 @@
         <Attribute>
           <ID>LIBEL UNIVERS</ID>
           <Name>LIBEL UNIVERS</Name>
+          <EstimatedCount>3</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1347,6 +1351,7 @@
           <ID>LIEU PK</ID>
           <Name>LIEU PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>256</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Integer</DataType>
@@ -1423,6 +1428,7 @@
         <Attribute>
           <ID>NOM REGION MAJ</ID>
           <Name>NOM REGION MAJ</Name>
+          <EstimatedCount>20</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1440,6 +1446,7 @@
         <Attribute>
           <ID>NOM DEPARTEMENT MAJ</ID>
           <Name>NOM DEPARTEMENT MAJ</Name>
+          <EstimatedCount>68</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1721,6 +1728,7 @@
           <ID>TEMPS PK</ID>
           <Name>TEMPS PK</Name>
           <Usage>Key</Usage>
+          <EstimatedCount>3652</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>Date</DataType>
@@ -1743,6 +1751,7 @@
         <Attribute>
           <ID>Month Year</ID>
           <Name>Month Year</Name>
+          <EstimatedCount>120</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1765,6 +1774,7 @@
         <Attribute>
           <ID>Year</ID>
           <Name>Year</Name>
+          <EstimatedCount>10</EstimatedCount>
           <KeyColumns>
             <KeyColumn>
               <DataType>WChar</DataType>
@@ -1816,9 +1826,9 @@
           <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
           <Value>
             <dds xmlns="">
-              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="30" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1438" scrolltop="9812" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="16484" y="8943" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="30" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1438" scrolltop="9812" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="17404" y="8584" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
                 <font>
-                  <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+                  <ddsxmlobjectstreamwrapper binary="01000000900180380100065461686f6d61" />
                 </font>
                 <mouseicon>
                   <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
@@ -2280,6 +2290,7 @@
             </Measure>
           </Measures>
           <StorageMode>Molap</StorageMode>
+          <EstimatedRows>5261859</EstimatedRows>
           <ProcessingMode>Regular</ProcessingMode>
           <Dimensions>
             <Dimension xsi:type="RegularMeasureGroupDimension">
@@ -2370,8 +2381,418 @@
               <StorageMode>Molap</StorageMode>
               <CurrentStorageMode>Molap</CurrentStorageMode>
               <ProcessingMode>Regular</ProcessingMode>
+              <EstimatedRows>5261859</EstimatedRows>
+              <AggregationDesignID>AggregationDesign_SSDT_1</AggregationDesignID>
             </Partition>
           </Partitions>
+          <AggregationDesigns>
+            <AggregationDesign>
+              <ID>AggregationDesign_SSDT_1</ID>
+              <Name>AggregationDesign_SSDT_1</Name>
+              <CreatedTimestamp>2015-10-12T08:50:59.743333Z</CreatedTimestamp>
+              <LastSchemaUpdate>2015-10-12T08:50:59.743333Z</LastSchemaUpdate>
+              <EstimatedRows>5261859</EstimatedRows>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>PRODUIT PK</AttributeID>
+                      <EstimatedCount>24001</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>PRIX ACHAT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TAUX TVA</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>MARQUE PRODUIT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>GROSSISTE PRODUIT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>LIBEL RAYON</AttributeID>
+                      <EstimatedCount>39</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>LIBEL FAMILLE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>LIBEL SSFAMILLE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>LIBEL UNIVERS</AttributeID>
+                      <EstimatedCount>3</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>LIEU PK</AttributeID>
+                      <EstimatedCount>256</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>NOM REGION MAJ</AttributeID>
+                      <EstimatedCount>20</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>NOM DEPARTEMENT MAJ</AttributeID>
+                      <EstimatedCount>68</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>POPULATION</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>NOM VILLE MAJ</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>CODE CANTON</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TYPE LIEU</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>DATE OUVERTURE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>DATE FERMETURE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>SURFACE M2</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>LIBEL LIEU</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>CLIENT PK</AttributeID>
+                      <EstimatedCount>100010</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TAUX REMISE</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>TYPE CLIENT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>NOM CLIENT</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>VILLE PK</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>DATE SOUSCRIPTION</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>TEMPS PK</AttributeID>
+                      <EstimatedCount>3652</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Month Year</AttributeID>
+                      <EstimatedCount>120</EstimatedCount>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                      <EstimatedCount>10</EstimatedCount>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+              <Aggregations>
+                <Aggregation>
+                  <ID>Aggregation 0</ID>
+                  <Name>Aggregation 0</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 1</ID>
+                  <Name>Aggregation 1</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIEU PK</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>Year</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 2</ID>
+                  <Name>Aggregation 2</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL RAYON</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>Month Year</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 3</ID>
+                  <Name>Aggregation 3</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>TEMPS PK</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 4</ID>
+                  <Name>Aggregation 4</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL UNIVERS</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>NOM DEPARTEMENT MAJ</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>Month Year</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 5</ID>
+                  <Name>Aggregation 5</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL RAYON</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIEU PK</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 6</ID>
+                  <Name>Aggregation 6</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>Year</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 7</ID>
+                  <Name>Aggregation 7</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>LIBEL RAYON</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>NOM DEPARTEMENT MAJ</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>Year</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 8</ID>
+                  <Name>Aggregation 8</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>NOM REGION MAJ</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+                <Aggregation>
+                  <ID>Aggregation 9</ID>
+                  <Name>Aggregation 9</Name>
+                  <Dimensions>
+                    <Dimension>
+                      <CubeDimensionID>DIM PRODUITS</CubeDimensionID>
+                      <Attributes>
+                        <Attribute>
+                          <AttributeID>PRODUIT PK</AttributeID>
+                        </Attribute>
+                      </Attributes>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM LIEUX</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM CLIENTS</CubeDimensionID>
+                    </Dimension>
+                    <Dimension>
+                      <CubeDimensionID>DIM TEMPS</CubeDimensionID>
+                    </Dimension>
+                  </Dimensions>
+                </Aggregation>
+              </Aggregations>
+            </AggregationDesign>
+          </AggregationDesigns>
         </MeasureGroup>
       </MeasureGroups>
       <Source>
@@ -2385,12 +2806,11 @@
       <Name>Data Warehouse ODE</Name>
       <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
       <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
-      <ConnectionString>Provider=SQLNCLI11.1;Data Source=ASAT-PC\SIID_ODE;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
+      <ConnectionString>Provider=SQLNCLI11.1;Data Source=POMINHDSMQ32;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
       <ConnectionStringSecurity>Unchanged</ConnectionStringSecurity>
       <ImpersonationInfo>
-        <ImpersonationMode>ImpersonateAccount</ImpersonationMode>
-        <Account>ASAT-PC\ASAT</Account>
-        <ImpersonationInfoSecurity>PasswordRemoved</ImpersonationInfoSecurity>
+        <ImpersonationMode>ImpersonateServiceAccount</ImpersonationMode>
+        <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
       </ImpersonationInfo>
       <Timeout>PT0S</Timeout>
     </DataSource>

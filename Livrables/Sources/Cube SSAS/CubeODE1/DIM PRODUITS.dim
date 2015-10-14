@@ -144,6 +144,7 @@
       <ID>PRODUIT PK</ID>
       <Name>PRODUIT PK</Name>
       <Usage>Key</Usage>
+      <EstimatedCount>24001</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="c9f9694c-969a-4988-8438-9620d05c2e40">
           <DataType>Integer</DataType>
@@ -256,6 +257,7 @@
     <Attribute dwd:design-time-name="3baeaf23-170e-4e9d-b56d-8dc50a4e5da9">
       <ID>LIBEL RAYON</ID>
       <Name>LIBEL RAYON</Name>
+      <EstimatedCount>39</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="d2cf0fee-fc57-4275-9c8a-5e21f4fe6fdd">
           <DataType>WChar</DataType>
@@ -310,6 +312,7 @@
     <Attribute dwd:design-time-name="1c079207-7abf-4f10-b924-34f6ce7ad68a">
       <ID>LIBEL UNIVERS</ID>
       <Name>LIBEL UNIVERS</Name>
+      <EstimatedCount>3</EstimatedCount>
       <KeyColumns>
         <KeyColumn dwd:design-time-name="05c7ad32-7467-4bee-b5fd-dd7aa342eb55">
           <DataType>WChar</DataType>

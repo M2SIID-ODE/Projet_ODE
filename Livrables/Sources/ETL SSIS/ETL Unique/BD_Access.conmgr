@@ -5,6 +5,6 @@
   DTS:CreationName="OLEDB">
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=C:\Users\Brice\Documents\Visual Studio 2013\BD_TEST.mdb;Provider=Microsoft.Jet.OLEDB.4.0;" />
+      DTS:ConnectionString="Data Source=C:\Users\olivier.essner\Desktop\ProjetODE_Demo_15-10-2015\Partie 3 - SSIS\BD_TEST.mdb;Provider=Microsoft.Jet.OLEDB.4.0;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

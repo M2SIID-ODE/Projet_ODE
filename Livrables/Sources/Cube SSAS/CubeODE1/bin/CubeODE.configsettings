@@ -3,11 +3,10 @@
     <DataSources>
       <DataSource>
         <ID>Data Warehouse ODE</ID>
-        <ConnectionString>Provider=SQLNCLI11.1;Data Source=ASAT-PC\SIID_ODE;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
+        <ConnectionString>Provider=SQLNCLI11.1;Data Source=POMINHDSMQ32;Integrated Security=SSPI;Initial Catalog=DataWarehouseODE</ConnectionString>
         <ImpersonationInfo>
-          <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ImpersonateAccount</ImpersonationMode>
-          <Account xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ASAT-PC\ASAT</Account>
-          <ImpersonationInfoSecurity xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">PasswordRemoved</ImpersonationInfoSecurity>
+          <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ImpersonateServiceAccount</ImpersonationMode>
+          <ImpersonationInfoSecurity xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Unchanged</ImpersonationInfoSecurity>
         </ImpersonationInfo>
       </DataSource>
     </DataSources>

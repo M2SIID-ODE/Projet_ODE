@@ -123,3 +123,57 @@ Z:\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\ob
 C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
 C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
 C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\Cédric\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.dll
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\GitHub\Projet_ODE\Sources\MOTEUR_CALCUL\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.DLL
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+C:\Users\Beatrice\Documents\V_THOMAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.DLL
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\App.g.cs
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\MainWindow.baml
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\ODE\Projet_ODE-master\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\olivier.essner\Desktop\Livrables\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\olivier.essner\Desktop\Livrables\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\olivier.essner\Desktop\Livrables\Livrables\Sources\Cube SSAS\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
