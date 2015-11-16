@@ -1238,6 +1238,21 @@ namespace WpfApplication2
             return indice;
         }
 
+        private void Bouton_Purge_Click(object sender, RoutedEventArgs e)
+        {
+            // Gestion d'un message de confirmation
+            var result = System.Windows.Forms.MessageBox.Show("Etes-vous sur de vouloir vider la cache?", "Confirmation Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            // Suppression de la cache si confirmation
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+
+                // Instanciation de la classe proxy permettant l'appel distant au Webservice
+                OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
+                bool resultat = Webservice.CleanCache();
+
+            }
+        }
     }
 }
 

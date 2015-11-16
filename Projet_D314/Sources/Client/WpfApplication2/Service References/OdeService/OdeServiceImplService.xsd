@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://projetode.org/" targetNamespace="http://projetode.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CleanCache" type="tns:CleanCache" />
+  <xs:element name="CleanCacheResponse" type="tns:CleanCacheResponse" />
   <xs:element name="GetCombinaisons" type="tns:GetCombinaisons" />
   <xs:element name="GetCombinaisonsIndex" type="tns:GetCombinaisonsIndex" />
   <xs:element name="GetCombinaisonsIndexResponse" type="tns:GetCombinaisonsIndexResponse" />
@@ -16,6 +18,14 @@
   <xs:element name="TestMaterialisationPartielleResponse" type="tns:TestMaterialisationPartielleResponse" />
   <xs:element name="TestMetropolis" type="tns:TestMetropolis" />
   <xs:element name="TestMetropolisResponse" type="tns:TestMetropolisResponse" />
+  <xs:complexType name="CleanCache">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="CleanCacheResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="GetCombinaisonsIndex">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />

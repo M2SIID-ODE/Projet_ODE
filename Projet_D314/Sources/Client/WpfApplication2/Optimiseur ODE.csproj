@@ -114,6 +114,9 @@
     <None Include="Service References\OdeService\OdeServiceImplService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.CleanCacheResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\OdeService\WpfApplication2.OdeService.dimension.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

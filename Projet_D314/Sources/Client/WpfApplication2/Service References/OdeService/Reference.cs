@@ -43,6 +43,15 @@ namespace WpfApplication2.OdeService {
         System.Threading.Tasks.Task<WpfApplication2.OdeService.TestMetropolisResponse> TestMetropolisAsync(WpfApplication2.OdeService.TestMetropolisRequest request);
         
         // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://projetode.org/OdeService/CleanCacheRequest", ReplyAction="http://projetode.org/OdeService/CleanCacheResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        WpfApplication2.OdeService.CleanCacheResponse CleanCache(WpfApplication2.OdeService.CleanCacheRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://projetode.org/OdeService/CleanCacheRequest", ReplyAction="http://projetode.org/OdeService/CleanCacheResponse")]
+        System.Threading.Tasks.Task<WpfApplication2.OdeService.CleanCacheResponse> CleanCacheAsync(WpfApplication2.OdeService.CleanCacheRequest request);
+        
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://projetode.org/OdeService/TestGetCombinaisonsRequest", ReplyAction="http://projetode.org/OdeService/TestGetCombinaisonsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
@@ -268,6 +277,34 @@ namespace WpfApplication2.OdeService {
         }
         
         public TestMetropolisResponse(bool @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CleanCache", WrapperNamespace="http://projetode.org/", IsWrapped=true)]
+    public partial class CleanCacheRequest {
+        
+        public CleanCacheRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CleanCacheResponse", WrapperNamespace="http://projetode.org/", IsWrapped=true)]
+    public partial class CleanCacheResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://projetode.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool @return;
+        
+        public CleanCacheResponse() {
+        }
+        
+        public CleanCacheResponse(bool @return) {
             this.@return = @return;
         }
     }
@@ -529,6 +566,27 @@ namespace WpfApplication2.OdeService {
         public System.Threading.Tasks.Task<WpfApplication2.OdeService.TestMetropolisResponse> TestMetropolisAsync() {
             WpfApplication2.OdeService.TestMetropolisRequest inValue = new WpfApplication2.OdeService.TestMetropolisRequest();
             return ((WpfApplication2.OdeService.OdeService)(this)).TestMetropolisAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WpfApplication2.OdeService.CleanCacheResponse WpfApplication2.OdeService.OdeService.CleanCache(WpfApplication2.OdeService.CleanCacheRequest request) {
+            return base.Channel.CleanCache(request);
+        }
+        
+        public bool CleanCache() {
+            WpfApplication2.OdeService.CleanCacheRequest inValue = new WpfApplication2.OdeService.CleanCacheRequest();
+            WpfApplication2.OdeService.CleanCacheResponse retVal = ((WpfApplication2.OdeService.OdeService)(this)).CleanCache(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WpfApplication2.OdeService.CleanCacheResponse> WpfApplication2.OdeService.OdeService.CleanCacheAsync(WpfApplication2.OdeService.CleanCacheRequest request) {
+            return base.Channel.CleanCacheAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WpfApplication2.OdeService.CleanCacheResponse> CleanCacheAsync() {
+            WpfApplication2.OdeService.CleanCacheRequest inValue = new WpfApplication2.OdeService.CleanCacheRequest();
+            return ((WpfApplication2.OdeService.OdeService)(this)).CleanCacheAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

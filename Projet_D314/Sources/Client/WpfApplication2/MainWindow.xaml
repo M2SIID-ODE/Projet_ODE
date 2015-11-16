@@ -38,5 +38,6 @@
         <Label x:Name="Libelle_Database_Copy" Content="Database / Cube :" HorizontalAlignment="Left" Margin="67,75,0,0" VerticalAlignment="Top" TabIndex="3"/>
         <TextBox x:Name="Nom_Server" HorizontalAlignment="Left" Margin="176,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="515" TextChanged="Nom_Server_TextChanged"/>
         <CheckBox x:Name="Webservice" Content="WebService" HorizontalAlignment="Left" Height="14" Margin="15,13,0,0" VerticalAlignment="Top" Width="107" IsChecked="True"/>
+        <Button x:Name="Bouton_Purge" Content="Purge Cache" HorizontalAlignment="Left" Margin="15,39,0,0" VerticalAlignment="Top" Width="77" Height="26" Click="Bouton_Purge_Click"/>
     </Grid>
 </Window>

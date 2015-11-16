@@ -148,3 +148,18 @@ C:\Users\Cédric\Desktop\projet D314\20151119\Sources\Temp\AppliMerge\WpfApplica
 C:\Users\Cédric\Desktop\projet D314\20151119\Sources\Temp\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
 C:\Users\Cédric\Desktop\projet D314\20151119\Sources\Temp\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.exe
 C:\Users\Cédric\Desktop\projet D314\20151119\Sources\Temp\AppliMerge\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\bin\Debug\Optimiseur ODE.exe.config
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.exe
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.pdb
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\bin\Debug\Optimiseur ODE.exe
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\bin\Debug\Optimiseur ODE.pdb
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\bin\Debug\Microsoft.AnalysisServices.dll
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\App.g.cs
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.cache
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE_MarkupCompile.lref
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\MainWindow.baml
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
