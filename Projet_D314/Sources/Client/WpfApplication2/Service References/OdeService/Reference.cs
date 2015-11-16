@@ -112,16 +112,11 @@ namespace WpfApplication2.OdeService {
         [System.Xml.Serialization.XmlElementAttribute("arg0", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public WpfApplication2.OdeService.dimension[] arg0;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://projetode.org/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute("arg1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public WpfApplication2.OdeService.dimension[] arg1;
-        
         public GetCombinaisonsRequest() {
         }
         
-        public GetCombinaisonsRequest(WpfApplication2.OdeService.dimension[] arg0, WpfApplication2.OdeService.dimension[] arg1) {
+        public GetCombinaisonsRequest(WpfApplication2.OdeService.dimension[] arg0) {
             this.arg0 = arg0;
-            this.arg1 = arg1;
         }
     }
     
@@ -246,10 +241,9 @@ namespace WpfApplication2.OdeService {
             return base.Channel.GetCombinaisons(request);
         }
         
-        public WpfApplication2.OdeService.dimension[] GetCombinaisons(WpfApplication2.OdeService.dimension[] arg0, WpfApplication2.OdeService.dimension[] arg1) {
+        public WpfApplication2.OdeService.dimension[] GetCombinaisons(WpfApplication2.OdeService.dimension[] arg0) {
             WpfApplication2.OdeService.GetCombinaisonsRequest inValue = new WpfApplication2.OdeService.GetCombinaisonsRequest();
             inValue.arg0 = arg0;
-            inValue.arg1 = arg1;
             WpfApplication2.OdeService.GetCombinaisonsResponse retVal = ((WpfApplication2.OdeService.OdeService)(this)).GetCombinaisons(inValue);
             return retVal.@return;
         }
@@ -259,10 +253,9 @@ namespace WpfApplication2.OdeService {
             return base.Channel.GetCombinaisonsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<WpfApplication2.OdeService.GetCombinaisonsResponse> GetCombinaisonsAsync(WpfApplication2.OdeService.dimension[] arg0, WpfApplication2.OdeService.dimension[] arg1) {
+        public System.Threading.Tasks.Task<WpfApplication2.OdeService.GetCombinaisonsResponse> GetCombinaisonsAsync(WpfApplication2.OdeService.dimension[] arg0) {
             WpfApplication2.OdeService.GetCombinaisonsRequest inValue = new WpfApplication2.OdeService.GetCombinaisonsRequest();
             inValue.arg0 = arg0;
-            inValue.arg1 = arg1;
             return ((WpfApplication2.OdeService.OdeService)(this)).GetCombinaisonsAsync(inValue);
         }
         

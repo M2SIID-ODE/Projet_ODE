@@ -27,7 +27,7 @@ import java.util.*;
 public interface OdeService
 {  
     @WebMethod
-    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D, List<Dimension> listCuboides);
+    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D);
     
     @WebMethod
     public List<Integer> Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle);

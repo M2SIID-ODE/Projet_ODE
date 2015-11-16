@@ -17,7 +17,7 @@ import java.util.*;
     
     // METHODE 1 : Algorithme qui récupère le nombre de lignes des cuboides
     // Appel dans le C# : GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index)
-    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D, List<Dimension> listCuboides)
+    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D)
     {
         List<Dimension> DimensionResultList = new ArrayList<Dimension>(1);
         return DimensionResultList;

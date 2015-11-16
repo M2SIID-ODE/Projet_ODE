@@ -9,7 +9,6 @@
   <xs:complexType name="GetCombinaisons">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="arg1" type="tns:dimension" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="dimension">

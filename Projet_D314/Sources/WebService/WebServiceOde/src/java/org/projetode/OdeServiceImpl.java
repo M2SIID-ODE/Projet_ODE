@@ -24,9 +24,9 @@ public class OdeServiceImpl implements OdeService {
     DimensionUtils dimUtils = new DimensionUtils();
 
     
-    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D, List<Dimension> listCuboides)
+    public List<Dimension> GetCombinaisons(List<Dimension> listDim1D)
     {
-        return dimUtils.GetCombinaisons(listDim1D, listCuboides);
+        return dimUtils.GetCombinaisons(listDim1D);
     }
     
     
