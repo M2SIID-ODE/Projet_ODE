@@ -1,0 +1,6 @@
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\bin\Release\Optimiseur ODE.exe.config
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\obj\Release\Optimiseur ODE.csprojResolveAssemblyReference.cache
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\obj\Release\MainWindow.g.cs
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\obj\Release\App.g.cs
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\obj\Release\Optimiseur ODE_MarkupCompile.cache
+Z:\GitHub\Projet_D314\Sources\Client\WpfApplication2\obj\Release\Optimiseur ODE_MarkupCompile.lref
