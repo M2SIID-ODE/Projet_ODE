@@ -30,6 +30,9 @@ public interface OdeService
     public List<Dimension> GetCombinaisons(List<Dimension> listDim1D);
     
     @WebMethod
+    public List<String> GetCombinaisonsIndex(List<Dimension> listDim1D);
+    
+    @WebMethod
     public List<Integer> Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle);
     
     @WebMethod

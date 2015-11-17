@@ -13,9 +13,14 @@ import javax.jws.WebService;
 import javax.jws.WebParam.Mode;
 import java.util.*;
 
+
 /**
  *
  * @author olivier.essner
+ * Etape 1 : CLEAN & BUILD PROJECT
+ * Etape 2 : DEPLOY
+ * Etape 3 : Résumé sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService
+ * Etape 4 : Testeur sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?tester
  */
 @WebService(endpointInterface = "org.projetode.OdeService")
 
@@ -27,6 +32,11 @@ public class OdeServiceImpl implements OdeService {
     public List<Dimension> GetCombinaisons(List<Dimension> listDim1D)
     {
         return dimUtils.GetCombinaisons(listDim1D);
+    }
+    
+    public List<String> GetCombinaisonsIndex(List<Dimension> listDim1D)
+    {
+        return dimUtils.GetCombinaisonsIndex(listDim1D);
     }
     
     
