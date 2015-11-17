@@ -163,3 +163,4 @@ C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Clie
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.g.resources
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
 C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.csproj.GenerateResource.Cache
+C:\Users\Cédric\Documents\GitHub\Projet_ODE\Projet_ODE\Projet_D314\Sources\Client\WpfApplication2\obj\Debug\Optimiseur ODE.csprojResolveAssemblyReference.cache

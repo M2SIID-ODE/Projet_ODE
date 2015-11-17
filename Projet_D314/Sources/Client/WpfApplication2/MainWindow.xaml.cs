@@ -496,7 +496,7 @@ namespace WpfApplication2
 
             //Etape : Liste de toutes les dimensions 1D
             Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Liste dimensions 1D" });
-            if (Glb_Webservice == "O")
+            if (Glb_Deconnecte == "O")
             {
                 WS_GetDimension1DProperties(Glb_Nom_Cube, listDim1D);
             }
