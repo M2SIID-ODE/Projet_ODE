@@ -10,19 +10,26 @@ import java.sql.*;
 import java.lang.Math;
 import java.util.*;
 import java.security.MessageDigest;
+import org.apache.log4j.Logger;
+
 
 
 /**
  *
  * @author olivier.essner
  */
-    public class DimensionUtils {
+public class DimensionUtils {
         
         
     private enum Algorithm {
         METROPOLIS,
         MATERIALISATION_PARTIELLE
     }
+    
+    // ////////////
+    // Logger LOG4J
+    // ////////////
+    final static Logger logger = Logger.getLogger(DimensionUtils.class);
     
     // //////////////////
     // Connexion à SQLite
@@ -48,6 +55,7 @@ import java.security.MessageDigest;
         {
             stmtToHash = stmtToHash + d.toString();
         }
+        logger.debug("generateSHA256.stmtToHash : " + stmtToHash);
         
         try{
             // Hash depuis la chaine formée
@@ -58,9 +66,11 @@ import java.security.MessageDigest;
             return encryptedString;
             
         } catch(Exception ex){
+            logger.error("generateSHA256.exception", ex);  
             throw new RuntimeException(ex);
         }
     }
+   
         
     
     // ///////////////////////////////////
@@ -84,9 +94,9 @@ import java.security.MessageDigest;
             ResultSet executeQuery = stmtOut.executeQuery("INSERT INTO CACHE_WEBSERVICE_ODE(methode, seuil_poids, nb_boucle, hashCode, solution) "
                                                         + "VALUES ('"+ typeAlgorithm +"',"+ (int)(seuil_poids) +","+ nb_boucle +",'"+ hashCodeList +"','"+ dimensionToMaterialize +"');");
         }
-        catch(SQLException e)
+        catch(SQLException ex)
         {
-            System.err.println("TRACE : " + e.getMessage());
+            logger.error("generateSHA256.exception", ex);  
         }
         
         return;
@@ -132,9 +142,9 @@ import java.security.MessageDigest;
                  */
             }
         }
-        catch(SQLException e)
+        catch(SQLException ex)
         {
-            System.err.println("TRACE : " + e.getMessage());
+            logger.error("generateSHA256.exception", ex);  
         }   
         
         return flagResult;
