@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://miage.org/" targetNamespace="http://miage.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="hello" type="tns:hello" />
+  <xs:element name="helloResponse" type="tns:helloResponse" />
+  <xs:element name="operation" type="tns:operation" />
+  <xs:element name="operationResponse" type="tns:operationResponse" />
+  <xs:complexType name="operation">
+    <xs:sequence>
+      <xs:element name="profCourante" type="xs:int" />
+      <xs:element minOccurs="0" name="prefix" type="xs:string" />
+      <xs:element name="rang" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="operationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
