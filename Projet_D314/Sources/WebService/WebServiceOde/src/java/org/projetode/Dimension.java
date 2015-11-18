@@ -30,9 +30,9 @@ public class Dimension
         // Constructeur avec (name, count, dimensionOrder) comme arguments
         Dimension(String inDimensionName, long inDimensionCount, int inDimensionOrder)
         {
-            SetDimensionName(inDimensionName);
-            SetDimensionCount(inDimensionCount);
-            SetDimensionMemory(0);
+            this.dimensionName = inDimensionName;
+            this.dimensionCount = inDimensionCount;
+            this.dimensionMemory = 0;
             this.dimensionOrder = inDimensionOrder;
         }
 

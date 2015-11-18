@@ -5,11 +5,8 @@
  */
 package org.projetode;
 
-import java.sql.DriverManager;
-import java.sql.*;
-import java.lang.Math;
+
 import java.util.*;
-import java.security.MessageDigest;
 import org.apache.log4j.Logger;
 
 
@@ -17,138 +14,25 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author olivier.essner
+ *  > Etape 1 : CLEAN & BUILD PROJECT
+ *  > Etape 2 : DEPLOY
+ *  > Etape 3 : Résumé sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService
+ *  > Etape 4 : Testeur sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?tester
  */
 public class DimensionUtils {
         
-        
-    private enum Algorithm {
+    public enum Algorithm {
         METROPOLIS,
         MATERIALISATION_PARTIELLE
     }
     
-    // ////////////
     // Logger LOG4J
-    // ////////////
     final static Logger logger = Logger.getLogger(DimensionUtils.class);
-    
-    // //////////////////
-    // Connexion à SQLite
-    // //////////////////
-    static {
-        try{
-            Class.forName("org.sqlite.JDBC");
-        } catch(ClassNotFoundException e){
-            System.out.println("Erreur de chargement du driver SQLite");
-        }
-    }
-    
-    // ///////////////////////////////////////////////
-    // Calcul du hash SHA256 d'une liste de dimensions
-    // ///////////////////////////////////////////////
-    public static String generateSHA256(List<Dimension> listCuboides)
-    {
-        String stmtToHash;
-        
-        // Formation de la chaine en concatenant tous les items de la liste en entrée
-        stmtToHash = "";
-        for(Dimension d : listCuboides)
-        {
-            stmtToHash = stmtToHash + d.toString();
-        }
-        logger.debug("generateSHA256.stmtToHash : " + stmtToHash);
-        
-        try{
-            // Hash depuis la chaine formée
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(stmtToHash.getBytes());
-            String encryptedString = new String(messageDigest.digest());
-            
-            return encryptedString;
-            
-        } catch(Exception ex){
-            logger.error("generateSHA256.exception", ex);  
-            throw new RuntimeException(ex);
-        }
-    }
-   
-        
-    
-    // ///////////////////////////////////
-    // Enregistrement en cache des calculs
-    // ///////////////////////////////////
-    private void CacheWrite(Algorithm typeAlgorithm, List<Dimension> listCuboides, double seuil_poids, int nb_boucle, List<Integer> dimensionToMaterialize)
-    {
-        String hashCodeList;
-        
- 
-        // Calcul du hash de la listCuboides
-        hashCodeList = generateSHA256(listCuboides);
-        
-        // Enregistrement en base SQLite
-        try{
-            String path = this.getClass().getResource("/CacheWebServiceOde.db").getPath();
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
-            
-            Statement stmtOut = connection.createStatement();
-			
-            ResultSet executeQuery = stmtOut.executeQuery("INSERT INTO CACHE_WEBSERVICE_ODE(methode, seuil_poids, nb_boucle, hashCode, solution) "
-                                                        + "VALUES ('"+ typeAlgorithm +"',"+ (int)(seuil_poids) +","+ nb_boucle +",'"+ hashCodeList +"','"+ dimensionToMaterialize +"');");
-        }
-        catch(SQLException ex)
-        {
-            logger.error("generateSHA256.exception", ex);  
-        }
-        
-        return;
-    }
-    
-    
-    // ////////////////////////////
-    // Lecture en cache des calculs
-    // ////////////////////////////
-    private boolean CacheRead(Algorithm typeAlgorithm, List<Dimension> listCuboides, double seuil_poids, int nb_boucle, List<Integer> dimensionToMaterialize)
-    {
-        String hashCodeList;
-        boolean flagResult = false;
-        
-        
-        // Calcul du hash de la listCuboides
-        hashCodeList = generateSHA256(listCuboides);
-        
-        // Lecture en base SQLite
-        try{
-            String path = this.getClass().getResource("/CacheWebServiceOde.db").getPath();
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
-            
-            Statement stmtOut = connection.createStatement();
-			
-            ResultSet executeQuery = stmtOut.executeQuery("SELECT solution FROM CACHE_WEBSERVICE_ODE "
-			+ "WHERE CACHE_WEBSERVICE_ODE.methode = '"+ typeAlgorithm +"' "
-			+ "AND CACHE_WEBSERVICE_ODE.seuil_poids = "+ (int)(seuil_poids) +" "
-			+ "AND CACHE_WEBSERVICE_ODE.nb_boucle = "+ nb_boucle +" "
-			+ "AND CACHE_WEBSERVICE_ODE.hashCode = '"+ hashCodeList +"';");
-			
-            List resultat = new ArrayList();
-            
-            while(executeQuery.next()){
-		flagResult = true;
-				
-		/*		
-                String titre = executeQuery.getString("Titre");
-                String description = executeQuery.getString("Description");
-                String nom = executeQuery.getString("Nom");
-                Recette r = new Recette(titre, description);
-                resultat.add(r.GetTitre());
-                 */
-            }
-        }
-        catch(SQLException ex)
-        {
-            logger.error("generateSHA256.exception", ex);  
-        }   
-        
-        return flagResult;
-    }
+
+    // SQLite
+    final SqliteSql db = new SqliteSql();
+
+
     
     
     // ///////////////////////////////////////
@@ -171,13 +55,13 @@ public class DimensionUtils {
     }
     
     
+    
     // ////////////////////////////////////////////////////////////////////////////////////////////
     // WEB METHODE 1 : Point d'entrée de l'algorithme qui récupère le nombre de lignes des cuboides
     // ////////////////////////////////////////////////////////////////////////////////////////////
     public List<Dimension> GetCombinaisons(List<Dimension> listDim1D)
     {
         List<Dimension> DimensionResultList = new ArrayList<Dimension>();
-
         List<String> index_cuboides = new ArrayList<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
         String prefix_index = "";
         int profCourante = 0;
@@ -186,7 +70,8 @@ public class DimensionUtils {
         
         // Appel initial de la fonction recursive
         FunctionGetCombinaisons(listDim1D, profCourante, prefix, rang, DimensionResultList, index_cuboides, prefix_index);
-  
+        logger.debug("DimensionUtils.GetCombinaisons.success");
+        
         return DimensionResultList;
     }
     
@@ -206,6 +91,7 @@ public class DimensionUtils {
         
         // Appel initial de la fonction recursive
         FunctionGetCombinaisons(listDim1D, profCourante, prefix, rang, DimensionResultList, index_cuboides, prefix_index);
+        logger.debug("DimensionUtils.GetCombinaisonsIndex.success");
   
         return index_cuboides;
     }
@@ -214,7 +100,7 @@ public class DimensionUtils {
     // //////////////////////////////////////////////////////////////////////////
     // Algorithme qui récupère le nombre de lignes des cuboides lié aux WM 1 et 2
     // //////////////////////////////////////////////////////////////////////////
-    static void FunctionGetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
+    private void FunctionGetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
     {
         for (int i=rang; i<listDim1D.size(); i++)
         {
@@ -224,7 +110,13 @@ public class DimensionUtils {
 
         for (int i=rang; i<listDim1D.size(); i++)
         {
-            FunctionGetCombinaisons(listDim1D, profCourante+1, prefix + listDim1D.get(i).GetDimensionName() + " * ", i+1, listCuboides, index_cuboides, prefix_index + Integer.toString(i));
+            FunctionGetCombinaisons(listDim1D, 
+                    profCourante+1, 
+                    prefix + listDim1D.get(i).GetDimensionName() + " * ", 
+                    i+1, 
+                    listCuboides, 
+                    index_cuboides, 
+                    prefix_index + Integer.toString(i));
         }
     }
     
@@ -237,14 +129,18 @@ public class DimensionUtils {
         List<Integer> dimensionToMaterialize = new ArrayList<Integer>();
         boolean isCachedValue;
         
+        // Initialisation du tableau des resultats
+        initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
+        
         // Gestion du cache
-        isCachedValue = CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+        isCachedValue = db.CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
         
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
-        if(isCachedValue == true){
+        if(!isCachedValue){
             FunctionMetropolis(listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
-            CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+            db.CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
         }
+        logger.debug("DimensionUtils.Metropolis.success");
       
         // Renvoi du resultat
         return dimensionToMaterialize;
@@ -254,7 +150,7 @@ public class DimensionUtils {
     // ////////////////////////
     // Algorithme de Metropolis
     // ////////////////////////
-    static void FunctionMetropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, List<Integer> sol_act)
+    private void FunctionMetropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, List<Integer> sol_act)
     {
         double poids_act = 0;
         double poids_next = 0;
@@ -270,12 +166,14 @@ public class DimensionUtils {
             choix_cube = rnd.nextInt(listCuboides.size()); 
             
             // s'il est à 0, on ajoute son poids
-            if(sol_act.get(choix_cube) == 0) 
+            if(sol_act.get(choix_cube) == 0){
                 poids_next = poids_act + (listCuboides.get(choix_cube).GetDimensionCount() * listCuboides.get(choix_cube).GetDimensionMemory());
+            }
             // sinon on on l'enlève
-            else 
+            else{
                 poids_next = poids_act - (listCuboides.get(choix_cube).GetDimensionCount() * listCuboides.get(choix_cube).GetDimensionMemory());
-
+            }
+            
             // on continue uniquement si le poids de la future solution ne dépasse pas le seuil fixé
             if(poids_next <= seuil_poids) 
             {
@@ -297,7 +195,7 @@ public class DimensionUtils {
                     }
                 }
             }
-            i = i + 1;
+            i = i+1;
         }
     }  
 
@@ -313,22 +211,24 @@ public class DimensionUtils {
         initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
         
         // Gestion du cache
-        isCachedValue = CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+        isCachedValue = db.CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
         
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
-        if(isCachedValue == true){
-            FunctionMetropolis(listCuboides, seuil_poids, 0, dimensionToMaterialize);
-            CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+        if(!isCachedValue){
+            FunctionMaterialisationPartielle(listCuboides, seuil_poids, dimensionToMaterialize);
+            db.CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
         }
+        logger.debug("DimensionUtils.MaterialisationPartielle.success");
   
         // Renvoi du resultat
         return dimensionToMaterialize;
     }
+    
 
     // /////////////////////////////////////////////////////////////////////////
     // Algorithme de matérialisation partielle - cf cours D111 de Sofian MAABOUT
     // /////////////////////////////////////////////////////////////////////////
-    static void FunctionMaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, List<Integer> selectedViews)
+    private void FunctionMaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, List<Integer> selectedViews)
     {
         long totalSize;
         long viewSize;
@@ -376,8 +276,8 @@ public class DimensionUtils {
 
                 // On crée la liste des composantes 1D de la vue j à partir de ses noms
                 stmt = listCuboides.get(i).GetDimensionName();
-                stmt.trim();  // Supression de tous les espaces
-                String[] listDim1Di = stmt.split("*");  // Découpage par le séparateur '*'
+                stmt = stmt.trim();  // Supression de tous les espaces
+                String[] listDim1Di = stmt.split("\\*");  // Découpage par le séparateur '*'
                 
                 for (int k=0; k<listDim1Di.length; k++) { listDim1Di[k] = listDim1Di[k].trim(); }
 

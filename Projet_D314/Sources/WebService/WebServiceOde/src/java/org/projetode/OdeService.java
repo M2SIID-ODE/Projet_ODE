@@ -30,12 +30,24 @@ public interface OdeService
     public List<Dimension> GetCombinaisons(List<Dimension> listDim1D);
     
     @WebMethod
+    public boolean TestGetCombinaisons();
+    
+    @WebMethod
     public List<String> GetCombinaisonsIndex(List<Dimension> listDim1D);
+    
+    @WebMethod
+    public boolean TestGetCombinaisonsIndex();
     
     @WebMethod
     public List<Integer> Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle);
     
     @WebMethod
+    public boolean TestMetropolis();
+    
+    @WebMethod
     public List<Integer> MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids);
+    
+    @WebMethod
+    public boolean TestMaterialisationPartielle();
 }
 
