@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/WebServiceOde/OdeServiceImplService?WSDL" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OdeServiceImplService.wsdl" MetadataType="Wsdl" ID="37794d24-3709-472f-a086-756ff9b35b2a" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?WSDL" />
-    <MetadataFile FileName="OdeServiceImplService.xsd" MetadataType="Schema" ID="e0eba66c-ad8d-4dcf-9507-7c6025ed925e" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?xsd=1" />
+    <MetadataFile FileName="OdeServiceImplService1.wsdl" MetadataType="Wsdl" ID="f5a32812-a48b-400c-8fbc-d46e4c3eba2c" SourceId="1" SourceUrl="http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?wsdl" />
+    <MetadataFile FileName="OdeServiceImplService1.xsd" MetadataType="Schema" ID="cdb42300-bc48-402a-929c-e2dc40c95353" SourceId="1" SourceUrl="http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -807,29 +807,27 @@ namespace WpfApplication2
         // Algorithme des combinaisons (fonction récursive qui retourne l'ensemble des combinaisons possibles de notre liste listDim1D           // Pour D314
         static void WS_GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
         {
+            // Instanciation de la classe proxy permettant l'appel distant au Webservice
             OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
-            
 
+
+
+            // Pour le paramètre du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
             List<OdeService.dimension> listDim1D_Temp = new List<OdeService.dimension>();
+
+            // Pour la sortie du WS => Liste d'objets de type List<Dimension> (Et non <OdeService.dimension>) definit dans le code C#
+            List<Dimension> listCuboides_Temp = new List<Dimension>();
+
+            // Peuplement de la liste d'objets du WS par des items de même type : <OdeService.dimension>
             OdeService.dimension dim_Temp = new OdeService.dimension();
-
-            dim_Temp.DimensionName = listCuboides[0].GetDimensionName();
-
+            dim_Temp. = listCuboides[0].GetDimensionName(); // POURQUOI pas de membre ???
             //dimensionName; 
-        //dimensionCount;
-        //dimensionMemory;
-        //dimensionOrder;
+            //dimensionCount;
+            //dimensionMemory;
+            //dimensionOrder;
 
-
-            List<OdeService.dimension> listCuboides_Temp = new List<OdeService.dimension>();
-
+            // Appel du WS
             listCuboides_Temp = Webservice.GetCombinaisons(listDim1D_Temp.ToArray()).ToList();
-
-
-
-
-
-
 
 
             // => Liste d'objets de type employee (Et non Employee) definit dans le stub du WS

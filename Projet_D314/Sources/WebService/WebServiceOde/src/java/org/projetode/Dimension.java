@@ -12,11 +12,11 @@ package org.projetode;
  */
 public class Dimension
 {
-        // Membres
-        private String dimensionName; // Nom de la dimension
-        private long dimensionCount; // Nombre de lignes de la dimension
-        private int dimensionMemory; // Taille d'une ligne, en octets
-        private int dimensionOrder; // Indique la dimension du cuboide
+        // Membres public, pour être visibles sur le WSDL !
+        public String dimensionName; // Nom de la dimension
+        public long dimensionCount; // Nombre de lignes de la dimension
+        public int dimensionMemory; // Taille d'une ligne, en octets
+        public int dimensionOrder; // Indique la dimension du cuboide
 
         // Constructeur avec dimensionOrder comme argument
         Dimension(int inDimensionOrder)
@@ -35,6 +35,9 @@ public class Dimension
             this.dimensionMemory = 0;
             this.dimensionOrder = inDimensionOrder;
         }
+        
+        // Default constructor
+        Dimension(){}
 
         // Methodes
         public void SetDimensionName(String inDimensionName) { this.dimensionName = new String(inDimensionName); }

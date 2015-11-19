@@ -137,7 +137,14 @@
     <None Include="Service References\OdeService\OdeServiceImplService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\OdeService\OdeServiceImplService1.wsdl" />
+    <None Include="Service References\OdeService\OdeServiceImplService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\OdeService\WpfApplication2.OdeService.dimension.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.GetCombinaisonsIndexResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\OdeService\WpfApplication2.OdeService.GetCombinaisonsResponse.datasource">
@@ -147,6 +154,18 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\OdeService\WpfApplication2.OdeService.MetropolisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.TestGetCombinaisonsIndexResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.TestGetCombinaisonsResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.TestMaterialisationPartielleResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OdeService\WpfApplication2.OdeService.TestMetropolisResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WSOptimiseur\WpfApplication2.WSOptimiseur.helloResponse.datasource">

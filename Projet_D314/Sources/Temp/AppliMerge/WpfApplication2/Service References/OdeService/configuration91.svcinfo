@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="/PrCDOzJW+YXgm68t+5NHDf14zU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3V9h1LiRWj0rU/Q9TIZEGe3tuxg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="OdeServiceImplPortBinding1">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="OdeServiceImplPort1" contract="OdeService.OdeService" bindingType="basicHttpBinding" address="http://localhost:8080/WebServiceOde/OdeServiceImplService" bindingConfiguration="OdeServiceImplPortBinding1">
+    <endpoint name="OdeServiceImplPort1" contract="OdeService.OdeService" bindingType="basicHttpBinding" address="http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService" bindingConfiguration="OdeServiceImplPortBinding1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8080/WebServiceOde/OdeServiceImplService</serializedValue>
+          <serializedValue>http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

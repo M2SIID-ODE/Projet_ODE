@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://projetode.org/" targetNamespace="http://projetode.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetCombinaisons" type="tns:GetCombinaisons" />
+  <xs:element name="GetCombinaisonsIndex" type="tns:GetCombinaisonsIndex" />
+  <xs:element name="GetCombinaisonsIndexResponse" type="tns:GetCombinaisonsIndexResponse" />
+  <xs:element name="GetCombinaisonsResponse" type="tns:GetCombinaisonsResponse" />
+  <xs:element name="MaterialisationPartielle" type="tns:MaterialisationPartielle" />
+  <xs:element name="MaterialisationPartielleResponse" type="tns:MaterialisationPartielleResponse" />
+  <xs:element name="Metropolis" type="tns:Metropolis" />
+  <xs:element name="MetropolisResponse" type="tns:MetropolisResponse" />
+  <xs:element name="TestGetCombinaisons" type="tns:TestGetCombinaisons" />
+  <xs:element name="TestGetCombinaisonsIndex" type="tns:TestGetCombinaisonsIndex" />
+  <xs:element name="TestGetCombinaisonsIndexResponse" type="tns:TestGetCombinaisonsIndexResponse" />
+  <xs:element name="TestGetCombinaisonsResponse" type="tns:TestGetCombinaisonsResponse" />
+  <xs:element name="TestMaterialisationPartielle" type="tns:TestMaterialisationPartielle" />
+  <xs:element name="TestMaterialisationPartielleResponse" type="tns:TestMaterialisationPartielleResponse" />
+  <xs:element name="TestMetropolis" type="tns:TestMetropolis" />
+  <xs:element name="TestMetropolisResponse" type="tns:TestMetropolisResponse" />
+  <xs:complexType name="GetCombinaisonsIndex">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dimension">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dimensionName" type="xs:string" />
+      <xs:element name="dimensionCount" type="xs:long" />
+      <xs:element name="dimensionMemory" type="xs:int" />
+      <xs:element name="dimensionOrder" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCombinaisonsIndexResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestMaterialisationPartielle">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="TestMaterialisationPartielleResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestGetCombinaisons">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="TestGetCombinaisonsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCombinaisons">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCombinaisonsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:dimension" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Metropolis">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />
+      <xs:element name="arg1" type="xs:double" />
+      <xs:element name="arg2" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MetropolisResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestMetropolis">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="TestMetropolisResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MaterialisationPartielle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:dimension" />
+      <xs:element name="arg1" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MaterialisationPartielleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestGetCombinaisonsIndex">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="TestGetCombinaisonsIndexResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

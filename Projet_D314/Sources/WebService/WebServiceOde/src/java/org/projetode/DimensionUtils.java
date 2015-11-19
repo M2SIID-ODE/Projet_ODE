@@ -133,12 +133,13 @@ public class DimensionUtils {
         initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
         
         // Gestion du cache
-        isCachedValue = db.CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+        // isCachedValue = db.CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+        isCachedValue = false;
         
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
         if(!isCachedValue){
             FunctionMetropolis(listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
-            db.CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+            // db.CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
         }
         logger.debug("DimensionUtils.Metropolis.success");
       
@@ -211,12 +212,13 @@ public class DimensionUtils {
         initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
         
         // Gestion du cache
-        isCachedValue = db.CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+        // isCachedValue = db.CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+        isCachedValue = false;
         
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
         if(!isCachedValue){
             FunctionMaterialisationPartielle(listCuboides, seuil_poids, dimensionToMaterialize);
-            db.CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+            // db.CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
         }
         logger.debug("DimensionUtils.MaterialisationPartielle.success");
   
