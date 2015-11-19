@@ -16,8 +16,9 @@ import org.apache.log4j.Logger;
  * @author olivier.essner
  *  > Etape 1 : CLEAN & BUILD PROJECT
  *  > Etape 2 : DEPLOY
- *  > Etape 3 : Résumé sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService
- *  > Etape 4 : Testeur sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?tester
+ *  > Résumé sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService
+ *  > Testeur sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?tester
+ *  > XSD sur http://127.0.0.1:8080/WebServiceOde/OdeServiceImplService?xsd=1
  */
 public class DimensionUtils {
         
@@ -127,19 +128,23 @@ public class DimensionUtils {
     public List<Integer> Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle)
     {
         List<Integer> dimensionToMaterialize = new ArrayList<Integer>();
-        boolean isCachedValue;
-        
-        // Initialisation du tableau des resultats
-        initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
-        
-        // Gestion du cache
-        // isCachedValue = db.CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
-        isCachedValue = false;
-        
+
+
+        // Lecture du cache
+        dimensionToMaterialize = db.CacheRead(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle);
+
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
-        if(!isCachedValue){
+        if(dimensionToMaterialize.isEmpty()){
+            logger.debug("DimensionUtils.Metropolis.NewCache");
+            
+            // Initialisation du tableau des resultats
+            initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
+        
             FunctionMetropolis(listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
-            // db.CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+            db.CacheWrite(Algorithm.METROPOLIS, listCuboides, seuil_poids, nb_boucle, dimensionToMaterialize);
+        }
+        else{
+            logger.debug("DimensionUtils.Metropolis.ExistingCache");
         }
         logger.debug("DimensionUtils.Metropolis.success");
       
@@ -206,22 +211,26 @@ public class DimensionUtils {
     public List<Integer> MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids)
     {
         List<Integer> dimensionToMaterialize = new ArrayList<Integer>();
-        boolean isCachedValue;
-        
-        // Initialisation du tableau des resultats
-        initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
-        
-        // Gestion du cache
-        // isCachedValue = db.CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
-        isCachedValue = false;
-        
+
+
+        // Lecture du cache
+        dimensionToMaterialize = db.CacheRead(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0);
+
         // Si le cache n'existe pas : Traitement puis enregistrement en cache
-        if(!isCachedValue){
+        if(dimensionToMaterialize.isEmpty()){
+            logger.debug("DimensionUtils.MaterialisationPartielle.NewCache");
+            
+            // Initialisation du tableau des resultats
+            initDimensionToMaterialize(listCuboides, dimensionToMaterialize);
+        
             FunctionMaterialisationPartielle(listCuboides, seuil_poids, dimensionToMaterialize);
-            // db.CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+            db.CacheWrite(Algorithm.MATERIALISATION_PARTIELLE, listCuboides, seuil_poids, 0, dimensionToMaterialize);
+        }
+        else{
+            logger.debug("DimensionUtils.MaterialisationPartielle.ExistingCache");
         }
         logger.debug("DimensionUtils.MaterialisationPartielle.success");
-  
+      
         // Renvoi du resultat
         return dimensionToMaterialize;
     }

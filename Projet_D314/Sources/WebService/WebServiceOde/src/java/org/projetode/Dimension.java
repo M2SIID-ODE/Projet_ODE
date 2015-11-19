@@ -12,7 +12,7 @@ package org.projetode;
  */
 public class Dimension
 {
-        // Membres public, pour être visibles sur le WSDL !
+        // Membres public, pour être visibles sur le XSD !
         public String dimensionName; // Nom de la dimension
         public long dimensionCount; // Nombre de lignes de la dimension
         public int dimensionMemory; // Taille d'une ligne, en octets

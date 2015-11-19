@@ -13,8 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import static org.projetode.DimensionUtils.logger;
+// import java.lang.String;
 
 /**
  *
@@ -71,7 +73,31 @@ public class SqliteSql {
         }
     }
    
+    
+    // ///////////////////////////////////
+    // Conversion d'un string en list<int>
+    // ///////////////////////////////////
+    public List<Integer> ConvertResultsStringToList(String dimensionToMaterializeStr)
+    {
+        String str;
+        int tmpInteger;
         
+        // Input : // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        str = dimensionToMaterializeStr.substring(1, dimensionToMaterializeStr.length()-1);
+        dimensionToMaterializeStr = str.replaceAll("\\s","");
+        // Maintenant : 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        
+        String[] strArray = dimensionToMaterializeStr.split(Pattern.quote(","));
+        List<Integer> dimensionToMaterializeList = new ArrayList<Integer>();
+        for(String number : strArray) {
+            tmpInteger = Integer.parseInt(number);
+            dimensionToMaterializeList.add(tmpInteger); 
+        }
+        
+        return  dimensionToMaterializeList;
+    }
+    
+    
     
     // ///////////////////////////////////
     // Enregistrement en cache des calculs
@@ -80,50 +106,58 @@ public class SqliteSql {
     {
         String hashCodeList;
         String stmt;
+        String dimensionToMaterializeStr;
+        int tmp;
         
  
-        // Calcul du hash de la listCuboides
+        // Calcul du hash de la listCuboides -> SHA256 => Proba collision faible
         hashCodeList = generateSHA256(listCuboides);
+        
+        logger.debug("CacheWrite.begin");
+        
+        // Conversion de la List<Integer> en String 
+        dimensionToMaterializeStr = dimensionToMaterialize.toString();
         
         // Enregistrement en base SQLite
         try{
             String path = this.getClass().getResource("/CacheWebServiceOde.db").getPath();
-            logger.debug("SqliteSql.CacheWrite.path : " + path);
             Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
             Statement stmtOut = connection.createStatement();
             stmt = "INSERT INTO CACHE_WEBSERVICE_ODE(methode, seuil_poids, nb_boucle, hashCode, solution) "
-                                                        + "VALUES ('"+ typeAlgorithm +"',"+ (int)(seuil_poids) +","+ nb_boucle +",'"+ hashCodeList +"','"+ dimensionToMaterialize +"');";
+                                                        + "VALUES ('"+ typeAlgorithm +"',"+ (int)(seuil_poids) +","+ nb_boucle +",'"+ hashCodeList +"','"+ dimensionToMaterializeStr +"');";
             logger.debug("SqliteSql.CacheWrite.stmt : " + stmt);
-            ResultSet executeQuery = stmtOut.executeQuery(stmt);
+            stmtOut.executeUpdate(stmt);
+            stmtOut.close();
             connection.close();
             logger.debug("SqliteSql.CacheWrite.success");
         }
         catch(SQLException ex)
         {
             logger.error("SqliteSql.CacheWrite.exception", ex);  
+            return;
         }
-        
         return;
     }
     
     // ////////////////////////////
     // Lecture en cache des calculs
     // ////////////////////////////
-    public boolean CacheRead(DimensionUtils.Algorithm typeAlgorithm, List<Dimension> listCuboides, double seuil_poids, int nb_boucle, List<Integer> dimensionToMaterialize)
+    public List<Integer> CacheRead(DimensionUtils.Algorithm typeAlgorithm, List<Dimension> listCuboides, double seuil_poids, int nb_boucle)
     {
-        String hashCodeList;
+        String hashCode;
         String stmt;
-        boolean flagResult = false;
+        List<Integer> dimensionToMaterialize = new ArrayList<Integer>();
+        String dimensionToMaterializeStr;
         
-        /*
-        
-        // http://www.tutorialspoint.com/sqlite/sqlite_java.htm
-        
+                
         // Calcul du hash de la listCuboides
-        hashCodeList = generateSHA256(listCuboides);
+        hashCode = generateSHA256(listCuboides);
+        
+        logger.debug("CacheRead.begin");
         
         // Lecture en base SQLite
         try{
+            dimensionToMaterializeStr = "";
             String path = this.getClass().getResource("/CacheWebServiceOde.db").getPath();
             Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
             
@@ -132,30 +166,33 @@ public class SqliteSql {
 			+ "WHERE CACHE_WEBSERVICE_ODE.methode = '"+ typeAlgorithm +"' "
 			+ "AND CACHE_WEBSERVICE_ODE.seuil_poids = "+ (int)(seuil_poids) +" "
 			+ "AND CACHE_WEBSERVICE_ODE.nb_boucle = "+ nb_boucle +" "
-			+ "AND CACHE_WEBSERVICE_ODE.hashCode = '"+ hashCodeList +"';";
+			+ "AND CACHE_WEBSERVICE_ODE.hashCode = '"+ hashCode +"';";
             logger.debug("CacheRead.stmt : " + stmt);
             ResultSet executeQuery = stmtOut.executeQuery(stmt);
-            List resultat = new ArrayList();
+            
             while(executeQuery.next()){
-		flagResult = true;
-				
-				
-                String titre = executeQuery.getString("Titre");
-                String description = executeQuery.getString("Description");
-                String nom = executeQuery.getString("Nom");
-                Recette r = new Recette(titre, description);
-                resultat.add(r.GetTitre());
-                 
+                dimensionToMaterializeStr = executeQuery.getString("solution");
+                
+                logger.debug("SqliteSql.CacheRead.dimensionToMaterializeStr : "+ dimensionToMaterializeStr);
+
+                // Conversion du String en List<Integer>
+                if(dimensionToMaterializeStr != "" && dimensionToMaterializeStr != null){
+                    dimensionToMaterialize = ConvertResultsStringToList(dimensionToMaterializeStr);
+                }
+                else{
+                    dimensionToMaterialize = null;
+                }
             }
+            stmtOut.close();
             connection.close();
-            logger.debug("SqliteSql.CacheRead.success");
+            logger.debug("SqliteSql.CacheRead.dimensionToMaterialize : "+ dimensionToMaterialize.toString());
         }
         catch(SQLException ex)
         {
             logger.error("SqliteSql.CacheRead.exception", ex);  
-        }   
-        */
-        return flagResult;
+            return null;
+        }    
+        logger.debug("SqliteSql.CacheRead.success");
+        return dimensionToMaterialize;
     }
-    
 }

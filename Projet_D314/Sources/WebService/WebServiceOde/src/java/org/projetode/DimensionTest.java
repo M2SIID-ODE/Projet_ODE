@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author olivier.essner
+ * > Tests de la DB avec DB BROWSER : Ne pas se connecter avec celle du projet mais celle déployer sur le serveur GlassFish : \build\web\WEB-INF\classes
+ * > Même en cas de re-deploy, la base existante n'est pas écrasée
  */
 public class DimensionTest {
         
@@ -119,7 +121,7 @@ public class DimensionTest {
         List<Dimension> listCuboides = new ArrayList<Dimension>();
         List<Dimension> listDim1D = new ArrayList<Dimension>();
         double seuil_poids = 10000;
-        int nb_boucle = 100;
+        int nb_boucle = 1000;
         
         // Peuplement de listCuboides :
         // > Etape 1 : Peuplement de listDim1D
@@ -130,8 +132,8 @@ public class DimensionTest {
         for(int i=0; i<listCuboides.size(); i++){
             
             // MAJ des autres champs de Dimensions (Fait par le client C# normallement)
-            listCuboides.get(i).SetDimensionCount(10000);
-            listCuboides.get(i).SetDimensionMemory(100);
+            listCuboides.get(i).SetDimensionCount(10);
+            listCuboides.get(i).SetDimensionMemory(10);
             
             logger.debug("DimensionTest.TestMetropolis.listCuboides["+ i +"] : "
                     + listCuboides.get(i).GetDimensionName() +" # "
@@ -156,19 +158,29 @@ public class DimensionTest {
         List<Dimension> listCuboides = new ArrayList<Dimension>();
         List<Dimension> listDim1D = new ArrayList<Dimension>();
         double seuil_poids = 10000;
-        
+
         
         // Peuplement de listCuboides :
         // > Etape 1 : Peuplement de listDim1D
         listDim1D = TestPopulateDim1D();
         // > Etape 2 : Fonction de combinaison
         listCuboides = dimTest.GetCombinaisons(listDim1D);
-
+        logger.debug("DimensionTest.TestMaterialisationPartielle.listCuboides success");
+        for(int i=0; i<listCuboides.size(); i++){
+            
+            // MAJ des autres champs de Dimensions (Fait par le client C# normallement)
+            listCuboides.get(i).SetDimensionCount(10);
+            listCuboides.get(i).SetDimensionMemory(10);
+            
+            logger.debug("DimensionTest.TestMaterialisationPartielle.listCuboides["+ i +"] : "
+                    + listCuboides.get(i).GetDimensionName() +" # "
+                    + listCuboides.get(i).GetDimensionOrder());
+        }
+        
         // Appel de la fonction
         dimensionToMaterialize = dimTest.MaterialisationPartielle(listCuboides, seuil_poids);
         logger.debug("DimensionTest.TestMaterialisationPartielle.success");
         logger.debug("DimensionTest.TestMaterialisationPartielle.dimensionToMaterialize : "+ dimensionToMaterialize.toString());
-        
         return true;
     }
 }
