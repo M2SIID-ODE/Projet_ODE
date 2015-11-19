@@ -807,27 +807,63 @@ namespace WpfApplication2
         // Algorithme des combinaisons (fonction récursive qui retourne l'ensemble des combinaisons possibles de notre liste listDim1D           // Pour D314
         static void WS_GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
         {
+
+
+            CalculsSimples.CalculsSimplesClient Webservice = new CalculsSimples.CalculsSimplesClient();
+            
+            ServiceReference1.OdeServiceClient Webservice2 = new ServiceReference1.OdeServiceClient();
+            List<ServiceReference1.dimension> listDim1D_Temp = new List<ServiceReference1.dimension>();
+            List<ServiceReference1.dimension> listCuboides_Temp = new List<ServiceReference1.dimension>();
+            ServiceReference1.dimension dim_Temp = new ServiceReference1.dimension();
+            dim_Temp.dimensionName = listDim1D[0].GetDimensionName();
+            dim_Temp.dimensionCount = listDim1D[0].GetDimensionCount();
+            dim_Temp.dimensionOrder = listDim1D[0].GetDimensionOrder();
+            dim_Temp.dimensionMemory = listDim1D[0].GetDimensionMemory();
+            listDim1D_Temp.Add(dim_Temp);
+            dim_Temp.dimensionName = listDim1D[1].GetDimensionName();
+            dim_Temp.dimensionCount = listDim1D[1].GetDimensionCount();
+            dim_Temp.dimensionOrder = listDim1D[1].GetDimensionOrder();
+            dim_Temp.dimensionMemory = listDim1D[1].GetDimensionMemory();
+            listDim1D_Temp.Add(dim_Temp);
+            dim_Temp.dimensionName = listDim1D[2].GetDimensionName();
+            dim_Temp.dimensionCount = listDim1D[2].GetDimensionCount();
+            dim_Temp.dimensionOrder = listDim1D[2].GetDimensionOrder();
+            dim_Temp.dimensionMemory = listDim1D[2].GetDimensionMemory();
+            listDim1D_Temp.Add(dim_Temp);
+            dim_Temp.dimensionName = listDim1D[3].GetDimensionName();
+            dim_Temp.dimensionCount = listDim1D[3].GetDimensionCount();
+            dim_Temp.dimensionOrder = listDim1D[3].GetDimensionOrder();
+            dim_Temp.dimensionMemory = listDim1D[3].GetDimensionMemory();
+            listDim1D_Temp.Add(dim_Temp);
+
+            listCuboides_Temp = Webservice2.GetCombinaisons(listDim1D_Temp.ToArray()).ToList();
+
+            //dim_Temp.dimensionName = listDim1D
+
+            /*
             // Instanciation de la classe proxy permettant l'appel distant au Webservice
-            OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
-
-
-
+            //OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
+            
             // Pour le paramètre du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
             List<OdeService.dimension> listDim1D_Temp = new List<OdeService.dimension>();
-
+            
             // Pour la sortie du WS => Liste d'objets de type List<Dimension> (Et non <OdeService.dimension>) definit dans le code C#
             List<Dimension> listCuboides_Temp = new List<Dimension>();
 
             // Peuplement de la liste d'objets du WS par des items de même type : <OdeService.dimension>
             OdeService.dimension dim_Temp = new OdeService.dimension();
-            dim_Temp. = listCuboides[0].GetDimensionName(); // POURQUOI pas de membre ???
+            //dim_Temp.add(new OdeService.dimension(listCuboides[0].GetDimensionName(), listCuboides[0].GetDimensionCount(), listCuboides[0].GetDimensionOrder()));
+            dim_Temp.dimensionName = listCuboides[0].GetDimensionName();
+            
+            */
+            //dim_Temp. = listCuboides[0].GetDimensionName(); // POURQUOI pas de membre ???
             //dimensionName; 
             //dimensionCount;
             //dimensionMemory;
             //dimensionOrder;
 
             // Appel du WS
-            listCuboides_Temp = Webservice.GetCombinaisons(listDim1D_Temp.ToArray()).ToList();
+            //listCuboides_Temp = Webservice.GetCombinaisons(listDim1D_Temp.ToArray()).ToList();
 
 
             // => Liste d'objets de type employee (Et non Employee) definit dans le stub du WS
