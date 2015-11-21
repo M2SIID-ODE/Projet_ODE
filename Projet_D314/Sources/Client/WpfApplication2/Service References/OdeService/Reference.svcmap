@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="81c167eb-cb5e-4529-b984-0193f50f1a9c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8330a21c-3b70-4491-b4f5-bcaa8a722e55" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/WebServiceOde/OdeServiceImplService?WSDL" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OdeServiceImplService.wsdl" MetadataType="Wsdl" ID="7e368338-0d75-42ad-99f3-2ecd5a300344" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?WSDL" />
-    <MetadataFile FileName="OdeServiceImplService.xsd" MetadataType="Schema" ID="af4aee19-25a3-41ad-ad10-a6d3eb72eb3f" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?xsd=1" />
+    <MetadataFile FileName="OdeServiceImplService.wsdl" MetadataType="Wsdl" ID="60fb339f-208b-4896-a6ac-7d81d91c2569" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?WSDL" />
+    <MetadataFile FileName="OdeServiceImplService.xsd" MetadataType="Schema" ID="2f2943eb-397c-4f9f-aa17-69b9b538cc48" SourceId="1" SourceUrl="http://localhost:8080/WebServiceOde/OdeServiceImplService?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

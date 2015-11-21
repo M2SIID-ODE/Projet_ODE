@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
         mc:Ignorable="d"
-        Title="Remplissage cube" Height="585" Width="820" ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen" Background="#FFCDCDCD" Closing="Principal_Closing">
+        Title="Remplissage cube for D314" Height="585" Width="820" ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen" Background="#FFCDCDCD" Closing="Principal_Closing">
     <Grid HorizontalAlignment="Left" Height="214" Margin="50,20,0,0" VerticalAlignment="Top" Width="720" Background="#FFCDCDCD">
         <Grid HorizontalAlignment="Right" Margin="0,193,0,-73" Width="720" Background="#FFCDCDCD">
             <Label x:Name="Libelle_Barre" HorizontalAlignment="Left" Margin="339,63,0,0" VerticalAlignment="Top" Width="224"/>
@@ -37,5 +37,6 @@
         <ListBox x:Name="Liste_Cube" HorizontalAlignment="Left" Height="118" Margin="176,75,0,0" VerticalAlignment="Top" Width="515" SelectionChanged="Liste_Cube_SelectionChanged"/>
         <Label x:Name="Libelle_Database_Copy" Content="Database / Cube :" HorizontalAlignment="Left" Margin="67,75,0,0" VerticalAlignment="Top" TabIndex="3"/>
         <TextBox x:Name="Nom_Server" HorizontalAlignment="Left" Margin="176,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="515" TextChanged="Nom_Server_TextChanged"/>
+        <CheckBox x:Name="Webservice" Content="WebService" HorizontalAlignment="Left" Height="14" Margin="15,13,0,0" VerticalAlignment="Top" Width="107" IsChecked="True"/>
     </Grid>
 </Window>

@@ -4,10 +4,20 @@ Role ........ : Programme de gestion de l'interface de saisie et de traitement d
                 Le traitement principal aiguillera sur deux traitements annexes :
                        - Algorithme de Metropolis
                        - Algorithme de Matérialisation
-Auteurs ..... : Thomas CHOURREAU  
-                Olivier ESSNER    
-                Cédric VANDEVORDE 
-Version ..... : V1.0 du 04/08/2015
+                Cette version est la version D314 qui prend en compte l'externalisation de certaine fonction en webservice OdeService écrit en Java :
+                       - GetCombinaisons
+                       - Metropolis
+                       - MaterialisationPartielle
+
+                La version permet de travailler sans le deploiement du Cube du projet initial ODE. Pour cela, il suffit de saisir en nom de server "D3143.
+                En mode deconnecté, il est necessaire d'affectuer les forcages dans les paragraphes WS_GetDimension1DProperties et WS_GetPoidsCuboides.
+
+                Elle permet egalement de travailler en version initiale ou en version WebService. Pour cela cocher la case Webservice.
+
+Auteurs ..... : Thomas CHOURREAU  (Projet initial de conception)
+                Olivier ESSNER    (Projet initial de conception + D314) 
+                Cédric VANDEVORDE (Projet initial de conception + D314)
+Version ..... : V2.0 du 15/11/2015
 *****************************************************************************************************************************************************/
 
 using System;
@@ -21,8 +31,6 @@ using System.Data;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Threading;
-
-
 
 namespace WpfApplication2
 {
@@ -80,10 +88,12 @@ namespace WpfApplication2
         /// </summary>
         /// 
         // Définition des globales utilisées par le programme
-        public static string Status_Traitement = "OK";
+        public static string Status_Traitement = "";
         public static string Glb_Nom_Server = "";
         public static string Glb_Nom_Database = "";
         public static string Glb_Nom_Cube = "";
+        public static string Glb_Deconnecte = "N";
+        public static string Glb_Webservice = "N";
         public static double Glb_Size = 0;
         public static bool Thread_en_cours = false;
         public static int Glb_Num_Trait; // 1 : Algo Metropolis / 2 : Algo Materialisation
@@ -95,14 +105,8 @@ namespace WpfApplication2
 
         public MainWindow()
         {
-
             InitializeComponent();
             ProgressBarDelegate = new ProgressBarDelegateHandler(UpdateProgressBar);
-
-            // Instanciation de la classe proxy permettant l'appel distant au Webservice
-            ServiceReference1.CalculsSimplesClient myMathService = new ServiceReference1.CalculsSimplesClient();
-            System.Windows.Forms.MessageBox.Show("Resultat : " + myMathService.additionner(1, 2).ToString());
-
             InitializeBis();
         }
 
@@ -189,41 +193,52 @@ namespace WpfApplication2
         {
             Init_Liste_Database();
             Init_Info_Cube();
-
-            // Tentative de connexion au server
-            Server svr = new Server();
-
-            try
+                        
+            if (Nom_Server.Text == "D314") {
+                Glb_Deconnecte = "O";
+                Liste_Cube.Items.Add("D314/Cube1");
+                Liste_Cube.Items.Add("D314/Cube2");
+                Tab_Agr.Add(3);
+                Tab_Agr.Add(2);
+            }
+            else
             {
-                svr.Connect(Nom_Server.Text);
+                Glb_Deconnecte = "N";
+                // Tentative de connexion au server
+                Server svr = new Server();
 
-                // Récupération de la liste des databases
-                foreach (Database db in svr.Databases)
+                try
                 {
-                    //Récupération de la liste des databases et cubes
-                    for (int i = 0; i < db.Cubes.Count; i++)
-                    {
-                        Cube cube = db.Cubes[i];
-                        Liste_Cube.Items.Add(db.Name + "/" + cube.Name);
+                    svr.Connect(Nom_Server.Text);
 
-                        // Récupération présence d'aggrégats
-                        int Nb_aggregat = 0;
-                        //AVOIR
-                        foreach (MeasureGroup Meg in cube.MeasureGroups)
+                    // Récupération de la liste des databases
+                    foreach (Database db in svr.Databases)
+                    {
+                        //Récupération de la liste des databases et cubes
+                        for (int i = 0; i < db.Cubes.Count; i++)
                         {
-                            Nb_aggregat = Meg.AggregationDesigns.Count;
+                            Cube cube = db.Cubes[i];
+                            Liste_Cube.Items.Add(db.Name + "/" + cube.Name);
+
+                            // Récupération présence d'aggrégats
+                            int Nb_aggregat = 0;
+
+                            foreach (MeasureGroup Meg in cube.MeasureGroups)
+                            {
+                                Nb_aggregat = Meg.AggregationDesigns.Count;
+                            }
+                            Tab_Agr.Add(Nb_aggregat);
                         }
-                        Tab_Agr.Add(Nb_aggregat);
                     }
                 }
-            }
-            catch (Exception)
-            {
-                System.Windows.Forms.MessageBox.Show("Server introuvable, merci de vérifier son identifiant.");
-            }
-            finally
-            {
-                svr.Disconnect();
+                catch (Exception)
+                {
+                    System.Windows.Forms.MessageBox.Show("Server introuvable, merci de vérifier son identifiant.");
+                }
+                finally
+                {
+                    svr.Disconnect();
+                }
             }
         }
 
@@ -345,18 +360,22 @@ namespace WpfApplication2
             // Suppression des aggrégats présents sur le cube si confirmation
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                Server srv = new Server();
-                srv.Connect(Glb_Nom_Server);
-                Database db = srv.Databases.FindByName(Glb_Nom_Database);
-                Cube Cube_maj = db.Cubes.FindByName(Glb_Nom_Cube);
-
-                foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
+                // Pour D314
+                if (Glb_Deconnecte != "O")
                 {
-                    Meg.AggregationDesigns.Clear();
+                    Server srv = new Server();
+                    srv.Connect(Glb_Nom_Server);
+                    Database db = srv.Databases.FindByName(Glb_Nom_Database);
+                    Cube Cube_maj = db.Cubes.FindByName(Glb_Nom_Cube);
+
+                    foreach (MeasureGroup Meg in Cube_maj.MeasureGroups)
+                    {
+                        Meg.AggregationDesigns.Clear();
+                    }
+                    Cube_maj.Update(UpdateOptions.ExpandFull);
+                    Cube_maj.Process(ProcessType.ProcessFull);
+                    srv.Disconnect();
                 }
-                Cube_maj.Update(UpdateOptions.ExpandFull);
-                Cube_maj.Process(ProcessType.ProcessFull);
-                srv.Disconnect();
                 Tab_Agr[Liste_Cube.SelectedIndex] = 0;
                 Pres_Aggregat.Content = "Aggrégat Design supprimé";
                 Bouton_Aggr.IsEnabled = false;
@@ -368,6 +387,14 @@ namespace WpfApplication2
         {
             Thread_en_cours = !Thread_en_cours;
             Glb_Num_Trait = 1;
+            if (Webservice.IsChecked == true)
+            {
+                Glb_Webservice = "O";
+            }
+            else
+            {
+                Glb_Webservice = "N";
+            }
             myThread = new Thread(new ThreadStart(ThreadPrinc));
             myThread.Start();
         }
@@ -377,8 +404,15 @@ namespace WpfApplication2
         {
             Thread_en_cours = !Thread_en_cours;
             Glb_Num_Trait = 2;
+            if (Webservice.IsChecked == true)
+            {
+                Glb_Webservice = "O";
+            }
+            else
+            {
+                Glb_Webservice = "N";
+            }
             myThread = new Thread(new ThreadStart(ThreadPrinc));
-            myThread.Start();
         }
 
         //Gestion bouton Cancel
@@ -396,6 +430,7 @@ namespace WpfApplication2
         public void Blocage_Zones()
         {
             Nom_Server.IsEnabled = false;
+            Webservice.IsEnabled = false;                                       
             Bouton_Connexion.IsEnabled = false;
             Liste_Cube.IsEnabled = false;
             Bouton_Aggr.IsEnabled = false;
@@ -411,6 +446,7 @@ namespace WpfApplication2
         public void Deblocage_Zones()
         {
             Nom_Server.IsEnabled = true;
+            Webservice.IsEnabled = true;                                       
             Bouton_Connexion.IsEnabled = true;
             Liste_Cube.IsEnabled = true;
             Alim_Lib_Agg();
@@ -460,26 +496,39 @@ namespace WpfApplication2
 
             //Etape : Liste de toutes les dimensions 1D
             Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Liste dimensions 1D" });
-            GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
+            if (Glb_Webservice == "O")
+            {
+                WS_GetDimension1DProperties(Glb_Nom_Cube, listDim1D);
+            }
+            else
+            {
+                GetDimension1DProperties(conn, Glb_Nom_Cube, listDim1D);
+            }
 
             //Etape : Récupération du treillis des cuboïdes
             Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Récupération du treillis des cuboïdes" });
             List<Dimension> listCuboides = new List<Dimension>(); // liste des cuboïdes
             List<String> index_cuboides = new List<String>(); // liste des index des cuboïdes : plus facile à utiliser par la suite
             String prefix_index = "";
-
-            
-
-
-
-
-
-            /* WEB-SERVICE CALL : OdeWebService.GetCombinaisons */
-            GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index); // appel de la fonction qui crée les combinaisons
+            if (Glb_Webservice == "O")
+            {
+                WS_GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index);
+            }
+            else
+            {
+                GetCombinaisons(listDim1D, 0, "", 0, listCuboides, index_cuboides, prefix_index);
+            }
 
             //Etape : Récupération du nombre de lignes des cuboïdes
             Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 5, "Récupération du nombre de lignes des cuboïdes" });
-            GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
+            if (Glb_Deconnecte == "O")
+            {
+                WS_GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count);
+            }
+            else
+            {
+                GetPoidsCuboides(index_cuboides, listCuboides, listDim1D, listDim1D.Count, conn); // appel de la fonction qui récupère le nombre de lignes des cuboides
+            }
 
             //Etape : Algorithme de Metropolis ou de Matérialisation
             double seuil_poids = Glb_Size;
@@ -489,15 +538,25 @@ namespace WpfApplication2
                 case 1:
                     Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Algorithme de Metropolis" });
                     int nb_boucle = 100; // le nombre de boucle que l'on veut faire faire à l'algo de Metropolis
-
-                    /* WEB-SERVICE CALL : OdeWebService.Metropolis */
-                    Metropolis(listCuboides, seuil_poids, nb_boucle, solution); // appel de l'algo de Metropolis
+                    if (Glb_Webservice == "O")
+                    {
+                        WS_Metropolis(listCuboides, seuil_poids, nb_boucle, solution);
+                    }
+                    else
+                    {
+                        Metropolis(listCuboides, seuil_poids, nb_boucle, solution);
+                    }
                     break;
                 case 2:
                     Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Algorithme de Matérialisation" });
-
-                    /* WEB-SERVICE CALL : OdeWebService.MaterialisationPartielle */
-                    MaterialisationPartielle(listCuboides, seuil_poids, solution); // appel de l'algo de Matérialisation
+                    if (Glb_Webservice == "O")
+                    {
+                        WS_MaterialisationPartielle(listCuboides, seuil_poids, solution);
+                    }
+                    else
+                    {
+                        MaterialisationPartielle(listCuboides, seuil_poids, solution);
+                    }
                     break;
                 default:
                     break;
@@ -505,11 +564,20 @@ namespace WpfApplication2
 
             //Etape : Deconnexion à la base
             Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 30, "Deconnexion base" });
-            Deconnexion_Base(StrConnexion);
-
-            //Etape : Création aggrégat Design en fonction de la solution
-            Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Création Aggrégat" });
-            int nb_aggregats = CreateAgg(solution, listCuboides);
+            int nb_aggregats;
+            if (Glb_Deconnecte == "O")
+            {
+                //Etape : Création aggrégat Design en fonction de la solution
+                Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Création Aggrégat" });
+                nb_aggregats = 99;
+            }
+            else
+            {
+                Deconnexion_Base(StrConnexion);
+                //Etape : Création aggrégat Design en fonction de la solution
+                Dispatcher.Invoke(this.ProgressBarDelegate, new object[] { 10, "Création Aggrégat" });
+                nb_aggregats = CreateAgg(solution, listCuboides);
+            }
 
             TimeSpan exeDuration = DateTime.Now.Subtract(exeStart);
             string exeTime = string.Format(" : {0}h, {1}m, {2}s et {3}ms",exeDuration.Hours,exeDuration.Minutes,exeDuration.Seconds,exeDuration.Milliseconds);
@@ -553,17 +621,25 @@ namespace WpfApplication2
         {
             Status_Traitement = "KO";
             AdomdConnection conn = new AdomdConnection(StrConnect);
-            try
+            if (Glb_Deconnecte == "O")
             {
-                conn.Open();
-                //Utilisation de la donnée pour déclencher l'exception
-                int nbOfCubes = conn.Cubes.Count;
                 Status_Traitement = "OK";
             }
-            catch (Exception)
+            else
             {
-                System.Windows.Forms.MessageBox.Show("Impossible de se connecter à la base");
+                try
+                {
+                    conn.Open();
+                    //Utilisation de la donnée pour déclencher l'exception
+                    int nbOfCubes = conn.Cubes.Count;
+                    Status_Traitement = "OK";
+                }
+                catch (Exception)
+                {
+                    System.Windows.Forms.MessageBox.Show("Impossible de se connecter à la base");
+                }
             }
+
             return conn;
         }
 
@@ -604,7 +680,7 @@ namespace WpfApplication2
             while (readerPart1.Read())
             {
                 // Enregistrement dans la listDim1D
-                listDim1D.Add(new Dimension(readerPart1.GetString(0), readerPart1.GetInt32(1), 1));
+                 listDim1D.Add(new Dimension(readerPart1.GetString(0), readerPart1.GetInt32(1), 1));
             }
 
             // Fermeture du reader XML
@@ -653,6 +729,7 @@ namespace WpfApplication2
                 // 3eme retour : [TOTAL_MEM_SIZE]
                 if (listDim1D[i].GetDimensionCount() != 0)
                 {
+                    int essai1 = readerPart2.GetInt32(0);
                     listDim1D[i].SetDimensionMemory((int)(readerPart2.GetInt32(0) / listDim1D[i].GetDimensionCount()));
                 }
                 else
@@ -665,10 +742,26 @@ namespace WpfApplication2
             readerPart2.Close();
         }
 
-		/* ************************** */
-        /* TO DO : passage en WS JAVA */
-        /* ************************** */
-		
+        // Exploration DMV de SSAS (Vues prédefinies sur tables systeme)               - Version Deconnectee
+        static void WS_GetDimension1DProperties(string cubeId, List<Dimension> listDim1D)
+        {
+            // Etape 1 : Récuperation des noms et des count
+            listDim1D.Add(new Dimension("DIM CLIENTS", 10001, 1));
+            listDim1D.Add(new Dimension("DIM LIEU", 257, 1));
+            listDim1D.Add(new Dimension("DIM PRODUITS", 11, 1));
+            listDim1D.Add(new Dimension("DIM TEMPS", 3653, 1));
+
+            // Etape 2 : Récuperation des tailles (Octets)
+            int a = 782332 / (int)listDim1D[0].GetDimensionCount();
+            listDim1D[0].SetDimensionMemory(a);
+            a = 333448 / (int)listDim1D[1].GetDimensionCount();
+            listDim1D[1].SetDimensionMemory(a);
+            a = 332624 / (int)listDim1D[2].GetDimensionCount();
+            listDim1D[2].SetDimensionMemory(a);
+            a = 1423003 / (int)listDim1D[3].GetDimensionCount();
+            listDim1D[3].SetDimensionMemory(a);
+        }
+
         // Algorithme des combinaisons (fonction récursive qui retourne l'ensemble des combinaisons possibles de notre liste listDim1D
         static void GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
         {
@@ -683,6 +776,39 @@ namespace WpfApplication2
                 GetCombinaisons(listDim1D, profCourante + 1, prefix
                       + listDim1D[i].GetDimensionName() + " * ", i + 1, listCuboides, index_cuboides, prefix_index + i.ToString());
             }
+        }
+
+        // Algorithme des combinaisons (fonction récursive qui retourne l'ensemble des combinaisons possibles de notre liste listDim1D)    - Version WebService
+        static void WS_GetCombinaisons(List<Dimension> listDim1D, int profCourante, String prefix, int rang, List<Dimension> listCuboides, List<String> index_cuboides, String prefix_index)
+        {
+            // Instanciation de la classe proxy permettant l'appel distant au Webservice
+            OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
+
+            // Pour le paramètre du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
+            List<OdeService.dimension> listDim1D_Temp = new List<OdeService.dimension>();
+            
+            // Pour la sortie du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
+            List<OdeService.dimension> listCuboides_Temp = new List<OdeService.dimension>();
+            List<String> index_cuboides_Temp = new List<String>();
+            
+            // Peuplement de la liste d'objets du WS par des items de même type : <OdeService.dimension>
+            for (int i = 0; i < listDim1D.Count; i++)
+            {
+                listDim1D_Temp.Add(new OdeService.dimension() { dimensionName = listDim1D[i].GetDimensionName(), dimensionCount = listDim1D[i].GetDimensionCount(), dimensionOrder = listDim1D[i].GetDimensionOrder(), dimensionMemory = listDim1D[i].GetDimensionMemory() });
+            }
+
+            // Appel du WS
+            listCuboides_Temp = Webservice.GetCombinaisons(listDim1D_Temp.ToArray()).ToList();
+            index_cuboides_Temp = Webservice.GetCombinaisonsIndex(listDim1D_Temp.ToArray()).ToList();
+
+            // Alimentation de la liste des retours des cuboides
+            for (int i = 0; i < listCuboides_Temp.Count; i++)
+            {
+                listCuboides.Add(new Dimension(listCuboides_Temp[i].dimensionName, listCuboides_Temp[i].dimensionCount, listCuboides_Temp[i].dimensionOrder));
+                listCuboides[i].SetDimensionMemory(listCuboides_Temp[i].dimensionMemory);
+                index_cuboides.Add(index_cuboides_Temp[i]);
+            }
+            
         }
 
         // Algorithme qui récupère le nombre de lignes des cuboides
@@ -710,7 +836,7 @@ namespace WpfApplication2
                     }
             }
 
-            long poids;
+            int poids;
             String commandText = "";
             for (int i = 0; i < cuboides.Count; i++)
             {
@@ -720,25 +846,21 @@ namespace WpfApplication2
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i])] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i])].GetDimensionMemory();
-                    //poids = (int)listDim1D[int.Parse(cuboides[i])].GetDimensionCount();
                 }
                 if (cuboides[i].Length == 2)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory();
-                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount());
                 }
                 if (cuboides[i].Length == 3)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory();
-                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionCount());
                 }
                 if (cuboides[i].Length == 4)
                 {
                     commandText = "SELECT ({ NONEMPTYCROSSJOIN ((NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(0, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(1, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(2, 1))] + ".Members)}),NONEMPTY({(" + test_dimensions[int.Parse(cuboides[i].Substring(3, 1))] + ".Members)})))}) ON ROWS, ([Measures].[UNITES VENDUES]) on COLUMNS  FROM [" + Glb_Nom_Cube + "]";
                     poids_une_ligne = listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionMemory() + listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionMemory();
-                    //poids = (int)(listDim1D[int.Parse(cuboides[i].Substring(0, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(1, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(2, 1))].GetDimensionCount() * listDim1D[int.Parse(cuboides[i].Substring(3, 1))].GetDimensionCount());
                 }
 
                 try
@@ -766,10 +888,56 @@ namespace WpfApplication2
             }
         }
 
-		/* ************************** */
-        /* TO DO : passage en WS JAVA */
-        /* ************************** */
-		
+        // Algorithme qui récupère le nombre de lignes des cuboides            - Version deconnectee
+        static void WS_GetPoidsCuboides(List<String> cuboides, List<Dimension> listCuboides, List<Dimension> listDim1D, int nb_dim_1d)
+        {
+            listCuboides[0].SetDimensionCount(66);
+            listCuboides[0].SetDimensionMemory(78);
+
+            listCuboides[1].SetDimensionCount(48);
+            listCuboides[1].SetDimensionMemory(1297);
+
+            listCuboides[2].SetDimensionCount(11);
+            listCuboides[2].SetDimensionMemory(30238);
+
+            listCuboides[3].SetDimensionCount(65);
+            listCuboides[3].SetDimensionMemory(389);
+
+            listCuboides[4].SetDimensionCount(178);
+            listCuboides[4].SetDimensionMemory(1375);
+
+            listCuboides[5].SetDimensionCount(298);
+            listCuboides[5].SetDimensionMemory(30316);
+
+            listCuboides[6].SetDimensionCount(195);
+            listCuboides[6].SetDimensionMemory(467);
+
+            listCuboides[7].SetDimensionCount(826);
+            listCuboides[7].SetDimensionMemory(31613);
+
+            listCuboides[8].SetDimensionCount(437);
+            listCuboides[8].SetDimensionMemory(1764);
+
+            listCuboides[9].SetDimensionCount(1972);
+            listCuboides[9].SetDimensionMemory(32002);
+
+            listCuboides[10].SetDimensionCount(870);
+            listCuboides[10].SetDimensionMemory(30705);
+
+            listCuboides[11].SetDimensionCount(252);
+            listCuboides[11].SetDimensionMemory(31535);
+
+            listCuboides[12].SetDimensionCount(177);
+            listCuboides[12].SetDimensionMemory(1686);
+
+            listCuboides[13].SetDimensionCount(824);
+            listCuboides[13].SetDimensionMemory(31924);
+
+            listCuboides[14].SetDimensionCount(296);
+            listCuboides[14].SetDimensionMemory(60627);
+
+        }
+
         // Algorithme de Metropolis
         static void Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, int[] sol_act)
         {
@@ -810,13 +978,38 @@ namespace WpfApplication2
             }
         }
 
-		// -- Olivier # 07/09/2015
+        // -- Olivier # 07/09/2015
+        
+        // Algorithme de Metropolis                                                      - Version WebService
+        static void WS_Metropolis(List<Dimension> listCuboides, double seuil_poids, int nb_boucle, int[] sol_act)
+        {
 
-		/* ************************** */
-        /* TO DO : passage en WS JAVA */
-        /* ************************** */
-		
-		// Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
+            // Instanciation de la classe proxy permettant l'appel distant au Webservice
+            OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
+
+            // Pour le paramètre du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
+            List<OdeService.dimension> listCuboides_Temp = new List<OdeService.dimension>();
+
+            // Pour la sortie du WS => Liste d'objets de type int[]
+            int[] sol_act_Temp = new int[listCuboides.Count];
+
+            // Peuplement de la liste d'objets du WS par des items de même type : <OdeService.dimension>
+            for (int i = 0; i < listCuboides.Count; i++)
+            {
+                listCuboides_Temp.Add(new OdeService.dimension() { dimensionName = listCuboides[i].GetDimensionName(), dimensionCount = listCuboides[i].GetDimensionCount(), dimensionOrder = listCuboides[i].GetDimensionOrder(), dimensionMemory = listCuboides[i].GetDimensionMemory() });
+            }
+
+            // Appel du WS
+            sol_act_Temp = Webservice.Metropolis(listCuboides_Temp.ToArray(), seuil_poids, nb_boucle);
+
+            // Alimentation de la liste des retours des cuboides
+            for (int i = 0; i < sol_act_Temp.Length; i++)
+            {
+                sol_act[i] = sol_act_Temp[i];
+            }
+        }
+
+        // Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT
         static void MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, int[] selectedViews)
         {
             long totalSize;
@@ -947,11 +1140,38 @@ namespace WpfApplication2
             Console.WriteLine();
         }
         // -- Fin Olivier # 07/09/2015
-   
-   
 
-		// Fonction de création des aggrgéats
-		static int CreateAgg(int[] solution, List<Dimension> listCuboides)
+        // Algorithme de matérailisation partielle - cf cours D111 de Sofian MAABOUT                        - Version WebService
+        static void WS_MaterialisationPartielle(List<Dimension> listCuboides, double seuil_poids, int[] selectedViews)
+        {
+            // Instanciation de la classe proxy permettant l'appel distant au Webservice
+            OdeService.OdeServiceClient Webservice = new OdeService.OdeServiceClient();
+
+            // Pour le paramètre du WS => Liste d'objets de type <OdeService.dimension> (Et non List<Dimension>) definit dans le WS
+            List<OdeService.dimension> listCuboides_Temp = new List<OdeService.dimension>();
+
+            // Pour la sortie du WS => Liste d'objets de type int[]
+            int[] selectedViews_Temp = new int[listCuboides.Count];
+
+            // Peuplement de la liste d'objets du WS par des items de même type : <OdeService.dimension>
+            for (int i = 0; i < listCuboides.Count; i++)
+            {
+                listCuboides_Temp.Add(new OdeService.dimension() { dimensionName = listCuboides[i].GetDimensionName(), dimensionCount = listCuboides[i].GetDimensionCount(), dimensionOrder = listCuboides[i].GetDimensionOrder(), dimensionMemory = listCuboides[i].GetDimensionMemory() });
+            }
+
+            // Appel du WS
+            selectedViews_Temp = Webservice.MaterialisationPartielle(listCuboides_Temp.ToArray(), seuil_poids);
+
+            // Alimentation de la liste des retours des cuboides
+            for (int i = 0; i < selectedViews.Length; i++)
+            {
+                selectedViews[i] = selectedViews_Temp[i];
+            }
+            
+        }
+
+        // Fonction de création des aggrgéats
+        static int CreateAgg(int[] solution, List<Dimension> listCuboides)
         {
             int indice = 0;
             Server srv = new Server();
@@ -1017,6 +1237,7 @@ namespace WpfApplication2
             }
             return indice;
         }
+
     }
 }
 
