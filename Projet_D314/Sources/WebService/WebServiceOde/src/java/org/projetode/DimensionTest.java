@@ -17,8 +17,6 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author olivier.essner
- * > Tests de la DB avec DB BROWSER : Ne pas se connecter avec celle du projet mais celle déployer sur le serveur GlassFish : \build\web\WEB-INF\classes
- * > Même en cas de re-deploy, la base existante n'est pas écrasée
  */
 public class DimensionTest {
         

@@ -50,5 +50,8 @@ public interface OdeService
     
     @WebMethod
     public boolean TestMaterialisationPartielle();
+    
+    @WebMethod
+    public boolean CleanCache();
 }
 

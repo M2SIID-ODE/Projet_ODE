@@ -24,6 +24,7 @@ public class OdeServiceImpl implements OdeService {
 
     DimensionUtils dimUtils = new DimensionUtils();
     DimensionTest dimTest = new DimensionTest();
+    SqliteSql sqlUtils = new SqliteSql();
 
     public List<Dimension> GetCombinaisons(List<Dimension> listDim1D)
     {
@@ -63,6 +64,11 @@ public class OdeServiceImpl implements OdeService {
     public boolean TestMaterialisationPartielle()
     {
         return dimTest.TestMaterialisationPartielle();
+    }
+    
+    public boolean CleanCache()
+    {
+        return sqlUtils.CleanCache();
     }
           
 }

@@ -16,11 +16,12 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import static org.projetode.DimensionUtils.logger;
-// import java.lang.String;
 
 /**
  *
  * @author olivier.essner
+ * > Tests de la DB avec DB BROWSER : Ne pas se connecter avec celle du projet mais celle déployer sur le serveur GlassFish : \build\web\WEB-INF\classes
+ * > Même en cas de re-deploy, la base existante n'est pas écrasée
  */
 public class SqliteSql {
 
@@ -95,6 +96,40 @@ public class SqliteSql {
         }
         
         return  dimensionToMaterializeList;
+    }
+    
+    
+    // ///////////////////////////
+    // Vidange du cache de calculs
+    // ///////////////////////////
+    public boolean CleanCache()
+    {
+        String hashCodeList;
+        String stmt;
+        String dimensionToMaterializeStr;
+        int tmp;
+        
+
+        logger.debug("CacheClean.begin");
+        
+        // Enregistrement en base SQLite
+        try{
+            String path = this.getClass().getResource("/CacheWebServiceOde.db").getPath();
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+            Statement stmtOut = connection.createStatement();
+            stmt = "DELETE FROM CACHE_WEBSERVICE_ODE";
+            logger.debug("SqliteSql.CacheClean.stmt : " + stmt);
+            stmtOut.executeUpdate(stmt);
+            stmtOut.close();
+            connection.close();
+            logger.debug("SqliteSql.CacheClean.success");
+        }
+        catch(SQLException ex)
+        {
+            logger.error("SqliteSql.CacheClean.exception", ex);  
+            return false;
+        }
+        return true;
     }
     
     
