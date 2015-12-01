@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>CubeODE</DataSourceReference>
+      <CommandText>WITH
+MEMBER Measures.[DIFF VENTE] AS '([Measures].[UNITES VENDUES]-([Measures].[UNITES VENDUES], [DIM TEMPS].[MOIS NOM].CURRENTMEMBER.PrevMember))'
+
+/*
+FORMATAGE DU MEMBRE EVOLUTION DES VOLUMES DE VENTE
+TRANSFORMATION DES CELLULES N/A EN NULL POUR ENSUITE ELIMINER TOUS LES TUPLES NULL  A TRAVERS LA FONCTION "NON EMPTY"
+*/
+MEMBER Measures.[Evolution Volume Vente] AS 
+IIF (ISEMPTY([Measures].[DIFF VENTE]) or ISEMPTY([Measures].[UNITES VENDUES]) ,Null ,
+	IIF ([Measures].[UNITES VENDUES]&lt;=0,0,
+			IIF ([Measures].[DIFF VENTE]&lt;&gt;0,[Measures].[DIFF VENTE]/[Measures].[UNITES VENDUES],"null"))),FORMAT_STRING="##.#%"
+
+--===================================================
+
+
+SELECT 
+NON EMPTY
+ {[Measures].[UNITES VENDUES], Measures.[Evolution Volume Vente]} ON COLUMNS,
+ NON EMPTY
+ ([DIM CATEGORIES].[LIBEL RAYON].CHILDREN,[DIM TEMPS].[MOIS NOM].CHILDREN ) ON ROWS
+FROM [CubeODE]
+
+
+</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_CATEGORIES___LIBEL_RAYON___LIBEL_RAYON_____">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[DIM CATEGORIES].[LIBEL RAYON].[LIBEL RAYON]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Level__UniqueName___DIM_TEMPS___MOIS_NOM___MOIS_NOM_____">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[DIM TEMPS].[MOIS NOM].[MOIS NOM]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___UNITES_VENDUES_____">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[UNITES VENDUES]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ID__xml_version__1_0__encoding__utf_8____Field_xmlns_xsi__http___www_w3_org_2001_XMLSchema_instance__xmlns_xsd__http___www_w3_org_2001_XMLSchema__xsi_type__Measure__UniqueName___Measures___Evolution_Volume_Vente_____">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Evolution Volume Vente]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
